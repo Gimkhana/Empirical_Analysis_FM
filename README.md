@@ -3,7 +3,7 @@
 
 Welcome to the Portfolio Management repository – a comprehensive suite of analytical tools and scripts designed for modern asset managers and finance professionals. This repository houses a diverse array of methods and strategies in portfolio management and econometrics, implemented in R and Python, to aid in the construction, analysis, and optimization of investment portfolios. Part of the scripts are based on lectures and projects taught in the M2 Risk and Asset Management (Paris-Saclay).
 
-Repository Structure
+**Repository Structure**
 
 The repository is organized into three main folders:
 
@@ -33,7 +33,6 @@ This project demonstrates how to build a portfolio that aims to perform well acr
 
 To get started, clone this repository and navigate to each folder to find detailed instructions and documentation for each script and project. The code is primarily written in R, so ensure you have R and the necessary packages installed.
 
-Copy code
 git clone https://github.com/your-username/portfolio-management-collection.git
 cd portfolio-management-collection
 
@@ -49,8 +48,7 @@ Download Anaconda: Anaconda Distribution
 
 **Setting up your Python environment** 
 Create a new environment (Optional but Recommended):
-bash
-Copy code
+
 conda create --name finance python=3.8
 conda activate finance
 
@@ -63,19 +61,16 @@ Scikit-learn for machine learning (if applicable).
 
 You can install these packages using the following command:
 
-Copy code
 conda install numpy pandas matplotlib scikit-learn
 
 **Running Python scripts**
 
 If you have Python scripts in your repository, navigate to their directory:
 
-Copy code
 cd path/to/python/scripts
 
 Run a script using:
 
-Copy code
 python script_name.py
 
 **Using Python with R**
@@ -83,7 +78,6 @@ For projects where you wish to combine the power of R and Python, the rpy2 packa
 
 Install rpy2 using:
 
-Copy code
 conda install rpy2
 
 **Jupyter Notebook**
@@ -92,15 +86,15 @@ Use Jupyter Notebooks for an interactive environment where you can run both R an
 
 To start Jupyter Notebook, run:
 
-Copy code
 jupyter notebook
+
 Navigate to your notebook file (.ipynb) and open it to run Python and R code interactively.
 
 This guide will help you set up a Python environment that complements the R-based tools in this repository, offering a broader scope for data analysis and portfolio management tasks.
 
 **Contributing**
 
-We welcome contributions and suggestions! Please read our CONTRIBUTING.md for guidelines on how to submit pull requests, propose features, or report bugs.
+We welcome contributions and suggestions! Reach out at b00726728@essec.edu for any feedback.
 
 **License**
 
