@@ -1,0 +1,8 @@
+---
+title: 'Portfolio Insurance: OBPI and CPPI strategies'
+output: html_document
+date: "`r Sys.Date()`"
+editor_options: 
+  markdown: 
+    wrap: sentence
+---

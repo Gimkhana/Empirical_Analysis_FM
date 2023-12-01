@@ -1,0 +1,1298 @@
+---
+title: "R_Markdown_project_Clauss_GRA"
+output: html_document
+date: "`r Sys.Date()`"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# 1. Global Minimum Volatility portfolio (GMV) on an equity portfolio
+
+## 1.1 Packages
+
+We import the necessary libraries to perform the first analysis.
+
+1.  **library(tidyverse):** The tidyverse package constitutes a
+    collection of R packages meticulously designed to work seamlessly in
+    unison for data manipulation, visualization, and analysis. It
+    encompasses packages like ggplot2 for data visualization, dplyr for
+    data manipulation, tidyr for data tidying, and more. Loading
+    tidyverse avails all these packages for utilization during your R
+    session, streamlining your data analysis workflow.
+
+2.  **library(quantmod):** The quantmod package primarily caters to
+    quantitative financial modeling and analysis. It furnishes an array
+    of functions and tools for handling financial data, such as
+    downloading and managing stock price data, conducting technical
+    analysis, and modeling financial time series.
+
+3.  **library(DataExplorer):** The DataExplorer package serves the
+    purpose of preliminary data exploration and analysis. It offers
+    functions to generate summary statistics, visualize missing data,
+    plot variable distributions, and more. It can aid in obtaining a
+    quick overview of your data before delving into more extensive
+    analyses.
+
+4.  **library(corrplot):** The corrplot package specializes in
+    visualizing correlation matrices. It provides functions for
+    generating visually appealing and informative correlation plots,
+    which prove valuable for comprehending relationships between
+    variables within your data.
+
+5.  **library(scales):** The scales package provides an assortment of
+    scales and formatting functions tailored for R graphics. It is often
+    employed in conjunction with other plotting packages, such as
+    ggplot2, to customize the appearance of plots, including axes,
+    labels, and color scales.
+
+```{r}
+library(tidyverse)
+library(quantmod)
+library(DataExplorer)
+library(corrplot)
+library(scales)
+```
+
+## 1.2 Investment universe
+
+In our portfolio management project, we have carefully chosen a set of
+twenty stocks from a larger universe of investments. This selection
+represents the most significant companies in the US equity market,
+primarily based on their market capitalization. By analyzing these
+stocks, our objective is to gain valuable insights into the strategies
+that can be employed for managing investments in the US equity market.
+
+Our choice of stocks is guided by several key considerations:
+
+-   **Investment universe:** Our selection is drawn from a universe of
+    stocks that encompasses twenty well-established companies within the
+    US equity market. These companies are known for their substantial
+    market presence and are recognized leaders in their respective
+    industries.
+
+-   **Market capitalization focus:** We have chosen stocks with an
+    emphasis on market capitalization. Larger market capitalization
+    often indicates stability and lower volatility, making these stocks
+    appealing for various investment strategies.
+
+-   **US equity market perspective:** Our project primarily targets
+    insights related to the US equity market. The chosen stocks provide
+    a representative snapshot of the investment landscape in one of the
+    world's largest and most influential equity markets.
+
+-   **Diversification:** To create a well-rounded portfolio, we have
+    ensured diversification across different sectors and industries.
+    Diversification is essential in portfolio management as it spreads
+    risk and mitigates overexposure to a single sector.
+
+-   **Market visibility:** The selected companies are not only
+    well-regarded in the financial sector but are also widely recognized
+    in popular culture. Their performance is closely monitored, and they
+    often hold significant sway over market indices.
+
+-   **Historical data and research:** These stocks have a rich history
+    of performance data and have been the subject of extensive research.
+    Access to their historical data is abundant, making them suitable
+    for rigorous portfolio management analysis and research.
+
+The provided R code defines the stock tickers for these companies,
+allowing you to access financial data. This data can then be employed to
+conduct a range of analyses, such as return calculations, risk
+assessments, and portfolio optimization, to test and implement various
+investment strategies on the US equity market.
+
+```{r}
+# Define the stock tickers you want to fetch data for
+stock_tickers <- c("AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "PYPL", "CMCSA", "ADBE", "ASML",
+                   "CSCO", "PEP", "AVGO", "TMUS", "INTC", "TXN", "AMGN", "NFLX", "SBUX", "AMAT")
+```
+
+We source our data from Yahoo Finance, a highly reputable platform
+renowned for its financial data. Our analysis covers a comprehensive
+three-and-a-half-year period, allowing us to evaluate the performance of
+our selected companies both before and after the onset of the COVID-19
+pandemic.
+
+```{r}
+# Fetch historical stock data from Yahoo Finance
+start_date <- "2019-01-01"  # Replace with your desired start date
+end_date <- "2023-08-31"    # Replace with your desired end date
+stock_data <- getSymbols(stock_tickers, from = start_date, to = end_date, auto.assign = TRUE)
+```
+
+## 1.3 Data cleaning
+
+We perform some formatting to clean the data, an important step in
+performing data analysis:
+
+-   **Extracting adjusted closing prices** (lapply(stock_tickers,
+    function(ticker) { Ad(get(ticker)) })): This code uses the lapply
+    function to retrieve the adjusted closing prices (often used for
+    return calculations) for a list of stock tickers. It iterates
+    through each ticker in the stock_tickers vector and fetches the
+    adjusted closing prices using the Ad() function from the quantmod
+    package.
+
+-   **Combining stock returns** (do.call(cbind, stock_returns)): The
+    code combines the extracted adjusted closing prices into a single
+    data frame by calling cbind (column-bind) on the list of stock
+    returns obtained in the previous step. This creates a data frame
+    where each column represents the adjusted closing prices of a
+    specific stock.
+
+-   **Renaming columns** (colnames(fin_prices) \<- stock_tickers): The
+    code assigns the stock tickers as column names to the combined data
+    frame. This step ensures that each column is labeled with the
+    corresponding stock ticker, making it easier to identify each
+    stock's data.
+
+-   **Handling missing data** (na.omit(fin_prices)): This line of code
+    removes rows with missing values (usually represented as NA) from
+    the combined data frame, fin_prices. Removing missing data is a
+    common processing step to ensure the quality and consistency of the
+    dataset for further analysis.
+
+```{r}
+# Extract adjusted closing prices (which are typically used for returns)
+stock_returns <- lapply(stock_tickers, function(ticker) {
+  Ad(get(ticker))
+})
+
+# Combine stock returns into a single data frame
+fin_prices <- do.call(cbind, stock_returns)
+
+# Rename columns to match your analysis
+colnames(fin_prices) <- stock_tickers
+
+# Eliminated missing data in time series
+fin_return <- na.omit(fin_prices)  # Remove rows with missing values
+```
+
+We perform the arithmetic return method to compute returns for this data
+set. It is simple, intuitive and widely accessible. Arithmetic returns
+are particularly useful for performance measurement, providing a clear
+view of actual gains and losses. It is well-suited for short-term
+analysis and offer transparency.
+
+```{r}
+arith_fin_returns = diff(fin_return)/lag(fin_return)
+head(arith_fin_returns, n=3)
+arith_fin_returns <- arith_fin_returns[-1, ]
+```
+
+In order to ensure that the data is properly imported, with non missing
+values and proper data cleaning procedure, we can implement this line of
+code in order to learn more about data.
+
+```{r}
+plot_intro(arith_fin_returns)
+```
+
+The US stock market has performed strongly from 2019 to 2023, despite
+some headwinds. The S&P 500 index has returned double digit returns
+during this period, driven by a number of factors, including:
+
+-   **Strong economic growth:** The US economy grew at an average rate
+    of 2.3% from 2019 to 2022, which supported corporate earnings
+    growth.
+
+-   **Low interest rates:** The Federal Reserve kept interest rates at
+    record lows during this period, which boosted corporate profits and
+    made stocks more attractive to investors.
+
+-   **Government stimulus:** The US government injected a number of
+    stimulus measures in response to the COVID-19 pandemic, which
+    boosted consumer spending and supported the economy.
+
+The main market movers during this period have been technology stocks,
+which have outperformed other sectors by a wide margin. This is due to
+the fact that technology companies have benefited from the shift to
+online shopping and working during the pandemic.
+
+Other sectors that have performed well during this period include
+healthcare, consumer staples, and financials. These sectors are
+generally seen as more defensive, and they have tended to outperform in
+times of market volatility.
+
+Some of the top performing US stocks from 2019 to 2023 include:
+
+-   **NVIDIA (TICKER: NVDA)**
+
+-   **Tesla (TICKER: TSLA)**
+
+-   **Apple (TICKER: AAPL)**
+
+-   **Microsoft (TICKER: MSFT)**
+
+-   **Alphabet (TICKER: GOOGL)**
+
+-   **Amazon (TICKER: AMZN)**
+
+These companies have all benefited from the trends mentioned above, and
+they have seen their share prices rise significantly during this period.
+Overall, the US stock market has performed strongly from 2019 to 2023,
+despite some headwinds. The main market movers have been technology
+stocks, which have outperformed other sectors by a wide margin.
+
+From the figure below, Nvidia (TICKER: NVDA) and Tesla (TICKER: TSLA)
+stock shares witnessed an unprecedented surge in attraction, making it a
+notable standout within our investment universe. Tesla was amon the best
+performing stocks in the broader investment universe selected. The surge
+in retail trading interest for the electric car company can explain to
+some extent this massive performance, especially in the wake of the
+post-COVID market, where intensive monetary policies prompted
+significant investments from both corporate and retail investors seeking
+higher yields.
+
+Regarding Nvidia's stock price, it has surged in recent years as
+investors have become increasingly bullish on the company's prospects.
+There are a number of reasons for this, including:
+
+-   **The growth of AI:** AI is one of the most important technological
+    trends of our time, and Nvidia's GPUs are essential for many AI
+    applications. As AI continues to grow, Nvidia is well-positioned to
+    benefit.
+
+-   **The rise of the metaverse:** The metaverse is a virtual world that
+    is still in its early stages of development, but it has the
+    potential to be a massive market. Nvidia's GPUs are used to power
+    many of the technologies that will be used in the metaverse, such as
+    virtual reality and augmented reality.
+
+-   **Nvidia's strong financial performance:** Nvidia has been
+    delivering strong financial performance for many years. In the most
+    recent quarter, the company reported revenue of \$8.29 billion and
+    earnings per share of \$1.32, both of which beat analyst
+    expectations.
+
+Given Nvidia's strong position in the AI and metaverse markets, it is
+not surprising that investors are paying attention to the stock. The
+company is also well-managed and has a strong track record of
+innovation.
+
+Here are some specific reasons why investors are interested in NVDA
+stock amid a rising war in AI and LLM:
+
+-   **Nvidia is a leader in the development of AI hardware and
+    software.** The company's GPUs are used by many of the world's
+    leading AI researchers and companies.
+
+-   **Nvidia is well-positioned to benefit from the growth of
+    LLM.** LLMs are a new type of AI that can generate text, translate
+    languages, write different kinds of creative content, and answer
+    your questions in an informative way. Nvidia's GPUs are essential
+    for training and running LLMs.
+
+-   **Nvidia is investing heavily in the research and development of new
+    AI technologies.** The company is committed to maintaining its
+    leadership position in the AI market.
+
+Overall, Nvidia is a well-established company with a strong track record
+of innovation. The company is well-positioned to benefit from the growth
+of AI and LLM, which is why investors are paying attention to the stock.
+
+The code allowed us to plot returns into a time series, providing a
+clear visualization of stock performance during the specified period.
+
+```{r}
+# Calculate Cumulative Returns
+cumulative_returns <- cumprod(1 + arith_fin_returns)
+
+# Plot Cumulative Return Performance
+library(ggplot2)
+autoplot(cumulative_returns, facets = NULL) +
+  ggtitle("Cumulative Return Performance of the investment universe") +
+  ylab("Cumulative Return") +
+  xlab("Year")
+
+```
+
+We can define the minimum volatility portfolio as a portfolio of assets
+with the lowest possible risk for an investor and is located on the
+far-left side of the efficient frontier. Note that the minimum
+volatility portfolio is also called the minimum variance portfolio or
+more precisely the global minimum volatility portfolio (to distinguish
+it from other optimal portfolios obtained for higher risk levels).
+
+To implement to global minimum variance portfolio, we need to compute
+the covariance matrix as an input parameter for the Markowitz
+optimization model.
+
+```{r}
+cov_matrix <- cov(arith_fin_returns)
+
+```
+
+Correlation plays an important role in a Markowitz allocation framework,
+where diversification can be achieved when allocating capital to poorly
+or negatively correlated assets.
+
+The concept of diversification seeks to enhance returns while minimizing
+risk by investing in a variety of assets that will react differently to
+the same event (s). For example, whenever there is unfavorable news
+about a certain event, i.e. 2008 sub prime mortgage crisis, the stock
+market typically declines dramatically. Simultaneously, the same news
+has generally benefited the price of specific assets, such as gold. As a
+result, portfolio diversification should include not just diverse stocks
+inside and outside of the same industry, but also diverse asset classes,
+such as bonds and commodities. The diversification effect is a term that
+relates to the link between portfolio correlations and diversification.
+When there is an imperfect correlation between assets (positive or
+negative), the diversification effect occurs. It is a critical and
+successful risk mitigation method since risk mitigation may be
+accomplished without sacrificing profits. As a result, any prudent
+investor who is 'risk cautious' will diversify to a certain extent.
+
+Here, we observe opportunities for diversification within our investment
+universe. For instance, we notice that stocks often categorized as
+defensive plays can serve as effective diversification instruments when
+combined with more aggressive stocks. In this context, consider Amgen
+Inc. (TICKER: AMGN) in the healthcare industry, which exhibits a neutral
+correlation when compared to a stock like Tesla (TICKER: TSLA). Similar
+logic applies to a stock such as PepsiCo Inc. (TICKER: PEP) in relation
+to Tesla. It's worth noting that within our investment universe, we do
+not find negative correlations, as all the assets exhibit some degree of
+correlation to one another.
+
+```{r}
+corrplot(cor(arith_fin_returns), type='lower', 
+         method = "shade", tl.col = 'black', cl.pos = "r", tl.cex = 1)
+```
+
+To further complement the analysis of the data gathered, we can run a
+statistical analysis of the first moments of the distribution to assess
+the performance of each stock and understand their behavior during the
+time frame observed. NB: Figures obtained from this statistical analysis
+are given on a daily return basis.
+
+```{r}
+summary(arith_fin_returns)
+```
+
+In portfolio management, statistical analysis can help understand
+financial patterns in data.
+
+Density plots, also known as probability density function plots, serve
+the purpose of visualizing data distributions. They offer insights into
+the shape, spread, and central tendencies of data, making them crucial
+for assessing the nature of financial asset returns. These plots help
+portfolio managers identify departures from expected distributions,
+facilitating informed investment decisions. Together, these techniques
+aid in the exploration and assessment of financial data, enabling
+portfolio managers to make more informed and data-driven choices in
+their investment strategies.
+
+We can run some more advanced statistical analysis to understand the
+asset return behavior of the equities selected in this analysis.
+
+```{r}
+
+# Advanced statistical analysis for the dataset
+
+plot_density(arith_fin_returns)
+#plot_qq(arith_fin_returns)
+
+```
+
+# 2. Modelling part
+
+Modern Portfolio Theory (MPT) is founded on several market and investor
+assumptions. Several of these assumptions are stated explicitly, while
+others are implied. Markowitz's contributions to (MPT) in portfolio
+selection are based on the following basic assumptions: 
+
+-   Investors are rational (they seek to maximize returns while
+    minimizing risk, or minimize risk while maximize return).
+
+-   Investors will accept increased risk only if compensated with higher
+    expected returns.
+
+-   Investors receive all relevant information regarding their
+    investment decision.
+
+-   Investors can borrow or lend an unlimited amount of capital at a
+    risk-free rate of interest.
+
+## 2.1 Unbiased Global Minimum Variance (GMV) portfolio
+
+In the context of time series data analysis, one of the crucial
+applications is the division of the data set into a training set and a
+testing set based on temporal order. This approach is particularly
+important when dealing with data that evolves over time, such as stock
+prices, weather observations, or economic indicators.
+
+The training set typically comprises historical data, while the testing
+set contains more recent observations. This temporal separation allows
+for the evaluation of predictive models and forecasting techniques. By
+using historical data to train the model and then assessing its
+performance on more recent data, analysts can gauge the model's ability
+to make accurate predictions and anticipate future trends. Time series
+data applications are essential in fields like finance, where
+understanding and forecasting trends over time is important.
+
+For the purpose of modelling, we will shrink the data set into two
+different sub-samples. We can define the following parameters:
+
+```{r}
+num_rows_subsample1 <- 400
+total_rows <- nrow(arith_fin_returns)
+```
+
+1.  The first sub-sample will cover the first 400 trading days covered
+    in the data set.
+
+```{r}
+subsample1 <- arith_fin_returns[1:num_rows_subsample1, ]
+plot_intro(subsample1)
+```
+
+2.  The second sub-sample will cover the rest of the data set, covering
+    the equivalent of 773 trading days.
+
+```{r}
+subsample2 <- arith_fin_returns[(num_rows_subsample1 + 1):total_rows, ]
+plot_intro(subsample2)
+
+```
+
+We implement the parameters of the model in order to compute the GMV:
+
+```{r}
+
+#Definition of parameters
+n <- ncol(subsample1)
+T <- nrow(subsample1)
+e <- rep(1, n)
+perio <- 252
+
+#Compute Sigma (unbiased covariance matrix)
+Sigma <- cov(subsample1) * (T - 1) / (T - n - 2) * perio
+C <- t(e) %*% solve(Sigma) %*% e
+
+#Anticipated volatility can be computed
+sigmag <- sqrt(1 / C)
+```
+
+After computing the parameters required to implement the unbiased GMV
+portfolio, we can compute omega, representing the weightings of the
+portfolio as follows.
+
+```{r}
+omega_gmv <- 1 / as.numeric(C) * solve(Sigma) %*% e
+```
+
+We can see in this instance that the portfolio is mixed, with some long
+and short positions. The capital is fully invested, with some important
+exposure in the long part of the portfolio on stocks like Amazon
+(TICKER: AMZN) with 39.85%, followed by PepsiCo (TICKER: PEP) at 29.45%
+and ASML (TICKER: ASML) at 26.35%.
+
+On the short part of the portfolio, we can see an important short on
+three stocks that can stand out: Applied Materials Inc. (TICKER: AMAT)
+-24.07%, Adobe (TICKER: ADBE) at -19.90% and NVIDIA Corp. (TICKER:
+NVDIA) at -18.28%.
+
+```{r}
+barplot(as.numeric(omega_gmv), col = 'black', ylim = c(-0.5, 1))
+```
+
+## 2.2 Implementation of Principal Component Analysis (PCA)
+
+Principal Component Analysis (PCA) is a technique used to analyze and
+reduce the dimensionality of a dataset while retaining as much variance
+as possible. We perform the PCA analysis using the second subsample
+starting from the trading day number 401 of the sample to the trading
+day number 1174.
+
+```{r}
+pca_result <- prcomp(subsample2, center = TRUE, scale = TRUE)
+
+#Extract principal component loadings
+loadings <- pca_result$rotation
+
+#Variance explained by each principal component
+var_explained <- (pca_result$sdev^2) / sum(pca_result$sdev^2)
+
+#We select the number of components for the PCA
+num_components <- 3  # Adjust as needed
+
+#We compute the weights of the PCA in the portfolio.
+weights_pca <- loadings[, 1:num_components] / rowSums(loadings[, 1:num_components])
+```
+
+This is the result of the plot from the PCA analysis. Here are some
+interpretations:
+
+1.  **Principal Components (PCs)**:
+
+    -   PC1, PC2, and PC3 represent the first, second, and third
+        principal components, respectively.
+
+    -   Each principal component is a linear combination of the original
+        variables (in this case, stocks) such that it captures the
+        maximum variance in the data.
+
+2.  **Loadings**:
+
+    -   Loadings represent the coefficients that define the contribution
+        of each original variable (stock) to the principal component.
+        The loadings are specific to each PC.
+
+    -   Positive or negative values in loadings indicate the direction
+        and strength of the relationship between each stock and the
+        principal component. For example, a high positive loading
+        indicates that a particular stock has a strong positive
+        influence on the corresponding principal component. In this
+        context, we can see that Adobe (TICKER: ADBE) is very sensitive
+        to the variations of the PCA1, meaning that the stock is
+        positively correlated with broad market movement. Regarding the
+        second PCA factor, Tesla (TICKER: TSLA) has the most sensitivity
+        to this particular factor loading. Regarding the third factor
+        loading, Amazon (TICKER: AMZN) is the most sensitive to the
+        third PCA component.
+
+3.  **Weights for the PCA Portfolio**:
+
+    -   The weights for the PCA portfolio represent the portfolio
+        allocation to each stock based on the chosen principal
+        components. These weights can be used to create a portfolio with
+        a specific strategy, which leverages the information in the
+        principal components.
+
+4.  **Interpretation**:
+
+    -   PC1, PC2, and PC3 capture specific patterns or relationships in
+        the returns of the stocks. For this instance, PC1 can capture
+        broad market movements, while PC2 might capture sector-specific
+        trends.
+
+    -   The specific interpretation of each PC depends on the loadings
+        and how they relate to the original variables (stocks). Positive
+        loadings indicate stocks that move in the same direction as the
+        principal component, while negative loadings suggest stocks that
+        move in the opposite direction.
+
+    -   By examining the loadings for each PC, you can gain insights
+        into which stocks are the most influential for each component.
+
+```{r}
+my_colors <- c("red", "blue", "green") # vector of colours
+barplot(weights_pca, beside = TRUE, col = my_colors,
+        names.arg = colnames(weights_pca),
+        legend.text = colnames(weights_pca), 
+        main = "PCA Portfolio Weights")
+```
+
+---
+title: "Tangency portfolio and Black-Litterman approach"
+output: html_document
+date: "`r Sys.Date()`"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# 3. Tangency portfolio and Black-Litterman approach
+
+## 3.1 Packages
+
+We use the following libraries:
+
+1.  **tidyverse:** This package is a powerful toolbox that combines
+    various R packages to streamline data manipulation, visualization,
+    and analysis. It includes versatile tools like ggplot2 for visuals,
+    dplyr for data tweaks, and tidyr for tidying data.
+
+2.  **quantmod:** quantmod specializes in quantitative financial
+    modeling and data analysis. It equips us with tools to handle
+    financial data, perform technical analysis, and model financial time
+    series.
+
+3.  **DataExplorer:** DataExplorer aids in the initial data exploration
+    phase. It provides quick insights through functions for generating
+    summary statistics, visualizing missing data, and plotting variable
+    distributions.
+
+4.  **corrplot:** This package is your go-to for visualizing correlation
+    matrices. It offers functions to create informative correlation
+    plots, helping you grasp relationships between data variables.
+
+5.  **scales:** scales complements R graphics, especially in conjunction
+    with ggplot2. It furnishes various scales and formatting functions
+    to customize plot aesthetics, including axes, labels, and color
+    scales
+
+```{r}
+library(tidyverse)
+library(quantmod)
+library(DataExplorer)
+library(corrplot)
+library(scales)
+```
+
+## 3.2 Investment universe
+
+We have carefully chosen a set of five trackers (ETFs) to represent our
+univestment universe. An ETF can be defined as a financial product that
+is based on a basket of different assets, to replicate the actual
+performance of each selected investment. An ETF has more or less the
+same proportion of the underlying components of the basket, depending on
+the style of management of the asset manager.
+
+Our selection strategy is based on several fundamental considerations:
+
+-   **Investment universe:** The investment universe aims at
+    representing different asset classes in order to construct a
+    multi-asset portfolio.
+
+-   **Diversification strategy:** Our commitment to constructing a
+    well-rounded portfolio has been affirmed through diversification
+    across various sectors and industries. Such diversification is a
+    critical risk management tool, curbing overexposure to a single
+    sector or asset class.
+
+-   **Historical data availability:** The selected trackers benefit from
+    a rich repository of historical data and extensive research. The
+    accessibility of such data enable these ETFs to rigorous portfolio
+    management analysis and comprehensive research.
+
+The provided R code defines the tickers for these trackers, allowing you
+to access the financial data. This data can then be employed to conduct
+a range of analyses, such as return calculations, risk assessments, and
+portfolio optimization, to test and implement various investment
+strategies.
+
+We source our data from Yahoo Finance, a highly reputable platform
+renowned for its financial data. Our analysis covers a comprehensive
+three-and-a-half-year period, allowing us to evaluate the performance of
+our selected asset class both before and after the onset of the COVID-19
+pandemic.
+
+```{r}
+# Define the stock tickers you want to fetch data for
+stock_tickers <- c("VTI", "EMGF", "IEF", "DBC", "GLD")
+
+# Fetch historical stock data from Yahoo Finance
+start_date <- "2019-01-01"  # Replace with your desired start date
+end_date <- "2023-08-31"    # Replace with your desired end date
+
+# Use getSymbols to fetch data for all stock tickers
+stock_data <- getSymbols(stock_tickers, from = start_date, to = end_date, auto.assign = TRUE)
+```
+
+## 3.3 Data cleaning
+
+We initiate data cleaning, a crucial step in data analysis:
+
+-   **Extracting adjusted closing prices:** We use the lapply function
+    to obtain adjusted closing prices, commonly used for return
+    calculations, for a list of stock tickers. This code iterates
+    through each ticker and fetches the adjusted closing prices.
+
+-   **Combining stock returns:** To consolidate the adjusted closing
+    prices, we employ cbind, creating a data frame where each column
+    represents a specific stock's adjusted closing prices.
+
+-   **Renaming columns:** We label the columns with their corresponding
+    stock tickers, facilitating easy identification.
+
+-   **Handling missing data:** We remove rows with missing values from
+    the dataset for quality and consistency.
+
+```{r}
+# Extract adjusted closing prices (which are typically used for returns)
+stock_returns <- lapply(stock_tickers, function(ticker) {
+  Ad(get(ticker))
+})
+
+# Combine stock returns into a single data frame
+fin_prices <- do.call(cbind, stock_returns)
+
+# Eliminate missing data in time series
+fin_return <- na.omit(fin_prices)  # Remove rows with missing values
+
+```
+
+Arithmetic returns are used for performance assessment, offering a clear
+view of gains and losses, suitable for short-term analysis, and ensuring
+transparency.
+
+```{r}
+# Computation of returns
+arith_fin_returns = diff(fin_return)/lag(fin_return)
+head(arith_fin_returns, n=3)
+arith_fin_returns <- arith_fin_returns[-1, ]
+
+
+```
+
+In order to ensure that the data is properly imported, with non missing
+values and proper data cleaning procedure, we can implement this line of
+code in order to learn more about data.
+
+```{r}
+# Data exploration for the return time series
+plot_intro(arith_fin_returns)
+```
+
+We plot the rebased performance of the trackers selected in our
+investment universe. From the graph below, we can clearly see the out
+performance of equity tracker (VTI) by a considerable margin with
+respected to the other asset classes.
+
+The equity market has outperformed all of the other asset classes
+mentioned above since 2019 for a number of reasons.
+
+-   **Strong economic growth:** The global economy has grown at a
+    healthy pace since 2019, which has supported corporate earnings
+    growth. This has made equities more attractive to investors.
+
+-   **Low interest rates:** Interest rates have been low since 2019,
+    which has made equities more attractive relative to other asset
+    classes, such as bonds.
+
+-   **Government stimulus:** Governments around the world have enacted a
+    number of stimulus measures to support the economy during the
+    COVID-19 pandemic. This has boosted consumer spending and
+    investment, which has benefited equities.
+
+-   **Corporate earnings growth:** Corporate earnings have grown
+    strongly since 2019, as companies have benefited from the strong
+    economy and low interest rates. This has made equities more
+    attractive to investors.
+
+The equity market is the riskiest of the asset classes mentioned above
+because it is more volatile and subject to larger swings in price.
+However, it has also been the most rewarding asset class over the long
+term, as it has generated higher returns than other asset classes, such
+as bonds and commodities.
+
+Investors who are willing to take on more risk may want to consider
+investing in the equity market. However, it is important to note that
+past performance is not indicative of future results. Investors should
+always do their own research and consult with a financial advisor before
+making any investment decisions.
+
+Here are some additional insights on the outperformance of the equity
+market:
+
+-   The equity market has benefited from a number of technological
+    trends, such as the rise of e-commerce and cloud computing. These
+    trends have led to the growth of new companies and industries, which
+    has created new investment opportunities for investors.
+
+-   The equity market has also benefited from the globalization of the
+    economy. Companies are now able to operate in multiple countries,
+    which has helped them to grow their businesses and increase their
+    profits.
+
+-   The equity market has become more accessible to individual investors
+    in recent years. This has led to an increase in demand for equities,
+    which has helped to drive up prices.
+
+Overall, the equity market has outperformed all of the other asset
+classes mentioned above since 2019 due to a number of factors, including
+strong economic growth, low interest rates, government stimulus,
+corporate earnings growth, technological trends, globalization, and
+increased access for individual investors.
+
+```{r}
+# Calculate Cumulative Returns
+cumulative_returns <- cumprod(1 + arith_fin_returns)
+
+# Plot Cumulative Return Performance
+library(ggplot2)
+autoplot(cumulative_returns, facets = NULL) +
+  ggtitle("Cumulative Return Performance of the investment universe") +
+  ylab("Cumulative Return") +
+  xlab("Year")
+
+```
+
+To enhance our data analysis, we can perform statistical analysis on the
+daily returns of each stock. This helps us evaluate their performance
+and behavior during the observed time frame. Please note that the
+figures derived from this analysis are presented in daily returns.
+
+```{r}
+# Statistical summary of returns for each asset class
+
+summary(arith_fin_returns)
+```
+
+In portfolio management, statistical analysis plays a key role in
+understanding financial data patterns. We will focus on the density plot
+which visualize data distributions. This method assist portfolio
+managers in making data-driven investment decisions, enhancing the
+exploration of financial data, and understanding the behavior of
+selected equities' returns. As seen from the density plots, the results
+are not normally distributed.
+
+```{r}
+# Advanced statistical analysis for the dataset
+
+plot_density(arith_fin_returns)
+#plot_qq(arith_fin_returns)
+```
+
+Correlation is a fundamental concept related to diversification, which
+seeks to use poorly correlated and non correlated assets to construct a
+portfolio. Diversification aims to boost returns while minimizing risk
+by investing in assets that respond differently to various events.
+Prudent investors seeking risk mitigation will diversify their
+portfolios.
+
+In our investment universe, opportunities for diversification arise.
+Defensive assets like gold (TICKER: GLD) can effectively diversify when
+combined with more aggressive ones. For instance, the Vanguard Total
+Index tracker (TICKER: VTI) has a poor correlation with gold (TICKER:
+GLD). iShares 7-10 years Treasuries Index tracker (TICKER: IEF) exhibits
+negative correlation with respect to international and emerging market
+equities.
+
+```{r}
+# Correlation analysis
+
+library(corrplot)
+corrplot( cor(arith_fin_returns), type='lower', method = "shade", tl.col = 'black', cl.pos = "r", tl.cex = 1)
+```
+
+# 4. Modelling of the portfolio
+
+## 4.1 Implementing the Tangency portfolio (TP)
+
+In time series data analysis, a crucial application involves splitting
+the dataset into training and testing sets based on temporal order. This
+is vital when working with data that evolves over time, such as stock
+prices or weather observations.
+
+The training set consists of historical data, while the testing set
+contains more recent observations. This division allows analysts to
+assess predictive models and forecasting techniques. By training the
+model on historical data and evaluating it with recent data, we can
+determine its ability to make accurate predictions. This is especially
+important in finance for understanding and forecasting trends over time.
+
+For modeling purposes, we'll create two sub-samples with defined
+parameters.
+
+```{r}
+# Specify the number of rows for the first subsample
+num_rows_subsample1 <- 400
+
+# Calculate the total number of rows in your dataset
+total_rows <- nrow(arith_fin_returns)
+```
+
+1.  The first sub-sample will cover the first 400 trading days covered
+    in the data set.
+
+```{r}
+# Create the first subsample
+subsample1 <- arith_fin_returns[1:num_rows_subsample1, ]
+plot_intro(subsample1)
+
+```
+
+2.  The second sub-sample will cover the rest of the data set, covering
+    the equivalent of 773 trading days.
+
+```{r}
+# Create the second subsample by excluding the rows in the first subsample
+subsample2 <- arith_fin_returns[(num_rows_subsample1 + 1):total_rows, ]
+plot_intro(subsample2)
+```
+
+We implement the parameters of the model in order to compute the
+Tangency Portfolio:
+
+```{r}
+n <- ncol(subsample1)
+T <- nrow(subsample1)
+e <- rep(1, n)
+perio <- 252
+rf <- 0
+
+```
+
+The parameter sigma, representing the unbiased covariance matrix
+(similar to the procedure implemented when computing the GMV portfolio),
+can be computed using the following procedure:
+
+```{r}
+mu <- colMeans(subsample1) * perio - rf
+Sigma <- cov(subsample1) * (T - 1) / (T - n - 2) * perio
+A <- t(e) %*% solve(Sigma) %*% mu
+omega <- 1 / as.numeric(A) * solve(Sigma) %*% mu
+
+returns = mu %*% omega
+```
+
+The portfolio allocation consists of both long positions, where
+investors expect favorable returns, and short positions, where they
+anticipate weaker performance. Here's a more detailed explanation of
+each asset class allocation:
+
+Long Positions:
+
+-   **International Equities (Ticker: VTI, Allocation: 25.38%):** This
+    segment of the portfolio is dedicated to international equities,
+    with VTI making up a substantial portion at 25.38%. Investors are
+    optimistic about the performance of international equities, which is
+    why they have allocated a significant portion of their capital to
+    this asset class.
+
+-   **US Short-Term Maturity Bond (Ticker: IEF, Allocation: 77.03%):**
+    The largest allocation in the long positions is in US short-term
+    maturity bonds, represented by IEF. This allocation, at 77.03%,
+    indicates a strong conviction in the stability and income potential
+    of short-term bonds.
+
+-   **Gold (Ticker: GLD, Allocation: 15.27%):** The allocation to gold,
+    represented by GLD, has decreased to 15.27%. Gold is often
+    considered a safe-haven asset, and this allocation suggests that
+    investors still see value in holding gold as a hedge or store of
+    value, albeit at a slightly reduced allocation.
+
+Short Positions:
+
+-   **Emerging Markets (Ticker: EMGF, Allocation: -6.41%):** The short
+    segment of the portfolio is allocated to assets where weak
+    performance is expected. In the case of emerging markets, the
+    allocation is bearish at -6.41%. This indicates that investors are
+    taking a negative stance on the performance of emerging market
+    assets, expecting their values to decline.
+
+-   **Commodities (Ticker: DBC, Allocation: -11.26%):** The allocation
+    to commodities, represented by DBC, is even more conservative at
+    -11.26%. This suggests a strongly bearish outlook on commodities,
+    where investors anticipate a significant decrease in their value.
+    This allocation reflects a cautious approach towards commodities in
+    the portfolio.
+
+In summary, the portfolio is strategically balanced between long
+positions, where investors have confidence in the assets' growth
+potential, and short positions, where they are expecting weaker
+performance. The specific allocations provide insights into the level of
+conviction and sentiment regarding each asset class.
+
+```{r}
+# Plot of Tangency portfolio
+
+barnames <- c("VTI", "EMGF", "IEF", "DBC", "GLD")
+barplot(
+  as.numeric(omega),
+  col = 'Black',
+  names.arg = barnames,
+  ylim = c(-0.5, 1)
+)
+```
+
+## 4.2 Implementing Black-Litterman approach
+
+In order to construct our views matrix, we can base our assumptions on
+the economic outlooks provided from a group of asset managers to
+confront outlooks and assess their perspective on markets. We will delve
+deeper into the outlooks from BlackRock, Goldman Sachs Asset Management
+(GSAM), and J.P. Morgan Asset Management (JPMAM) on gold, international
+equities, commodities, short-term US Treasuries, and emerging markets:
+
+**International equity markets**
+
+International equity markets have underperformed US equity markets since
+2019. However, they have started to outperform in 2023, as valuations
+have become more attractive and corporate earnings growth has picked up.
+
+-   **BlackRock:** BlackRock is neutral on international equities. The
+    firm believes that international equities are undervalued, but it is
+    cautious due to the risks associated with investing in international
+    markets, such as currency fluctuations and political instability.
+
+-   **Goldman Sachs Asset Management (GSAM):** GSAM is neutral on
+    international equities. The firm believes that international
+    equities are undervalued, but it is cautious due to the risks
+    associated with investing in international markets, such as currency
+    fluctuations and political instability.
+
+-   **J.P. Morgan Asset Management (JPMAM):** JPMAM is overweight
+    international equities. The firm believes that international
+    equities are undervalued and that corporate earnings growth will
+    pick up in the coming months.
+
+**Emerging market equity**
+
+Emerging market equity has underperformed US equity since 2019. However,
+it has started to outperform in 2023, as valuations have become more
+attractive and corporate earnings growth has picked up.
+
+-   **BlackRock:** BlackRock is neutral on emerging market equities. The
+    firm believes that emerging market equities are undervalued, but it
+    is cautious due to the risks associated with investing in emerging
+    markets, such as currency fluctuations and political instability.
+
+-   **GSAM:** GSAM is underweight emerging market equities. The firm
+    believes that emerging markets are more risky than developed markets
+    due to their higher exposure to China and other emerging economies.
+
+-   **JPMAM:** JPMAM is underweight emerging market equities. The firm
+    believes that emerging markets are more risky than developed markets
+    due to their higher exposure to China and other emerging economies.
+
+**US short-term treasuries**
+
+US short-term treasuries have underperformed most other asset classes
+since 2019. This is due to the fact that interest rates have been rising
+during this period.
+
+-   **BlackRock:** BlackRock is overweight short-term US Treasuries. The
+    firm believes that the outlook for short-term US Treasuries is
+    positive, as the Federal Reserve is expected to continue raising
+    interest rates to combat inflation.
+
+-   **GSAM:** GSAM is overweight short-term US Treasuries. The firm
+    believes that the outlook for short-term US Treasuries is positive,
+    as the Federal Reserve is expected to continue raising interest
+    rates to combat inflation.
+
+-   **JPMAM:** JPMAM is neutral on short-term US Treasuries. The firm
+    believes that the outlook for short-term US Treasuries is neutral,
+    as the Federal Reserve is expected to continue raising interest
+    rates, but yields are already relatively high.
+
+**Commodities**
+
+Commodities have outperformed most other asset classes since 2019. This
+is due to a number of factors, including strong demand from China and
+the ongoing war in Ukraine.
+
+-   **BlackRock:** BlackRock is overweight commodities. The firm
+    believes that commodity prices will remain supported by strong
+    demand from China and the ongoing war in Ukraine.
+
+-   **GSAM:** GSAM is overweight commodities. The firm believes that
+    commodity prices will remain supported by strong demand from China
+    and the ongoing war in Ukraine.
+
+-   **JPMAM:** JPMAM is overweight commodities. The firm believes that
+    commodity prices will remain supported by strong demand from China
+    and the ongoing war in Ukraine.
+
+**Gold**
+
+Gold has outperformed most other asset classes since 2019. This is due
+to a number of factors, including concerns about global economic growth,
+geopolitical tensions, and inflation.
+
+-   **BlackRock:** BlackRock is overweight gold in its portfolios. The
+    firm believes that gold is a good hedge against inflation and
+    geopolitical risk.
+
+-   **GSAM:** GSAM is overweight gold in its portfolios. The firm
+    believes that gold is a good hedge against inflation and
+    geopolitical risk.
+
+-   **JPMAM:** JPMAM is overweight gold in its portfolios. The firm
+    believes that gold is a good hedge against inflation and
+    geopolitical risk.
+
+Overall, there is a general convergence of outlooks on gold,
+commodities, and short-term US Treasuries. All three asset managers are
+overweight these asset classes. However, there is some divergence of
+outlooks on international equities and emerging markets. BlackRock and
+GSAM are neutral on international equities, while JPMAM is overweight.
+GSAM and JPMAM are underweight on emerging markets, while BlackRock is
+neutral.
+
+| **Asset class**          | **BlackRock** | **GSAM**    | **JPMAM**   |
+|--------------------------|---------------|-------------|-------------|
+| Gold                     | Overweight    | Overweight  | Overweight  |
+| International equities   | Neutral       | Neutral     | Overweight  |
+| Commodities              | Overweight    | Overweight  | Overweight  |
+| Short-term US Treasuries | Overweight    | Overweight  | Neutral     |
+| Emerging markets         | Neutral       | Underweight | Underweight |
+
+: Table 1. Data from BlackRock, Goldman Sachs Asset Management (GSAM),
+and J.P. Morgan Asset Management (JPMAM), 2023.
+
+In summary, our combined views suggest the following outlook scenario
+for each asset class:
+
+-   **International equities (TICKER: VTI):** Strongly overweight
+
+-   **Emerging Markets** **(TICKER: EMGF):** Relatively underweight
+
+-   **US short term maturity bond** **(TICKER: IEF):** Strongly
+    overweight
+
+-   **Commodities** **(TICKER: DBC):** Relatively underweight
+
+-   **Gold** **(TICKER: GLD):** Relatively overweight
+
+```{r}
+Q <- numeric(5)
+Q[1] <- 0.05 # Strongly overweight for International equities (TICKER: VTI)
+Q[2] <- -0.02 # Relatively underweight for Emerging Markets (TICKER: EMGF)
+Q[3] <- 0.05 # Strongly overweight for US short term maturity bond (TICKER: IEF)
+Q[4] <- -0.01 # Relatively underweight for Commodities (TICKER: DBC)
+Q[5] <- 0.03 # Relatively overweight for Gold (TICKER: GLD)
+tau <- 0.95
+```
+
+The Black-Litterman optimization approach is a widely-used method for
+improving the estimation of expected returns and making asset allocation
+decisions. It addresses the limitations of traditional mean-variance
+optimization by incorporating investor views and market equilibrium
+considerations. The following key steps are performed:
+
+Mixed estimation of returns: The code starts by computing expected
+returns using mixed estimation. This means combining the market
+equilibrium-based returns (mu) with the views-based returns (Q) using a
+blending process. The parameter tau adjusts the strength of the
+blending. This approach allows investors to incorporate their subjective
+views on assets into the asset allocation process while considering the
+overall market dynamics.
+
+Tactical allocation with views directly: This part of the code
+calculates the tactical asset allocation weights based on views
+directly. It uses a matrix A_Q and the matrix of uncertainty in views
+(omega_Q) to determine the optimal portfolio weights. These weights
+reflect the investor's views on specific assets and are adjusted
+according to their confidence in those views.
+
+Tactical allocation with mixed estimation: Similarly, this part
+calculates tactical asset allocation weights, but this time, it uses the
+mixed estimation approach. It calculates A_mixed and omega_mixed based
+on the mixed estimation of expected returns. This allows investors to
+take a balanced approach, combining both market equilibrium
+considerations and their own views in the asset allocation process.
+
+Black-Litterman offers a flexible framework for investors to incorporate
+their insights and views while maintaining a connection to market
+equilibrium. It's a valuable tool for optimizing portfolio allocation
+decisions, especially when investors have specific expectations or
+insights about the market.
+
+Source [1] Black, F., & Litterman, R. B. (1992). Global portfolio
+optimization. Financial Analysts Journal, 48(5), 28-43.
+
+```{r}
+
+#Mixed estimation of returns
+
+Omega <- diag(diag(Sigma), n, n)
+mu_mixed <-
+  solve(solve(tau * Sigma) + solve(Omega)) %*% (solve(tau * Sigma) %*% mu +
+                                                  solve(Omega) %*% Q)
+
+#Tactical allocation with views directly
+
+A_Q <- t(e) %*% solve(Sigma) %*% Q
+omega_Q <- 1 / as.numeric(A_Q) * solve(Sigma) %*% Q
+#barplot(as.numeric(omega_Q), col = 'black', names.arg = barnames, ylim = c(-0.5,1.5))
+
+
+```
+
+We can add the following comments on the new portfolio allocation under
+Black-Litterman approach, including asset views.
+
+**Asset Class Allocations**:
+
+-   **International Equities (Ticker: VTI, Allocation: 31.95%)**: The
+    allocation to international equities is 31.95%. This allocation
+    represents a "strongly overweight" position compared to the neutral
+    stance of the BlackRock outlook, indicating a high level of
+    confidence in the favorable performance of international equities.
+    However, it's essential to note that there are differing views among
+    asset managers. BlackRock and GSAM are neutral on international
+    equities, neither optimistic nor pessimistic about their outlook,
+    whereas JPMAM is "overweight," indicating a bullish perspective.
+    This divergence in views reflects the varying assessments of
+    international equity performance.
+
+-   **Emerging Markets (Ticker: EMGF, Allocation: -12.14%)**: The
+    allocation to emerging markets is -12.14%, indicating a "relatively
+    underweight" position. This aligns with the BlackRock outlook, which
+    takes a neutral stance on emerging markets. JPMAM shares this
+    neutral view, while GSAM adopts a more cautious stance by being
+    "underweight," indicating a bearish outlook. The divergence in views
+    highlights the risk-return trade-off associated with emerging
+    markets.
+
+-   **US Short Term Maturity Bond (Ticker: IEF, Allocation: 86.17%)**:
+    The allocation to US short-term maturity bonds is 86.17%, reflecting
+    a "strongly overweight" position. This significant overweight
+    allocation aligns with the views of both BlackRock and GSAM, which
+    are bullish on short-term US Treasuries. In contrast, JPMAM
+    maintains a "neutral" position, neither optimistic nor pessimistic.
+    Short-term US Treasuries are seen as a favorable option for capital
+    preservation and income generation, given the expected rise in
+    yields.
+
+-   **Commodities (Ticker: DBC, Allocation:** **-12.65%):** The
+    allocation to commodities is -12.65%, indicating a "relatively
+    underweight" position. This allocation is consistent with the
+    outlook of all three asset managers, which are "overweight"
+    commodities, signifying a positive investment view. While commodity
+    prices have exhibited volatility, they are expected to remain
+    supported by strong demand from China and geopolitical tensions.
+    Nevertheless, investors should be aware of the cyclical nature of
+    commodity prices, which may not experience continuous growth.
+
+-   **Gold (Ticker: GLD, Allocation: 6.67%)**: The allocation to gold is
+    6.67**%**, reflecting a "relatively overweight" position. This
+    aligns with the outlook of all three asset managers, who are
+    collectively "overweight" on gold. This indicates a shared belief
+    that gold is a sound investment at this time, particularly as it is
+    considered a safe-haven asset sought after during periods of
+    economic uncertainty. Given the current economic outlook's
+    uncertainty and high inflation, gold prices are expected to be
+    supported in the near term.
+
+**Comments on Portfolio Allocation**:
+
+-   The portfolio's strong overweight position in international equities
+    signifies a bullish stance, despite differing views among asset
+    managers. BlackRock and GSAM maintain a neutral position, while
+    JPMAM's overweight perspective suggests a higher degree of
+    confidence in the outlook for international equities.
+
+-   The relatively underweight position in emerging markets aligns with
+    the cautious approach recommended by BlackRock. Differing views from
+    GSAM and JPMAM indicate varying risk appetites, acknowledging the
+    challenges associated with investing in these markets.
+
+-   The significant overweight allocation to US short-term maturity
+    bonds is a key feature of the portfolio allocation. This reflects
+    confidence in the short-term Treasuries and is supported by
+    BlackRock and GSAM's bullish stance, with JPMAM taking a neutral
+    position.
+
+-   The relatively underweight allocation to commodities is consistent
+    with the cyclical nature of these assets. The portfolio takes a more
+    conservative stance, despite expectations of continued strength in
+    commodity prices.
+
+-   The relatively overweight position in gold underscores its potential
+    as a safe-haven asset in the short term, aligning with the views of
+    all three asset managers.
+
+Overall, the portfolio allocation under the Black-Litterman approach
+takes into account a broader spectrum of views from different asset
+managers and integrates them into a more specific allocation that
+reflects varying degrees of optimism and caution across different asset
+classes. Incorporating views into the portfolio has resulted in diverse
+adjustments across asset classes, reflecting the investor's evolving
+outlook on each. These changes are indicative of a dynamic strategy that
+aims to capitalize on various market scenarios. It's crucial to consider
+these allocations within the context of the investor's overall
+investment objectives and risk tolerance, as they play a pivotal role in
+shaping the portfolio's risk-return profile.
+
+```{r}
+#Tactical allocation with mixed estimation
+A_mixed <- t(e) %*% solve(Sigma) %*% mu_mixed
+omega_mixed <- 1 / as.numeric(A_mixed) * solve(Sigma) %*% mu_mixed
+barplot(as.numeric(omega_mixed), col = 'black', names.arg = barnames, ylim = c(-1,1))
+```
