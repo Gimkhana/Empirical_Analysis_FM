@@ -8,21 +8,27 @@ Repository Structure
 The repository is organized into three main folders:
 
 1. Asset Management
+
 This folder contains a variety of advanced portfolio management techniques and strategies, each implemented in R:
 
-Global Minimum-Tangency Portfolio: Scripts for constructing portfolios that aim to achieve the lowest possible risk for a given level of expected return, utilizing the Markowitz efficient frontier concept.
-PCA (Principal Component Analysis): PCA is used here for dimensionality reduction in financial datasets, aiding in the identification of key factors that drive asset returns.
-Black-Litterman Model: Implementation of the Black-Litterman model which combines market equilibrium and subjective views to produce optimized asset allocations.
-Option-Based Portfolio Insurance: Scripts that implement strategies for protecting a portfolio against downside risk using options, a crucial technique for risk-averse investors.
+- Global Minimum-Tangency Portfolio: Scripts for constructing portfolios that aim to achieve the lowest possible risk for a given level of expected return, utilizing the Markowitz efficient frontier concept.
+- PCA (Principal Component Analysis): PCA is used here for dimensionality reduction in financial datasets, aiding in the identification of key factors that drive asset returns.
+- Black-Litterman Model: Implementation of the Black-Litterman model which combines market equilibrium and subjective views to produce optimized asset allocations.
+- Option-Based Portfolio Insurance: Scripts that implement strategies for protecting a portfolio against downside risk using options, a crucial technique for risk-averse investors.
+
 2. Econometrics
+
 This folder focuses on econometric analysis, featuring:
 
-Regressions: A collection of scripts for running various types of regression analyses, essential for understanding relationships between financial variables.
-ADF (Augmented Dickey-Fuller Test): Implementation of the ADF test to check the stationarity of time series, a critical aspect in many econometric analyses in finance.
+- Regressions: A collection of scripts for running various types of regression analyses, essential for understanding relationships between financial variables.
+- ADF (Augmented Dickey-Fuller Test): Implementation of the ADF test to check the stationarity of time series, a critical aspect in many econometric analyses in finance.
+
 3. All-Weather Portfolio Project
+
 An integrated project that applies various tools and scripts provided in this repository to construct an "All-Weather" portfolio:
 
 This project demonstrates how to build a portfolio that aims to perform well across different economic environments, using diversification strategies and insights from the asset management and econometrics folders.
+
 Getting Started
 
 To get started, clone this repository and navigate to each folder to find detailed instructions and documentation for each script and project. The code is primarily written in R, so ensure you have R and the necessary packages installed.
