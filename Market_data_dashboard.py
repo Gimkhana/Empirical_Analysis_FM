@@ -6,12 +6,22 @@ Created on Mon Nov  6 20:40:34 2023
 @author: youssef
 """
 
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Nov  6 20:40:34 2023
+
+@author: youssef
+"""
+
 import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import skew, kurtosis
-
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import numpy as np
 
 # Define assets by category
 assets = {
@@ -163,11 +173,6 @@ for category, datasets in data.items():
     print(stats)
     print("\n" + "-" * 50 + "\n")
 
-# Generate insights
-market_insights = get_insights(data)
-for category, insight in market_insights.items():
-    print(f"{category} Insights: {insight}")
-
 def get_insights(datasets):
     insights = {}
     for category, data in datasets.items():
@@ -262,4 +267,3 @@ with PdfPages('market_plots.pdf') as pdf:
             plt.ylabel("Price")
             pdf.savefig()  # saves the current figure
             plt.close()
-
