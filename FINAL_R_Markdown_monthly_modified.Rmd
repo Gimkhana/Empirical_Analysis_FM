@@ -59,7 +59,7 @@ library(scales)
 
 ## 1.2 Investment universe
 
-### **1.2.1 Investment Universe**
+### **1.2.1 Portfolio selection**
 
 In our portfolio management project, we have carefully chosen a set of
 ten stocks from a larger universe of investments. This selection
@@ -74,7 +74,7 @@ companies are recognized for their robust market capitalization,
 innovative business models, and significant impact on global markets.
 
 | Ticker | Company Description                                                                                                    |
-|---------------------|---------------------------------------------------|
+|--------------------|----------------------------------------------------|
 | AAPL   | A leader in consumer electronics, software, and services.                                                              |
 | MSFT   | A global leader in software, services, devices, and solutions.                                                         |
 | GOOGL  | The parent company of Google, known for its dominant search engine and a wide array of internet services and products. |
@@ -98,7 +98,7 @@ higher inflation. Here a market outlook for each stock selected in our
 investment universe.
 
 | Ticker | Company Description                                                                                                                                                            |
-|----------------------|--------------------------------------------------|
+|--------------------|----------------------------------------------------|
 | AAPL   | The company has a strong track record of innovation. Expected to benefit from the continued growth of the smartphone market and the launch of new products and services.       |
 | MSFT   | Has a diversified business model. Expected to benefit from the growth of cloud computing and other enterprise software markets.                                                |
 | GOOGL  | A leader in online advertising and cloud computing. Expected to benefit from the continued growth of the digital economy.                                                      |
@@ -692,41 +692,61 @@ assumption of unbiased estimators, meaning that the expected returns are
 assumed to be neutral and not influencing the weight allocation. Below
 is an analysis of the GMV portfolio weights:
 
--   **AAPL (Weight: -50.83%)**: The portfolio has a substantial negative
-    weight on AAPL. This suggests that, in the context of minimizing
-    variance, short positions in AAPL might be used to balance other
-    positions' risks. AAPL's negative weight may be due to its
-    volatility or correlation characteristics with other assets in the
-    portfolio.
+-   **AAPL (weight of -50.83%)**: The portfolio has a substantial
+    negative weight on AAPL. This suggests that, in the context of
+    minimizing variance, short positions in AAPL might be used to
+    balance other positions' risks. AAPL's negative weight may be due to
+    its volatility or correlation characteristics with other assets in
+    the portfolio.
 
--   **MSFT (Weight: 40.45%)**, **GOOGL (Weight: 28.18%)** and **NVDA
-    (Weight: 13.97%)**: The following stocks have positive weights,
+-   **MSFT (weight of 40.45%)**, **GOOGL (weight of 28.18%)** and **NVDA
+    (weight of 13.97%)**: The following stocks have positive weights,
     indicating that these stocks contribute to the GMV portfolio's
     overall risk profile. They may offer a balance of return potential
     and risk that aligns with the GMV portfolio's objective.
 
--   **AMZN (Weight: 26.64%), CMCSA (Weight: 48.16%)**, **ADBE (Weight:
-    30.07%)**: The significant positive weight on AMZN, CMCSA and ADBE
-    suggests that, within the GMV framework, these stocks present
-    attractive prospects while providing a potential diversification
-    benefit.
+-   **AMZN (weight of 26.64%), CMCSA (Weight: 48.16%)**, **ADBE
+    (Weight:30.07%)**: The significant positive weight on AMZN, CMCSA
+    and ADBE suggests that, within the GMV framework, these stocks
+    present attractive prospects while providing a potential
+    diversification benefit.
 
--   **TSLA (Weight: -6.8%)**, : Tesla show moderate negative weights,
+-   **TSLA (weight of -6.8%)**, : Tesla show moderate negative weights,
     potentially offsetting the portfolio's volatility due to its higher
     individual risk or positive correlation with higher-volatility
     assets.
 
--   **PYPL (Weight: -31.72%)**, Paypal has a heavy negative weight,
+-   **PYPL (weight of-31.72%)**, Paypal has a heavy negative weight,
     implying a lesser impact on the portfolio's volatility.
 
--   **ASML (Weight: 1.93%)**: The weight is close to zero, indicating a
-    neutral position in terms of its contribution to portfolio variance.
+-   **ASML (weight of 1.93%)**: The weight is close to zero, indicating
+    a neutral position in terms of its contribution to portfolio
+    variance.
 
 ```{r GMV plot , fig.cap="GMV portfolio weights. Each represent a stock weight (from left to right: AAPL, MSFT, GOOGL, AMZN, TSLA, NVDA, PYPL, CMCSA, ADBE, ASML.", echo=FALSE, fig.pos='H'}
 barplot(as.numeric(omega_gmv), col = 'black', ylim = c(-0.5, 1))
 ```
 
 ### 1.4.2 Implementation of Principal Component Analysis (PCA)
+
+**Implementation of factor models**
+
+The challenge in implementing a multifactor model lies in deciding on
+the common factors. There are essentially three approaches to tackle
+this issue:
+
+1.  Factors can be chosen based on economic theory, such as utilizing
+    the market or aggregate wealth portfolio, as suggested by the CAPM.
+    This aligns with Sharpe's (1963) approach or Merton's (1973) ICAPM.
+
+2.  Factor selection can be grounded in empirical research,
+    incorporating macroeconomic factors (for instance: Chen, Roll, and
+    Ross (1986), industry factors, firm characteristic-based factors
+    (e.g., Fama and French (1993), or various combinations.
+
+3.  Factors can be derived directly from returns using a statistical
+    method like factor analysis or principal components analysis, Connor
+    and Korajczyk (1988).
 
 Principal Component Analysis (PCA) is a technique used to analyze and
 reduce the dimensionality of a dataset while retaining as much variance
@@ -778,7 +798,7 @@ the diagonal residual covariance matrix determined for each asset $i$.
 We can plot the portfolio weights derived from the Hierarchical PCA
 implementation:
 
--   **AAPL (Apple Inc., weight: -12.32%): T**he bar for AAPL shows a
+-   **AAPL (Apple Inc., weight of -12.32%):** The bar for AAPL shows a
     negative weight, suggesting that the first principal component,
     which this portfolio is likely based on, attributes a negative
     correlation with the stock. It indicates that movements in AAPL's
@@ -786,35 +806,35 @@ implementation:
     market factor. Investors might interpret this as AAPL moving against
     a certain market trend captured by the PCA.
 
--   **MSFT (Microsoft Corporation, weight: 58.13%):** MSFT shows a
+-   **MSFT (Microsoft Corporation, weight of 58.13%):** MSFT shows a
     substantial positive weight, indicating a strong positive
     correlation with the market factor. This means that MSFT's stock
     performance is likely to move in the same direction as the factor
     identified by PCA, which could be overall market performance or a
     specific industry trend.
 
--   **GOOGL (Alphabet Inc., weight: 23.23%)**, **AMZN (Amazon.com Inc.,
-    weight: 10.06%)**, and **TSLA (Tesla Inc., -10.04%):** These stocks
-    have positive weights but to varying degrees. GOOGL and AMZN, in
-    particular, show moderate positive weights, whereas TSLA exhibits a
-    relatively smaller positive weight. This suggests that these stocks
-    contribute to the portfolio in alignment with the primary factor,
-    but their impact is less significant than MSFT.
+-   **GOOGL (Alphabet Inc., weight of 23.23%)**, **AMZN (Amazon.com
+    Inc., weight: 10.06%)**, and **TSLA (Tesla Inc., -10.04%):** These
+    stocks have positive weights but to varying degrees. GOOGL and AMZN,
+    in particular, show moderate positive weights, whereas TSLA exhibits
+    a relatively smaller positive weight. This suggests that these
+    stocks contribute to the portfolio in alignment with the primary
+    factor, but their impact is less significant than MSFT.
 
--   **NVDA (NVIDIA Corporation, weight:** **-0.05%)** and **PYPL (PayPal
-    Holdings Inc., weight : -36.08%)**: NVDA has a slight negative
-    weight, and PYPL is more heavily negative, indicating that these
-    stocks are expected to move opposite the principal factor. This
-    could imply that these stocks hedge against the market risk
+-   **NVDA (NVIDIA Corporation, weight of** **-0.05%)** and **PYPL
+    (PayPal Holdings Inc., weight : -36.08%)**: NVDA has a slight
+    negative weight, and PYPL is more heavily negative, indicating that
+    these stocks are expected to move opposite the principal factor.
+    This could imply that these stocks hedge against the market risk
     identified by PCA or represent a different risk factor within the
     portfolio.
 
--   **CMCSA (Comcast Corporation, weight: 28.86%)**, **ADBE (Adobe Inc.,
-    weight: 27.43%)**, and **ASML (ASML Holding, weight: 11.21% )**:
-    CMCSA, ADBE has weighting above 20%, while ASML has a above 10%. The
-    positive weights across these stocks reflect a diversification
-    strategy, capturing various sectors and risk factors different from
-    the major tech companies.
+-   **CMCSA (Comcast Corporation, weight of 28.86%)**, **ADBE (Adobe
+    Inc., weight: 27.43%)**, and **ASML (ASML Holding, weight: 11.21%
+    )**: CMCSA, ADBE has weighting above 20%, while ASML has a above
+    10%. The positive weights across these stocks reflect a
+    diversification strategy, capturing various sectors and risk factors
+    different from the major tech companies.
 
 In summary, the PCA portfolio weighting suggests a strategy that
 diversifies across different sectors and risk factors. Stocks like MSFT
@@ -822,6 +842,10 @@ contribute positively to the factor, whereas companies like PYPL, TSLA
 and AAPL provide a counterbalance, potentially reducing overall
 portfolio volatility. The negative weights could indicate a hedge
 against certain market risks or a bet on different economic drivers.
+Progressing from theoretical to empirical and then to statistical
+factors captures progressively more of the covariation among assets.
+However, this comes at the expense of factors becoming more challenging
+to interpret, raising concerns about potential data-mining issues.
 
 ```{r PCA three factor model, fig.cap="PCA portfolio weights. Each bar represent a stock weight (from left to right: AAPL, MSFT, GOOGL, AMZN, TSLA, NVDA, PYPL, CMCSA, ADBE, ASML.", echo=FALSE, fig.pos='H'}
 #PCA one factor
@@ -860,25 +884,22 @@ barplot(as.numeric(omega3), col = 'black')
 
 **Alternative technique to compute Hierarchical PCA**
 
-Introduction to PCA in Finance: PCA is widely recognized in the
-quantitative finance literature for its utility in dimensionality
-reduction and identification of latent factors in asset returns. This
-technique's ability to transform a dataset into principal
-components---linearly uncorrelated variables---facilitates the
+PCA is widely recognized in the quantitative finance literature for its
+utility in dimensionality reduction and identification of latent factors
+in asset returns. This technique's ability to transform a dataset into
+principal components---linearly uncorrelated variables---facilitates the
 understanding of complex market structures (Jolliffe, 2002; Fabozzi et
 al., 2014).
 
-Portfolio Management Context: PCA's application in portfolio management
-serves to discern the fundamental drivers of asset performance. Through
-the lens of principal components, portfolio diversification strategies
-can be refined to mitigate systemic risk and enhance returns (Sharpe,
-1992).
+PCA's application in portfolio management serves to discern the
+fundamental drivers of asset performance. Through the lens of principal
+components, portfolio diversification strategies can be refined to
+mitigate systemic risk and enhance returns (Sharpe, 1992).
 
-Hierarchical PCA Application: The hierarchical PCA provides a nuanced
-perspective on the asset correlations within the portfolio. This
-innovative approach organizes the principal components in a hierarchy,
-potentially revealing intricate interdependencies among the assets
-(Hardoon et al., 2004).
+The hierarchical PCA provides a nuanced perspective on the asset
+correlations within the portfolio. This innovative approach organizes
+the principal components in a hierarchy, potentially revealing intricate
+interdependencies among the assets (Hardoon et al., 2004).
 
 **Empirical Findings:**
 
@@ -898,8 +919,7 @@ potentially revealing intricate interdependencies among the assets
 -   PC3 Analysis: The unique weight distribution of PC3, especially for
     GOOGL and ADBE, suggests that this component captures idiosyncratic
     risks or company-specific attributes, such as innovation intensity
-    or business model robustness (Lewellen and Shanken, 2002). Insights
-    and Practical Implications:
+    or business model robustness (Lewellen and Shanken, 2002).
 
 The decomposition into orthogonal factors elucidates diversification
 benefits. The portfolio's structure, as revealed by PCA, aids in the
@@ -949,6 +969,155 @@ barplot(weights_pca, beside = TRUE, col = my_colors,
         main = "PCA Portfolio Weights")
 ```
 
+### 1.4.3 Analysis of anticipated, realised volatility and risk-return characteristics for GMV portfolio and PCA portfolio strategy.
+
+To compute the anticipated volatility, realized volatility, and Sharpe
+ratio for the GMV and PCA portfolio strategies, we employed historical
+return data of selected assets.
+
+Anticipated volatility was estimated using the standard deviation of
+historical returns, adjusted for the sampling frequency, to gauge the
+expected future variability of asset returns within each strategy. The
+GMV portfolio's anticipated volatility was derived from the inverse of
+the sum of the product of the portfolio weights with the corresponding
+asset variances and covariances, reflecting the portfolio's design to
+minimize this metric. For the PCA portfolio, anticipated volatility was
+calculated based on the variances captured by the leading principal
+components that drive portfolio construction.
+
+Realized volatility was determined by the actual standard deviation of
+the portfolio returns over the observed period (subsample 2), providing
+a retrospective measure of how much the portfolio's return actually
+deviated from its mean. This empirical approach captures the strategy's
+performance in terms of risk experienced by the investor.
+
+The Sharpe ratio, which represents risk-adjusted returns, was computed
+by dividing the portfolio's excess return over the risk-free rate by its
+standard deviation. This ratio encapsulates the return earned per unit
+of risk, facilitating a direct comparison between the two strategies. In
+our analysis, a risk-free rate of 0% was assumed for simplicity, though
+this can be adjusted based on the prevailing risk-free rate during the
+investment period.
+
+The R code accompanying this methodology applied these calculations to
+time-series data of asset returns, segmented into two subsamples to
+explore the strategies' behaviors in different market segments. The
+results were visualized using R's ggplot2 library, providing a clear and
+concise graphical representation of each strategy's risk profile and
+performance.
+
+```{r Anticipated and realised volatility analysis, include=FALSE}
+# Function to calculate annualized metrics (period)
+perio <- 12
+
+# Function to calculate Sharpe Ratio
+calculate_sharpe_ratio <- function(returns) {
+  mean_return <- mean(returns)
+  sd_return <- sd(returns)
+  sharpe_ratio <- mean_return / sd_return
+  return(sharpe_ratio)
+}
+
+# Anticipated Volatility for GMV using subsample1
+anticipated_volatility_gmv <- sqrt(as.numeric(t(omega_gmv) %*% Sigma_reg %*% omega_gmv))
+
+# Anticipated Volatility for PCA using subsample1
+anticipated_volatility_pca <- sqrt(as.numeric(t(omega3) %*% Sigma_reg %*% omega3))
+
+# Realized Volatility for GMV using subsample2, annualized
+realized_returns_gmv <- subsample2 %*% omega_gmv
+realized_volatility_gmv_annualized <- sd(as.numeric(realized_returns_gmv)) * sqrt(perio)
+
+# Sharpe Ratio for GMV, using annualized data
+sharpe_ratio_gmv_annualized <- calculate_sharpe_ratio(as.numeric(realized_returns_gmv) * perio)
+
+# Realized Volatility for PCA using subsample2, annualized
+realized_returns_pca <- subsample2 %*% omega3
+realized_volatility_pca_annualized <- sd(as.numeric(realized_returns_pca)) * sqrt(perio)
+
+# Sharpe Ratio for PCA, using annualized data
+sharpe_ratio_pca_annualized <- calculate_sharpe_ratio(as.numeric(realized_returns_pca) * perio)
+
+# Update the data frame to store the annualized results
+results_df <- data.frame(
+  Strategy = c("GMV", "PCA"),
+  Anticipated_Volatility = c(anticipated_volatility_gmv, anticipated_volatility_pca),  # This remains the same as it's already annualized
+  Realized_Volatility_Annualized = c(realized_volatility_gmv_annualized, realized_volatility_pca_annualized),
+  Sharpe_Ratio_Annualized = c(sharpe_ratio_gmv_annualized, sharpe_ratio_pca_annualized)
+)
+
+```
+
+We can evaluate the performance of two different portfolio strategies:
+the Global Minimum Volatility (GMV) portfolio and a Principal Component
+Analysis (PCA)-based portfolio. Here is an in-depth commentary on each
+of the plots:
+
+**Anticipated Volatility**
+
+The 'Anticipated Volatility' plot shows that the GMV portfolio has lower
+expected volatility compared to the PCA portfolio. This outcome aligns
+with the theoretical objective of the GMV portfolio, which is designed
+to minimize expected volatility based on historical covariance among
+assets.
+
+The PCA portfolio, on the other hand, might be expected to have higher
+anticipated volatility because it is typically constructed to capture
+the primary sources of risk (via principal components) rather than to
+minimize volatility. The principal components may represent directions
+of maximum variance in the data, which could lead to higher anticipated
+volatility.
+
+**Realized Volatility**
+
+The 'Realized Volatility' plot indicates that the GMV portfolio
+experienced higher realized volatility in practice. The PCA portfolio's
+realized volatility is lower, which may suggest that the PCA strategy is
+useful for dimensionality reduction, capturing the main factors
+affecting asset returns. This could be advantageous in periods when
+market volatility is rewarded with higher returns, but in this instance,
+it implies a riskier portfolio.
+
+**Sharpe Ratio**
+
+The 'Sharpe Ratio' plot shows that the GMV portfolio has a lower Sharpe
+ratio compared to the PCA portfolio. Despite the lower volatility of the
+GMV portfolio, the Sharpe ratio suggests that the return per unit of
+risk is actually higher for the PCA portfolio. This could be interpreted
+as the PCA portfolio having either higher returns, sufficient to offset
+the increased risk, or the GMV portfolio having lower returns that do
+not compensate enough for the reduced risk. It is important to consider
+the return component when looking at the Sharpe ratio, as it is a
+measure of risk-adjusted return.
+
+In summary, the GMV portfolio seems to offer a more conservative
+investment approach with lower volatility, while the PCA portfolio shows
+higher risk but potentially higher returns as indicated by the Sharpe
+ratio. The choice between these strategies would depend on an investor's
+risk tolerance and investment goals. If an investor prefers stability
+and preservation of capital, the GMV might be more suitable. In
+contrast, if an investor is willing to take on more risk for the
+possibility of higher returns, the PCA portfolio might be more
+appealing.
+
+```{r Anticipated, realised and risk return analysis, fig.cap="Table of the results regarding anticipated volatility, realised volatility and Sharpe ratio for the GMV and PCA portfolio strategy.",  echo=FALSE}
+# Print the results
+print(results_df)
+```
+
+```{r Anticipated volatility plot, fig.cap="Anticipated volatility for the GMV and PCA portfolio strategy.",  echo=FALSE}
+#Visualize the results with a barplot
+barplot(results_df$Anticipated_Volatility, names.arg = results_df$Strategy, main = "Anticipated Volatility")
+```
+
+```{r Realised volatility plot, fig.cap="Realised volatility for the GMV and PCA portfolio strategy.", echo=FALSE}
+barplot(results_df$Realized_Volatility_Annualized, names.arg = results_df$Strategy, main = "Annualized Realized Volatility")
+```
+
+```{r Sharpe ratio plot for GMV and PCA portfolio, fig.cap="Sharpe ratio for the GMV and PCA portfolio strategy.", echo=FALSE}
+barplot(results_df$Sharpe_Ratio_Annualized, names.arg = results_df$Strategy, main = "Annualized Sharpe Ratio")
+```
+
 # 2. Tangency Portfolio and Black-Litterman Approach
 
 ## 2.1 Packages
@@ -957,7 +1126,7 @@ We use the same packages as described on 1.1.
 
 ## 2.2 Investment universe
 
-### **2.2.1 Investment universe**
+### **2.2.1 Portfolio selection**
 
 This investment universe is designed to provide diversified exposure
 across a range of asset classes, including broad market indices,
@@ -965,20 +1134,13 @@ emerging market equities, government bonds, commodities, and precious
 metals. This selection is intended to balance risk and return while
 capturing growth opportunities and providing a hedge against inflation.
 
--   VTI (Vanguard Total Stock Market ETF): Broad exposure to the global
-    stock market.
-
--   EMGF (iShares MSCI Emerging Markets Multifactor ETF): Exposure to
-    emerging markets with favorable exposure to value, quality,
-    momentum, and size factors.
-
--   IEF (iShares 7-10 Year Treasury Bond ETF): Exposure to
-    intermediate-term government bonds.
-
--   DBC (Invesco DB Commodity Index Tracking Fund): Exposure to a basket
-    of commodities.
-
--   GLD (SPDR Gold Trust): Exposure to gold.
+| Ticker | Tracker Description                                                                                        |
+|----------------|--------------------------------------------------------|
+| VTI    | Vanguard Total Stock Market ETF: Broad exposure to the global stock market.                                |
+| EMGF   | iShares MSCI Emerging Markets Multifactor ETF: Exposure to emerging markets with various factor exposures. |
+| IEF    | iShares 7-10 Year Treasury Bond ETF: Exposure to intermediate-term U.S. government bonds.                  |
+| DBC    | Invesco DB Commodity Index Tracking Fund: Exposure to a basket of commodities.                             |
+| GLD    | SPDR Gold Trust: Exposure to gold.                                                                         |
 
 ### **2.2.2 Economic data**
 
@@ -1026,8 +1188,8 @@ same proportion of the underlying components of the basket, depending on
 the style of management of the asset manager. Below is the
 Exchange-Traded Funds (ETF) chosen as the investment universe.
 
--   **Equities (VTI):** VTI provides broad exposure to the global stock
-    market, which is expected to benefit from economic growth.
+-   **Global equities (VTI):** VTI provides broad exposure to the global
+    stock market, which is expected to benefit from economic growth.
 
 -   **Emerging market equities (EMGF):** EMGF provides exposure to
     emerging markets with favorable exposure to value, quality,
@@ -1262,10 +1424,9 @@ portfolios.
 In our investment universe, opportunities for diversification arise.
 Defensive assets like gold (TICKER: GLD) can effectively diversify when
 combined with more aggressive ones. For instance, the Vanguard Total
-Index tracker (TICKER: VTI) has a poor correlation with gold (TICKER:
+Index tracker (TICKER: VTI) has a low correlation with gold (TICKER:
 GLD). iShares 7-10 years Treasuries Index tracker (TICKER: IEF) exhibits
-negative correlation with respect to international and emerging market
-equities.
+negative correlation with respect to commodities (TICKER: DBC).
 
 ```{r Correlation multi-asset portfolio, fig.cap="Correlation of returns of the funds over the selected period.", echo=FALSE, fig.pos='H'}
 # Correlation analysis
@@ -1277,11 +1438,6 @@ corrplot( cor(arith_fin_returns), type='lower', method = "shade", tl.col = 'blac
 ## 2.4 Modelling of the portfolio
 
 ### 2.4.1 Implementing the Tangency portfolio (TP)
-
-In time series data analysis, a crucial application involves splitting
-the dataset into training and testing sets based on temporal order. This
-is vital when working with data that evolves over time, such as stock
-prices or weather observations.
 
 The training set consists of historical data, while the testing set
 contains more recent observations. This division allows analysts to
@@ -1576,7 +1732,14 @@ The Black-Litterman optimization approach is a widely-used method for
 improving the estimation of expected returns and making asset allocation
 decisions. It addresses the limitations of traditional mean-variance
 optimization by incorporating investor views and market equilibrium
-considerations.
+considerations. Initially, the investor allocates funds to the scaled
+market portfolio and subsequently incorporates portfolios reflecting
+their views. The Black-Litterman model calculates the optimal weights
+for these portfolios. A positive weight is assigned to a portfolio
+representing a view when the investor's outlook is more optimistic than
+that implied by the equilibrium and other views. The weight rises as the
+investor's bullishness on the view intensifies, and the weight's
+magnitude increases with the investor's growing confidence in the view.
 
 The weights in a Black-Litterman can be approached as:
 
@@ -1849,6 +2012,31 @@ There are two main types of portfolio insurance strategies:
     strategies maintain a fixed allocation to risky assets. This
     allocation is determined in advance and is not adjusted over time.
 
+The OBPI, pioneered by Leland and Rubinstein (1976), comprises a
+portfolio invested in a risky asset S, typically a financial index like
+the S&P, paired with a listed put option written on it. Irrespective of
+S's value at the terminal date T, the portfolio's value will always
+exceed the put's strike K. Initially, the apparent aim of the OBPI
+method is to ensure a fixed amount only at the terminal date. However,
+the OBPI method actually provides portfolio insurance at any point in
+time. Nevertheless, it may be challenging to find a European put with
+the appropriate strike and maturity in the market. Consequently, it must
+be replicated through a dynamic portfolio invested in a risk-free asset
+(such as T-bills) and the risky asset.
+
+The CPPI, credited to Perold and Sharpe (1988) for fixed-income
+instruments and Black and Jones (1987) for equity instruments, employs a
+straightforward strategy for dynamic asset allocation over time. The
+investor initiates the process by establishing a floor, representing the
+lowest acceptable value for the portfolio. Subsequently, the cushion is
+calculated as the surplus of the portfolio value over the floor, and the
+allocation to the risky asset is determined by multiplying the cushion
+by a predetermined multiple. Both the floor and the multiple are
+influenced by the investor's risk tolerance and are external to the
+model. The combined amount allocated to the risky asset is referred to
+as the exposure, with the remaining funds directed towards the reserve
+asset, typically T-bills.
+
 ## 3.1 Packages
 
 The same packages are referenced in 1.1
@@ -1949,7 +2137,7 @@ For the Monte Carlo simulation:
     technique.
 
 2.  **Return Statement:** The function finally returns a list containing
-    the simulated equity, floor, OBPI call, and CPPI values.
+    the simulated equity, OBPI call, and CPPI values.
 
 3.  **Visualization**: The script includes plotting functions to
     visualize the simulated price paths for equity, OBPI, and CPPI
@@ -2061,18 +2249,11 @@ payoff of the modelled OBPI and CPPI portfolios:
     dictates how much of the cushion (difference between current
     portfolio value and floor) is invested in risky assets.
 
-3.  **Volatility (`sigma`)**: Volatility represents the uncertainty or
-    risk regarding the magnitude of changes in an asset's value. A
-    higher volatility indicates that an asset's value can potentially be
-    spread out over a larger range of values. In the simulation,
-    volatility affects the returns and also the Black-Scholes-like
-    calculation for the call option.
-
-4.  **Return (`mu`)**: The expected return on the risky asset. This
+3.  **Return (`mu`)**: The expected return on the risky asset. This
     impacts the drift of the simulation path. A higher return would
     generally lead to higher asset values, all else being equal.
 
-5.  **Strike Price (`strike`)**: This represents an initial reference
+4.  **Strike Price (`strike`)**: This represents an initial reference
     value from which different strategies are assessed. In the code, it
     acts as the initial value for Equity, OBPI, and CPPI. Changes in
     strike price will directly affect these initial values.
@@ -2145,13 +2326,11 @@ plot_results <- function(results, title) {
 **Risk-free rate (rf)**
 
 -   **Increase:** An increase in the risk-free rate will decrease the
-    present value of the strike, which will increase the cost of the put
-    option used in OBPI and CPPI. This will lead to lower payoffs for
+    present value of the strike. This will lead to lower payoffs for
     both strategies.
 
 -   **Decrease:** A decrease in the risk-free rate will increase the
-    present value of the strike, which will decrease the cost of the put
-    option used in OBPI and CPPI. This will lead to higher payoffs for
+    present value of the strike. This will lead to higher payoffs for
     both strategies.
 
 ```{r Risk-free rate,  fig.cap="Sensitivity analysis using the risk-free rate.", echo=FALSE, fig.pos='H'}
@@ -2160,36 +2339,20 @@ plot_results(results_rf[[2]], "Sensitivity analysis: Risk-free rate variation")
 
 **Stress value (stress)**
 
--   **Increase:** An increase in the stress value will increase the
-    multiplier used in CPPI, which will lead to a higher allocation to
-    risky assets. This will increase the potential upside of the
-    strategy, but it will also increase the downside risk.
-
--   **Decrease:** A decrease in the stress value will decrease the
+-   **Increase:** An increase in the stress value will decrease the
     multiplier used in CPPI, which will lead to a lower allocation to
-    risky assets. This will decrease the potential upside of the
-    strategy, but it will also decrease the downside risk.
+    risky assets.
+
+-   **Decrease:** A decrease in the stress value will increase the
+    multiplier used in CPPI, which will lead to a higher allocation to
+    risky assets.
 
 ```{r Stress value,fig.cap="Sensitivity analysis using the stress value.", echo=FALSE, fig.pos='H'}
 plot_results(results_stress[[2]], "Sensitivity analysis: Stress value variation")
 ```
 
-**Volatility (sigma)**
-
--   **Increase:** An increase in volatility will increase the cost of
-    the put option used in OBPI and CPPI. It will also increase the
-    potential upside of CPPI, as the portfolio will be more exposed to
-    risky assets. However, it will also increase the downside risk of
-    CPPI.
-
--   **Decrease:** A decrease in volatility will decrease the cost of the
-    put option used in OBPI and CPPI. It will also decrease the
-    potential upside of CPPI, as the portfolio will be less exposed to
-    risky assets. However, it will also decrease the downside risk of
-    CPPI.
-
-```{r Volatility plot, fig.cap="Sensitivity analysis using volatility.", echo=FALSE, fig.pos='H'}
-plot_results(results_sigma[[2]], "Sensitivity analysis: Volatility variation")
+```{r Volatility plot, eval=FALSE, fig.cap="Sensitivity analysis using volatility.", fig.pos='H', include=FALSE}
+# plot_results(results_sigma[[2]], "Sensitivity analysis: Volatility variation")
 ```
 
 **Return (mu)**
@@ -2208,15 +2371,11 @@ plot_results(results_mu[[2]], "Sensitivity analysis: Return (mu) variation")
 
 **Strike price (strike)**
 
--   **Increase:** An increase in the strike price will increase the cost
-    of the put option used in OBPI and CPPI. It will also decrease the
-    initial value of the risky assets, which will lead to lower payoffs
-    for both strategies.
+-   **Increase:** An increase in the strike price will decrease the cost
+    of the call option used in OBPI and CPPI.
 
--   **Decrease:** A decrease in the strike price will decrease the cost
-    of the put option used in OBPI and CPPI. It will also increase the
-    initial value of the risky assets, which will lead to higher payoffs
-    for both strategies.
+-   **Decrease:** A decrease in the strike price will increase the cost
+    of the call option used in OBPI and CPPI.
 
 ```{r Strike plot, fig.cap="Sensitivity analysis using strike price.", echo=FALSE, fig.pos='H'}
 plot_results(results_strike[[2]], "Sensitivity analysis: Strike price variation")
@@ -2224,9 +2383,11 @@ plot_results(results_strike[[2]], "Sensitivity analysis: Strike price variation"
 
 In general, OBPI and CPPI are designed to protect portfolios from
 downside risk. However, they both have different trade-offs between risk
-and reward. OBPI is more aggressive, with higher potential upside but
-also higher downside risk. CPPI is more conservative, with lower
-potential upside but also lower downside risk.
+and reward. The use of leverage in the CPPI portfolio allows to capture
+more value than with the OBPI strategy during periods of stable growth
+of the risky asset. Nevertheless, it is more sensitive to asset declines
+and a sudden drop in the market can cause the CPPI portfolio value to
+fall much more than the OBPI portfolio value.
 
 The best strategy to use will depend on the individual investor's risk
 tolerance and investment goals. Investors who are more risk-averse may
@@ -2236,82 +2397,55 @@ prefer CPPI, while investors who are more risk-tolerant may prefer OBPI.
 
 ### **3.4.1 Overview and utility**:
 
--   Monte Carlo simulation is a computational technique that uses random
-    sampling to obtain numerical results.
-
--   It is particularly useful for assessing the impact of risk and
-    uncertainty in prediction and forecasting models.
-
--   To account for the variability in financial markets and model
-    outcomes that are not deterministic.
-
--   To create a range of possible outcomes and the probabilities that
-    they will occur for uncertain variables.
-
--   To help in making informed decisions under uncertainty by
-    considering different scenarios and their potential impacts.
+Monte Carlo simulations are a class of computational algorithms that
+leverage the power of random sampling to approximate numerical solutions
+(Elton et al., 2006). This approach is invaluable in quantifying the
+influence of risk and indeterminacy within predictive and forecasting
+models, particularly in finance where market conditions are inherently
+volatile. By generating a spectrum of plausible outcomes and their
+associated likelihoods for uncertain parameters, Monte Carlo methods
+enable a robust assessment of various risk scenarios. These simulations
+serve as a strategic tool, aiding decision-makers in navigating the
+complexities of uncertainty by evaluating the ramifications of diverse
+contingencies (Elton et al., 2006).
 
 ### **3.4.2 Components of Monte Carlo simulation in finance**
 
-1.  **Randomness**:
+1.  **Randomness**: Incorporates elements of randomness reflecting the
+    uncertainty and volatility in financial markets.
 
-    -   Incorporates elements of randomness reflecting the uncertainty
-        and volatility in financial markets.
+2.  **Statistical Properties**: Uses statistical properties (mean,
+    variance) of historical data to simulate future price movements.
 
-2.  **Statistical Properties**:
-
-    -   Uses statistical properties (mean, variance) of historical data
-        to simulate future price movements.
-
-3.  **Time Series Modeling**:
-
-    -   Models the evolution of financial instruments over time using
-        time series analysis.
+3.  **Time Series Modeling**: Models the evolution of financial
+    instruments over time using time series analysis.
 
 ### **3.4.3 Application and results in this exercise**
 
-1.  **Equity Price Simulation**:
+1.  **Equity Price Simulation**: Simulated using a stochastic process
+    (Geometric Brownian Motion) to reflect the random nature of stock
+    prices. Incorporates drift (expected return) and diffusion
+    (volatility) derived from historical data.
 
-    -   Simulated using a stochastic process (Geometric Brownian Motion)
-        to reflect the random nature of stock prices.
+2.  **Investment Strategies**: For the OBPI strategy, it models an
+    options-based strategy that provides downside protection. For the
+    CPPI strategy it models a dynamic allocation strategy that adjusts
+    exposure based on a predetermined cushion.
 
-    -   Incorporates drift (expected return) and diffusion (volatility)
-        derived from historical data.
+3.  **Simulation Execution**: It runs the simulation over a large number
+    of trials to capture a broad range of possible outcomes. Each trial
+    represents a potential future state of the market or asset price.
 
-2.  **Investment Strategies**:
+4.  **Visualization**: We plot histograms showing the distribution of
+    final values from the simulation.
 
-    -   **OBPI**: Models an options-based strategy that provides
-        downside protection.
+5.  **Summary Statistics**: The analysis provides key measures like
+    mean, median, standard deviation, and percentiles to summarize the
+    simulation results.
 
-    -   **CPPI**: A dynamic allocation strategy that adjusts exposure
-        based on a predetermined cushion.
-
-3.  **Simulation Execution**:
-
-    -   Runs the simulation over a large number of trials to capture a
-        broad range of possible outcomes.
-
-    -   Each trial represents a potential future state of the market or
-        asset price.
-
-4.  **Visualization**:
-
-    -   Price path plots for the simulated strategies over time.
-
-    -   Histograms showing the distribution of final values from the
-        simulation.
-
-5.  **Summary Statistics**:
-
-    -   Provides key measures like mean, median, standard deviation, and
-        percentiles to summarize the simulation results.
-
-6.  **Comparative Analysis**:
-
-    -   Compares the performance and risk of different strategies
-        (Equity, OBPI, CPPI).
-
-    -   Helps in understanding the trade-offs between return and risk.
+6.  **Comparative Analysis**: We compare the performance and risk of
+    different strategies (Equity, OBPI, CPPI). It helps in understanding
+    the trade-offs between return and risk.
 
 ```{r Monte Carlo script, include=FALSE}
 
@@ -2384,7 +2518,7 @@ The three histograms below represent the distribution of final values
 from a Monte Carlo simulation for an equity simulation and two
 investment strategies, CPPI (Constant Proportion Portfolio Insurance)
 and OBPI (Option-Based Portfolio Insurance). Here is an analysis of
-each:
+each.
 
 This histogram displays the frequency distribution of the final values
 of a simulated equity investment over a given period. The distribution
@@ -2427,56 +2561,191 @@ limit downside risk but allow for participation in upside potential.
 hist(mc_results$average_cppi, main="Histogram of Final CPPI Strategy Values", xlab="Value", col="green", breaks=50)
 ```
 
+We can analyze each strategy and link it to academic literature. Below
+are the comments for each strategy.
+
+1.  **Equity:**
+
+    -   **Return:** The return for the Equity strategy is approximately
+        19.59%, which is the highest among the three strategies. This is
+        consistent with historical data that equities often yield higher
+        returns compared to fixed-income securities or derivative-based
+        strategies (Bodie, 2014).
+
+    -   **Risk:** The risk, measured by standard deviation, is also the
+        highest for the Equity strategy at approximately 57.24%. This
+        aligns with the fundamental risk-return tradeoff in finance,
+        which states that higher returns are usually associated with
+        higher risk (Sharpe, 1964).
+
+    -   **Sharpe Ratio:** The Sharpe Ratio of 0.34 for Equity is the
+        lowest among the strategies, indicating that, per unit of risk
+        taken, the returns are lower compared to OBPI and CPPI. The
+        Sharpe Ratio is an indicator of risk-adjusted returns, with
+        higher values generally being more desirable (Sharpe, 1994).
+
+2.  **OBPI:**
+
+    -   **Return:** The OBPI strategy shows a significantly lower return
+        at approximately 3.84%. This strategy involves a mix of a
+        risk-free asset and a call option on the risky asset (equity).
+        The lower return can be partly due to the cost of the option and
+        the protective nature of the strategy, which limits downside
+        risk (Black, 1992).
+
+    -   **Risk:** OBPI has a slightly higher risk than CPPI at
+        approximately 7.30%. This could be due to the fact that options
+        can increase in volatility, which in turn can affect the
+        portfolio's value.
+
+    -   **Sharpe Ratio:** At 0.526, OBPI has a better Sharpe Ratio than
+        Equity but is not as high as CPPI. This suggests that OBPI
+        offers a better risk-adjusted return than simply holding the
+        equity.
+
+3.  **CPPI:**
+
+    -   **Return:** CPPI yields a return of approximately 4.10%, higher
+        than OBPI. CPPI dynamically adjusts exposure to the risky asset
+        (equity) based on the difference between the asset's value and a
+        predetermined floor, known as the "cushion" (Black, 1987).
+
+    -   **Risk:** CPPI shows the lowest risk at 6.66%, which could be
+        attributed to its mechanism of reducing exposure to equities
+        when they become riskier, thus maintaining a buffer against
+        downturns.
+
+    -   **Sharpe Ratio:** CPPI has the highest Sharpe Ratio of 0.617,
+        indicating that it has the best risk-adjusted performance among
+        the three strategies. The higher Sharpe Ratio suggests that CPPI
+        efficiently balances the risk while still capturing reasonable
+        returns.
+
+In conclusion, while the Equity strategy provides the highest raw
+returns, it does so at a higher level of risk and offers lower
+risk-adjusted returns. Both OBPI and CPPI provide lower returns but do
+so with substantially less risk, and they both have higher Sharpe
+Ratios, indicating more efficient performance. These results highlight
+the trade-offs between risk and return and underscore the importance of
+portfolio insurance techniques in managing risk, consistent with the
+protective and dynamic strategies discussed in the academic literature
+on portfolio management.
+
+```{r Risk and return table for Equity, OBPI and CPPI returns, echo=FALSE}
+# Calculate returns, risks, and Sharpe ratios
+calculate_statistics <- function(simulated_values) {
+  returns <- diff(simulated_values) / simulated_values[-length(simulated_values)]
+  annual_return <- (simulated_values[length(simulated_values)] / simulated_values[1]) - 1
+  annual_risk <- sd(returns) * sqrt(12)  # Assuming monthly returns, annualize the risk
+  sharpe_ratio <- annual_return / annual_risk  # Assuming risk-free rate = 0
+  
+  return(c("Return" = annual_return, "Risk" = annual_risk, "Sharpe Ratio" = sharpe_ratio))
+}
+
+# Calculate statistics for each strategy
+equity_stats <- calculate_statistics(mc_results$average_equity)
+obpi_stats <- calculate_statistics(mc_results$average_obpi_call)
+cppi_stats <- calculate_statistics(mc_results$average_cppi)
+
+# Combine statistics into a data frame
+monte_carlo_table <- data.frame(
+  Strategy = c("Equity", "OBPI", "CPPI"),
+  Return = c(equity_stats["Return"], obpi_stats["Return"], cppi_stats["Return"]),
+  Risk = c(equity_stats["Risk"], obpi_stats["Risk"], cppi_stats["Risk"]),
+  Sharpe_Ratio = c(equity_stats["Sharpe Ratio"], obpi_stats["Sharpe Ratio"], cppi_stats["Sharpe Ratio"])
+)
+
+# Print out the Monte Carlo simulation table
+print(monte_carlo_table)
+
+```
+
 ## References
 
--   Black, F., & Litterman, R. (1992). Global Portfolio Optimization.
+1.  Bertrand, P., Prigent, J. (2001) Portfolio Insurance Strategies:
+    OBPI Versus. University of CERGY Working Paper No. 2001-30, GREQAM
+    Working Paper.
+
+2.  Black, F., Jones, R. (1987). Simplifying portfolio insurance. The
+    Journal of Portfolio Management, 48-51.
+
+3.  Black, F., & Litterman, R. (1992). Global Portfolio Optimization.
     *Financial Analysts Journal*, 48(5), 28-43.
 
--   Bodie, Z., Kane, A., & Marcus, A. J. (2018). *Investments* (11th
+4.  Bodie, Z., Kane, A., & Marcus, A. J. (2018). *Investments* (11th
     ed.). McGraw-Hill Education.
 
--   Campbell, J. Y., Lo, A. W., & MacKinlay, A. C. (1997). *The
+5.  Campbell, J. Y., Lo, A. W., & MacKinlay, A. C. (1997). *The
     Econometrics of Financial Markets*. Princeton University Press.
 
--   Clauss, P. Gestion de Portfeuille: Une Approche Quantitative (2011).
+6.  Chen, N., Roll, R., Ross, S. (1986). Economic forces and the stock
+    market, Journal of Business 59, 383--403.
+
+7.  Clauss, P. Gestion de Portfeuille: Une Approche Quantitative (2011).
     Edition Dunod.
 
--   Elton, E. J., Gruber, M. J., Brown, S. J., & Goetzmann, W. N.
+8.  Connor, G., Korajczyk, R. (1988). Risk and return in an equilibrium
+    APT: Application of a new test methodology, Journal of Financial
+    Economics 21, 255--290.
+
+9.  Elton, E. J., Gruber, M. J., Brown, S. J., & Goetzmann, W. N.
     (2006). *Modern Portfolio Theory and Investment Analysis* (7th ed.).
     Wiley.
 
--   Fabozzi, F. J., Focardi, S. M., & Kolm, P. N. (2014). *Quantitative
+10. Fabozzi, F. J., Focardi, S. M., & Kolm, P. N. (2014). *Quantitative
     Equity Investing: Techniques and Strategies*. John Wiley & Sons.
 
--   Fama, E. F., & French, K. R. (1993). Common risk factors in the
+11. Fama, E. F., & French, K. R. (1993). Common risk factors in the
     returns on stocks and bonds. *Journal of Financial Economics*,
     33(1), 3-56.
 
--   Hardoon, D. R., Szedmak, S., & Shawe-Taylor, J. (2004). Canonical
+12. Hardoon, D. R., Szedmak, S., & Shawe-Taylor, J. (2004). Canonical
     correlation analysis: An overview with application to learning
     methods. *Neural Computation*, 16(12), 2639-2664.
 
--   Hull, J. C. (2017). *Options, Futures, and Other Derivatives* (10th
+13. He, G., Litterman, R. (2002). The Intuition Behind Black-Litterman
+    Model Portfolios. SSRN.
+
+14. Hull, J. C. (2017). *Options, Futures, and Other Derivatives* (10th
     ed.). Pearson.
 
--   Jolliffe, I. T. (2002). *Principal Component Analysis*. Springer.
+15. Jolliffe, I. T. (2002). *Principal Component Analysis*. Springer.
 
--   Lewellen, J., & Shanken, J. (2002). Learning, asset-pricing tests,
+16. Leland, H,Rubinstein, M. (1976). The evolution of portfolio
+    insurance, in: D.L. Luskin, ed., Portfolio insurance: a guide to
+    dynamic hedging, Wiley.
+
+17. Lewellen, J., & Shanken, J. (2002). Learning, asset-pricing tests,
     and market efficiency. *Journal of Finance*, 57(3), 1113-1145.
 
--   Litterman, R. B., & Scheinkman, J. (1991). Common factors affecting
+18. Litterman, R. B., & Scheinkman, J. (1991). Common factors affecting
     bond returns. *Journal of Fixed Income*, 1(1), 54-61.
 
--   Lo, A. W., & MacKinlay, A. C. (1990). When are contrarian profits
+19. Lo, A. W., & MacKinlay, A. C. (1990). When are contrarian profits
     due to stock market overreaction? *Review of Financial Studies*,
     3(2), 175-205.
 
--   Markowitz, H. (1952). Portfolio selection. *The Journal of Finance*,
+20. Markowitz, H. (1952). Portfolio selection. *The Journal of Finance*,
     7(1), 77-91.
 
--   Sharpe, W. F. (1992). Asset allocation: Management style and
+21. Merton, R. (1973). An intertemporal capital asset pricing model,
+    Econometrica 41, 867--887.
+
+22. Perold, A., Sharpe, W. (1988). Dynamic strategies for asset
+    allocation. Financial Analyst Journal, January-February, 16-27.
+
+23. Sharpe, W. (1963). A simplified model for portfolio analysis,
+    Management Science 9, 277--293.
+
+24. Sharpe, W. F. (1964). "Capital Asset Prices: A Theory of Market
+    Equilibrium Under Conditions of Risk," The Journal of Finance.
+
+25. Sharpe, W. F. (1992). Asset allocation: Management style and
     performance measurement. *Journal of Portfolio Management*, 18(2),
     7-19.
+
+26. Sharpe, W. F. (1994)."The Sharpe Ratio," The Journal of Portfolio
+    Management.
 
 ### Market outlook
 
