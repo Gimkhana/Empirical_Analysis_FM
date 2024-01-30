@@ -1,7 +1,7 @@
 # Portfolio Construction and Analysis
 **Portfolio Management Repository**
 
-Welcome to the Portfolio Management repository – a comprehensive suite of analytical tools and scripts designed for academical and and finance professionals. This repository houses a diverse array of methods and strategies in portfolio management and econometrics, implemented in R and Python, to aid in the construction, analysis, and optimization of investment portfolios. Part of the scripts are based on lectures and projects taught in the M2 Risk and Asset Management (Paris-Saclay).
+Welcome to the Portfolio Management repository – a comprehensive suite of analytical tools and scripts. This repository houses a diverse array of methods and strategies in portfolio management and econometrics, implemented in R and Python, to aid in the construction, analysis, and optimization of investment portfolios. Part of the scripts are based on lectures and projects taught in the M2 Risk and Asset Management (Paris-Saclay).
 
 **Repository Structure**
 
@@ -43,7 +43,7 @@ In addition to our R scripts, you may find that Python can be a powerful tool fo
 
 Ensure you have Python installed on your system. We recommend using the Anaconda distribution, which includes Python, the Jupyter Notebook, and other commonly used packages for scientific computing and data science.
 
-Download Anaconda: Anaconda Distribution
+- Download Anaconda: Anaconda Distribution
 
 **Setting up your Python environment** 
 
@@ -75,9 +75,7 @@ Run a script using:
 
 **Using Python with R**
 
-For projects where you wish to combine the power of R and Python, the rpy2 package in Python provides an interface between the two languages.
-
-Install rpy2 using:
+For projects where you wish to combine the power of R and Python, the rpy2 package in Python provides an interface between the two languages. Install rpy2 using:
 
 - conda install rpy2
 
