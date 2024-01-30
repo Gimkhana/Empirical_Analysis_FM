@@ -28,6 +28,11 @@ This folder focuses on econometric analysis, featuring:
 - An integrated project that applies various tools and scripts provided in this repository to construct an "All-Weather" portfolio.
 - This project demonstrates how to build a portfolio that aims to perform well across different economic environments, using diversification strategies and insights from the asset management and econometrics folders.
 
+**4. Numerical Methods in Finance**
+
+- This folder is strcutured into two main projects: Credit derivatives modelling and option pricing using numerical methods.
+- Both projects are coded in Python and we use Jupyter Notebook to elaborate on the results.
+
 **Getting started with R**
 
 To get started, clone this repository and navigate to each folder to find detailed instructions and documentation for each script and project. The code is primarily written in R, so ensure you have R and the necessary packages installed.
