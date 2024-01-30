@@ -1,5 +1,5 @@
-# Portfolio-Construction-and-Analysis
-**Portfolio Management repository**
+# Portfolio Construction and Analysis
+**Portfolio Management Repository**
 
 Welcome to the Portfolio Management repository – a comprehensive suite of analytical tools and scripts designed for academical and and finance professionals. This repository houses a diverse array of methods and strategies in portfolio management and econometrics, implemented in R and Python, to aid in the construction, analysis, and optimization of investment portfolios. Part of the scripts are based on lectures and projects taught in the M2 Risk and Asset Management (Paris-Saclay).
 
