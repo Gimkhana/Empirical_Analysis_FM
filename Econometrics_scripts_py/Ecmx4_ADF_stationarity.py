@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov  6 13:13:27 2023
-
-@author: youssef
-"""
-
 import yfinance as yf
 import pandas as pd
 import numpy as np
@@ -15,8 +7,7 @@ from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.tsa.stattools import adfuller
 
 
-
-#2. Deterline ACF and autocorrelation
+#2. Determine ACF and autocorrelation
 
 # Download data
 sp500 = yf.download('^GSPC', start='2010-01-01', end='2023-01-01')
@@ -106,10 +97,6 @@ adf_test(cac40['Log_Return'], title='CAC 40 Log Returns')
 
 
 #ARIMA model
-
-import numpy as np
-import yfinance as yf
-import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import acf, pacf, adfuller
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.arima_process import ArmaProcess
