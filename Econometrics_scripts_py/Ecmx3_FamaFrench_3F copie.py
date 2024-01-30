@@ -1,27 +1,18 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct  9 16:43:40 2023
-
-@author: youssef
-"""
-
 import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 
-
-
 #(1) Load data from CSV file into the FF variable
 # Extracted from https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
 # U.S. Research Returns Data (Downloadable Files), changes in CRSP Data, Fama/French 3 Factors (CSV file)  
+#NB: Ensure you use the right path direction to properly run the python script
 
 file_path = insert path file in the system ("...path/user/folder/name_file.CSV")
 FF = pd.read_csv(file_path)
 
 
 #(2) Load data from CSV file into the Factors (Fama-French FF 3 factor model) variable
-Factors_data = pd.read_csv("/Users/youssef/Downloads/F-F_Research_Data_Factors.CSV", skiprows=3)
+Factors_data = pd.read_csv("...path/user/folder/F-F_Research_Data_Factors.CSV", skiprows=3)
 
 # Convert the first (index 0) column to a string
 Factors_data.iloc[:, 0] = Factors_data.iloc[:, 0].astype(str)
