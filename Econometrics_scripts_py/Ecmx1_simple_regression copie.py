@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct  2 16:36:36 2023
-
-@author: youssef
-"""
-
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
