@@ -31,7 +31,7 @@ This folder focuses on econometric analysis, featuring:
 **4. Numerical Methods in Finance**
 
 - This folder is strcutured into two main projects: Credit derivatives modelling and option pricing using numerical methods.
-- Both projects are coded in Python and we use Jupyter Notebook to elaborate on the results.
+- Both projects are coded in Python and use Jupyter Notebook to elaborate on the results.
 
 **Getting started with R**
 
