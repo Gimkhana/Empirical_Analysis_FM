@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct  2 18:03:27 2023
-
-@author: youssef
-"""
-
 import yfinance as yf
 import pandas as pd
 import numpy as np
