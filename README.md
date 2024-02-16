@@ -48,15 +48,6 @@ In addition to our R scripts, you may find that Python can be a powerful tool fo
 
 Ensure you have Python installed on your system. We recommend using the Anaconda distribution, which includes Python, the Jupyter Notebook, and other commonly used packages for scientific computing and data science.
 
-- Download Anaconda: Anaconda Distribution
-
-**Setting up your Python environment** 
-
-Create a new environment (Optional but recommended):
-
-- conda create --name finance python=3.8
-- conda activate finance
-
 **Contributing**
 
 We welcome contributions and suggestions! Reach out at 20230348@etud.univ-evry.fr for any feedback.
