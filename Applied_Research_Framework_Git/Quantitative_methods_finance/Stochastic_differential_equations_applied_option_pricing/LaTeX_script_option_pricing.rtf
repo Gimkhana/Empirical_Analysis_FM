@@ -1,0 +1,578 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2758
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass\{article\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage[T1]\{fontenc\}\
+\\usepackage\{amsmath, amsfonts, amssymb\}\
+\\usepackage\{graphicx\}\
+\\usepackage\{array, booktabs\}\
+\\usepackage\{hyperref\}\
+\\usepackage\{enumitem, geometry, titlesec\}\
+\\usepackage\{booktabs\}\
+\\usepackage\{tabularx\}\
+\
+    \\title\{Stochastic Partial Differential Equations in Finance\}\
+\\author\{\
+    Youssouf Banc\'e9 \\\\\
+    M2 Risk and Asset Management (GRA) \\\\\
+    University Paris-Saclay, \'c9vry campus \\\\\
+    \\texttt\{20234008@etud.univ-evry.fr\}\
+    \\and\
+    Youssef Louraoui \\\\\
+    M2 Risk and Asset Management (GRA) \\\\\
+    University Paris-Saclay, \'c9vry campus \\\\\
+    \\texttt\{20230348@etud.univ-evry.fr\}\
+\}\
+\\date\{\\today\} % or specify a date\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\
+\\thispagestyle\{empty\} % Removes page number on title page\
+\
+\\newpage % Starts the main content on the next page\
+\
+\\section*\{Summary\}\
+\
+\\noindent\
+\\begin\{tabularx\}\{\\textwidth\}\{X\}\
+\\toprule\
+\\textbf\{Section\} \\\\\
+\\midrule\
+1. Introduction \\\\\
+\\quad 1.1. Context \\& Importance of PDE in Finance \\\\\
+\\quad 1.2. Purpose of the Project \\\\\
+\\addlinespace\
+2. Methodology \\\\\
+\\quad 2.1. Python and Jupyter Notebook \\\\\
+\\quad 2.2. Algorithm Overview \\\\\
+\\addlinespace\
+3. Main Option Pricing Models \\\\\
+\\quad 3.1. Black \\& Scholes option pricing model \\\\\
+\\quad\\quad 3.1.1 Introduction \\\\\
+\\quad\\quad 3.1.2 Assumptions and characteristics \\\\\
+\\quad 3.2. CIR (Cox-Ingersoll-Ross) option pricing model \\\\\
+\\quad\\quad 3.2.1 Introduction \\\\\
+\\quad\\quad 3.2.2 Assumptions and characteristics \\\\\
+\\quad 3.3. Vasicek option pricing model \\\\\
+\\quad\\quad 3.3.1 Introduction \\\\\
+\\quad\\quad 3.3.2 Assumptions and characteristics \\\\\
+\\addlinespace\
+4. Implementation \\\\\
+\\quad 4.1. Python Implementation \\\\\
+\\quad\\quad 4.1.1 Libraries \\\\\
+\\quad\\quad 4.1.2 Challenges faced during the implementation \\\\\
+\\quad 4.2. Results \\& visualization \\\\\
+\\quad\\quad 4.2.1 Black-Scholes Model with Finite Difference method \\\\\
+\\quad\\quad 4.2.2 Cox-Ingersoll-Ross model under Crank-Nicolson method \\\\\
+\\quad\\quad 4.2.3 Vasicek model under Crank-Nicolson method \\\\\
+\\addlinespace\
+5. Conclusion and further recommendations \\\\\
+6. References \\\\\
+\\bottomrule\
+\\end\{tabularx\}\
+\
+\\newpage\
+\
+\\section\{Introduction\}\
+\
+\\subsection\{Context \\& importance of PDE in finance\}\
+\
+The development of mathematical finance has been substantially impacted by the integration of differential equations, particularly partial differential equations (PDEs), throughout its history. The equations presented herein provide a comprehensive and rigorous framework for modeling the dynamic behavior of financial derivatives, incorporating key factors such as the passage of time and the fluctuating value of underlying assets. The fundamental notion of no-arbitrage is crucial in the field of derivatives pricing. When examined within specific prerequisites, this approach enables the development of partial differential equations (PDEs) \\cite\{hull2017\}. The significance of the Black-Scholes equation in the field of option pricing should not be underestimated, as it played a pivotal role in the recognition of Fischer Black, Myron Scholes, and Robert Merton, leading to their receipt of the Nobel Prize in Economics. Furthermore, the significance of partial differential equations (PDEs) extends beyond the domain of pricing. They possess significant importance within the field of risk management. Through the assessment of price sensitivities to various factors, commonly referred to as 'the Greeks' in the field of finance, financial institutions can enhance their ability to proactively manage risks and reduce potential negative impacts. Nevertheless, the complex characteristics of financial instruments, along with the multitude of factors that impact them, can pose difficulties in getting analytical solutions to partial differential equations (PDEs) \\cite\{hull2017\}. The presence of this complex nature has catalyzed the development of computational methods. These algorithms are simply designed to offer approximations to these mathematical structures. A comprehensive comprehension and mastery of numerical approaches are crucial for anyone engaged in real financial operations.\
+\
+\\subsection\{Purpose of the project\}\
+\
+The primary objective of this project is to develop a highly advanced tool that possesses the ability to effectively solve finance-oriented partial differential equations (PDEs) while also being applicable and valuable for individuals working in the sector. Due to the broad range of potential applications associated with these mathematical constructs, the creation of such a tool is not merely a technical endeavor but rather a crucial resource for professionals in the field. In further exploration, the objective of this research is to highlight and assess various facets of financial modeling through a specific focus on three option pricing models: the Black \\& Scholes, CIR, and Merton models. These models encompass a wide range of applications, including stock option valuation and interest rate modeling. In addition to its theoretical aspects, the project also encompasses a pragmatic dimension. The objective of this study is to elucidate the practical implications and consequences of these models in real-world scenarios. Through a comprehensive grasp of the advantages and constraints associated with each model, stakeholders within the financial markets can gain a profound comprehension of the intricacies involved in option pricing.\
+\
+\\section\{Methodology\}\
+\
+\\subsection\{Python and Jupyter Notebook\}\
+\
+The choice to employ Python for financial calculations arises from its extensive collection of modules designed explicitly for complex mathematical operations, statistical analysis, and data visualization. Python's proficiency in this field is demonstrated by modules such as numpy, scipy, pandas, and matplotlib. Moreover, Python, known for its flexible syntax and strong architecture, is not only suitable for rapid model prototyping but also capable of effortlessly handling larger and more complex projects. The open-source nature of the software provides additional support through a large collaborative group, which offers comprehensive instruction, especially in specialist areas such as finance. Jupyter has been selected for its interactive environment, which complements Python's computational capabilities \\cite\{kluyver2016\}. Jupyter is particularly advantageous for thorough code creation, testing, and debugging in situations that require periodic verification of results. Moreover, the intrinsic potential of Jupyter for integrated data visualization is quite helpful for financial tasks \\cite\{kluyver2016\}. The utilization of visualization elements in Jupyter becomes essential in situations where the accurate representation of data, such as stock trajectories or option calculations, is of utmost importance. One notable characteristic of Jupyter notebooks is their capacity to enable the integration of Markdown annotations, thereby ensuring the strict maintenance of documentation alongside code execution. The role of Jupyter in the project can be seen as follows \\cite\{kluyver2016\}:\
+\
+\\begin\{itemize\}\
+  \\item Interactive environment: Jupyter provides an interactive environment where one can write, test, and debug code in a step-by-step manner. This is especially beneficial for complex computations where intermediate results might need checking.\
+\\item Visualization: With Jupyter, it becomes convenient to plot and visualize data inline. For a finance project where visual representation of data, like stock prices or option values, is crucial, this feature is invaluable.\
+  \\item Documentation: Jupyter notebooks are not just for code. They allow for the inclusion of Markdown cells, facilitating comprehensive documentation alongside the code. This is particularly useful for academic projects where explanations are as crucial as computations.\
+\\end\{itemize\}\
+\
+\\subsection\{Algorithm overview\}\
+\
+The algorithms employed are conventional techniques commonly utilized within the financial sector to solve partial differential equations (PDEs). In the domain of finance, commonly employed methodologies include Finite Difference Methods (FDM) and Finite Element Methods (FEM). A comprehensive grasp of the fundamental mathematical principles, convergence criteria, and inherent restrictions or assumptions is necessary for the chosen methodology. Financial partial differential equations (PDEs) sometimes have certain requirements, such as boundary conditions and initial conditions, among others. \
+\
+These scenarios may encompass events such as the termination of options or the attainment of specific financial criteria. It is of utmost importance to ensure that the selected numerical process aligns with these specifications. \
+\
+Moreover, financial partial differential equations (PDEs) may exhibit coefficients that experience variations due to changing timeframes or the trajectory of underlying assets. Hence, it is imperative for the algorithm to possess resilience and adaptability to effectively address these heterogeneities. Given the time-sensitive nature of many financial determinations, optimizing the algorithm for efficiency becomes paramount. Techniques, such as operator partitioning, might be invoked to ensure computational swiftness and accuracy.\
+\
+\\section\{Implementation of the option pricing models\}\
+\
+The fundamental theorem of finance states that in an arbitrage-free model with a single factor, the price of the financial asset obeys the following valuation equation:\
+\
+\\begin\{equation\}\
+\\frac\{1\}\{2\} \\sigma^2(t, x) \\frac\{\\partial^2 P(t, x)\}\{\\partial x^2\} + [\\mu(t, x) - \\lambda(t, x)\\sigma(t, x)]\\frac\{\\partial P(t, x)\}\{\\partial x\} + \\frac\{\\partial P(t, x)\}\{\\partial t\} - r(t, x)P(t, x) + b(t, x) = 0\
+\\end\{equation\}\
+\
+where:\
+\
+\\begin\{itemize\}\
+    \\item The first term, $\\frac\{1\}\{2\} \\sigma^2(t, x) \\frac\{\\partial^2 P\}\{\\partial x^2\}$, reflects the diffusion or variance in the price of the underlying asset, accounting for the uncertainty or risk.\
+\
+    \\item The second term, $\\mu(t, x) - \\lambda(t, x) \\sigma(t, x)$, adjusts the expected return by the market price of risk times volatility, which brings the drift term in line with an arbitrage-free market.\
+\
+    \\item The third term, $\\frac\{\\partial P\}\{\\partial t\}$, denotes the sensitivity of the option's price to the passage of time, also known as theta in options Greeks.\
+\
+    \\item The fourth term, $-r(t, x) P(t, x)$, subtracts the risk-free growth of the option's price.\
+\
+    \\item The last term, $+b(t, x)$, adds the cost of carry benefits into the equation.\
+\\end\{itemize\}\
+\
+Setting the sum of these terms to zero ensures that the derivative is correctly priced to prevent arbitrage. This PDE forms the basis of many derivative pricing models, allowing for the valuation of options and other financial instruments under a variety of conditions.\
+\
+One of the underlying principles is the arbitrage-free market model. The equation is based on the assumption of an arbitrage-free market with one factor, meaning that there is no possibility to make a risk-free profit through trading strategies, and the model is dependent on a single source of market risk or uncertainty \\cite\{hull2017\}. These are foundational assumptions required for the model to hold \\cite\{hull2017\}. These typically include assumptions such as the frictionless market, no arbitrage opportunities, a constant risk-free rate, the ability to borrow and lend at the risk-free rate, and the possibility to buy and sell any amount of an asset. The price of the financial asset can be expressed in terms of $P(t, x)$ as the price of the derivative at time $t$ given the current state of the underlying asset $x$.\
+\
+\\begin\{itemize\}\
+     \\item \{$\\sigma(t, x)$:\} This represents the volatility of the underlying asset. It is a measure of how much the asset's price is expected to fluctuate over time.\
+\
+     \\item \{$\\mu(t, x)$:\} This is the expected return or drift rate of the underlying asset.\
+\
+    \\item \{$\\lambda(t, x)$:\} This is the market price of risk. It accounts for the premium investors demand for taking on risk.\
+\
+    \\item \{$r(t, x)$:\} The theoretically constant rate of return on a risk-free investment. In practice, this is often approximated using government securities.\
+\
+    \\item \{$b(t, x)$:\} This term includes the cost of carry, which could be dividends paid out or convenience yield.\
+\\end\{itemize\}\
+\
+\
+The solution to this PDE, under appropriate boundary conditions (which depend on the type of financial derivative being modeled), gives us the fair price of the derivative in question. The Black-Scholes equation, specifically, provides solutions for European call and put options, but the methodology can be extended to a wide range of financial derivatives.\
+\
+\
+\\subsection\{Black \\& Scholes option pricing model\}\
+\
+\\subsubsection\{Introduction\}\
+\
+Within the field of financial mathematics, numerous significant models have been developed to tackle the complex aspects of option pricing. One of the most influential models in finance is the Black \\& Scholes model, developed by Fischer Black, Myron Scholes, and Robert Merton. That model might be considered a significant milestone in the field, as it introduced an analytical approach for calculating the values of European-style options \\cite\{black1973\}. The fundamental equation of this model is the well-established Black-Scholes partial differential equation (PDE). The price of a European option can be determined by solving this equation under specific conditions \\cite\{black1973\}. The model is based on several underlying assumptions, including the presence of a constant and known risk-free rate, a constant level of volatility, the assumption that stock prices follow a geometric Brownian motion, the absence of any dividend payments throughout the lifespan of the option, the absence of any arbitrage opportunities, and the limitation that European-style options can only be exercised upon expiration. The uniqueness of the model lies in its ability to provide an analytical solution, enabling efficient calculations and establishing it as a fundamental tool in the field of financial engineering. Nevertheless, the subject under discussion has its share of critics. The primary focus of criticisms revolves around the assumptions made by the theory, specifically the assumption of consistent volatility. Empirical evidence suggests that volatility in real-world scenarios frequently exhibits stochastic behavior, perhaps manifesting in a "smile" or "skew" pattern \\cite\{black1973\}.\
+\
+\\subsubsection\{Assumptions and characteristics\}\
+\
+The model's derivation results in the well-known Black-Scholes Partial Differential Equation (PDE), which, under specific conditions, can be solved to ascertain the theoretical price of a European option. \
+\
+An essential foundation of the Black-Scholes model is the assumption that the risk-free interest rate remains constant and is generally known \\cite\{black1973\}.The interest rate serves as a means to adjust the future payoffs of the options to their current values, taking into account the concept of the time value of money. \
+\
+Another crucial assumption of the model is that the volatility of the returns of the underlying asset remains constant across time. Volatility, which quantifies the level of risk associated with the asset, is incorporated into the model as a key factor in determining the value of the option. By assuming that volatility remains constant, the calculations are simplified and a solution that can be expressed in a mathematical formula is obtained \\cite\{black1973\}. \
+\
+The Black-Scholes model posits that the underlying stock prices adhere to a geometric Brownian motion, indicating that the logarithm of stock price returns follows a normal distribution, and the stock prices themselves follow a log-normal distribution. The stochastic process determines the unpredictable trajectory that stock prices are assumed to adhere to, marked by continuous and seamless fluctuations in price. \
+\
+Another simplification involves the omission of dividends. The Black-Scholes model postulates that the underlying asset remains dividend-free during the duration of the option \\cite\{black1973\}. This assumption is essential as dividends can impact the price of the underlying asset, hence influencing the pricing of the option. \
+\
+The model is based on the notion of the absence of arbitrage opportunities, indicating that it is impossible to make a riskless profit in a zero-sum game. The fundamental principle of arbitrage-free markets guarantees that the option pricing model is equitable and that the values of the underlying asset and the option are in alignment with each other \\cite\{hull2017\}. \
+\
+The Black-Scholes model is exclusively tailored for European-style options, which are only exercisable on the option's expiration date. In contrast, American-style choices allow for exercising at any point up until the expiration date. \
+\
+For a call option, the payoff is expressed as follows:\
+\\begin\{equation\}\
+  (S_T-K)^+ = \\max(S_T-K; 0)\
+\\end\{equation\}\
+\
+where \\( K \\) represents the strike price of the option and \\( S_T \\) represents the price of the underlying at time \\( t \\).\
+\
+Regarding the put option, the payoff is the following:\
+\\begin\{equation\}\
+  (K-S_T )^+ = \\max(K-S_T; 0)\
+\\end\{equation\}\
+\
+The formula to price a European call under BS is given below:\
+\\begin\{equation\}\
+  C(S_0,K,r,T,\\sigma) = S_0 N(d_1) - Ke^\{-rT\} N(d_2)\
+\\end\{equation\}\
+\
+where \\( N(d_1) \\) and \\( N(d_2) \\) are cumulative distribution functions for a standard normal distribution with the following Gaussian distribution function formula:\
+\\begin\{equation\}\
+  N(x) = \\int_\{-\\infty\}^\{x\} \\frac\{1\}\{\\sqrt\{2\\pi\}\} e^\{-\\frac\{1\}\{2\} u^2\} du\
+\\end\{equation\}\
+\
+The payoff for a put option is given by:\
+\\begin\{equation\}\
+    (K - S_T)^+ = \\max(K - S_T, 0)\
+\\end\{equation\}\
+where \\( K \\) is the strike price and \\( S_T \\) is the asset price at maturity.\
+\
+The formula to price a European call under the Black-Scholes model is:\
+\\begin\{equation\}\
+    C(S_0, K, r, T, \\sigma) = S_0 N(d_1) - Ke^\{-rT\} N(d_2)\
+\\end\{equation\}\
+where \\( N(d_1) \\) and \\( N(d_2) \\) are cumulative distribution functions of a standard normal distribution. The Gaussian distribution function is given by:\
+\\begin\{equation\}\
+    N(x) = \\int_\{-\\infty\}^x \\frac\{1\}\{\\sqrt\{2\\pi\}\} e^\{-\\frac\{1\}\{2\} u^2\} \\, du\
+\\end\{equation\}\
+\
+For a put option, the Black-Scholes model can be rewritten as:\
+\\begin\{equation\}\
+    P(S_0, K, r, T, \\sigma) = Ke^\{-rT\} N(d_2) - S_0 N(d_1)\
+\\end\{equation\}\
+\
+The \\( d_1 \\) and \\( d_2 \\) functions in the Black-Scholes model are computed as:\
+\\begin\{align\}\
+    d_1 &= \\frac\{1\}\{\\sigma\\sqrt\{T\}\} \\left[ \\ln\\left(\\frac\{S_0\}\{K\}\\right) + \\left(r + \\frac\{1\}\{2\} \\sigma^2\\right)T \\right] \\\\\
+    d_2 &= d_1 - \\sigma\\sqrt\{T\}\
+\\end\{align\}\
+\
+where \\( T \\) represents time to maturity, \\( S_0 \\) represents the underlying asset price at \\( t = 0 \\),  \\( K \\) represents the strike price, \\( \\sigma \\) represents the volatility of the option, and \\( r \\) represents the risk-free rate.\
+\
+The model's beauty lies in its analytical solution, allowing for quick computations. It has become the foundational model in financial engineering. However, its assumptions, especially constant volatility, have been criticized. Market observations show that volatility can be stochastic and is often "smiled" or "skewed" \\cite\{hull2017\}.\
+\
+In summary, the Black-Scholes model relies on a simplified set of assumptions to provide a theoretical framework for option pricing. While the model has been heavily used and is widely recognized as a reference in the financial industry, its assumptions have been subject to scrutiny, leading to the development of alternative models that attempt to relax these conditions and accommodate a wider range of market phenomena.\
+\
+\\subsection\{Cox-Ingersoll-Ross (CIR) option pricing model\}\
+\
+\\subsubsection\{Introduction\}\
+\
+The CIR (Cox-Ingersoll-Ross) model was developed by Cox, Ingersoll, and Ross with the primary objective of estimating interest rates \\cite\{hull2017\}. The utilization of this approach is essential within the fields of fixed-income derivatives and risk management. The fundamental nature of the equation can be described as a stochastic differential equation with a "square-root diffusion" characteristic, which effectively guarantees that interest rates maintain a non-negative value \\cite\{hull2017\}. The proposed model claims that interest rates tend to revert to their mean value and that the level of volatility in these rates is directly related to the square root of the rate itself. One of the notable advantages of this approach is its ability to effectively mitigate the occurrence of negative interest rates, a crucial aspect when considering the modeling of short-term interest rates \\cite\{hull2017\}.\
+\
+\\subsubsection\{Assumptions and characteristics\}\
+\
+The CIR model is an advanced financial model that employs a stochastic differential equation of the "square-root diffusion" form \\cite\{hull2017\}. The CIR model incorporates a unique characteristic that guarantees interest rates will always be positive, effectively resolving a common issue encountered in alternative interest rate models.\
+\
+The CIR model is primarily based on the principle of mean reversion \\cite\{hull2017\}. This behavior is a reflection of market dynamics that can be observed, where rates do not continue to diverge indefinitely but instead tend to return to a balanced level.\
+\
+An interesting characteristic of the CIR model is its treatment of volatility. In contrast to other financial models, the volatility of interest rates in the CIR framework exhibits a direct proportionality to the square root of the interest rate level. The relationship is crucial for guaranteeing that rates cannot be negative, as it logically eliminates the idea of taking the square root of a negative integer. This prevents the model from producing negative interest rates. This trait is especially advantageous when the model is utilized in situations that involve short-term interest rates \\cite\{hull2017\}.\
+\
+Although the CIR model has considerable advantages, it is not exempt from drawbacks. It fails to completely describe the complex dynamics observed in actual interest rate fluctuations. The financial industry has seen specific intricacies in interest rates that are not considered by the CIR model. In order to deal with these complexities, more sophisticated models, such as the Heath-Jarrow-Morton (HJM) framework or the LIBOR Market Model, have been created. These models enhance the fundamental framework of the CIR model by expanding its capabilities to offer a more thorough depiction of interest rate dynamics \\cite\{hull2017\}.\
+\
+The mathematical formulation of the Cox-Ingersoll-Ross model is \\cite\{hull2017\}:\
+\
+\\begin\{equation\}\
+\\left\\\{\
+\\begin\{aligned\}\
+r(t_0) &= r_0 \\\\\
+\\frac\{dr(t)\}\{dt\} &= \\kappa(\\theta - r) \\cdot dt + \\sigma\\sqrt\{r\} \\cdot dW(t)\
+\\end\{aligned\}\
+\\right.\
+\\end\{equation\}\
+\
+where \\( W_t \\) is a Wiener process, \\(\\kappa\\) corresponds to the speed of adjustment to the mean \\(\\theta\\), \\(\\theta\\) represents the mean, and \\(\\sigma \\) represents the volatility.\
+\
+In the context of option pricing, the price of a zero-coupon bond is of particular interest. The following formula presents the price of a zero-coupon bond that is used in the CIR option pricing models:\
+\
+\\begin\{equation\}\
+P^C_\{t_0\}(\\tau) = \\left[ \\frac\{2\\gamma e^\{\\phi_1 \\tau / 2\}\}\{\\phi_3\} \\right]^\{\\phi_4\} e^\{-2 r_0 \\phi_2 / \\phi_3\}\
+\\end\{equation\}\
+\
+where the terms are defined as follows:\
+\
+\\begin\{align*\}\
+\\tau &= T - t \\\\\
+\\gamma &= \\sqrt\{(\\kappa + \\lambda)^2 + 2\\sigma^2\} \\\\\
+\\phi_1 &= (\\gamma + \\kappa + \\lambda) \\\\\
+\\phi_2 &= e^\{\\gamma \\tau\} - 1 \\\\\
+\\phi_3 &= \\phi_1 \\phi_2 + 2\\gamma \\\\\
+\\phi_4 &= \\frac\{2\\kappa\\theta\}\{\\sigma^2\}\
+\\end\{align*\}\
+\
+Some important points are worth mentioning:\
+\\begin\{itemize\}\
+    \\item The drift factor, \\(\\kappa(\\theta - r)\\), is exactly the same as in the Vasicek model. It ensures mean reversion of the interest rate towards the long run value \\(\\theta\\), with the speed of adjustment governed by the strictly positive parameter \\(\\kappa\\).\
+    \\item 	The standard deviation factor, \\( \\sigma \\sqrt\{r\} \\), avoids the possibility of negative interest rates for all positive values of a and b. \
+\\end\{itemize\}\
+\
+To summarize, the CIR model is notable for its mathematical methodology in guaranteeing positive interest rates and representing the tendency of these rates to return to their average values. However, it may not fully encompass the wide range of intricate behaviors found in financial markets.\
+\
+\\subsection\{Vasicek option pricing model\}\
+\
+\\subsubsection\{Introduction\}\
+\
+The Vasicek model, introduced by Old\uc0\u345 ich Va\'9a\'ed\u269 ek in 1977, presents a pioneering approach to the modeling of interest rates through the framework of a stochastic differential equation\\cite\{hull2017\}. The model's importance in finance is emphasized by its use in valuing interest rate derivatives, such as bond options, and its usefulness in risk management strategies. It is a type of one-factor short-rate model as it describes interest rate movements driven by only one source of market risk \\cite\{hull2017\}. The model is particularly significant in the field of finance for pricing interest rate derivatives, like bond options, and for risk management. The model assumes that interest rates exhibit mean-reverting behavior, meaning they tend to move towards a long-term average level over time. This is a crucial aspect differentiating it from other models which might assume a random walk without mean reversion. One of the appealing aspects of the Vasicek model is that it allows for an analytical solution for zero-coupon bond prices, which can be used to value bond options. The model assumes that changes in interest rates are normally distributed, which implies that the rates can become negative \\cite\{hull2017\}. This can be a limitation, especially in market environments where negative rates are unrealistic.\
+\
+\\subsubsection\{Assumptions and characteristics\}\
+\
+The Vasicek model is based on the concept of mean reversion, which claims that interest rates have a tendency to return to a long-term average level as time passes \\cite\{hull2017\}. This mean-reverting characteristic refers to the tendency of interest rates to fluctuate around a historical average, rather than moving without any limits. The Vasicek model implies constant volatility across time, hence simplifying the intricacies of market behavior into a more manageable form. The Vasicek model is widely used in quantitative finance due to its ability to derive closed-form solutions for bond and bond option prices, thanks to this assumption \\cite\{vasicek1977\}. \
+\
+The mathematical formulation of the Vasicek model is \\cite\{vasicek1977\}:\
+\
+\\begin\{equation\}\
+\\left\\\{\
+\\begin\{aligned\}\
+r(t_0) &= r_0 \\\\\
+\\frac\{dr(t)\}\{dt\} &= a(b - r) \\cdot dt + \\sigma \\cdot dW(t)\
+\\end\{aligned\}\
+\\right.\
+\\end\{equation\}\
+\
+where \\( r(t) \\) denotes the instantaneous interest rate, \\( r_0 \\) the initial interest rate, \\( a \\) the speed of reversion, \\( b \\) the long-term mean level, \\( \\sigma \\) the volatility, and \\( dW(t) \\) the Wiener process representing the source of randomness.\
+\
+The price of a zero-coupon bond is given by the following formula:\
+\
+\\begin\{equation\}\
+P^C_\{t_0\}(\\tau) = \\exp \\left[ -\\left( b' - \\frac\{\\sigma^2\}\{2a^2\} \\right)\\tau - \\left( r_0 - b' + \\frac\{\\sigma^2\}\{2a^2\} \\right)\\left( \\frac\{1 - e^\{-a\\tau\}\}\{a\} \\right) - \\frac\{\\sigma^2\}\{4a^3\}(1 - e^\{-a\\tau\})^2 \\right]\
+\\end\{equation\}\
+\
+with\
+\
+\\begin\{equation*\}\
+b' = b - \\frac\{\\lambda\\sigma\}\{a\}\
+\\end\{equation*\}\
+\
+Although the approach is widely utilized, it is not exempt from criticism. A key constraint is the potential for negative interest rates, which, although theoretically feasible inside the model, were not regarded as a practical issue throughout its development. Indeed, given current economic conditions, the presence of negative interest rates in certain markets has posed a challenge to the model's relevance. \
+\
+Furthermore, the premise of constant volatility is an oversimplification that may not always be accurate in the ever-changing financial markets, where volatility can be influenced by numerous factors and can fluctuate over time \\cite\{hull2017\}. The simplification of the Vasicek model implies that it may not accurately represent the complexities of interest rate dynamics in the real world.\
+\
+To conclude, the Vasicek model continues to be a fundamental component of the theoretical framework for understanding interest rate dynamics. This is because it was the first model to incorporate the concept of mean reversion in the modeling of the term structure of interest rates. The influence of this concept continues to exist in the several subsequent models that have been developed, aiming to combine mathematical sophistication with practical precision.\
+\
+The Vasicek model, a fundamental concept in the field of financial mathematics, provides a structure for comprehending the fluctuations of interest rates. The parameter theta (\\(\\theta\\)) is crucial in this model as it represents the long-term average level that interest rates tend to approach. An examination of the fluctuations in \\(\\theta\\) provides significant and valuable insights that are essential for both financial professionals and policymakers in the field of macroeconomics.\
+\
+To begin with, the alteration of \\(\\theta\\) offers insight into the behavioral patterns of interest rates. The Vasicek model assumes that interest rates exhibit mean-reverting behavior towards a long-term average. By manipulating the value of \\(\\theta\\), one can notice different patterns in the movements of interest rates that are of interest. Understanding the interest rate sensitivity to various economic conditions is crucial, as the parameter \\(\\theta\\) in the model represents these conditions (Vasicek, 1977).\
+\
+The practical consequences of changing \\(\\theta\\) have an impact on risk management and pricing methods. Financial institutions and investors utilize the Vasicek model to gain insights that help them reduce risk and determine the most favorable pricing for interest-dependent securities. Examining variations in interest rates under different \\(\\theta\\) scenarios assists in evaluating possible fluctuations, therefore informing approaches for determining the prices of bonds and derivatives \\cite\{hull2017\}. The capacity to predict changes in interest rates is essential for effective portfolio management and accurate pricing of financial products. \
+\
+Furthermore, the fluctuation of \\(\\theta\\) provides valuable macroeconomic insights.   The parameter is impacted by wider economic policies and conditions, such as fiscal and monetary policy. Examining the influence of interest rates allows for a more profound comprehension of the effects of policies on the economy. The utilization of this analytical approach assists policymakers and economists in assessing the impacts of different economic initiatives \\cite\{mishkin2007\}. \
+\
+The Vasicek model is widely used in the valuation of fixed-income products, specifically bonds and bond options. The fluctuation of bond prices, as perceived from various \\(\\theta\\) viewpoints, provides investors and portfolio managers with insightful perspectives on the assessment of security value. Comprehending the relationship between bond prices and different long-term average interest rates is crucial for making well-informed investment choices \\cite\{fabozzi2007\}.\
+\
+Moreover, the yield curve, a crucial indicator in finance, is significantly impacted by \\(\\theta\\). Various values of \\(\\theta\\) can result in different shapes of the yield curve, which indicate different economic situations. Understanding these processes is essential for forecasting market trends and developing asset allocation strategies \\cite\{choudhry2010\}.\
+\
+Finally, the implementation of the Vasicek model requires the adjustment of the parameter \\(\\theta\\) using market data. The model's response to various \\(\\theta\\) values highlights its susceptibility to this parameter. Comprehending this concept is crucial for precise adjustment and verification of the model, guaranteeing its relevance and dependability in practical situations \\cite\{brigo2006\}. \
+\
+Exploring variations in the parameter \\(\\theta\\) in the Vasicek model is not only a theoretical exercise but a crucial undertaking with significant ramifications in the fields of finance and economics. This analysis improves comprehension of the fluctuations in interest rates, provides valuable information for managing risks and determining pricing strategies, offers insights into macroeconomic trends, facilitates the evaluation of fixed-income instruments, clarifies the dynamics of yield curves, and helps in the adjustment of models. Therefore, it continues to be a subject of great interest and ongoing investigation in the field of financial engineering. \
+\
+\
+\\section\{Implementation\}\
+\
+\\subsection\{Python implementation\}\
+\
+\\subsubsection\{Libraries\}\
+\
+The most important libraries used \\cite\{kluyver2016\}:\
+\
+\\begin\{itemize\}\
+    \\item NumPy: The NumPy library is fundamental for numerical operations in Python. It provides support for arrays (including multidimensional arrays), as well as an assortment of mathematical functions to operate on these arrays. In the context of the given code, NumPy is utilized for mathematical computations, like random number generation, exponentials, and other array-based operations.\
+    \\item matplotlib.pyplot: This module provides functions to make some changes to figure such as create a figure, create a plotting area in a figure, plotting some lines in a plotting area, decorating the plot with labels, etc. In the code, it's used to visualize the data in the form of plots.\
+    \\item The solve banded function from the scipy.linalg package in Python is used to solve linear systems of equations with banded matrices. A banded matrix is a matrix in which the non-zero elements are concentrated in a band around the main diagonal. This type of matrix is common in many scientific and engineering applications, such as the solution of partial differential equations.\
+\\end\{itemize\}\
+\
+\\subsubsection\{Challenges faced during the implementation:\}\
+\
+ During implementation, certain challenges are encountered. These encompass the fine-tuning of parameters, computational performance concerns given the extensive calculations involved, and the stability of results due to the stochastic nature of some methods.\
+\
+ \'b7 Parameter Tuning: One of the challenges that might be faced during implementation is the selection of the right parameters. For instance, the number of iterations (num\\_iterations), the strike price (K), and other parameters can greatly influence the outcome. Choosing the best set of parameters requires understanding the financial context and possibly some trial-and-error.\
+\
+ \'b7 Performance: Calculating option prices for a large number of iterations might be computationally intensive. Efficient use of NumPy functions can help in vectorizing the operations and improving performance, but with very large datasets or high-frequency calculations, optimizing the code becomes essential.\
+\
+ \'b7 Stability of Results: Due to the stochastic nature of the Monte Carlo method, results can vary between runs. This inherent randomness can be a challenge if consistent results are desired. Increasing the number of iterations can reduce this variability, but it can also increase computational costs.\
+\
+\\subsection\{Results \\& Visualization\}\
+\
+The fundamental PDE for option pricing, expressed with coefficient functions, is as follows:\
+\
+\\begin\{equation\}\
+\\frac\{\\partial V\}\{\\partial t\} + aProc(t,x) \\frac\{\\partial^2 V\}\{\\partial x^2\} + bProc(t,x) \\frac\{\\partial V\}\{\\partial x\} + cProc(t,x)V + dProc(t,x) = 0\
+\\end\{equation\}\
+where the coefficient functions are defined as:\
+\\begin\{align*\}\
+aProc(t,x) &= 0.5 \\cdot \\sigma^2 \\cdot x^2 \\\\\
+bProc(t,x) &= b \\cdot x \\\\\
+cProc(t,x) &= r \\\\\
+dProc(t,x) &= 0\
+\\end\{align*\}\
+\
+This method is a finite difference method that is second-order accurate in both space and time, which makes it a popular choice for solving PDEs numerically due to its balance between accuracy and computational efficiency. It is also unconditionally stable for linear problems, which is an important property for ensuring reliable solutions over longer time steps. The Crank-Nicolson method, which combines both explicit and implicit methods, is written as:\
+\\begin\{equation\}\
+\\frac\{V^\{n+1\}_i - V^n_i\}\{\\Delta t\} + \\frac\{1\}\{2\} \\left( aProc^n_i \\frac\{\\partial^2 V\}\{\\partial x^2\} \\bigg|_n + aProc^\{n+1\}_i \\frac\{\\partial^2 V\}\{\\partial x^2\} \\bigg|_\{n+1\} \\right) + \\ldots = 0\
+\\end\{equation\}\
+\
+In the context of option pricing, the Crank-Nicolson method is applied to the discretized version of the PDE. Here's how the method works in terms of weighting between the explicit and implicit resolutions. The explicit part involves calculating the derivative prices based on known information at the current time step. This part is straightforward but can become unstable if the time step is too large. The implicit part requires solving a system of equations that includes information from both the current and the next time step. This part is stable for any size of the time step but computationally more intensive as it typically requires the inversion of a matrix.\
+\
+The Crank-Nicolson method is a finite difference approach that provides a numerical solution to the Black-Scholes PDE used in option pricing. It is defined by taking the average between the explicit and implicit methods, thus inheriting the stability of the implicit method while maintaining the ease of implementation similar to the explicit method.\
+\
+The method can be formulated as follows:\
+\\begin\{equation\}\
+\\frac\{V^\{n+1\}_i - V^n_i\}\{\\Delta t\} = \\frac\{1\}\{2\} \\left( L^n V^n_i + L^\{n+1\} V^\{n+1\}_i \\right)\
+\\end\{equation\}\
+\
+Here, $V^\{n+1\}_i$ is the option price at the next time step, $V^n_i$ is the option price at the current time step, $\\Delta t$ is the time step size, and $L$ is the differential operator reflecting the Black-Scholes PDE. The terms $L^n V^n_i$ and $L^\{n+1\} V^\{n+1\}_i$ represent the explicit and implicit parts of the method, respectively.\
+\
+By using the weighting factor of $\\frac\{1\}\{2\}$, the Crank-Nicolson method effectively averages the explicit and implicit updates, providing a scheme that is both stable and accurate. This method is particularly well-suited for financial applications where the solution must be robust over a range of different market conditions and over time.\
+\
+In the Black-Scholes model, \\( aProc \\) corresponds to the volatility term, reflecting the diffusion of the option's price. \\( bProc \\) is related to the risk-free rate, capturing the cost of carrying the option, while \\( cProc \\) represents the risk-free rate itself, discounting the option's price. \\( dProc \\) is often zero, assuming no dividends are paid. The constant term ensures no arbitrage opportunities in the market.\
+\
+For the CIR model, which is used to model interest rate evolution, \\( aProc \\) adapts to the level of interest rates, ensuring non-negativity. \\( bProc \\) introduces mean reversion towards a long-term average. \\( cProc \\) remains the short-rate, directly impacting zero-coupon bond pricing or other interest rate derivatives. \\( dProc \\) is zero, consistent with no additional direct pricing terms. The parameters are:\
+\
+\\begin\{itemize\}\
+\\item \\( aProc(t,x) \\): This term represents the diffusion coefficient which captures the variance of the interest rate process. It is proportional to the square of the volatility parameter \\( \\sigma \\) and the level of the interest rate \\( x \\).\
+\\item \\( bProc(t,x) \\): This term represents the mean reversion effect of the interest rate towards a long-term mean level \\( b' \\), with the speed of mean reversion \\( a \\).\
+\\item \\( cProc(t,x) \\): This is the short-rate itself which is used directly in the pricing of zero-coupon bonds or other interest rate derivatives.\
+\\item \\( dProc(t,x) \\): This term is zero in the CIR model, indicating there are no additional terms affecting the price directly in the differential equation.\
+\\end\{itemize\}\
+\
+The Vasicek model, another interest rate model, assumes the possibility of negative rates. Here, \\( aProc \\) and \\( bProc \\) are similar to the CIR model but without ensuring non-negative rates. \\( cProc \\) is again the short-rate, and \\( dProc \\) is zero. The constant term in the Vasicek model is critical for capturing the instantaneous interest rate. The parameters are:\
+\
+\\begin\{itemize\}\
+\\item \\( aProc(t,x) \\): Similar to the CIR model, this represents the diffusion coefficient and is proportional to the square of the volatility \\( \\sigma(t,x) \\).\
+\\item \\( bProc(t,x) \\): This term captures the drift of the interest rate, incorporating the mean reversion towards the long-term mean rate \\( \\mu(t,x) \\), adjusted by the market price of risk \\( \\lambda(t,x) \\) times the volatility \\( \\sigma(t,x) \\).\
+\\item \\( cProc(t,x) \\): This is the risk-free rate term \\( r(t,x) \\), which is the instantaneous short rate in the Vasicek model.\
+\\item \\( dProc(t,x) \\): As in the CIR model, this term is zero, indicating no additional terms in the equation.\
+\\end\{itemize\}\
+\
+In the models presented, these parameters are plugged into a Partial Differential Equation (PDE) used for pricing various interest rate derivatives. The difference in the models lies in their treatment of volatility and the probability of negative interest rates.\
+\
+To numerically solve these PDEs using the Crank-Nicolson method, the above-mentioned terms would be used to break up the PDE and solve it over and over again. This would create a stable system that combines the explicit and implicit finite difference methods.\
+\
+In financial mathematics, the fundamental equation of finance, often represented as a partial differential equation (PDE), is crucial for option pricing. This equation takes different parameter functions (\\( aProc \\), \\( bProc \\), \\( cProc \\), \\( dProc \\)) depending on the model being used. Each model reflects the unique characteristics and constraints of the underlying asset.\
+\
+To conclude and link the theoretical foundations to the coursework attempted, we can say that each model incorporates constraints reflective of the underlying asset's behavior. For instance, the Black-Scholes model assumes constant volatility and no dividends, which may not be realistic in dynamic markets. The CIR model accounts for the impossibility of negative interest rates, a limitation in certain economic conditions. The Vasicek model allows negative rates, which may be observed in some markets but could be unrealistic in others. Adapting the fundamental equation of finance to different option pricing models requires careful consideration of the underlying asset's characteristics. The choice of \\( aProc \\), \\( bProc \\), \\( cProc \\), and \\( dProc \\) must align with the model's assumptions and the market's limitations. By doing so, we can derive prices that reflect the risk and return profiles of various financial derivatives accurately.\
+\
+\\subsubsection\{Black-Scholes model with Finite Difference method\}\
+\
+The Black-Scholes model's adaptation, in conjunction with Finite Difference Methods (FDM), provides a methodologically rigorous framework for estimating the prices of European options. Utilizing FDM, the model's governing partial differential equation is discretized into a lattice structure that charts the progression of stock prices over time until the option's maturity. The value at each point on this lattice is found through a series of steps that can be expressed in different ways, such as through explicit, implicit, or Crank-Nicolson methods. However, some notable comments and challenges are worth mentioning.\
+\
+The foundational premise of the Black-Scholes model assumes fixed volatility and interest rates, an idealization that diverges from the variable nature of actual markets. The reality of fluctuating volatility and interest rates introduces a potential variance between the theoretical outputs of the model and observable market data. One of the limitations of the model is its usage for European-style options. In this sense, the model is tailored to European options that exclude the possibility of early execution, thereby limiting its direct application to the broader class of American options and narrowing its utility in the derivatives marketplace. Also, in scenarios where dividends are issued during the life of an option, the Black-Scholes model requires modification to accurately incorporate the impact of these dividends on the option's valuation \\cite\{hull2017\}. In addition, the accuracy of FDM outcomes is contingent upon the correct application of boundary conditions at the periphery of the stock price range and upon the expiration of the option. Deviations in these boundary conditions can induce errors in the calculated valuations. The FDM, particularly in its explicit form, may confront stability and convergence issues. The discretization intervals for time and stock price must adhere to the Courant-Friedrichs-Lewy condition to maintain computational stability \\cite\{hull2017\}. It is also worth mentioning that the application of FDM is resource-intensive, especially when extended over a broad temporal framework or applied to a multitude of options concurrently, requiring significant computational power. The FDM framework needs the "Greeks" to be derived, which are a stand-in for the option's risk sensitivity. This could make analytical expressions less accurate \\cite\{hull2017\}.\
+\
+The integration of the Black-Scholes model with FDM, while popular in the field of option pricing, invites a critical assessment of its foundational assumptions and computational complexities. As such, a meticulous calibration against empirical market data and a comprehensive analysis of the model's sensitivity to its input parameters are paramount to its successful application in financial markets. Recognizing the model\'92s theoretical elegance and its practical limitations is essential for a nuanced understanding of option pricing dynamics \\cite\{hull2017\}. In Figure 1, the X-axis portrays the stock price, the Y-axis shows time, and the Z-axis represents the option price. The flat surface indicates options that are out-of-the-money; their value doesn't change much regardless of the time left. As the stock price increases above the strike price of 100, the value of the option starts to rise linearly, representing an in-the-money call option. This linear rise matches the payoff of a European call option under the Black-Scholes model, excluding the time value which would decay as expiration nears.\
+\
+In conclusion, despite its limitations and the difficulties inherent in its numerical implementation, the Black-Scholes model, as implemented through FDM, remains a cornerstone of financial engineering for option pricing. The ongoing evolution of computational finance continues to refine these methods, enhancing their robustness and expanding their capacity to model complex financial phenomena \\cite\{hull2017\}.\
+\
+\\begin\{figure\}[h!]\
+    \\centering\
+    \\includegraphics[width=0.8\\linewidth]\{Numericalmethods_Python/Images/option_plot_1.png\}\
+    \\caption\{3D plot of the option price evolution with respect to the stock price and across time under a Black-Scholes model using the Finite Difference Method.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\\newpage\
+\
+\\subsubsection\{Cox-Ingersoll-Ross model with Crank-Nicolson method\}\
+\
+The fundamental notion in fixed-income quantitative modeling is the link between interest rates, bond prices, and bond maturity within the Cox-Ingersoll-Ross (CIR) model, as applied under the Crank-Nicolson method.\
+\
+The relationship between interest rates and bond prices under the Cox-Ingersoll-Ross (CIR) model is a key principle in bond valuation. When interest rates increase, there is a corresponding decrease in the present value of future cash flows generated by a bond, resulting in a decline in the bond's price \\cite\{hull2017\}. Conversely, when interest rates decrease, the present value of future cash flows increases, leading to an increase in the bond's price. The Cox-Ingersoll-Ross (CIR) model incorporates the concepts of mean reversion and stochastic volatility into the dynamics of interest rate processes. This implies that interest rates exhibit fluctuations around a stable long-term mean level, and the volatility of these rates is contingent upon their current level. The underlying assumption of this model is that interest rates follow a square-root diffusion process, which guarantees the non-negativity of rates. The significance of the issue is heightened in the context of bond valuation since it corresponds to the prevailing economic principle that interest rates generally do not descend into negative territory. The relationship between interest rates and bond prices is contingent upon the duration of the bond. Bonds with longer maturities tend to exhibit more sensitivity to fluctuations in interest rates because their future cash flows are discounted over an extended time horizon. The accurate representation of this phenomenon in the CIR model is done through the incorporation of increased uncertainty in the long-term trajectory of interest rates \\cite\{hull2017\}.\
+\
+The Crank-Nicolson technique, which is an implicit finite difference approach, is commonly employed because of its favorable numerical stability and convergence characteristics. This method is particularly valuable when simulating the mean-reverting stochastic process of interest rates within the framework of the Cox-Ingersoll-Ross (CIR) model. This approach presents a well-balanced methodology by combining the explicit and implicit finite difference approaches, resulting in a solution that is more stable compared to a wholly implicit scheme, however, it does not possess unconditional stability. The utilization of the Cox-Ingersoll-Ross (CIR) model for modeling options, in conjunction with the Crank-Nicolson approach, poses several difficulties that necessitate careful review and an in-depth understanding of both the theoretical foundations and real-world implementations \\cite\{hull2017\}.\
+\
+The calibration of the model holds significant importance in the modeling process. The process of calibration entails the manipulation of model parameters to achieve an alignment between the output of the model and the empirical market data. Figuring out the parameters for the Cox-Ingersoll-Ross (CIR) model is important so that the theoretical interest rate curves match up with the real-world yield curves seen in the financial market \\cite\{rubinstein1994\}. The complexity of this task arises from the fact that the calibration procedure is highly dependent on the accuracy of market data, the choice of optimization techniques, and the existence of several local minima within the solution space. The precision of calibration plays a pivotal role in ensuring the practical utility of the model, specifically in the context of valuing and managing interest rate derivatives \\cite\{hull2017\}.\
+\
+The issues of numerical stability and convergence are also significant areas of concern. Despite the Crank-Nicolson approach's reputation for stability, it can be challenging to handle the CIR model's inherent non-linearities because of the square-root factor in the volatility function. To make sure the method is numerically stable and converges, the state variables must be carefully discretized, and numerical techniques like predictor-corrector schemes may need to be used to deal with non-linearities.\
+\
+Similarly, the modeling of interest rates is a significant challenge. The mean-reverting square-root process is added to the CIR model to stop negative interest rates from happening. This makes the model more complicated and difficult to understand. Appropriate discretization of the stochastic differential equation is necessary to effectively capture its temporal behavior. However, this procedure can be computationally demanding and highly dependent on the selection of time and space steps.\
+\
+Financial organizations often require the use of efficient models that can deliver rapid outcomes in practical situations. The Crank-Nicolson approach, due to its iterative nature, can result in significant computational needs, particularly when applied over extensive time and space grids. The objective to optimize computational algorithms to minimize runtime is an important challenge in the finance field, which can be achieved among other techniques by the utilization of parallel computing techniques or the implementation of more efficient matrix solvers \\cite\{hull2017\}.\
+\
+\
+\\begin\{figure\}[htbp]\
+    \\centering\
+    \\includegraphics[width=0.8\\linewidth]\{Numericalmethods_Python/Images/option_plot_2.png\}\
+    \\caption\{Interest rate evolution under the Cox-Ingersoll-Ross (CIR) model using Crank-Nicolson method.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\\newpage\
+\
+\\subsubsection\{Vasicek model with Crank-Nicolson method\}\
+   \
+In the field of financial mathematics, using the Vasicek model with the Crank-Nicolson optimization method is a powerful way to understand how changing interest rates affect bond prices, especially for zero-coupon bonds \\cite\{vasicek1977\}. The model suggests that interest rates display mean-reverting characteristics, indicating a tendency to fluctuate around a historical average. This aligns with long-term market findings. \
+\
+The provided graph depicts the fluctuation of bond prices over time in relation to a range of interest rates (Figure 3). The x-axis represents the spectrum of interest rates, encompassing both positive and negative values. Negative values, however unconventional, can be used to simulate extreme market scenarios or as a means of testing theoretical hypotheses under stressful situations. The y-axis represents the time to maturity, showing how much time is left until the bond pays out its face value. As time passes, the y-axis decreases, indicating a shorter period of maturity. \
+\
+When we analyze the bond prices on the z-axis, we can clearly see a consistent pattern of value appreciation as the time until maturity decreases. This demonstrates the fundamental financial concept that money has greater worth when received today compared to the same amount received in the future. The plot's surface highlights this point even more clearly: as the time to maturity gets closer to zero, the bond price approaches its par value. This reflects the decreasing influence of interest rates on the bond's value, which is attributable to the nearness of the cash flow realization. \
+\
+The Crank-Nicolson technique plays a crucial role in this model by offering a robust and precise solution that strikes a balance between the explicit and implicit finite difference approaches. This is apparent in the plot, which shows a smooth and stable surface, suggesting that the numerical solution is behaving correctly. Numerical stability is crucial in financial modeling, as unpredictable or unstable solutions can greatly undermine the model's validity and practical usefulness.\
+\
+From a qualitative standpoint, the model emphasizes that as a bond approaches maturity, the impact of prevailing interest rates on its price becomes less pronounced. It is commonly accepted that as a bond approaches maturity, the main factor influencing its value is the promise of receiving the full face value payment, which becomes more important than the temporary impact of changes in interest rates. \
+\
+The Vasicek model, when implemented using the Crank-Nicolson optimization method, provides a reliable foundation for bond valuation. It combines abstract concepts with advanced computational techniques, guaranteeing that the outcomes are both mathematically accurate and practically instructive. The smoothness of the surface across various interest rates and timeframes to maturity is evidence of the model's stability, making it a dependable tool for financial analysts and practitioners. The statement emphasizes the theoretical attractiveness of the Vasicek model and the practical strengths and computational reliability provided by the Crank-Nicolson method. \
+\
+\\begin\{figure\}[h!]\
+    \\centering\
+    \\includegraphics[width=0.8\\linewidth]\{Numericalmethods_Python/Images/option_plot_3.png\}\
+    \\caption\{3D plot for the Vasicek pricing model using Crank-Nicolson method.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\newpage\
+\
+The Vasicek model, a fundamental concept in the field of financial mathematics, provides a structure for comprehending the fluctuations of interest rates. The parameter theta (\\(\\theta\\)) is crucial in this model as it represents the long-term average level that interest rates tend to approach. An examination of the fluctuations in \\(\\theta\\) provides significant and valuable insights that are essential for both financial professionals and policymakers in the field of macroeconomics.\
+\
+To begin with, the alteration of theta offers insight into the behavioral patterns of interest rates. The Vasicek model assumes that interest rates exhibit mean-reverting behavior towards a long-term average. By manipulating the value of \\(\\theta\\), one can notice different patterns in the movements of interest rates that are of interest. Understanding the interest rate sensitivity to various economic conditions is crucial, as the parameter \\(\\theta\\) in the model represents these conditions \\cite\{vasicek1977\}. \
+\
+The practical consequences of changing \\(\\theta\\) have an impact on risk management and pricing methods. Financial institutions and investors utilize the Vasicek model to gain insights that help them reduce risk and determine the most favorable pricing for interest-dependent securities. Looking at how interest rates change in different \\(\\theta\\) scenarios helps us figure out what changes might happen, which in turn affects how we set the prices of bonds and derivatives \\cite\{hull2017\}. The capacity to predict changes in interest rates is essential for effective portfolio management and accurate pricing of financial products.\
+\
+Furthermore, the fluctuation of \\(\\theta\\) provides valuable macroeconomic insights. Wider economic conditions and policies, such as fiscal and monetary policy, have an impact on the parameter. Examining the influence of interest rates allows for a more profound comprehension of the effects of policies on the economy. The utilization of this analytical approach assists policymakers and economists in assessing the impacts of different economic initiatives \\cite\{mishkin2007\}.\
+\
+Many fixed-income products, particularly bonds and bond options, are valued using the Vasicek model. The fluctuation of bond prices, as perceived from various viewpoints, provides investors and portfolio managers with insightful perspectives on the assessment of security value. Comprehending the relationship between bond prices and different long-term average interest rates is crucial for making well-informed investment choices \\cite\{fabozzi2007\}.\
+\
+Additionally, \\(\\theta\\) has a sizable impact on the yield curve, a crucial indicator in finance. Various values of \\(\\theta\\) can result in different shapes of the yield curve, which indicate different economic situations. Understanding these processes is essential for forecasting market trends and developing asset allocation strategies \\cite\{choudhry2010\}.\
+\
+Finally, the implementation of the Vasicek model requires the adjustment of the parameter \\(\\theta\\) using market data. The model's response to various \\(\\theta\\) values highlights its susceptibility to this parameter. Comprehending this concept is crucial for precise adjustment and verification of the model, guaranteeing its relevance and dependability in practical situations \\cite\{brigo2006\}.\
+\
+Exploring variations in the parameter \\(\\theta\\) in the Vasicek model is not only a theoretical exercise but a crucial undertaking with significant ramifications in the fields of finance and economics. This analysis improves comprehension of the fluctuations in interest rates, provides valuable information for managing risks and determining pricing strategies, offers insights into macroeconomic trends, facilitates the evaluation of fixed-income instruments, clarifies the dynamics of yield curves, and helps in the adjustment of models. Therefore, it continues to be a subject of great interest and ongoing investigation in the field of financial engineering.\
+\
+The Vasicek model's graphical representations depicted across varying values of theta present a comprehensive visualization of the interest rate's impact on bond pricing over time. As theta increases, the graphical analysis conveys several critical insights into the model's sensitivity and the intrinsic nature of the bonds being evaluated.\
+\
+From Figure 4, it is evident that as theta increases, the peak of the bond price shifts accordingly. This shift illustrates the mean-reverting characteristic of the Vasicek model, where interest rates tend to gravitate towards a long-term average level\'97theta in this context. Bond prices rise in tandem with higher theta values, which point to a higher long-term mean level. This observation is consistent with the idea that, ceteris paribus, higher expected future rates will result in an increase in the bond's cash flows' present value. Bonds that are nearing maturity stand out in particular because their coupon payments have less time to compound the effect of a change in interest rates. As the bond approaches its redemption date, when its return becomes more certain, this phenomenon illustrates how the significance of interest rate forecasts diminishes. The below plot emphasizes the value of theta as a risk management tool. Financial experts can more accurately evaluate the interest rate risk associated with bond portfolios and develop strategies to reduce this risk by knowing how bond prices may fluctuate with various long-term mean interest rates (Figure 4).\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Numericalmethods_Python//Images/option_plot_4.png\}\
+    \\caption\{\\(\\theta\\) variation (in a 0.25 increment) in the Vasicek pricing model. \\(\\theta\\) increments from 0 to 5\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+In conclusion, the analysis of theta values in the Vasicek model helps us understand how the model works and is an incredibly useful tool for predicting how bond prices will change in different economic situations. This is especially useful for fixed-income portfolio managers, traders, and analysts who rely on interest rate models to make informed decisions.\
+\
+\
+\\section\{Conclusion\}\
+\
+ We have extensively explored the complexities of financial partial differential equations\
+(PDEs) and their critical role in simulating the behavior of financial derivatives. By focusing on important models such as Black and Scholes, CIR, and Merton, we have comprehensively explored several domains within the field of financial mathematics, ranging from the assessment of stock option value to the modeling of interest rates.\
+ \
+The utilization of Python, due to its extensive library ecosystem, alongside Jupyter, known for its interactive functionalities, played a crucial role in enhancing our approaches and facilitating the visualization of outcomes. Although our investigation was conducted with great diligence, we faced various obstacles including in the areas of parameter tuning, computational efficiency, and guaranteeing the stability of our findings considering inherent random fluctuations.\
+\
+In summary, the convergence of mathematical finance and computer approaches presents a multitude of possibilities and challenges.  The ongoing evolution of financial instruments in terms of complexity underscores the ongoing importance of the methods and instruments explored and developed in this study. These findings will continue to hold substantial value for both scholars and professionals operating within the finance industry. To remain relevant and efficient in the dynamic field of financial mathematics, it is imperative to continuously enhance and modify these methods. Based on the challenges we faced in this project, we propose the following recommendations to improve the performance, stability, and robustness of our model.\
+\
+Regarding parameter tuning, we recommend implementing automated parameter tuning methods such as grid search or random search to systematically explore different parameter combinations. This would help us to identify the optimal parameter settings that minimize the error and maximize the accuracy of the model \\cite\{tavella2000\}. We could also utilize machine learning techniques such as hyperparameter optimization to find the best parameter settings \\cite\{tavella2000\}. Hyperparameter optimization algorithms use real-world data to fine-tune the model's parameters, resulting in a more robust and efficient model. Additionally, we could establish a feedback loop where the model's results are compared against real-world data to fine-tune the parameters accordingly. This would allow us to continuously improve the model's performance and ensure that it is aligned with the real world.\
+\
+To improve the performance of our model, we recommend implementing parallel processing techniques to handle large-scale computations simultaneously \\cite\{tavella2000\}. This would be especially beneficial for complex financial models that require extensive numerical calculations. We could also consider using specialized hardware such as Graphics Processing Units (GPUs) for faster matrix operations. GPUs are particularly well-suited for high-frequency calculations, which are common in financial modeling. Additionally, we could leverage more optimized libraries such as Numba or Cython to improve performance \\cite\{tavella2000\}. These libraries provide optimized implementations of common mathematical and numerical operations, which can significantly reduce the computational time of our model.\
+\
+Regarding the stability of results, we can perform the following approach. To ensure more stable results, we recommend implementing variance reduction techniques such as antithetic variates or control variates in the Monte Carlo method \\cite\{wilmott1998\}. Monte Carlo methods are widely used in financial modeling to simulate the behavior of complex financial systems. However, they can be susceptible to high variance, which can lead to inaccurate results. Variance reduction techniques can help to reduce the variance of the Monte Carlo simulations and produce more stable results \\cite\{tavella2000\}. When implementing stochastic methods, we should use consistent random seeds to reproduce the same results. This is important for ensuring the reproducible of the results and for debugging purposes. \
+\
+Finally, we should continuously monitor the convergence of the Monte Carlo simulations. If the results are not converging, we can consider increasing the number of iterations or revisiting the model's assumptions. Convergence monitoring is essential for ensuring that the Monte Carlo simulations are producing accurate results. We believe that implementing these recommendations will significantly improve the performance, stability, and robustness of our model, making it a more reliable and accurate tool for financial modeling. \
+\
+\\newpage\
+\
+\\section\{References\}\
+\
+\\begin\{thebibliography\}\{99\}\
+\
+\\bibitem\{black1973\} Black, F., \\& Scholes, M. (1973). The Pricing of Options and Corporate Liabilities. Journal of Political Economy, 81(3), 637-654.\
+\
+\\bibitem\{brigo2006\} Brigo, D., \\& Mercurio, F. (2006). Interest Rate Models-Theory and Practice: With Smile, Inflation and Credit. Springer Science \\& Business Media.\
+\
+\\bibitem\{choudhry2010\}Choudhry, M. (2010). The Bond and Money Markets: Strategy, Trading, Analysis. Butterworth-Heinemann.\
+\
+\\bibitem\{cox1985\} Cox, J. C., Ingersoll Jr, J. E., \\& Ross, S. A. (1985). A theory of the term structure of interest rates. Econometrica, 53(2), 385-407.\
+\
+\\bibitem\{fabozzi2007\}Fabozzi, F.J. (2007). Fixed Income Analysis. Wiley Finance.\
+\
+\\bibitem\{hull2017\} Hull, J. C. (2017). Options, futures, and other derivatives (10th ed.). Pearson.\
+\
+\\bibitem\{kluyver2016\} Kluyver, T., Ragan-Kelley, B., P\'e9rez, F., Granger, B., Bussonnier, M., Frederic, J., ... \\& Ivanov, P. (2016, May). Jupyter Notebooks \'96 a publishing format for reproducible computational workflows. In Positioning and Power in Academic Publishing: Players, Agents, and Agendas (pp. 87-90).\
+\
+\\bibitem\{kou2002\} Kou, S. G. (2002). A jump-diffusion model for option pricing. Management science, 48(8), 1086-1101.\
+\
+\\bibitem\{merton1976\} Merton, R. C. (1976). Option pricing when underlying stock returns are discontinuous. Journal of financial economics, 3(1-2), 125-144.\
+\
+\\bibitem\{mishkin2007\}Mishkin, F.S. (2007). The Economics of Money, Banking, and Financial Markets. Pearson Education.\
+\
+\\bibitem\{rubinstein1994\} Rubinstein, M. (1994). Implied binomial trees. The Journal of Finance, 49(3), 771-818.\
+\
+\\bibitem\{tavella2000\} Tavella, D., \\& Randall, C. (2000). Pricing financial instruments: The finite difference method. John Wiley \\& Sons.\
+\
+\\bibitem\{wilmott1998\} Wilmott, P. (1998). Derivatives: The theory and practice of financial engineering. John Wiley \\& Sons.\
+\
+\\bibitem\{vasicek1977\} Vasicek, O. A. (1977). An Equilibrium Characterization of the Term Structure. Journal of Financial Economics, 5: 177\'96188.\
+\
+\\end\{thebibliography\}\
+\
+% Document ends\
+\\end\{document\}}

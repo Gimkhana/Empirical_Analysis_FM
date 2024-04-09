@@ -1,0 +1,282 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass[xcolor=\{dvipsnames\}]\{beamer\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage\{graphicx\} % Needed to include images\
+\\usepackage\{amsmath\}  % For math fonts, symbols, and environments\
+\\usepackage\{hyperref\} % For hyperlinks\
+\
+\\usetheme\{CambridgeUS\}\
+\\usecolortheme\{default\}\
+\\setbeamertemplate\{enumerate items\}[default]\
+\
+% \\setbeamercolor*\{palette primary\}\{use=structure,fg=white,bg=structure.fg\}\
+% \\setbeamercolor*\{palette secondary\}\{use=structure,fg=white,bg=structure.fg!75\}\
+% \\setbeamercolor*\{palette tertiary\}\{use=structure,fg=white,bg=structure.fg!50!black\}\
+% \\setbeamercolor*\{palette quaternary\}\{fg=white,bg=black\}\
+\
+% \\setbeamercolor\{section in toc\}\{fg=black,bg=white\}\
+% \\setbeamercolor\{alerted text\}\{use=structure,fg=structure.fg!50!black!80!black\}\
+% \\setbeamercolor\{frametitle\}\{bg=black,fg=white\}\
+\
+% \\setbeamercolor\{titlelike\}\{parent=palette primary,fg=structure.fg!50!black\}\
+% \\setbeamercolor\{frametitle\}\{bg=gray!10!white,fg=black\}\
+\
+% \\setbeamercolor*\{titlelike\}\{parent=palette primary\}\
+\
+% \\setbeamercolor\{block title example\}\{bg=black,fg=white\}\
+\
+% \\usepackage\{times,url\}\
+\
+\\setbeamertemplate\{footline\}\{\
+  \\hfill%\
+  \\usebeamercolor[fg]\{page number in head/foot\}%\
+  \\usebeamerfont\{page number in head/foot\}%\
+  \\insertframenumber\\,/\\,\\inserttotalframenumber%\
+  \\kern1em\\vskip2pt%\
+\}\
+%Title page\
+\\title[Presentation] %optional\
+\{Urals loading analysis\}\
+\\subtitle\{Multivariate regression analysis of Urals loadings\}\
+\
+\\author[] % (optional)\
+\{Youssef Louraoui\\inst\{1\}\}\
+\
+\\institute[] % (optional)\
+\{\
+  \\inst\{1\}%\
+  Summer Analyst\\\\\
+  Analysis Desk\
+\}\
+\
+\\date[October, 2022] % (optional)\
+\{October, 2022\}\
+\
+\\begin\{document\}\
+\
+% Title Page\
+\\begin\{frame\}\
+\\titlepage\
+\\end\{frame\}\
+\
+\\section\{Data analysis\}\
+\\subsection\{Historical analysis\}\
+\\begin\{frame\}\{Historical analysis of Ural loading\}\
+   \\begin\{columns\}[T] % The [T] option aligns column content at the top\
+        % First column for text\
+        \\begin\{column\}\{0.4\\textwidth\}\
+            \\begin\{itemize\}\
+                \\small % Smaller text for bullet points\
+                \\item Over the period spanning 2017-2021, Urals loadings was  moving in a range between 3.19mb/d end Feb 2017 to less than 0.58mb/d May 2020. \
+                \\item Average mean for the whole period covering 2017-2021 for Urals loading reached the equivalent of 2.03mb/d (stdev: 3.07mb/d).\
+                % Add more items\
+            \\end\{itemize\}\
+        \\end\{column\}\
+\
+        % Second column for image\
+        \\begin\{column\}\{.8\\textwidth\}\
+            \\includegraphics[width=0.8\\linewidth]\{Econometrics plots/Russian_plot_1.png\}\
+        \\end\{column\}\
+    \\end\{columns\}  \
+\\end\{frame\}\
+\
+\\section\{Data analysis\}\
+\\subsection\{Historical analysis\}\
+\\begin\{frame\}\{Urals refining margin and Ural-Brent differential analysis\}\
+   \\begin\{columns\}[T] % The [T] option aligns column content at the top\
+        % First column for text\
+        \\begin\{column\}\{0.4\\textwidth\}\
+            \\small % Smaller text for bullet points\
+            \\begin\{itemize\}\
+                \\item \\fontsize\{8pt\}\{8pt\} Urals refining crack was fluctuating around end of 2018Q4, where it reached it lowest point in the sample (-16.34 USD/bbl), and in 2020Q1 where it reached it highest level across the sample analysed (15.1 USD/bbl).\
+                \\item \\fontsize\{8pt\}\{8pt\} Brent-Urals differential has been drifting around its long term mean during the period covered in this analysis (-1.24 USD/bbl, stdev 1.18 USD/bbl).\
+            \\end\{itemize\}\
+        \\end\{column\}\
+\
+        % Second column for image\
+        \\begin\{column\}\{.8\\textwidth\}\
+            \\includegraphics[width=0.8\\linewidth]\{Econometrics plots/Russian_plot_2.png\}\
+        \\end\{column\}\
+    \\end\{columns\}  \
+\\end\{frame\}\
+\
+\\section\{Data analysis\}\
+\\subsection\{Historical analysis\}\
+\
+\\begin\{frame\}\{Equity index analysis\}\
+   \\begin\{columns\}[T] % The [T] option aligns column content at the top\
+        % First column for text\
+        \\begin\{column\}\{0.4\\textwidth\}\
+            \\small % Smaller text for bullet points\
+            \\begin\{itemize\}\
+                \\item \\fontsize\{8pt\}\{8pt\} During the period covering 2021, MOEX performed above its average for the period (avg. 2021: 3710.74 pts vs avg. sample: 2708.96 pts).\
+                \\item \\fontsize\{8pt\}\{8pt\} With a correlation of 0.8782 (87.82\\% between the two), the VanEck tracker closely resembles the Russian equity index (MOEX). Due to the holdings' differences from the MOEX index, this divergence from the tracker can be justified.\
+            \\end\{itemize\}\
+        \\end\{column\}\
+\
+        % Second column for image\
+        \\begin\{column\}\{.8\\textwidth\}\
+            \\includegraphics[width=0.8\\linewidth]\{Econometrics plots/Russian_plot_5.png\}\
+        \\end\{column\}\
+    \\end\{columns\}  \
+\\end\{frame\}\
+\
+\\section\{Data analysis\}\
+\\subsection\{Historical analysis\}\
+\
+\\begin\{frame\}\{Brent futures analysis\}\
+   \\begin\{columns\}[T] % The [T] option aligns column content at the top\
+        % First column for text\
+        \\begin\{column\}\{0.4\\textwidth\}\
+            \\small % Smaller text for bullet points\
+            \\begin\{itemize\}\
+                \\item \\fontsize\{8pt\}\{8pt\} Brent futures traded in a range covering (21.8 USD/bbl) at its lowest value during Mar. 2020 to more than 84 USD/bbl end of 2021. \
+                \\item \\fontsize\{8pt\}\{8pt\} Across the last year worth of data, Brent futures where trading above their long term mean for the period 2017-2021 (avg 2022: 69.03 USD/bbl vs avg. 2017-2021: 60.7 USD/bbl).\
+            \\end\{itemize\}\
+        \\end\{column\}\
+\
+        % Second column for image\
+        \\begin\{column\}\{.8\\textwidth\}\
+            \\includegraphics[width=0.8\\linewidth]\{Econometrics plots/Russian_plot_6.png\}\
+        \\end\{column\}\
+    \\end\{columns\}  \
+\\end\{frame\}\
+\
+\\section\{Econometric modeling analysis\}\
+\\subsection\{Empirical analysis\}\
+\\begin\{frame\}\{Effects of the variables on change in Urals loading\}\
+\\small \{  % Smaller text for bullet points\
+The figure below captures the effect of change in RUB/USD spot rate, Brent futures, and USD index with respect to the change in Urals loadings over 2022, or the equivalent of 40 data points. The regression can be captured mathematically as follows ($*$):\
+\
+\\scriptsize % Makes the equation smaller\
+\\begin\{equation*\}\
+\\scriptsize % Makes the equation smaller\
+y_\{\\text\{Loadings 2022\}\} = \\alpha + \\beta_\{\\%RUB/USD_\{spot\}\} X_\{\\%RUB/USD_\{spot\}\} + \\beta_\{\\%Brent_\{futures\}\} X_\{\\%Brent_\{futures\}\} + \\beta_\{\\%USD_\{index\}\} X_\{\\%USD_\{index\}\} + \\epsilon_t\
+\\end\{equation*\}\
+\
+\\section\{Econometric modeling analysis\}\
+\
+\\begin\{itemize\}\
+    \\item Very poor relationship between the Urals loading rate with respect to the other explanatory variables used.\
+    \\item Urals loadings seem to be sensitive to changes in Brent futures price ($R^2 = 2.1\\%$).\
+    \\item Overall $R^2$ for the regression is not conclusive (0.034, 3.4\\%). In other words, 3.4\\% of the variations in the Urals loadings can be attributed to the changes in the explanatory variables retained in this analysis.\
+    \\item This slightly negative relationship can seem intuitive since Urals difference is a sound gauge for Russian crude attractiveness in the crude oil market.\
+    \\item This analysis offers an additional view on possible variables that can be used to better predict Russian Ural loading. \
+\\end\{itemize\}\
+\}\
+\\end\{frame\}\
+\
+\\section\{Econometric modeling analysis\}\
+\\subsection\{Empirical analysis\}\
+\\begin\{frame\}\{Augmented econometric modeling analysis\}\
+\
+\\includegraphics[width=1\\linewidth]\{Econometrics plots/Russian_plot_3.png\}\
+\
+\\end\{frame\}\
+\
+\\section\{Econometric modeling analysis\}\
+\\subsection\{Empirical analysis\}\
+\\begin\{frame\}\{Augmented econometric modeling analysis\}\
+\\small \{  % Smaller text for bullet points\
+The figure below captures the effect of change in Brent futures, Brent-Urals differential, MOEX equity index, VanEck Russia ETF and Urals refinery crack with respect to the change in Urals loadings over the equivalent of 235 data points. The regression can be captured mathematically as follows (*):\
+\
+\\scriptsize % Makes the equation smaller\
+\\begin\{align*\}\
+y_\{\\text\{Loadings 2017--2021\}\} &= \\alpha + \\beta_\{\\%\\text\{Brent futures\}\} X_\{\\%\\text\{Brent futures\}\} + \\beta_\{\\%\\text\{BFO--URL NWE\}\} X_\{\\%\\text\{BFO--URL NWE\}\} \\nonumber \\\\\
+&\\quad + \\beta_\{\\%\\text\{MOEX index\}\} X_\{\\%\\text\{MOEX index\}\} \
+\\nonumber \\\\\
+&\\quad + \\beta_\{\\%\\text\{RSX\}\} X_\{\\%\\text\{RSX\}\} + \\beta_\{\\%\\text\{Urals ref--crack\}\} X_\{\\%\\text\{Urals ref--crack\}\} + \\varepsilon_t\
+\\end\{align*\}\
+\
+\
+\\begin\{itemize\}\
+    \\item Again, very poor relationship between the Urals loading rate with respect to the other explanatory variables used in this multivariate regression. \
+    \\item Even after expanding the original regression with the addition of other variables (five factors), we still yield poor regression outputs. \
+    \\item We can capture an interesting pattern; Urals loadings seems to be sensitive to change in the differential Brent-Urals ($R^2$ = 1.18\\%)\
+    \\item Overall $R^2$ for the regression is not conclusive (0.0136, 1.36\\%). In other words, 1.36\\% of the variations of the Urals loadings can be attributed to the changes in the explanatory variables retained in this analysis. \
+\\end\{itemize\}\
+\}\
+\\end\{frame\}\
+\
+\
+\
+\\section\{Augmented econometric modeling analysis\}\
+\\subsection\{Empirical analysis\}\
+\\begin\{frame\}\{Augmented econometric modeling on Urals loading\}\
+\
+\\includegraphics[width=1\\linewidth]\{Econometrics plots/Russian_plot_4.png\}\
+\
+\\end\{frame\}\
+\
+\\section\{Augmented econometric modeling analysis\}\
+\\subsection\{Empirical analysis\}\
+\\begin\{frame\}\{Augmented econometric modeling on Urals loading\}\
+\
+\\includegraphics[width=1\\linewidth]\{Econometrics plots/Russian_plot_7.png\}\
+\
+\\end\{frame\}\
+\
+\\section\{Machine learning analysis\}\
+\\subsection\{Machine learning analysis: MLP and LSTM\}\
+\\begin\{frame\}\{Implementation of MLP and LSTM models\}\
+\\small \{  % Smaller text for bullet points\
+The results obtained from the multiple regression are not very satisfying, the results cannot help much in predicting Urals loading patterns. In this sense, we decide to implement alternative machine learning techniques into the dataset and assess their predictive power(*):\
+\
+\\begin\{itemize\}\
+    \\item We use a dataset of weekly data capturing 234 data points. We made sure to eliminate any missing data and applied a z\\_score to eliminate data above three standard deviation threshold.\
+    \\item We decompose the dataset into two samples: A training period with the first 120 observations and a testing set of the remaining observations (114 observations). \
+    \\item We implement at first Multiple Layer Perceptron (MLP) and Long-Short Term Memory (LSTM) algorithms. The (1) and (2) drops 25\\% of the data to preserve the model from overfitting.  \
+    \\item Both models will run on the training dataset ten times (epoch=10) with a batch of sixteen, meaning the model will be updated after sixteen points are processed. \
+\\end\{itemize\}\
+\}\
+\\end\{frame\}\
+\
+\\section\{Machine learning analysis\}\
+\\subsection\{Machine learning analysis: MLP and LSTM\}\
+\\begin\{frame\}\{Machine learning analysis: MLP and LSTM\}\
+\\includegraphics[width=1\\linewidth]\{Econometrics plots/MLP_LSTM_urals.png\}\
+\\end\{frame\}\
+\
+\
+\\section\{Machine learning analysis\}\
+\\subsection\{Machine learning analysis: alternative models\}\
+\\begin\{frame\}\{Implementation of alternative models (GBoost, SVM and Random Forest)\}\
+\\small \{  % Smaller text for bullet points\
+For this particular forecasting exercise, the LSTM model shows\'a0the best fit. Even though the Random Forest model isn't as precise as the LSTM, it still has good predictive power. Despite employing strong algorithms, both the Gradient Boosting and MLP models imply that careful adjustment is necessary to improve their performance. Finally, the less accurate findings of the SVM highlight the difficulties of using kernel-based techniques in complex time-series forecasting without considerable feature engineering and tweaking (*):\
+\
+\\begin\{itemize\}\
+    \\item Exhibits the highest accuracy among all models with the lowest MAE, MSE, and RMSE scores. This suggests a strong capacity for capturing temporal dependencies and sequential patterns within the data.\
+    \\item Shows competitive accuracy, with relatively low error metrics, particularly the MAE being the second-best. This ensemble model's robustness against overfitting may have contributed to its solid performance.\
+    \\item Registers the highest error metrics across all three indicators, indicating a lower predictive accuracy for this dataset. The kernel and hyperparameter selection are critical for SVM performance and might require optimization. \
+\\end\{itemize\}\
+\}\
+\\end\{frame\}\
+\
+\
+\\section\{Machine learning application\}\
+\\subsection\{Machine learning analysis: alternative models\}\
+\\begin\{frame\}\{Implementation of alternative models (GBoost, SVM and Random Forest)\}\
+\
+\\includegraphics[width=1\\linewidth]\{Econometrics plots/ML_urals.png\}\
+\
+\\end\{frame\}\
+\
+\\section\{Conclusion\}\
+\\subsection\{Comments on the results\}\
+\\begin\{frame\}\{Conclusion\}\
+\\begin\{itemize\}\
+    \\item After running the regression for each time series, there is a very poor relationship between the Urals loading rate with respect to the other explanatory variables used in this multivariate regression. \
+    \\item Some interesting relationships* with Urals loadings with Brent futures and Urals loadings with Brent-Urals differential.\
+    \\item Modelling the relationship of Urals loading via marchine learning techniques gives mixed results. More fine tuning of the parameters and the underlying models is needed to obtain more robust forecasts. \
+    \\item Modelling the relationship of Urals loading is complicated. The results serve as a basis for further analysis in order to obtain better results. \
+\\end\{itemize\}\
+\
+\\end\{frame\}\
+\
+\\end\{document\}}

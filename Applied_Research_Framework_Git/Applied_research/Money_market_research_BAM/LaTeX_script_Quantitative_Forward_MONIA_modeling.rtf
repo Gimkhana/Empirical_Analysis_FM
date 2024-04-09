@@ -1,0 +1,687 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass\{article\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage[T1]\{fontenc\}\
+\\usepackage\{amsmath, amsfonts, amssymb\}\
+\\usepackage\{graphicx\}\
+\\usepackage\{array, booktabs\}\
+\\usepackage\{hyperref\}\
+\\usepackage\{enumitem, geometry, titlesec\}\
+\\usepackage\{booktabs\}\
+\\usepackage\{tabularx\}\
+\
+    \\title\{The reform of money market benchmarks worldwide: Construction of a forward rate model for the Moroccan interbank market\}\
+\\author\{\
+    Youssef LOURAOUI \\\\\
+    ESSEC Business School \\\\\
+    \\texttt\{youssef.louraoui@essec.edu\}\
+    \\and\
+    Arnaud Feral, PhD \\\\\
+    Professor of Economics \\\\\
+    ESSEC Business School \\\\\
+    \\and\
+    Abderrahim RAFIKI \\\\\
+    Senior in charge of benchmark alternative reference rates \\\\\
+    Bank Al-Maghrib (Central Bank of Morocco) \\\\\
+\}\
+\\date\{21/06/2021\}% or specify a date\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\
+\\thispagestyle\{empty\}% Removes page number on title page\
+\
+\\newpage % Starts the main content on the next page\
+\
+\\noindent\
+\\begin\{tabularx\}\{\\textwidth\}\{X\}\
+\\toprule\
+\\textbf\{Section\}\\\\\
+\\midrule\
+\\addlinespace\
+1. Introduction \\\\\
+\\addlinespace\
+\\quad 1.1. Context of the problem \\\\\
+\\quad 1.2. Motivation \\\\\
+\\quad 1.3 Structure of the research \\\\\
+\
+\\addlinespace\
+\
+2. Literature Review \\\\\
+\\addlinespace\
+\\quad 2.1. Theoretical framework and origins \\\\\
+\\quad 2.2. Causes of the transition \\\\\
+\\quad 2.3. The reference benchmarks \\\\\
+\\quad 2.4. New rates developed \\\\\
+\\quad 2.5. Models developed to date and their limitations \\\\\
+\\addlinespace\
+\
+\
+3. Results \\& visualization \\\\\
+\\quad 3.1. Implementation of the reference yield curve in the Moroccan market \\\\\
+\\quad 3.2. Results of the analysis \\\\\
+\\addlinespace\
+\
+4. Conclusion and further recommendations \\\\\
+\\quad 4.1. Money market transition risk \\\\\
+\\quad 4.2. General conclusion and recommendations \\\\\
+\\addlinespace\
+\
+5. References \\\\\
+\\bottomrule\
+\\end\{tabularx\}\
+\
+\\newpage\
+\
+\\section\{Introduction\}\
+\
+For more than four decades, Interbank Offered Rate (IBOR) indices have been of paramount importance in the globalized finance industry. International transactions have grown significantly, prompting the development of indices that can represent the reference price for short-term financing. IBORs, the abbreviation that groups together several indices such as EURIBOR and LIBOR, among others, were created in order to respond to a new market demand to allow participants to carry out globalized operations. These indices reflect the refinancing cost at which banks are willing to borrow their money from each other from a short-term perspective without presenting collateral, which is likened to an amount held back to honour the commitment in the money market \\cite\{ey2018\}. They are used continuously and serve as a benchmark for a wide range of financial products and contracts for pricing and valuation of floating rate instruments with an estimated market of nearly USD 370 trillion.\\newline\
+\
+Nevertheless, the inflection point concerns the decision of the UK Financial Conduct Authority (FCA) to stop using these reference rates in the elaboration of financial contracts in a future horizon fixed to January 2021 following the events arising from the financial crisis of 2008 that have gangrenated the banking system and for cause the huge scandal to the manipulation of these rates in the profile of a number of banks with international scope. The decision to replace the reference rates is motivated by the insufficiency of the current number of real transactions in the market as well as its approach deemed vulnerable to manipulation. This last point is a critical aspect to consider in this process. This highlights the urgency of preparing for a transition that is gradual to maintain stability in the market. In this sense, many countries have created research committees to develop new risk-free reference rates to ensure succession. In this research the objective is twofold: To present and pose a theoretical framework to the reader to explain the origin and as well as the methodology used for the elaboration of these indices and in a second time to present the last advances carried out by the various research groups on the subject of the new alternative indices to lead in fine to the elaboration of a model of calculation of the alternative reference rate extended to effective future maturity and to draw up a curve of the rates for the Moroccan money market.\\newline\
+\
+\
+\\subsection\{Context of the problem\}\
+\
+To have a good global vision of the problem, it is necessary to go back to its source. This reform process is based on a desire to keep better control over these indices and avoid unscrupulous manipulation \\cite\{bos2019\}. LIBOR was the trigger for this reform process and has been in the news several times. One of the biggest scandals occurred in the British interbank market when City traders manipulated this rate for their own benefit. The London Interbank Offered Rate (LIBOR) was the main reference for short- term interest rates worldwide. LIBOR is based on a statement by banks of the rate at which they could borrow funds in the interbank market. Over time, this index has become the benchmark for interest rates in the short-term market. Considered "the most important number in the world" \\cite\{abrantesmetz2012\}, the latter is experiencing a hypothetical end of use due to the scandal of manipulation of banks during the 2008 crisis, where they declare rates below reality in order to appear financially healthier, it has been decided to abolish LIBOR by the end of 2021 \\cite\{ey2018\}.\\newline\
+\
+In a downturn, banks shared lower than average rates to demonstrate that they could finance themselves at lower cost and thus prove their financial health to the market \\cite\{bos2019\}. When this conspiracy was unmasked, market participants consequently became reluctant which contributed to the decline in terms of transactions directly impacting market liquidity. The lack of robustness of this rate is due to the transparency of the figures submitted by the banks which do not really represent the real situation of the market \\cite\{bos2019\}.\\newline\
+\
+IBORs are based on bank submissions, where the bank reports the rate it believes is correct but does not necessarily reflect the reality of the market. This subjective approach leaves a vulnerable loophole for rate manipulation as banks can submit whatever rate they like. Alternative rates proposed will be based on actual transactions in the market to show a true picture \\cite\{bos2019\}. Banks make their liquidity available in the interbank market. The stability of the market is essentially based on the theory of supply and demand, which affects the rate charged by banks \\cite\{bos2019\}. The decrease in confidence of operators on these rates will decrease the liquidity of the market which will result in an increase in the rate, which will ultimately discourage operations between banks preferring to keep their money. To ameliorate this point, research teams in different regions of the world have developed alternative rates based on actual market transactions in liquid markets to address this problem \\cite\{bos2019\}. The transition is more complex than expected because other issues need to be addressed. IBORs extend to maturities of up to one year, they are considered forward rates that capture the future view of market participants while the proposed alternatives do not have this ability to reflect the future view as they are published on a single maturity that is overnight \\cite\{bos2019\}. The difficulty with this transition lies in the complexity of developing these new rates for future maturities beyond overnight \\cite\{bos2019\}. IBORs are based on transactions with different maturities, so these rates contain an additional risk premium on the rate structure. This premium represents compensation for the degree of uncertainty about the bank's creditworthiness to clear its debt \\cite\{bos2019\}. Since the new risk-free rates are based on overnight collateralized market transactions, they are considered proxies for the definition of the risk-free rate \\cite\{bos2019\}.\\newline\
+\
+\\subsection\{Motivation\}\
+\
+Given the great complexity and broad exposure of this rate, it is necessary to understand the fundamentals of this transition to ensure stable change in the market. Two major points of this transition can be identified. One requirement for operating in the market is meeting the minimum capital requirement to complete a transaction \\cite\{bos2019\}. This is used to establish market risk, which is calculated from historical data. Since the new risk-free rates are fairly new they do not have enough historical information, which could induce additional risk \\cite\{bos2019\}. IBORs have a risk premium component included as the probability of a bank's failure over time increases \\cite\{bos2019\}. However, these rates do not capture this risk component as they are published overnight and therefore the probability of a liquid bank defaulting in a collateralized overnight market is practically zero, which is why they are called risk-free. It is therefore necessary to establish a spread to adjust this additional required return. If a transaction is recalculated with an increase or decrease in this rate it will result in a transfer of value between the borrower and the lender \\cite\{bos2019\}. This research aims to provide the reader with a panoramic view of the situation to date with the different rates in use as well as the challenges in transitioning to new risk-free rates with a focus on the Moroccan context as a case study. It is important to mention that the subject is constantly being improved and that it is highly likely that more complete information will not be included at the time of publication.\\newline\
+\
+\\subsection\{Structure of the research\}\
+\
+The formulated research question:\
+"In the context of the transition of the global benchmarks, how to develop a calculation methodology for these new risk-free rates at future maturity that is feasible in the Moroccan context? \'bb\\newline\
+\
+The research objectives are:\\newline\
+\\begin\{itemize\}\
+    \\item Identify the methodologies used to date and point out the limitations\
+    \\item Research the different approaches implemented worldwide and conduct a feasibility analysis on\
+the Moroccan context\
+    \\item Implement a model to calculate the risk-free rate at future maturity that follows the transition\
+approach in the Moroccan market\
+    \\item Conclude with proposals and recommendations for the Moroccan case\
+\\end\{itemize\}\
+\
+Several working groups are developing robust methodologies to carry out this reform process. The goal of these groups is to make the approach most understandable to market participants. Each group has different market characteristics in terms of liquidity, historical data, and data availability. In terms of advancing methodologies, the U.S. and U.K. research team is well ahead of the rest of the central banks. The following research hypotheses will be used:\\newline\
+\
+\\begin\{itemize\}\
+    \\item We are dealing with a period that has as a direct antecedent the financial crisis of 2008. In this sense, we decipher the crisis and the historical events that led to this reform\
+    \\item This transition process, first initiated in 2016, is still underway with the horizon for implementation of this transition set for 2021. It is possible that the methodologies and information shared may evolve over time\
+    \\item Each market has its own characteristics in terms of liquidity, volatility and depth of historical data.\
+    \\item The feasibility of a future maturity yield curve through the new risk-free rates on the Moroccan market is not assured. The research teams have not succeeded to date in finding a robust methodology\
+\\end\{itemize\}\
+\
+The stakes are dizzying: Even if the reader may think this subject is a bit remote, these rates are actually used in a wide range of financial products (some of them are commonly used such as student loans, real estate loans, as well as various derivative products based on these rates). The scandal of the manipulated rates between 2005-2010 would have endangered the reliability of these rates considered as the standards of world finance for the benefit of a few banks increasingly motivated by the lure of profit. If it turns out that this thermometer is rigged, all the operations based on this rate, i.e., the equivalent in volume of 370 trillion dollars would have been distorted \\cite\{abrantesmetz2012\}.\\newline\
+\
+All the relevance of this research lies in the fact that this rate is the menhir of finance, and that consequently the transition process towards new risk-free rates that can protect the operators of the place to the risk of manipulation is a subject very topical and of capital importance given that we are in the middle of it, with for horizon of end of theoretical transition towards the end 2021.\\newline\
+\
+This section serves to demonstrate the various research objectives as well as the research question. The approach of this research will be based essentially on a quantitative analysis through data extracted internally from the Bank of Morocco, as well as from other platforms for financial data (Bloomberg, Thomson Reuters). To carry out our analysis, we will rely on data from the repo market in Morocco, which is essentially the interbank market where banks place funds at the central bank in collateralized transactions against remuneration, with a commitment to repurchase on the part of the person who is loaned the funds.\\newline\
+\
+The objective of this quantitative research is to develop a calculation methodology for a risk-free overnight rate based on the previous day's transactions (in the context of a collateralized market) for future maturities of less than 1 year, using the theoretical basis of the various contributions proposed by central bank research teams from around the world (the most important contributors being the research teams from the United States, The most important contributors are the research teams of the United States, Great Britain, Japan, Europe and Switzerland) to model an interbank market yield curve based on the collateralized market instead of the uncollateralized market (as it is currently the case in most interbank markets). We will rely on various methodologies that will be developed throughout this research work. We will focus geographically on the Moroccan interbank market, with the Moroccan repo market as a data source.\\newline\
+\
+\\begin\{itemize\}\
+    \\item The first part of this work will aim to give an overview of the reasons that led to the transition to other rate alternatives while establishing a theoretical framework to allow the reader to become familiar with the issues and the research theme.\
+    \\item The second part of the research work will aim to develop all the rates used to date as benchmarks (namely LIBOR and EURIBOR as the main global benchmarks) while complementing with inputs from the research teams on alternative risk-free rates that will be used to substitute the already existing rates in the process of changing to new benchmarks.\
+    \\item The third and last part will aim to determine the latest findings concerning the development of a calculation method to have forward rates for these new risk-free rates. In this sense, it will expose the different approaches of calculation to then lead to a case study related to the context of the Moroccan money market. The ultimate objective is to develop a rate curve on the interbank market based on the risk-free rate recently implemented on the Moroccan market (MONIA, reference index on the overnight collateralized market) on several maturities in the image of its direct antecedent the interbank market rate to complete the transition process.\
+\\end\{itemize\}\
+\
+The main point regarding the limitations of this work is the complexity of the objective set. Given that this change is part of a process that extends over several years, with the end of 2021 as the horizon, this research may not include the new methodologies developed after its publication. I therefore take up the point made as an assumption that the feasibility of a future maturity yield curve through the new risk- free rates on the Moroccan market is not assured.\\newline\
+\
+The great complexity, which falls directly within the limitations of this proposed model, lies in the non- existence of a reference rate on the interbank market, leaving this study as an attempt to arrive at the much-coveted forward rate. The Moroccan market has complexities that can cause difficulties. The relatively lower liquidity compared to other interbank markets, the non-existence of certain financial instruments as well as the relatively low daily transaction volume are parameters to be considered that make the task much more difficult.\\newline\
+\
+The great ethical dilemma of this topic lies in the notion of manipulation and rigor in the financial world. In this sense, some banks during the period from 2005-2010 were prone to greed and improving the image of resilience, especially in times of economic stress during the 2008 financial crisis \\cite\{abrantesmetz2012\}. How far are banks willing to go to capture a larger piece of the pie? In a context where finance should reflect what is really happening in the market, manipulating rates is an act that goes against the very objective. In this sense, the dilemma raised seems to me to be very relevant, as the correction carried out by the major authorities of world finance have been trying to set the alarm bells ringing in order to put in place a transition process that can be fluid and flexible in order to allow the market players to change without disruption. This research is part of this framework to allow the Moroccan market to renew its interbank market and ultimately act in the direction of the great reform.\\newline\
+\
+\\section\{Literature Review\}\
+As stated in the research structure section, the first part of this work will aim to provide an overview of the reasons that led to the transition to other rate alternatives while setting up a theoretical framework to allow the reader to become familiar with the issues as well as the research theme.\\newline\
+\
+The capital market represents all the markets where financial instruments issued by governments or companies are traded for the long term. This definition includes instruments with a maturity of more than one year as well as instruments with perpetual cash flows (without maturities) \\cite\{drake2009\}. There are two main families of instruments on this market: instruments representing the ownership of a part of the company known as shares and bonds representing a part of the debt of a state or a company \\cite\{drake2009\}.\\newline\
+\
+The money market is based on all purchase or borrowing transactions carried out from a short-term perspective on various maturities of less than one year \\cite\{drake2009\}. Compared to the capital market, it is much safer due to its small fluctuations and a much higher volume of exchange \\cite\{mishkin2013\}. These credit institutions grant or borrow liquidity on the basis of their cash flow needs as well as on the pressure exerted by the central bank in terms of reserve requirements \\cite\{drake2009\}. Two main types of operations can be distinguished: Unsecured operations, i.e., without presentation of collateral and pledged operations with presentation of collateral \\cite\{drake2009\}. The concept of the money market has been separated to give rise to the interbank market, accessible only to credit institutions and the central bank, and the market for negotiable debt securities, open to market participants.\\newline\
+\
+This market is a pillar for financial stability because it is through this market that the central bank can control the degree of inflation present in the economy and thus exert an impact on the available liquidity through the transmission of its monetary policy through different channels to stabilize this economic aggregate \\cite\{drake2009\}. According to the Moroccan Capital Markets Authority (AMMC), the money market is "a financial market where short-term securities are exchanged for liquidity with the objective of allowing investors with excess liquidity to make it available to agents who need liquidity on a short- term basis\'bb. The benchmark represents the rate at which banks borrow overnight in the interbank money market. The usefulness of this rate is essential for the proper functioning of the market because it is used in the valuation of several financial assets in the money market (repo or repurchase agreements and other money market derivatives, among others). Most of the operations carried out on the Moroccan market are essentially on cash products, i.e., direct refinancing or investment instruments.\\newline\
+\
+In order to understand this market, it is necessary to distinguish two main sub-markets. Unsecured interbank loans are borrowing operations on the money market without presenting collateral. This is a small OTC market with a higher premium because this type of transaction presents a greater counterparty risk, representing 21.5\\% of the total volume of transactions on the money market \\cite\{bamnd\}.\\newline\
+\
+Almost 78.5\\% of all transactions in Morocco take place on the repo market. This is where market participants with extra cash lend it to people who need it in exchange for treasury bonds of the same amount, which are thought to be risk-free instruments. This is done to reduce counterparty risk. Most of these transactions are conducted by the Treasury and mutual fund structures. The investor debt market is where credit institutions borrow cash on a short-term basis \\cite\{drake2009\}.\\newline\
+\
+Among other things, they can trade commercial paper issued by non-financial companies to meet their liquidity needs, certificates of deposit allow investors to invest their money on a short-term basis with minimal risk, or treasury bills, which are similar to securities issued by governments to finance their debt. The major central banks intervene in refinancing operations to help steer the money supply in circulation by setting the level of the key rate and thus provide the liquidity necessary for the proper functioning of the market. Refinancing operations are based on borrowing in central currency against presentation of collateral with a commitment to take over on the maturity date.\\newline\
+\
+Lower interest rates allow banks to access liquidity at a lower cost, allowing them to offer credit to businesses and households on more attractive terms. Vice versa, an increase in interest rates will have a negative effect on liquidity, resulting in a more restrictive credit offer for economic agents. The first type of operations known as "open market", is direct intervention in the interbank market under the direction of the central bank. The other two operations are considered standing facilities. The repo rate (by convention the key rate) is the main rate based on repo transactions for a short-term maturity. When a bank cannot find the liquidity it is looking for from other banks, it turns to the central bank to obtain it. If the central bank increases its key interest rate, banks will find it harder to obtain financing, which will have an impact on the loans granted to companies and individuals. This would accentuate a decrease in the credits granted, which allows the central bank to decrease the money supply circulating on the market. The same reasoning is applied vice versa.\\newline\
+\
+Standing facilities are another instrument available to central banks to monitor and mechanically direct the flow of liquidity to markets. The marginal lending facility rate represents the rate at which the central bank provides overnight liquidity, with no limitation other than having liquidity collateral equivalent to the amount requested \\cite\{senat2009\}. This ceiling rate is higher than the refinance rate because the central bank has no control over the liquidity provided and does not exceed 100 basis points. The deposit facility rate represents the remuneration of the central bank for the liquidity that the banks can place on their accounts domiciled with it. This rate reflects the risk aversion of banks to lending to each other. If the central bank decides to increase the remuneration of its deposits, this will encourage banks not to lend to each other. The same reasoning is applied, and vice versa. This is the floor rate, located 100 basis points below the policy rate. The reserve requirement rate is a rate used by the central bank that obliges banks to make available their liquidity in the form of reserves. An increase in the reserve ratio leads to a decrease in the liquidity circulating in the market because banks will have to increase their money reserve, which will decrease the money supply, which will result in higher lending rates. The same reasoning is applied, and vice versa. The interbank market is of capital importance because it is on this market that economic agents in search of liquidity meet either with the banks with excess liquidity, or with the central bank through the tender sessions.\\newline\
+\
+The interbank market rate is at a level above the refinance rate, with a spread not exceeding tens of basis points except in a context of economic stress, and at a level below the marginal lending facility rate, because the closer the overnight rate is, the more investors will be tempted to switch to this facility ~\\ref\{fig:plot1\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.75\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_1.png\}\
+    \\caption\{Graphical representation of the key rate (TMIB); BAM data (Interbank market), \\cite\{bamnd\}.\}\
+    \\label\{fig:plot1\}\
+\\end\{figure\}\
+\
+Open market operations are used to steer the overnight interest rate, while standing facilities are used to keep the rate within a range. The ultimate objective is to set the policy rate at levels that are reasonable in relation to the central bank's macro-objectives. In a more macro vision, the importance of the policy rate is primordial because it represents a pillar of monetary policy with the aim of the triple objective of stability, namely:\\newline\
+\
+\\begin\{itemize\}\
+    \\item Price stability by maintaining controlled inflation\
+    \\item Policy rate stability to stimulate the economy and achieve "full employment \
+    \\item Exchange rate stability to boost trade and external balance\
+\\end\{itemize\}\
+\
+It is relevant to take up a theoretical notion to be able to assimilate the relationship between the impact of monetary policy on the liquidity available on the market. If we discuss the work of classical economists, we must bring up Jean Bodin's (1568) quantitative theory of money. It follows that any variation in the money supply will have a variation on the price level.\\newline\
+\
+By continuing this reasoning, an increase in the money supply will have the impact of an increase in price levels, which translates into inflation, while a decrease in the money supply will have the effect of a reduction in the price level, or deflation \\cite\{senat2009\}. In the long term, the research conducted by the neo-Keynesian economist Gregory Mankiw, this reasoning is shown to be valid in the long term. Inflation remains a target ceiling for the central bank in a medium-term perspective, with economies such as Europe with a target level of less than 2\\%. Morocco is approaching these figures by maintaining values close to but not far from this threshold.\\newline\
+\
+The relationship between monetary policy and the policy rate is intrinsic because it is a transmission vehicle for monetary policy. The policy rate is one of the instruments that allows the central bank to control the level of liquidity available on the market and a mechanism for stimulating borrowing and consumption. The instruments used by the central bank act on the liquidity of banks, that is to say the sum of assets held by banks on their account with the central bank and this to direct the interest rate and control the creation of money. In order to increase the money supply, the central bank can increase the refinancing rate (policy) or by reducing the money available on the market by withdrawing liquidity by increasing the percentage of reserve requirement. The same reasoning is applied vice versa. Regardless of the case, the central bank acts on the volume or price variable. Another important concept to mention is the concept of bank liquidity. The latter is defined as "the ability to meet cash obligations according to their maturity". This concept is directly related to funding liquidity, which is defined as "the amount of money needed to meet short-term cash withdrawal requests from counterparties.\\newline\
+\
+The second definition includes the involvement of banks in asset trading operations. The latter is defined as the capacity of a bank to liquidate non-monetary assets in order to meet its commitments to counterparties. This definition is close to the notion of market liquidity. The relationship between monetary policy and the steering of the key rate is directly linked as an instrument for controlling liquidity in order to increase consumption and credit debt to stimulate the economy.\\newline\
+\
+Benchmarks play a fundamental role in the global financial system. They are widely used by financial institutions as well as individuals on a wide range of index-backed transactions. Banks use this reference rate as the basis for setting the rate offered to professional and private customers. In this sense, the credit granted has a component linked to the fluctuations of this rate, an increase in this rate will generate by direct correlation an increase in the credit rate applied and vice versa. The reference index has a preponderant role in the evaluation of assets and financial contracts indexed to it. The majority of central banks use it as a transmission mechanism for monetary policy for steering and control purposes. In this sense, when a reference index is in line with the rate charged by local banks, this demonstrates that the stability objective is being met. An abnormal upward or downward shift indicates a misalignment of rates with the key rate, which may influence price stability as a result \\cite\{ey2018\}.\\newline\
+\
+EURIBOR and LIBOR comply with the protocol \\cite\{ioscond\} on the different standards to be considered a robust and transparent index as well as on the Benchmark Market Regulation (BMR), a European institution that ensures the proper tenor and compliance with the standards set forth on the best practices of these rates. The International Organization of Securities Commission is a regulatory committee formed by more than 217 countries whose main mission is to set the theoretical and legal framework of what should be a benchmark that meets international requirements (IOSCO). In July 2013, the organization published the report containing the main rules that govern a benchmark to ensure its robustness and resilience to manipulation (IOSCO).\\newline\
+\
+\
+\\subsection\{Theoretical framework and origins\}\
+This part will aim to give the reader an insight into the factors that triggered this change. It will develop the events related to the subprime crisis coupled with the scandal related to the manipulation of LIBOR; two major events that have made a great echo on the world financial markets.\\newline\
+\
+\
+\\subsubsection\{Causes of the transition\}\
+The reasons for this crisis are many, until today it is not possible to confirm the real culprit of the crisis. Before the dot com bubble of the early 2000s, the United States had experienced the longest economic expansion in its history \\cite\{zestos2015\}. This expansion brought unemployment down to the 4\\%-mark, 2\\% inflation and a surplus in federal reserves for the years 1998-2001 \\cite\{zestos2015\}.\\newline\
+\
+The expansionary US policy coupled with a weakened business environment following the 2001 terrorist attacks only put more pressure on the market. But it turns out that several causes are behind this crisis, in this sense this chapter will try to develop this point to be able to identify the problem \\cite\{zestos2015\}. The financial system has become much more fragile and volatile starting with the period of the early 1980s because of the race towards financial deregulation in order to attract capital and increase investments. It is in this process that the American government decided to put pressure on the commercial banks to allow low-income and middle-class households to take out a mortgage and buy a house.\\newline\
+\
+Several public and semi-public agencies have contributed towards the growth objective in terms of new homeowners, led by Fannie Mae \\& Freddie Mac, a pioneering institution in the development of financial products known as MBS to increase liquidity in the US housing market. Given the low liquidity of some of the mortgages voluntarily granted, the assets backed by these mortgages were consequently also of low liquidity. The detonator of this financial crisis occurred when Fannie Mae \\& Freddie Mac decided to market their securitized products in the U.S. and abroad. The first geographical area to be affected by this crisis was Europe with investors who decided to acquire this type of asset in order to obtain an interesting risk premium in addition to their confidence in American banks. The exposure of Europe to these products was felt, the rating agencies lowered the ratings of the countries and the market speculators who started short selling in the hope of making large profits at the first signs of weakness. After the bubble burst in September 2008 with the bankruptcy of the investment bank Lehman Brothers, the shock wave created was unprecedented with a very strong warning message from the American government that no institution is "too big to fail \\cite\{zestos2015\}. The consequence of this crisis on the interbank market was very quickly felt with a credit crunch effect that was automatically reflected in the borrowing rate because the banks no longer accepted or wanted to lend to each other \\cite\{zestos2015\}. To allow a better analysis of the situation, good gauges of financial stability can be analysed to explain this phenomenon of reticence \\cite\{zestos2015\}. \\newline\
+\
+The use of LIBOR came into question during the 2007 crisis. Banks became more suspicious, and the number of transactions dropped significantly. Before the crisis, LIBOR fluctuated almost identically with US Treasury bills and the OIS rate. An increase in volatility was added in mid-2007, at the dawn of the crisis. A combination of counterparty risk and liquidity risk drove LIBOR to new highs (5.62\\%), with a performance recorded over the last 6 months of nearly 5.36\\%. \\cite\{hou2014\}. The OIS rate represents the overnight borrowing rate on a non-collateralized basis, equivalent in the US to the EFFR (Effective Federal Fund Rate) ~\\ref\{fig:plot2\}.\\newline \
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_2.png\}\
+    \\caption\{3M USD LIBOR compared to other refinancing (borrowing) rates. Data: Calculations from the graph extracted in the research of \\cite\{hou2014\}.\}\
+    \\label\{fig:plot2\}\
+\\end\{figure\}\
+\
+During the crisis, LIBOR demonstrated greater volatility compared to other refinancing rates around mid-2008 In this sense, spreads widened significantly at the most dramatic time of the crisis \\cite\{hou2014\}. At its peak, the spread exceeded 360 basis points difference following the bankruptcy of Lehman Brothers in September 2008, remaining at that level for the next six months after their bankruptcy. This increase in the spread led banks to develop a greater reluctance to borrow, which reduced the number of banks willing to sell their money on the interbank market, which consequently suffered a drop in market liquidity, making access to financing more difficult and, in turn, a reduction in the granting of credit by banks because the risk premiums demanded were too high for companies and households. Another explanation for the widening spread is the imbalance in supply and demand. The supply of banks willing to give up liquidity was lower than the demand of the interbank market coupled with an appreciation of the risk premium factor on the rate only drove LIBOR to unprecedented new highs ~\\ref\{fig:plot3\}.\\newline \
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_3.png\}\
+    \\caption\{3M USD LIBOR compared to other refinancing (borrowing) rates , Data: Calculations of the chart extracted in the research of. \\cite\{hou2014\}.\}\
+    \\label\{fig:plot3\}\
+\\end\{figure\}\
+\
+\
+A good gauge for quantifying bank sentiment is based on the spread between the 3-month USD LIBOR rate with the 3-month US sovereign bond (known as the TED spread) \\cite\{hou2014\}. The higher the spread, the more it indicates a warning that banks are less willing to borrow, while a tight spread reflects a liquid market that is doing well. It is normally around 50 basis points in a normal market situation \\cite\{hou2014\}. Between October 2007 and May 2009, the spread was close to 100 basis points with peaks of 450 basis points in October 2008 ~\\ref\{fig:plot4\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_4.png\}\
+    \\caption\{TED spread between 1999-2021 , Data : Data: Thomson Reuters, data expressed in percentage points (0.01\\%).\}\
+    \\label\{fig:plot4\}\
+\\end\{figure\}\
+\
+The second market benchmark gauge is based on the difference between the 3-month maturity LIBOR rate with the overnight LIBOR-indexed SIO yield curve. \\cite\{hou2014\}. This spread highlights the difference between the refinancing rate in the short-term unsecured market with the yield of swaps indexed to overnight benchmark rates, considered representative values (proxy, approximating) the risk- free rate. \\cite\{hou2014\}. Figure 4 shows an increase in this gauge as the 2008 crisis began. It is one of the most reliable references that reflects the health of the interbank market \\cite\{hou2014\}.\\newline\
+\
+The third market benchmark is based on the difference between the LIBOR rate with the Credit Default Swaps (CDS) curve. This is a financial instrument that serves as insurance to protect against the counterparty risk that a bank may suffer in the event of economic stress \\cite\{hou2014\}. In this sense, when the risk of the counterparty increases, the price of the CDS will increase, which will make it more difficult for the counterparty to finance itself on the market \\cite\{hou2014\}. This product reflects the financial health of the bank in question. In this sense, the proposed analysis consists of relating the cost of refinancing on the uncollateralized interbank market to the price of insurance of banks at a defined maturity \\cite\{hou2014\}. The manipulation of reference rates by certain banks could have biased this gauge by displaying more attractive CDSs on the downside caused by the fall in the reference rate in order to display a better financial health. This is the next point addressed in this research paper. It is clear that this spread is increasing in early 2008 \\cite\{hou2014\}.\\newline\
+\
+\\subsubsection\{The LIBOR crisis\}\
+\
+The first suspicions of manipulation were declared by the Wall Street Journal around May 2008 after investigating the reliability of the panel banks' statements. Nevertheless, these suspicions were not solid given the lack of evidence in statistical terms. The publication of \\cite\{abrantesmetz2012\} detailed analysis of the LIBOR rate during the crisis with different barometers of confidence such as other short- term risk-free rates (OIS Curve, CDS Curve, 3-month US sovereign T-bill yield curve) ~\\ref\{fig:plot5\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_5.png\}\
+    \\caption\{Statistical analysis between LIBOR and FED funds rate (EFFR), 2007-2008 \\cite\{abrantesmetz2012\}.\}\
+    \\label\{fig:plot5\}\
+\\end\{figure\}\
+\
+Despite the important contribution in terms of analysis proposed by pointing out inconsistencies in terms of rates submitted by some of the panel banks, they lacked evidence to really be able to effectively demonstrate manipulation \\cite\{abrantesmetz2012\}. It is through the investigation conducted by the Financial Services Authority (2012) where the deception was dismantled through the analysis of several emails and compromising communications between several traders who agree on a rate considered interesting upstream to make up their balance sheet and thus display a good financial health by camouflaging their difficulty in terms of solvency to other banks in the place \\cite\{abrantesmetz2012\}. Declaring higher than average borrowing rates is a sign of financial fragility, their ease of access to advantageous financing was questioned and would damage their reputation. In this sense, the manipulation was justified by the banks concerned as a manoeuvre to enjoy a better reputation and thus reflect a good financial health vis-\'e0-vis other banks in the interbank market \\cite\{abrantesmetz2012\}.\\newline\
+\
+This is not the first time ever that a significant shift to a fundamentally different rate benchmark has occurred in the financial system. However, unlike previous examples of "benchmark rate switching," the current reform process is a public-private effort to move away from unsecured interbank rates to near-risk-free benchmarks, in contrast to the market-led process of the late 1980s to early 1990s of moving away from risk-free benchmarks based on U.S. Treasury bill rates to benchmarks incorporating credit risk based on IBOR. Ironically, at that time, market participants moved away from risk-free benchmarks to risky benchmarks based on Eurodollar rates. Banks seeking to manage asset-liability mismatches found that the latter were much closer to their actual borrowing costs and lending rates \\cite\{sushko2019\}.\\newline\
+\
+\\subsubsection\{The reference benchmarks\}\
+The objective of this part of the research will be to first research the original indices, with LIBOR and EURIBOR as the main indices. After developing the calculation methodology, the data used and the contingency plan, we will discuss the new risk-free rates developed by the different working groups to facilitate this transition process, with a benchmark to summarize the most important information to be retained on this chapter.\\newline\
+\
+\\subsubsection*\{Euro Interbank Offered Rate (EURIBOR)\}\
+Euribor was originally used in 1986 by the European Banking Federation (EBF) between 1988 - 2015 as the borrowing rate at which a set of banks lend to each other in unsecured transactions for various maturities ranging from overnight to 12-month maturities (European Money Markets Institute. This index suffered from the same transparency problems, and it was therefore decided to transform it in order to avoid any manipulation. The new index (which has kept the name EURIBOR) is a hybrid system based primarily on actual data \\cite\{emmi2019\}. The new EURIBOR would be the rate for different maturities at which a bank borrows unsecured, in euros, from different financial counterparties. The maturities are: 1m, 3m, 6m, 12m. The European Money Market Institute's (EMMI) is the administrator of this rate. EURIBOR was administered since 1988 by the European Banking Federation (FBE, 1960) until the change in 2015 by EMMI, which took over to complete this transition process (European Money Markets Institute \\cite\{emmi2019\}. In this sense EMMI is responsible for overseeing the index and ensuring the quality of the data.\\newline\
+\
+Rates are ordered and the bottom and top 15\\% are removed \\cite\{emmi2019\}. The remaining rates are used to make an arithmetic average rounded to 3 decimal places. The index follows the convention of "exact number of days/360". Each level of information (see above) contributes to the calculation according to a particular formula. For level 1 the contribution rate is calculated using the formula:\\newline\
+\
+\\[\
+\\sum_\{i=1\}^\{n\} \\frac\{\\text\{EURIBOR\}_\{R_i\} \\times \\text\{Vol\}_i\}\{\\text\{Vol\}\}\
+\\]\
+\
+where EURIBOR Ri and Voli are the EURIBOR interest rate and eligible transaction size i, respectively. Based on a panel of credit institutions, the number of which should be sufficient. Under the new methodology, the rate a bank provides for the calculation of EURIBOR will be confidential, as disclosure of this information could affect the bank's ability to raise funds \\cite\{emmi2019\}.\\newline\
+\
+\\subsubsection*\{London Interbank Offered Rate (LIBOR)\}\
+LIBOR represents the average rate at which local banks are willing to lend to each other in the unsecured market. Originally developed in 1986 by the British Bankers Association, it serves as a benchmark for bank liquidity in the market. It is calculated on the basis of the truncated average of the rates at which a sample of 16 selected banks are borrowing by eliminating the extreme values, i.e., the 4 highest rates as well as the lowest ones, in order to protect the index from a possible error or from a liquidity crisis that would affect one or another bank in the sample. \\cite\{ice2014\}.\\newline\
+\
+In terms of the calculation methodology, panel banks make the data submission. The calculated rate is the truncated average of the remaining submissions after removing the top and bottom quartile, rounded to 5 digits \\cite\{ice2014\}. Each submission has an equal weighting. NB: Levels 1 and 2 are calculated mathematically on the basis of transactions and the methodology is common to all panel banks \\cite\{ice2014\}.\\newline\
+\
+\\[\
+\\sum_\{i=1\}^\{n\} \\frac\{\\text\{LIBOR\}_\{R_i\} \\times \\text\{Vol\}_i\}\{\\text\{Vol\}\}\
+\\]\
+\
+Where LIBOR Ri and Voli are the LIBOR interest rate and the size of the eligible transaction i, respectively. This is a daily publication of the 35 rates (the 5 quoted currencies with their respective maturities) in the London marketplace by the ICE Benchmark Administration. The data used is essentially based on the unsecured loan transactions submitted by the panel banks \\cite\{ice2014\}. The data collected can be classified into 3 levels:\\newline\
+\
+\\begin\{itemize\}\
+    \\item Level 1: LIBOR is calculated on the basis of data collected through the sample by determining the volume-weighted average prices for eligible trades, with a higher weighting for trades settled close to 11:00am London time. The eligibility criteria are published by the IBA.\
+    \\item Level 2: If the panel does not have sufficient information on Level 1 transactions, then the committee will rely on the composite submission of data provided including historical transaction data adjusted for market movements by linear interpolation.\
+    \\item Level 3: If the bank panel does not have sufficient eligible Level 1 or 2 data, then the banks submit the rate at which they can fund themselves at 11:00am London time in the unsecured market.\
+\\end\{itemize\}\
+\
+\\subsubsection\{New rates developed\}\
+\
+The purpose of this section is to present the progress of the various international working groups regarding overnight maturity reference rates in the context of international prerogatives for a change in benchmark in the interbank market. Since the development of these new alternative risk-free rates, the volume of transactions has increased considerably, moving from a growing market to a more mature market with a growth perspective that is consolidating over time. The attached table highlights the liquidity of the various global money markets with alternative risk-free rates as an underlying asset. The American, British and European collateralized market is experiencing significant liquidity flows, which is a good sign for the generalization of the use of these new Risk-Free Rates in the current use of the different players in the market in order to act towards the transition and get rid of the original IBOR indices \\cite\{sushko2019\}.\\newline\
+\
+\\subsubsection*\{England: Sterling Overnight Index Average (SONIA)\}\
+\
+The SONIA index was introduced as part of the new benchmark overnight index to replace LIBOR. It is published by the UK FCA (Financial Conduct Authority) in conjunction with the Bank of England and is calculated on the basis of short-term overnight transactions in the wholesale unsecured market where there is minimal credit, liquidity or other risk \\cite\{boe2017\}. The major advance in the reform concerns the methodology for calculating the index. With the new reform, the index is now calculated each business day on the basis of a truncated average rounded to four digits on eligible trades over \'a325 million* \\cite\{boe2017\}.\\newline\
+\
+In order to preserve a reliable index is resilient, the research team has a contingency plan in place if the following occurs \\cite\{boe2017\}: \\newline\
+\
+\\begin\{itemize\}\
+    \\item 5 or more banks in the uncollateralized market have not been validated\
+    \\item If the trading volume of the eligible SONIA represents more than 70\\% of the average of the last 5 business days according to the defined methodology.\
+\\end\{itemize\}\
+\
+SONIA will then be determined based on the bank's rate level plus the average spread between SONIA and the bank's offered rate over the last 5 business days, excluding days with the largest and smallest spread. In this case, SONIA users will be warned about this calculation approach \\cite\{boe2017\} ~\\ref\{fig:plot8\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_7.png\}\
+    \\caption\{SONIA curve over five years of quotation. SONIA rate: Thomson Reuters.\}\
+    \\label\{fig:plot8\}\
+\\end\{figure\}\
+\
+\\subsubsection*\{Europe: Euro Short-Term Rate (ESTR)\}\
+The ESTR was developed to complement existing benchmarks such as the European Overnight Index Average (EONIA). The EONIA is a weighted average of interest rates carried by banks on overnight unsecured lending transactions. The ESTR represents the overnight rate at which a bank borrows unsecured from various financial counterparties \\cite\{ecb2017\}. It therefore includes not only interbank transactions but also transactions with other actors such as money market funds, pension funds, among others. The European Central Bank administers this index \\cite\{ecb2017\}.\\newline\
+\
+Eligible transactions are ranked from lowest to highest rate\
+\\begin\{itemize\}\
+    \\item Transactions are aggregated by rate level.\
+    \\item The volumes corresponding to the lower and upper 25\\% are not considered\
+in the calculation of the index\
+    \\item The weighted average of the remaining 50\\% is calculated.\
+\\end\{itemize\}\
+\
+The calculation is based exclusively on eligible data on the unsecured lending market from the Money Market Statistical Reporting (MMSR) sample, which currently covers the 50 largest European banks across 10 countries \\cite\{ecb2017\}. The data is checked for accuracy and transactions are removed from the calculation base. The data is considered sufficient unless the number of banks included in the calculation is less than 20 or if 5 banks account for 75\\% or more of the total transaction volume ~\\ref\{fig:plot9\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_8.png\}\
+    \\caption\{ESTR curve. Source: Methodology extracted from the European Central Bank (ECB, 2017, ESTR rate), source of the ESTR risk-free rate curve (1 year quote) from the ECB shared database, \\cite\{ecbnd\}.\}\
+    \\label\{fig:plot9\}\
+\\end\{figure\}\
+\
+\\subsubsection*\{Switzerland: Swiss Average Rate Overnight (SARON)\}\
+\
+The Swiss Average Rate Overnight (SARON) is the rate at which banks borrow in a collateralized market, in this case the repo market, based entirely on transactions in the Swiss franc (CHF) market \\cite\{six2020\}. This rate is regulated by the SIX and the Swiss Financial Market Authority (FMIA). Between 2015-2017, the daily volume recorded was close to 7.5 billion Swiss francs (CHF) with almost 42\\% of this volume realized on the repo market, which demonstrates that the rate is based on a market that is representative and liquid. The SARON is based on transactions carried out on the repo market, the rate is updated when a transaction is unwound \\cite\{six2020\}. The index is based on the weighted average of the volumes by the amount of the transaction while respecting a spread (rate differential) not exceeding 50 bp compared to the reference rate. Note that there is no minimum transaction amount ~\\ref\{fig:plot10\}.\\newline\
+\
+\\[\
+\\text\{SARON\}_\{\\text\{compounded rate\}\} = \\left[\\prod_\{i=1\}^\{bd\} \\left(1 + \\frac\{\\text\{SARON\}_\{R_i\}a_i\}\{360\}\\right) - 1\\right] \\times \\frac\{360\}\{n\}\
+\\]\
+\
+Eligible transactions are ranked from lowest to highest rate:\\newline\
+\
+\\begin\{itemize\}\
+    \\item Transactions are aggregated by rate level.\
+    \\item The volumes corresponding to the lower and upper 25\\% are not considered\
+in the calculation of the index\
+    \\item The weighted average of the remaining 50\\% is calculated.\
+\\end\{itemize\}\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_9.png\}\
+    \\caption\{SARON curve. Data: Thomson Reuters.\}\
+    \\label\{fig:plot10\}\
+\\end\{figure\}\
+\
+\\subsubsection*\{Japan: Tokyo Overnight Average Rate (TONAR)\}\
+Japan was one of the pioneers in terms of changing the reference rate. After the events that exposed LIBOR manipulation, the Japanese central bank immediately proceeded to develop a new rate that could take over \\cite\{boj2016\}. The Tokyo Overnight Average Rate (TONAR) reflects the rate at which banks borrow in the non- collateralized market in Japanese Yen (JPY). Administered by the Bank of Japan (BoJ), it serves as a barometer of bank liquidity in the Japanese unsecured market. \\newline\
+\
+The BoJ publishes daily TONAR based on transactions provided by market intermediaries (brokerage agents, brokers) in non-collateralized transactions. It is the volume-weighted average of the price of the transactions, with the extreme values discarded. The data used is essentially based on the market for unsecured transactions. In case of unavailability of the rate, the rate of the previous day will be considered as reference \\cite\{boj2016\} ~\\ref\{fig:plot11\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_10.png\}\
+    \\caption\{TONAR rate curve. Source: Bank of Japan (TONAR rate, BoJ, 2020) , Data downloaded from Thomson Reuters platform.\}\
+    \\label\{fig:plot11\}\
+\\end\{figure\}\
+\
+\\subsubsection*\{United States: Security Overnight Financing Rate (SOFR)\}\
+\
+The United States is at the heart of this transition process. Indeed, the U.S. task force for the development of a new reference rate has laid the groundwork for this change \\cite\{fed2020\}. SOFR is an index used to measure the overnight refinancing cost on transactions collateralized by Treasury securities \\cite\{fed2020\}. This index, published by the New York FED, is used on most U.S. repo transactions conducted through the DVP (Delivery Versus Payment) system via a clearinghouse, in this case the FICC (Fixed Income Clearing Corporation). Based on a market with a transaction volume equivalent to 750 billion dollars; compared to 500 million for the 3-month LIBOR as a reference; it is the most liquid interbank market in terms of daily transaction volume  \\cite\{fed2020\} ~\\ref\{fig:plot12\}.\\newline\
+\
+\\[\
+\\text\{SOFR\}_\{\\text\{compounded rate\}\} = \\left[\\prod_\{i=1\}^\{bd\} \\left(1 + \\frac\{\\text\{SOFR\}_\{R_i\}a_i\}\{360\}\\right) - 1\\right] \\times \\frac\{360\}\{n\}\
+\\]\
+\
+The SOFR is calculated on the basis of the weighted median of the daily volumes traded on the repo market. The rates are assigned with the respective transactions by retaining the rate found at 50\\% of the transaction volume \\cite\{fed2020\}. The calculation of this median:\\newline\
+\
+\\begin\{itemize\}\
+    \\item Sort values from lowest to highest\
+    \\item Then add the cumulative sum of the volumes\
+    \\item Identify the rate related to the 50\\% of the daily volume\
+\\end\{itemize\}\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_11.png\}\
+    \\caption\{SOFR curve. Source: Federal Reserve of New York \\cite\{fed2020\}, Thomson Reuters.\}\
+    \\label\{fig:plot12\}\
+\\end\{figure\}\
+\
+Note that movements in new overnight risk-free rates track changes in policy rates reasonably well. The same can be said of SOFR as well as the reformed SONIA and pre-ESTER . Although risk- free rates exhibit a spread relative to policy rates (e.g., the rate at which banks pay for reserve balances), the stability of this spread suggests that the pass-through of monetary policy should be generally satisfactory, at least in normal times (BIS Research, 2019) \\cite\{sushko2019\} ~\\ref\{fig:plot13\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_6.png\}\
+    \\caption\{Behaviour of risk-free rates vis-\'e0-vis the key interbank market rate in the three largest global money markets (US, GBP, EU). Source: "Beyond LIBOR: a primer on the new benchmark rates" (Bis, 2019).\}\
+    \\label\{fig:plot13\}\
+\\end\{figure\}\
+\
+\
+\\subsection\{Models developed to date and their limitations\}\
+\
+The major stumbling block in this transition process is essentially based on the development of a robust methodology that can consider the state of the market from a forward-looking perspective, which the new risk-free rates lack. In order to respond to market demand, the various research teams in different countries have developed more advanced methodologies to make these risk-free rates more adaptable and to consider other maturities. It turns out that the task is much more difficult than expected because these risk-free rate models are limited by the impossibility of directly determining the forward rate at future maturity because they are based on the overnight approach. Proposals to implement a calculation methodology have been developed based on three main segments:\\newline\
+\
+\\begin\{itemize\}\
+    \\item The inferential calculation approach to futures contracts \
+    \\item The OIS curve matching approach\
+    \\item Compound rates (compounding in arrears)\
+\\end\{itemize\}\
+\
+\
+Although many market participants have become accustomed to using forward IBORs, this is a relatively new phenomenon, and financial markets may have been functioning perfectly well before these rates were widely adopted \\cite\{goldmansachs2019\}. There is in fact a long history of using overnight rates in financial instruments. In the United States, futures contracts referencing the effective federal funds rate (EFFR) have been trading for more than 30 years, and overnight index swaps (OIS) referencing the EFFR have been trading for nearly 20 years. U.S. banks also have a history of offering loans based on the prime rate, which is essentially an overnight rate, or overnight LIBOR, and there have been floating rate bonds issued based on the federal funds rate or, more recently, the SOFR. Other countries have similar experiences; for example, in Canada, most variable rate mortgages are based on overnight rates \\cite\{goldmansachs2019\}.\\newline\
+\
+\\subsubsection*\{The inferential calculation approach to futures contracts\}\
+\
+The research teams most advanced on this topic are mainly American and British. The Americans studied the feasibility of implementing a model to calculate the SOFR reference forward rate that is similar in usage to what was done before with the USD LIBOR \\cite\{heitfield2019\}. They concluded that the SOFR approach inferred to futures contracts behaved similarly to fluctuations in FED Funds rates and OIS rates, i.e., rate swaps indexed to the short-term US sovereign bond, since the implementation and use of the SOFR forward maturity \\cite\{heitfield2019\}. The Financial Stability Board (FSB) in 2018 recognized that for some cash products that have interbank rates as a benchmark, other liquid market indices should be considered \\cite\{heitfield2019\}.\\newline\
+\
+The problem that has raised doubts in the market is the heavy reliance lately on expert-validated trades due to low market liquidity. According to ICE (2018), 4/5 of USD LIBOR bids depend on expert validation \\cite\{heitfield2019\}. Even though the development of a SOFR-related derivatives market is gaining momentum and showing impressive growth, as today it stands the level of liquidity remains quite low which makes it impossible to create a robust SOFR forward looking model based on overnight trading \\cite\{heitfield2019\}. This method can be approached according to the researches as:\\newline\
+\
+\\[\
+f(t; \\Theta) = \\theta_0 + \\sum_\{k\} \\theta_k \\mathbb\{1\}_\{\\\{t > M(k)\\\}\}\
+\\]\
+\
+Since the forward rate cannot be directly calculated, it is represented as a vector of unknown parameters. We select values for these parameters such that the induced forward contract values approximate the market prices closely. Consider \\( t \\) as the number of days and suppose we aim to estimate the forward rate for a maturity \\( t_0 \\). Let \\( f(t) \\) denote the SOFR forward rate, and \\( M(k) \\) be the \\( k \\)-th FOMC announcement date following \\( t_0 \\). Define \\( \\theta_0 \\) as the forward rate a day after the current date, and \\( \\theta_k \\) as the change in the forward rate at the \\( k \\)-th FOMC maturity. The forward rate at time \\( t \\) is thus computed with an indicator function \\( 1_\{\\\{...\\\}\} \\) that takes the value of one when a condition is met, or zero otherwise. Since all \\( M(k) \\) are predetermined, the forward curve relies on the unknown jump vector \\( \\theta = (\\theta_0, \\ldots, \\theta_k) \\), where \\( K \\) indexes the final FOMC meeting. For an in-depth mathematical exposition, refer to the research by \\cite\{heitfield2019\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_12.png\}\
+    \\caption\{Behaviour of the 3-month SOFR rate. Source: "Beyond LIBOR: a primer on the new benchmark rates" (Bis, 2019) (Bis, 2019).\}\
+    \\label\{fig:plot14\}\
+\\end\{figure\}\
+\
+The use of a rate such as the 3-month compound SOFR can be useful in determining floating rate payments on instruments such as OIS, or for floating rate U.S. sovereign bond issues indexed to the 3- month SOFR \\cite\{sushko2019\}. This rate stability ~\\ref\{fig:plot14\} (right chart) provides market participants with greater stability in their investment, which would increase the attractiveness of this type of rate. Forward rates developed to date from risk-free rates are structurally different from IBORs. In this sense, there is no reference rate based on derivatives indexed to SOFRs given the embryonic stage of this market. Even with improved liquidity in this market, the behaviour of this rate will ultimately be more like an OIS rate based on the EFFR than an IBOR rate \\cite\{sushko2019\}.\\newline\
+\
+This model depends on three data sources. SOFR-indexed futures contracts provide information on the expected SOFR rate in the future \\cite\{heitfield2019\}. Historical data must be considered in the model formulation \\cite\{heitfield2019\}. FOMC meetings must be determined in advance in order to predict with some degree of accuracy the induced fluctuation in SOFR forward. The data can be obtained by:\\newline\
+\
+\\begin\{itemize\}\
+    \\item The CME Group began publishing SOFR-indexed futures contracts with 1- and 3-month maturities around May 2018. This data can be obtained directly through CME publications or on Refinitiv.\
+    \\item The overnight SOFR rate is published daily on the Federal Reserve of New York's website.\
+    \\item The Federal Reserve Board publishes the FOMC meetings at the beginning of the second quarter of the current year. Although it is possible to anticipate the meetings 6 months in advance, it is not possible to predict them beyond this time frame.\
+\\end\{itemize\}\
+\
+The results obtained are rather convincing in the sense that the future performance of the SOFR at forward maturity converges with that of the OIS curve \\cite\{heitfield2019\}. The approach of this model based on Fed Funds futures shows that the forward rate has a fairly close behaviour with the OIS curve over a wide range of market environments \\cite\{heitfield2019\}. Currently the forward rate is based on the closing price of futures contracts, but as the market develops it is necessary to ensure that the calculation window is as narrow as possible to ensure price stability. There is an urgent need to find a more robust model to be able to obtain maturities beyond 6 months, perhaps using an approach based on parametric models such as that described by Nelson and Siegel (1987) and Svensson (1994)\\cite\{heitfield2019\}.\\newline\
+\
+\\subsubsection*\{Calculation by approximation to the OIS curve\}\
+\
+Historically, users have used LIBOR and the LIBOR swap as proxies to define the risk-free rate for valuing derivatives. The problem with this use was raised during the crisis that broke out in 2007 \\cite\{sundarsan2016\}. Many banks consider that the OIS (Overnight Indexed Swaps) rate should be used as the risk-free rate in the valuation of collateralized portfolios. The structure of the risk-free rate is essential as an input for the pricing of derivatives \\cite\{solnik2001\}. This rate is used to define the expected growth rate of the assets for a predefined time horizon from a risk-neutral perspective as well as for the calculation of the discounted rate for the different flows. Before the crisis of 2007, the majority of investors used LIBOR, considered as a short-term indicator, as a proxy for the risk-free rate \\cite\{solnik2001\}. Research by Collin-Dufresne and Solnik (2001) showed that the LIBOR swap has the same risk as a series of short-term loans from financial institutions rated AA at the beginning of the loan. For this reason, the LIBOR swap is considered low risk, but not risk-free \\cite\{solnik2001\}. The short-term OIS rate can be seen as a bond that has negligible credit risk. This is because OIS contracts are safe for many reasons \\cite\{solnik2001\}. The first reason two parties do not exchange their principal no real transaction of the nominal amount of the operation. The second reason is that losses are covered by collateral as a guarantee of payment. The premium for liquidity is almost zero because it is an active market. The financial industry has adopted the OIS rate as the new risk-free rate benchmark for valuing collateral.\\newline\
+\
+The general formula for OIS pricing can be approached as: \
+\
+\\[\
+\\text\{OIS Swap\} = N \\times \\left( r \\times \\frac\{\\text\{nbrdays\}\}\{360\} \\right) - \\left[ N \\times \\sum \\left( \\text\{rate\}_i \\times \\frac\{\\text\{day\}_i\}\{360\} \\right) - 1 \\right]\
+\\]\
+\
+Based on the continuation of the Collin-Dufresne and Solnik \\cite\{solnik2001\} the rate of a 5-year swap traded quarterly is equivalent to the settlement of 20 consecutive 3-month maturities where the counterparty's rating is AA at the beginning of the transaction \\cite\{sundarsan2016\}. By analogy, the OIS rate is the capitalized rate on overnight transactions until the maturity date in the overnight market. Two sources of risk can be extracted from OIS transactions. The credit risk on overnight FED funds is very minimal given the existing liquidity in the market. The second risk is related to the probability of default of the counterparty \\cite\{solnik2001\}. The adjustment rate depends on the probability of default of the counterparty, the volatility of the interest rate, the maturity of the swap and whether the transaction is collateralized. \\cite\{solnik2001\}. Generally, the adjustments are very small for currency transactions where both counterparties are well rated in terms of credit rating.\\newline\
+\
+In the case of a collateralized transaction this risk is zero \\cite\{solnik2001\}. Based on these arguments, it can be concluded that OIS rates can be used as a good proxy for a long-term risk-free rate. Short- term interest rates are closely related to the FED's monetary policy decisions and market operations. The exact date of the FOMC meetings deciding on the target rate in the overnight market are not known for sure, they are published only at the end of each meeting with a frequency of 1 every 6 weeks \\cite\{sundarsan2016\}. After the decision of the meeting, investors revise their expectations on the market and on the expected rate in the future \\cite\{sundarsan2016\}. The main risk of an OIS is the potential change following a change in the FOMC's target rate before its maturity \\cite\{sundarsan2016\}. A meeting after the maturity date will not affect the valuation of the OIS. This is why having a degree of precision on the meeting dates is crucial for the proper pricing of the rate. The integration of the FOMC calendar is a real challenge for the analysis of the short-term structure of the OIS rate \\cite\{sundarsan2016\}. The data can be obtained by \\cite\{sundarsan2016\}either through the short-term rate extracted from the Bloomberg database or through the Federal Reserve Board's announcements of FOMC meetings at the beginning of the second quarter of the current year. Although it is possible to anticipate the meetings 6 months in advance, it is not possible to predict them beyond this horizon.\\newline\
+\
+This methodology has some similarities in the broad outlines set forth by the SOFR-related futures price inference approach \\cite\{sundarsan2016\}. The decisions made by the FOMC is a key parameter in the development of the calculation with a direct impact on the pricing of OIS \\cite\{sundarsan2016\}. The 3-month LIBOR-OIS spread, which is the 3-month LIBOR rate with the 3- month OIS rate, reflects the difference between the credit risk of a 3-month loan that is considered to have an acceptable credit rating and the credit risk on the continuous capitalization of overnight loans to banks that are considered to have good credit ratings. \\cite\{sundarsan2016\}. In a normal market, this spread is 10 basis points. However, it rose to 364 basis points, (3.64\\%) in October 2008. A year later this same spread came down to more reasonable levels, but slightly up to 50 basis points towards the end of 2011 as a result of European sovereign debt. These statistics show that LIBOR cannot be a proxy for the risk-free rate in stressed market conditions \\cite\{sundarsan2016\}.\\newline\
+\
+The ultimate objective is to find a new alternative spread to LIBOR in order to propose a new benchmark for banking solidity. \\cite\{sundarsan2016\}. Despite their forward-looking nature, forward rates constructed from derivatives linked to the new risk-free rates will have different structural characteristics than the existing IBOR benchmarks \\cite\{sushko2019\}.The forward benchmark based on derivatives linked to risk-free rates does not yet exist, as the markets for derivatives linked to risk-free rates are still in their infancy. However, even when the liquidity in the SOFR-linked overnight swap market develops sufficiently to produce a forward-looking market-based overnight rate, the resulting curve will be essentially risk-free. As a result, it will more closely resemble the currently available OIS rate (linked to SOFR) than LIBOR \\cite\{sushko2019\}.\\newline\
+\
+\\subsubsection*\{Methodology of compound risk-free rates\}\
+\
+Calculation based on the capitalized overnight rate with future maturity by composition. It is interesting to note that most of the research carried out by the various central bank research teams converges on this rate model \\cite\{six2020\}. The methodology for calculating the rate compounded in arrears is based on the capitalization of the first rate published at time t until the future maturity date t+1. In this sense, for a 1-month compounded rate starting at the beginning of the month, the resulting rate is calculated by capitalizing the day-to- day rate published at time t (our day 1) until t+1, i.e., the last day of the month (daily capitalization of the rate published at time t until t+1) \\cite\{six2020\}. For this we apply the formula of the compound rate:\\newline\
+\
+\\[\
+\\text\{Rate\}_\{\\text\{forward\}\} = \\left[\\prod_\{i=1\}^\{bd\} \\left(1 + \\frac\{r_ia_i\}\{360\}\\right) - 1\\right] \\times \\frac\{360\}\{n\}\
+\\]\
+\
+The forward index is a complementary approach that allows to find the forward rate by composition as with the compound rate approach:\\newline\
+\
+\\[\
+\\text\{Forward Index\} = \\left( \\frac\{R_y\}\{R_\\epsilon\} - 1 \\right) \\times \\frac\{360\}\{d\}\
+\\]\
+\
+One of the benefits is that it reflects the daily rate change. As the index is based on compound daily fluctuations, it is more stable in terms of volatility than the overnight rate itself. However, there is a lack of historical data makes compounding riskier in terms of deviation from the reference rate.\\newline\
+\
+\
+\\section\{Empirical Study: Results of the analysis and general conclusion\}\
+\
+\\subsection\{The viability of these contributions on the Moroccan market - MONIA\}\
+\
+\\subsubsection\{Implementation of the reference yield curve in the Moroccan market\}\
+\
+After analysing the different proposals made by foreign working groups and considering the characteristics of the interbank market in terms of liquidity, instruments used as well as market depth, the choice of the methodology has been directed towards the compound rate approach as the most suitable proposal \\cite\{bam2020\}. Intuitively, we believe that, as the USD derivatives market is much more liquid and more elaborate than the MAD derivatives market, reproducing the SOFR forward calculation method using futures would not produce satisfactory results given the lack of liquidity \\cite\{bam2020\}. In this sense, we focused on the repo market as a starting point. The choice to turn to this market is based on the following qualities:\\newline\
+\
+\\begin\{itemize\}\
+    \\item The market is representative of banking liquidity at the Moroccan level, with a volume twice as high as the unsecured market.\
+    \\item Based on a collateralized market, lower rate compared to the unsecured market rate because of the elimination of the additional yield component, risk premium.\
+    \\item Negligible liquidity and counterparty risk.\
+    \\item Based on actual transactions, not on a declarative basis, which allows for better control over\
+attempts to manipulate the rate.\
+    \\item This index can be obtained via the Bank Al-Maghrib portal, or through various financial data\
+agencies such as Bloomberg or Reuters.\
+    \\item Transparent calculation methodology in accordance with the IOSCO regulation which provides the\
+basis for a representative benchmark.\
+\\end\{itemize\}\
+\
+\\subsubsection*\{Moroccan Overnight Index Average\}\
+The MONIA index represents the weighted average overnight repo rate. It is calculated for each business day in Morocco and is the adjusted average, rounded to three decimal places of the interest rates paid on eligible repo transactions \\cite\{bam2020\}. The adjusted average is equal to the volume- weighted average rate, based on the centre of 70\\% of the distribution of volumes classified by increasing rate level \\cite\{bam2020\}. This index is an indication of the rate at which participants in the Moroccan money market conduct borrowing/lending operations in dirhams backed by Treasury bills under conditions of low credit, liquidity and interest rate risk \\cite\{bam2020\}.\\newline\
+\
+The MONIA index is established by the administrator according to the following model \\cite\{bam2020\}:\\newline\
+\
+\\begin\{itemize\}\
+    \\item Eligible repo transactions are ranked from lowest to highest.\
+    \\item Transactions are aggregated by rate level. Each rate level is associated with the corresponding total volume.\
+    \\item The volumes corresponding to the lower and upper 15\\% are not considered in the calculation of the index.\
+\\end\{itemize\}\
+\
+The index is calculated as the volume-weighted average rate of the remaining 70\\% using the following formula:\\newline\
+\
+\\[\
+\\sum_\{i=1\}^\{n\} \\frac\{\\text\{MONIA\}_\{R_i\} \\times V\}\{V_i\}\
+\\]\
+\
+The calculation of MONIA is based on the one-day repo transactions carried out by the different money market operators and settled the day before by the platform of the central depository of Maroclear.\\newline\
+\
+The data source for the implementation of this model is based on the Moroccan repo market database. The real weakness lies in the low level of historical transactions made on the basis of the new risk-free rate (MONIA) \\cite\{bam2020\} given its very recent introduction to the market on January 2, 2020. I will base the study on a total of 351 days on the markets, from January 2, the first day of the rate's introduction to the market until December 18, 2020 ~\\ref\{fig:plot15\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_14.png\}\
+    \\caption\{Source: Bank Al-Maghrib \\cite\{bam2020\}, MONIA curve (MAD) day by day.\}\
+    \\label\{fig:plot15\}\
+\\end\{figure\}\
+\
+These data are public and available in time on the various financial data providers (Reuters and Bloomberg) as well as on the official website of the Bank Al-Maghrib. In order to arrive at a MONIA forward curve, we will rely on Swiss and English research. The data used are from primary and reliable sources. For the calculation methodology of the MONIA forward curve, we will mainly use the method of the compounded rate (Rate compounded in arrears) \\cite\{bam2020\}. For this we apply the formula of the compound rate:\\newline\
+\
+\\[\
+\\text\{MONIA\}_\{\\text\{compounded rate\}\} = \\left[\\prod_\{i=1\}^\{bd\} \\left(1 + \\frac\{r_ia_i\}\{360\}\\right) - 1\\right] \\times \\frac\{360\}\{n\}\
+\\]\
+\
+We then calculate the forward index that allows us to quantify how much our forward rate behaves in the rate \\cite\{bam2020\}. Note that the choice to choose 360 days is made because it is the main convention in most financial contracts (especially on various derivatives). This is why most central banks, including the Bank of England and the FED among others, have chosen this convention.\\newline\
+\
+Given that the Moroccan interbank market is quite limited in terms of market depth and products handled, the choice of methodology was directed towards the compounding approach as the most suitable proposal. Replicating another approach such as the forward SOFR method using futures would not produce a satisfactory result given the lack of liquidity.\\newline\
+\
+It is in this sense that we base ourselves on the development of the American model, which has been taken up by several central banks given the good feedback obtained by the various market participants who consider this approach much more intuitive and feasible in terms of implementation (the same observation is valid for the Moroccan interbank market) \\cite\{bam2020\}.\\newline\
+\
+\\subsection\{Results of the analysis\}\
+The MONIA composite rate was calculated using the methodology adopted for the six existing maturities for the interbank rate (the more the database is fed, the more the rate will be able to show the future expectations of the market players. We obtain the following result:\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_15.png\}\
+    \\caption\{MONIA risk-free rate curve from BAM shared database, 2020. (NB: 1 week, 2-week, 1 month, 3-month, 6-month, 1- year maturities).\}\
+    \\label\{fig:plot16\}\
+\\end\{figure\}\
+\
+The results obtained form a good basis for the presentation of the final research paper in the sense that the research objective initially proposed takes shape in a concrete manner with the outcome of the yield curve. The yield curve fluctuates in a narrow band, ranging from 1.420\\% for a one-week maturity to 1.736\\% for a projected one-year maturity. The spread, i.e., the difference between the shortest projected rate and the furthest, is 0.316\\%. This raw data taken as a whole allows us to anticipate the magnitude of the fluctuations between the behaviour of our model on the two ends of the curve ~\\ref\{fig:plot16\}.\\newline\
+\
+In order to consider, the different market configurations, we even performed a sensitivity study on the modelled rate by incorporating a 50-bps drop (-0.5\\% on published rates) into the calculation to see what the impact would be on the forward rate ~\\ref\{fig:plot17\}. The 12-month rate explodes despite the risk-free nature of the rate, which is one of the results that was not expected based on the existing literature. In this sense, the limiting hypothesis is that the rate is difficult to model for maturities of more than one year.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_17.png\}\
+    \\caption\{MONIA forward rate sensitivity study. Source of MONIA risk-free rate curve from BAM shared database, 2020.\}\
+    \\label\{fig:plot17\}\
+\\end\{figure\}\
+\
+\
+This methodology allowed us to stress test the model and see what the forward rate would be under different market scenarios. To understand the implications of this rate sensitivity study, the model proposed by \\cite\{heitfield2019\} concludes that the forward SOFR rate is assumed to be able to increase or decrease on the scheduled Federal Open Market Committee (FOMC) policy rate announcement dates but remain constant during the periods between FOMC meetings. This assumption allows us to determine the evolution of expected forward rates by estimating the magnitude of rate changes over a relatively small number of fixed dates. Although several alternative functional forms for the path of forward rates have been applied in the literature, all of these approaches require imposing some simplifying assumptions because the available derivative prices do not provide enough information to identify forward rates with any degree of accuracy.\\newline\
+\
+The following figure represents the fluctuation of SOFR at different maturities. The result justifies the modelling assumption presented by the work of \\cite\{heitfield2019\}. Although forward SOFR rates fluctuate on a daily basis, they generally move in narrow bands close to the effective federal funds rate (FED funds), the main transmission channel of the U.S. central bank's monetary policy. With a few exceptions, daily changes in SOFR rates do not seem very predictable, so it seems reasonable to assume that market expectations do not generally reflect the expected fluctuations.\\newline\
+\
+Forward SOFR rates sometimes experience significant spikes at the end of the quarter, when the repo market must account for balance sheet adjustments of regulated financial institutions as well as Treasury coupon settlements. However, these transitory variations dissipate over time. In contrast, persistent variations occur when a change is applied to the policy rate (FED funds) on FOMC announcement dates ~\\ref\{fig:plot18\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_20.png\}\
+    \\caption\{MONIA forward rate sensitivity study. Source of MONIA risk-free rate curve from BAM shared database, 2020.\}\
+    \\label\{fig:plot18\}\
+\\end\{figure\}\
+\
+Clearly, the sensitivity study makes it possible to respond in a reasoned manner to the anticipation of an increase or decrease in the key interest rate controlled by the central bank, and thus to model a curve that is as close as possible to the assumptions made in the calculation. The model presented can model different contexts under the assumption that there is access to the meeting of the central bank in the future to be able to draw up the different decisions of increase or decrease of the interbank rate and thus establish a forecast that is more accurate and more faithful to the market reality ~\\ref\{fig:plot19\}.\\newline\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_21.png\}\
+    \\caption\{Alternative credit sensitive index. Source: "Beyond LIBOR: a primer on the new benchmark rates" (Bis, 2019).\}\
+    \\label\{fig:plot19\}\
+\\end\{figure\}\
+\
+In this perspective of developing and improving the proposals put forward by the different research teams, a proposal formulated by the International Banking Association has been added to the list of alternatives developed to carry out this transition process. Known as the ICE Bank Yield 3 Month Index, this is a rate that is intended to measure the cost of borrowing in unsecured investments with large banks for a specified time horizon. The left chart ~\\ref\{fig:plot19\} shows the fluctuations of the 3-month IBOR index with the 3-month U.S. sovereign bond and the proposed new rate, with fluctuations in the proposed index remaining more controlled across much of the curve, aside from a few spikes in volatility just before the first quarter of 2019 \\cite\{sushko2019\}. The curve (Figure 19, right chart) shows the fluctuations in the unsecured bank funding market on banks' balance sheets. With nearly USD 500 million in market valuation, this is one of the largest sources of funding for banks.\\newline\
+\
+\\subsection\{Money market transition risk\}\
+\
+The reform and transition to the new benchmark interest rates is an ongoing process with uncertainties related to the timing and impact of the transition process. Lack of time may bias the way the tests are conducted, and as a result, the model results are bound to be incorrect. For example, they consider that models, IT systems, and data processes will not be implemented on time, and will not be adequately tested before moving to other reference rates. As a result, model results may turn out to be incorrect, which will negatively affect risk assessment, investment decisions, and valuations.\\newline\
+\
+At the financial level, IBORs have a risk premium component included in the rate, whereas the new rates are virtually risk-free. It is therefore necessary to establish a spread to adjust for this additional yield requirement. If a transaction is recalculated with an increase or decrease in this rate it will result in a transfer of value between the borrower and the lender. The impact on valuations could potentially be significant, particularly for parties with market-based balance sheet valuations and for parties with many long-term interest rate products.\\newline\
+\
+A change in valuation also creates hedging risks. For example, a hedging instrument may be less effective if the reference rate changes, or if the reference rate of the hedging instrument is adjusted at a later date to the reference rate of the hedged instrument \\cite\{ey2018\}. On a legal front, there is the possibility of a dispute arising with the counterparty over the modification or termination of the contract. For standardized contracts with professional counterparties, which is the case for most derivatives, the risk is considered to be lower because professional organizations are expected to take the initiative in preparing standardized clauses for these contracts \\cite\{ey2018\}. The risk of legal disputes is considered higher for contracts with non-professional parties, such as private loans. Another risk cited is that a change in the reference rate would mean that the contracts would fall under regulations from which they are currently exempt, such as margin and clearing requirements and entry into transaction records \\cite\{ey2018\}\\newline\
+\
+With respect to the client relationship, the main risk is that clients will feel disadvantaged if their contracts are changed as a result of the transition. Respondents consider that there is a significant information asymmetry between institutions and clients with respect to transition. This can lead to the risk that clients will assume that the transition has been misused if the outcome turns out to be unfavourable for them. A lack of transparency in communicating and informing clients therefore increases the risk of reputational damage or legal challenges \\cite\{ey2018\}.\\newline\
+\
+\\subsection\{General conclusion and recommendations\}\
+\
+The Covid-19 health crisis has created a sense of great volatility in the global financial markets, with the money market being directly affected. First, it is interesting to temper the results at the international level, focusing on the impact in the Japanese interbank market, considered a strategic pillar in this interbank rate transition \\cite\{bloomberg2021\}. Indeed, despite the willingness of the various central banks to stagger this transition by setting an ultimatum towards the end of 2021, with a leniency period extended towards mid 2023 in view of the situation linked to the CoVid-19 epidemic as well as the pace of the transition the Japanese interbank market has signalled their proven difficulty in carrying out this mission, with only about one-third of the interbank market actually switching to these new risk-free rate proposals, valued at more than USD 27 trillion on alternative rate-backed contracts \\cite\{bloomberg2021\}. The Bank of Japan (BoJ) coupled with the FCA's efforts have said they are moving in the same direction by monitoring the pace of this transition. Japan, along with the US, UK and other central banks are working hard to make this transition happen within the original timeframe \\cite\{bloomberg2021\}. The nature of this transition remains to be seen if one compares the figures for the total Japanese assets exposed to this rate with the US transition work with a cumulative exposure of nearly USD 220 trillion, or nearly eight times the cumulative value of Japanese assets. This is evidenced by the following figure, which shows the acceptance of market participants of the new alternative rates in the derivatives transactions backed by these new rates ~\\ref\{fig:plot20\}.\\newline \
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Images Monia/monia_plot_22.png\}\
+    \\caption\{Value (in \\%) of new Risk-Free Rates in derivative contracts \\cite\{bloomberg2021\}.\}\
+    \\label\{fig:plot20\}\
+\\end\{figure\}\
+\
+While most central banks are finding it difficult to develop a forward rate structure for these new risk- free alternatives, an extension period has been added to smooth the pace of this transition, proposing in particular to maintain the IBOR rates used by market participants and paving the way to make them obsolete in the medium term once risk-free rates have proven themselves and gained the confidence of financial players \\cite\{bloomberg2021\}. In the Moroccan sphere, this fear induced by these measures, which had never been undertaken before, generated a real shock wave on the money market with a more cautious behaviour in the borrowing operations carried out by banks. Banks have therefore become more reluctant to provide liquidity by granting credit to companies and households. The major decisions taken at the level of Bank Al-Maghrib since the beginning of the epidemic are the following:.\\newline \
+\
+\\begin\{itemize\}\
+    \\item Decision of the Bank's board to lower the key rate from 2.25\\% to 2\\% at the meeting of March 17, 2020 and then from 2\\% to 1.5\\% at the meeting of June 16, 2020 to offer households and businesses better financing conditions.\
+    \\item Reinforcement of Bank Al-Maghrib's specific refinancing program in favor of very small, small and medium-sized enterprises which now covers operating loans in addition to investment loans. \
+    \\item Greater flexibility of the Central Bank regarding the collateral presented by the different banks in the framework of the different repo operations. In this sense, a more accommodating initiative of recourse by the banks to all the refinancing instruments available at the BAM in MAD and in foreign currency, as well as the extension of the duration of these refinancing operations.\
+    \\item Creation of precise support measures available to banks in terms of prudential rules, capital requirements and provisioning of claims to better support households and businesses in these exceptional circumstances with a full release of the reserve account for the benefit of banks and support for refinancing of participatory banks and micro credit associations.\
+\\end\{itemize\}\
+\
+It should be noted that the MONIA overnight rate is much slower in receiving monetary policy decisions. Indeed, it is only one month after the reduction of the key rate from 2.25\\% to 2\\% as part of the economic recovery taken in hand by the central bank to counteract the effects of the Covid-19 pandemic that is ravaging the world economies that the MONIA rate has actually fallen in the same direction. In this sense, around the 3rd week of April, the central bank lowered the rate by 25 basis points, which was reflected in the collateralized market almost a week later. The MONIA futures market is behaving very similarly to the movement of the interbank market. Over the 351 days studied, the MONIA forward rates were within a few dozen basis points of the policy rate. The results obtained align perfectly and partially complement those of \\cite\{heitfield2019\}.\\newline \
+\
+The policy rate cut in mid-April was anticipated late by the MONIA collateralized interbank market. In this sense, and as stated earlier in the development, this is the only point of slight conflict with the results obtained by Heitfield \\& Park. As mentioned on the ARRC research paper \\cite\{goldmansachs2019\} the magnitude of daily MONIA volatility can vary over time and depends on a number of factors, including the monetary policy framework and daily fluctuations in supply and demand, but regardless of these factors, using an average overnight rate smooths out almost all of these types of volatility \\cite\{heitfield2019\}. That said, it is important to note that our model studies a period of economic stress in the interbank market coupled with the weak data available for the Moroccan collateralized market. Since the overnight MONIA rate as well as the forward MONIA rate do not incorporate a risk premium, the forward MONIA rates are lower than the 1-month forward TMIB rates, which aligns with the postulate stated in the research by \\cite\{heitfield2019\}.\\newline \
+\
+The great complexity, which falls directly within the limits of this proposed model, lies in the non- existence of a reference rate in the interbank market to date. We are talking about a proposed model that has still not been unofficially developed, leaving this study as an attempt to come up with the coveted forward rate. The rates are quite poor given the small amount of historical data available to date, with less than a year of data in our statistical analysis. The results will not be able to model a curve for maturities greater than one year, which poses a problem for the proper use of this rate which is indexed on a very large volume of financial contracts for maturities greater than one year. This is a\
+major limitation that greatly hinders a healthy transition to this alternative interbank rate..\\newline \
+\
+\
+The purpose of this research is to answer the following research question:.\\newline \
+\
+"In the context of the transition of the global benchmarks, how to develop a calculation methodology for these new risk-free rates at future maturity that is feasible in the Moroccan context? \'bb.\\newline \
+\
+The implication on financial markets is direct given that this interbank rate is backed by a daily trading volume that averages around MAD 7.147 billion in daily trading volume \\cite\{bam2020\}. The results can be taken as reconciliation values for forward maturities. However, it is worth mentioning that the composite approach highlights obstacles to overcome. This method is the most popular among market participants because it is easy to understand in terms of theoretical background, transparent and has a rather stable behaviour over time. Nevertheless, the approach is based on the previous day's data, has a backward-looking perspective and makes the transition harder given the future-oriented nature of IBORs. This research was able to demonstrate the relevance of using the compounding methodology in the Moroccan interbank market, and that these results are only the beginning of a refinement of the methodology. It should be noted that the shared results may evolve as the transition continues until early 2022, and other methodologies may emerge between the time of publication and the deadline. There is no alternative model that can replicate the behaviour of the benchmarks, is robust to manipulation risk, and does not produce value transfer \\cite\{sushko2019\}. Through the analysis of 351 days on the market, we can reach rather satisfactory conclusions in the sense that we were able to achieve the initial research objective, despite results that may be questionable.\\newline \
+\
+That said, this remains a possible avenue for development in order to improve the way in which this rate is modelled and to counteract the various sticking points regarding the lack of historical data, which remains a critical point in the development of a rate that can be as robust as possible in the face of different market configurations. Given the degree of uncertainty surrounding the future of reference rates at the global level, it is possible that these rates will be published in parallel with the new risk- free rates to smooth the transition and allow agents to better prepare themselves \\cite\{sushko2019\}. Given the importance of credit-sensitive forward benchmarks, authorities have chosen to supplement risk-free rates with reformed and improved local IBORs in jurisdictions where this has been deemed feasible \\cite\{sushko2019\}. In Japan, the reformed TIBOR will coexist with TONA; and in the eurozone, an effort is underway to reform EURIBOR to complement ESTER. In both cases, credit-sensitive forward benchmarks are (or will be) calculated using some form of hybrid methodology to address the scarcity of underlying forward transactions, using techniques such as interpolation and expert judgment, and including wholesale funding from nonbank counterparties \\cite\{sushko2019\}. Finding the right trade-off may seem like an option for research teams to explore, arriving at the best of different methodologies to obtain a robust rate that fits market constraints and is prone to controlled volatility in times of economic stress.\\newline \
+\
+\\newpage\
+\
+\
+\\section\{References\}\
+\
+\\begin\{thebibliography\}\{99\}\
+\
+\\bibitem\{bam2020\} Bank Al-Maghrib (BAM), (2020). \\textit\{Methodology for the Determination of the MONIA (Moroccan Overnight Index Average) Monetary Reference Rate\}, Rabat, Morocco: Bank Al-Maghrib (BAM).\
+\
+\\bibitem\{bamnd\} Bank Al-Maghrib, (n.d.). MONIA (Moroccan Overnight Index Average). [Online] Available at: [URL needed]\
+\
+\\bibitem\{boe2017\} Bank of England (BoE), (2017). SONIA interest rate benchmark. [Online] Available at: https://www.bankofengland.co.uk/markets/sonia-benchmark [Accessed 22 March 2020].\
+\
+\\bibitem\{boj2016\} Bank of Japan (BoJ), (2016). Public Consultation on Identification and Use of a Japanese Yen Risk-Free Rate. Bank of Japan (BoJ) Publications, 5. [Online] Available at: https://www.boj.or.jp/en/paym/market/sg/rfr1603c.pdf.\
+\
+\\bibitem\{bloomberg2021\} Bloomberg, (2021). A \\$27 Trillion Challenge Looms as Yen Libor Shift Nears. [Online] Available at: [URL needed]\
+\
+\\bibitem\{bos2019\} Bos, K., (2019). The LIBOR rate transition: On the implementation of transition approaches from Interbank Offered Rates to Risk Free Rates and the corresponding value impact, Twente: University of Twente, Financial Engineering \\& Management.\
+\
+\\bibitem\{hou2014\} Hou, D., (2014). LIBOR: Origins, Economics, Crisis, Scandal, and Reform. Report No. 667, 5, New York, USA: FRB of New York Staff.\
+\
+\\bibitem\{drake2009\} Drake, F. J. \\& Polonchek, P., (2009). \\textit\{Finance: Capital Markets, Financial Management and Investment Management\}. John Wiley \\& Sons.\
+\
+\\bibitem\{heitfield2019\} Heitfield, E. \\& Park, Y. H., (2019). "Inferring Term Rates from SOFR Futures Prices," Finance and Economics Discussion Series Divisions of Research \\& Statistics and Monetary Affairs Federal Reserve Board, Washington, D.C.\
+\
+\\bibitem\{ecb2017\} European Central Bank (ECB), (2017). The euro short-term rate (\'80STR) methodology and policies. \\textit\{European Central Bank (ECB) Publications\}, 5. Available at: \\url\{https://www.ecb.europa.eu/paym/initiatives/interest_rate_benchmarks/shared/pdf\}.\
+\
+\\bibitem\{ecbnd\} European Central Bank, (n.d.). European Central Bank Statistical Data Warehouse. [Online] Available at: [URL needed].\
+\
+\\bibitem\{emmi2019\} European Money Markets Institute (EMMI), (2019). Blueprint for the Hybrid Methodology for the Determination of EURIBOR. \\textit\{European Money Markets Institute Publications\}, 4.\
+\
+\\bibitem\{ey2018\} EY, (2018). "End of an IBOR era," vol. XXXVII, no. 173, p. 7.\
+\
+\\bibitem\{mishkin2013\} Mishkin, F. M., (2013). What Is Finance? In: \\textit\{Money, Banking, and Financial Markets 10th Edition (French) (10\'e9me \'c9dition)\}, p. 5. Paris, France: Pearson.\
+\
+\\bibitem\{goldmansachs2019\} Goldman Sachs Markets Research, (2019). LIBOR Transition. [Online] Available at: [URL needed].\
+\
+\\bibitem\{ice2014\} ICE Benchmark Administration, (2014). ICE LIBOR METHODOLOGY. \\textit\{Publication\}, 5. Available at: \\url\{https://www.theice.com/publicdocs/ICE_LIBOR_Methodology.pdf\}.\
+\
+\\bibitem\{ioscond\} IOSCO, (n.d.). International reference rate principles.\
+\
+\\bibitem\{fed2020\} New York Federal Reserve (FED), (2020). Statement Regarding Publication of SOFR Averages and a SOFR Index. \\textit\{New York Federal Reserve (FED) Publication\}, 1.\
+\
+\\bibitem\{abrantesmetz2012\} Abrantes-Metz, R. M., (2012). "Why and How Should the Libor Be Reformed?" New York University - Leonard N. Stern School of Business - Department of Economics: Global Economics Group, LLC.\
+\
+\\bibitem\{senat2009\} Senat, (2009). Economic Survey n\'b0 4 - November 5, 2009 - Monetary policy. Objectives, Methods, and Emerging Issues.\
+\
+\\bibitem\{solnik2001\} Solnik, C.-D. \\& B., (2001). "On the Term Structure of Default Premia in the Swap and Libor Market," \\textit\{The Journal of Finance\}, 56, 3 (June), 1095-1115.\
+\
+\\bibitem\{sundarsan2016\} Sundarsan, S., (2016). Dynamics of the expectation and risk premium in the OIS term structure. Columbia University - Kelley University at Indiana University (March 1, 2016).\
+\
+\\bibitem\{sushko2019\} Sushko, V. \\& Schrimpf, A., (2019). BIS Quarterly Review: Beyond LIBOR: a primer on the new reference rates. Bank of International Settlement Research (BIS).\
+\
+\\bibitem\{six2020\} Swiss Exchange (SIX), (2020). Swiss Index Methodology Rulebook Governing the Swiss Reference Rates. \\textit\{Swiss Exchange (SIX) Publication\}, 5. Available at: \\url\{https://www.six-group.com/exchanges/downloads/indexinfo/online/swiss_reference_rates/swiss_refe\}.\
+\
+\\bibitem\{zestos2015\} Zestos, G. K., (2015). \\textit\{The Global Financial Crisis (1st ed.)\}. New York, USA: Routledge.\
+\
+\\end\{thebibliography\}\
+\
+\\end\{document\}}

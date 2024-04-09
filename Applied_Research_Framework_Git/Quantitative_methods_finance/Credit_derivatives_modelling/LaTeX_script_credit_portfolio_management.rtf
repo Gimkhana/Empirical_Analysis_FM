@@ -1,0 +1,238 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2758
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass\{article\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage[T1]\{fontenc\}\
+\\usepackage\{amsmath, amsfonts, amssymb\}\
+\\usepackage\{graphicx\}\
+\\usepackage\{array, booktabs\}\
+\\usepackage\{hyperref\}\
+\\usepackage\{enumitem, geometry, titlesec\}\
+\\usepackage\{booktabs\}\
+\\usepackage\{tabularx\}\
+\
+    \\title\{Project 1: Credit portfolio modelling and CDO tranche pricing\}\
+\\author\{\
+    Youssouf Banc\'e9 \\\\\
+    M2 Risk and Asset Management (GRA) \\\\\
+    University Paris-Saclay, \'c9vry campus \\\\\
+    \\texttt\{20234008@etud.univ-evry.fr\}\
+    \\and\
+    Youssef Louraoui \\\\\
+    M2 Risk and Asset Management (GRA) \\\\\
+    University Paris-Saclay, \'c9vry campus \\\\\
+    \\texttt\{20230348@etud.univ-evry.fr\}\
+\}\
+\\date\{\\today\} % or specify a date\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\
+\\thispagestyle\{empty\} % Removes page number on title page\
+\
+\\newpage % Starts the main content on the next page\
+\
+\\noindent\
+\\begin\{tabularx\}\{\\textwidth\}\{X\}\
+\\toprule\
+\\textbf\{Section\} \\\\\
+\\midrule\
+1. Introduction \\\\\
+\\quad 1.1. Context \\& Importance \\\\\
+\\quad 1.2. Purpose of the Project \\\\\
+\\addlinespace\
+2. Methodology \\\\\
+\\quad 2.1. Python and Jupyter Notebook \\\\\
+\\quad 2.2. Algorithm Overview \\\\\
+\\quad 2.3. Challenges faced during the implementation \\\\\
+\\addlinespace\
+3. Results \\& visualization \\\\\
+\\addlinespace\
+4. Conclusion and further recommendations \\\\\
+\\addlinespace\
+5. References \\\\\
+\\bottomrule\
+\\end\{tabularx\}\
+\
+\\newpage\
+\
+\\section\{Introduction\}\
+\
+\\subsection\{Context \\& importance of of the project\}\
+\
+Credit portfolio modeling and CDO (Collateralized Debt Obligation) tranching represent crucial facets in the arena of modern finance, intricately intertwining the principles of risk management with the complexities of financial engineering. These methodologies are instrumental in navigating the multifaceted landscape of credit risks and the securitization process, particularly in the aftermath of financial crises, which have underscored the intricate nature of these risks \\cite\{fabozzi2008\}.\
+\
+\\subsubsection\{Credit portfolio modeling\}\
+Credit portfolio modeling is an analytical approach that focuses on evaluating and managing the risk associated with a diverse range of credit exposures. It involves assessing the probability of default and potential losses from credit instruments such as loans, bonds, and other forms of credit. This process is vital for financial institutions to maintain stability and to mitigate potential losses. The approach utilizes quantitative models to predict future losses and the distribution of these losses under various economic scenarios, thereby aiding in strategic decision-making \\cite\{bluhm2002\}.\
+\
+\\subsubsection\{CDO tranching\}\
+On the other hand, CDO tranching is a financial engineering technique used to segment credit exposures into different risk categories or tranches \\cite\{hull2017\}. Each tranche has a distinct level of risk and return, categorized into senior, mezzanine, and equity tranches. This segmentation allows investors to select investment products that align with their risk appetite. CDO tranching gained prominence in the finance industry for its role in the distribution and management of credit risk, though it also garnered scrutiny in the wake of financial crises due to its complexity and potential for risk concentration \\cite\{bluhm2002\}.\
+\
+\\subsubsection\{Integration in the financial industry\}\
+The integration of credit portfolio modeling and CDO tranching is of paramount importance in the financial industry. This integration provides a framework for financial institutions to effectively manage credit risk, diversify investment portfolios, and structure financial products. In the context of a rapidly evolving financial market, these tools are indispensable for financial stability and innovation. The increasing complexity of financial products and the dynamic nature of credit markets necessitate sophisticated approaches like these for risk assessment and management \\cite\{hull2017\}.\
+\
+\\subsection\{Purpose of the project\}\
+\
+The project aims to develop a comprehensive tool to simulate and analyze credit portfolio risks and CDO tranching strategies. It intends to provide financial professionals with a robust mechanism to evaluate and manage the inherent risks in credit portfolios and structured finance products.\
+\
+\\section\{Methodology\}\
+\
+\\subsection\{Mathematical foundation\}\
+\
+The variable \\( Z_i \\) is defined as:\
+\\begin\{equation\}\
+    Z_i = \\sqrt\{\\rho X\} + \\sqrt\{\\rho_S - \\rho X_S\} + \\sqrt\{1 - \\rho_S\} \\varepsilon_i\
+\\end\{equation\}\
+\
+This represents a stochastic model component, potentially in a financial context. Here, \\( \\rho \\) represent the correlation coefficient between the overall credit portfolio and \\( \\rho_s\\) the sector correlation, \\( X \\) and \\( X_S \\) are the factors themselves, and \\( \\varepsilon_i \\) is an idiosyncratic standard normally distributed random variable, indicating the specific uncertainty or noise in the system.\
+\
+The variable \\( B_i \\) is given by:\
+\\begin\{equation\}\
+    B_i = \\Phi^\{-1\}(PD_i)\
+\\end\{equation\}\
+\
+where \\( \\Phi^\{-1\} \\) is the inverse cumulative distribution function of the standard normal distribution. This transformation is used to convert a probability (such as the probability of default, \\( PD_i \\)), into a z-score which corresponds to the number of standard deviations from the mean a particular value lies in a standard normal distribution.\
+\
+\\subsection\{Python and Jupyter Notebook\}\
+\
+Python, with libraries like NumPy, SciPy, pandas, and Matplotlib, is employed for its mathematical and data visualization capabilities (McKinney, 2012). Jupyter Notebook offers an interactive environment for code execution, making it ideal for iterative testing and result visualization.\
+\
+Jupyter Notebook is an open-source web application that allows the creation and sharing of documents containing live code, equations, visualizations, and narrative text. Its interactivity is particularly advantageous for exploratory data analysis, a common task in financial modeling. Jupyter's ability to combine code execution with real-time results and visualizations makes it an invaluable tool for iterative processes, algorithm testing, and presenting financial models and analyses \\cite\{kluyver2016\}.\
+\
+Together, Python and Jupyter Notebook form a powerful duo for conducting financial analyses and modeling. They enable professionals to rapidly prototype and test models, perform extensive data analyses, and visualize complex financial concepts and data in an accessible and user-friendly manner.\
+\
+\\subsection\{Algorithm overview\}\
+\
+Monte Carlo simulation stands as a cornerstone in the landscape of computational finance, particularly for credit portfolio modeling and CDO tranching. This stochastic technique is adept at handling the randomness inherent in financial markets and is crucial for assessing the risk of credit portfolios and structuring CDOs.\
+\
+\\subsubsection\{Credit portfolio modeling with Monte Carlo simulation\}\
+In credit portfolio modeling, Monte Carlo simulation helps in estimating the probability of default and the distribution of potential losses. The process involves:\
+\
+\\begin\{itemize\}\
+    \\item Generating random paths for underlying risk factors affecting credit quality, such as interest rates, using stochastic processes (e.g., Geometric Brownian Motion).\
+    \\item Simulating the credit state of each portfolio entity over time, thereby determining the likelihood of default.\
+    \\item Estimating losses by considering the Exposure at Default (EAD) and Loss Given Default (LGD) for each entity.\
+    \\item Repeating the process numerous times to obtain a distribution of potential credit losses, from which risk measures like Value at Risk (VaR) and Expected Shortfall (ES) are calculated.\
+\\end\{itemize\}\
+\
+This approach allows for capturing the non-linear and complex dependencies between various portfolio constituents \\cite\{glasserman2003\}.\
+\
+\\subsubsection\{CDO Tranching and Monte Carlo Simulation\}\
+For CDO tranching, Monte Carlo simulation is employed to assess the risk and return profile of different tranches:\
+\
+\\begin\{itemize\}\
+    \\item The cash flows of the underlying credit portfolio are simulated under various economic scenarios.\
+    \\item The impact of these cash flows on different tranches (senior, mezzanine, equity) is analyzed, taking into account the waterfall structure of payment priorities.\
+    \\item The default correlation among portfolio entities is also considered, influencing tranche losses and returns.\
+    \\item The simulation results are used to price each tranche, reflecting their risk levels and potential returns.\
+\\end\{itemize\}\
+\
+The effectiveness of Monte Carlo simulation in this context lies in its flexibility to model complex, path-dependent structures of CDOs \\cite\{bluhm2002\}.\
+\
+In summary, Monte Carlo simulation provides a robust framework for analyzing credit portfolios and CDO tranches, offering insights into risk dynamics and aiding in informed decision-making in financial risk management.\
+\
+\\section\{Python implementation\}\
+\
+\\subsection\{Libraries\}\
+\
+The most important libraries used:\
+\
+\\begin\{itemize\}\
+    \\item \\textbf\{NumPy\}: NumPy, short for Numerical Python, is a fundamental package for scientific computing in Python. It offers support for large, multi-dimensional arrays and matrices, alongside a rich collection of high-level mathematical functions to operate on these arrays. In financial modeling, NumPy is extensively used for numerical operations like matrix calculations and Monte Carlo simulations \\cite\{oliphant2006\}.\
+    \
+    \\item \\textbf\{SciPy\}: Building upon NumPy, SciPy extends its capabilities by adding more advanced and specific functionalities. It includes modules for optimization, integration, interpolation, eigenvalue problems, algebraic equations, and other tasks. For financial analysts, SciPy's routines for statistical testing and data optimization are particularly useful \\cite\{oliphant2001\}.\
+    \
+    \\item \\textbf\{pandas\}: pandas is a game-changer for data manipulation and analysis, providing fast, flexible, and expressive data structures designed to make working with structured (tabular, multidimensional, potentially heterogeneous) and time series data both easy and intuitive. It's a primary tool in Python for financial data analysis, offering extensive functionality for data cleaning, transformation, and aggregation \\cite\{mckinney2010\}.\
+    \
+    \\item \\textbf\{Matplotlib\}: Matplotlib is the primary plotting library of Python. It provides an object-oriented API for embedding plots into applications. For financial modeling, Matplotlib is used to visualize data and financial concepts - price charts, risk-return trade-offs, asset allocation pie charts, and more, making complex data more comprehensible \\cite\{mckinney2012\}.\
+\\end\{itemize\}\
+\
+\\subsubsection\{Challenges faced during the implementation:\}\
+\
+\\paragraph\{Challenges in Implementation\}\
+While powerful, the Monte Carlo method in this context faces challenges:\
+\
+\\begin\{itemize\}\
+    \\item \\textbf\{Computational intensity:\} The need for a large number of simulation paths for accuracy makes the process computationally intensive.\
+    \\item \\textbf\{Modeling assumptions:\} The accuracy of simulation results heavily relies on the assumptions made about default probabilities, loss distributions, and correlations.\
+    \\item \\textbf\{Data quality:\} High-quality historical data is crucial for calibrating the simulation model, which can be a limiting factor.\
+\\end\{itemize\}\
+ \
+\
+\\subsection\{Results \\& Visualization\}\
+\
+The results, demonstrated through various simulations, showcase the risk profiles of different CDO tranches and the overall credit portfolio. Visualisations in Jupyter Notebook provide insights into risk distributions, the impact of market changes, and the effectiveness of different tranching strategies.\
+\
+The convergence graph for credit portfolio modeling also displays a rolling mean alongside the confidence interval bounds. Similar to the CDO graph, there is an initial period of high volatility. However, the values quickly converge to a stable mean, and the confidence interval narrows significantly, indicating a high degree of certainty in the results. This stable behavior reflects the reliability of the simulation in predicting potential losses within the credit portfolio under different economic conditions and stress scenarios.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.8\\linewidth]\{Numericalmethods_Python/Images/convergencecreditportfolio.png\}\
+    \\caption\{Credit portfolio modeling convergence graph.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\newpage\
+\
+The CDO price convergence graph shows the rolling mean of the CDO prices along with the upper and lower bounds, indicating the range of uncertainty around the mean. The wide divergence between the upper and lower bounds indicates that there is initially a high degree of volatility in the values. This volatility diminishes as the number of simulations increases, suggesting that the Monte Carlo simulation is reaching a stable solution. The graph stabilizes towards a consistent value, implying that the average CDO price converges to a particular value as the number of simulations grows, which is indicative of the law of large numbers in statistical analyses.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.8\\linewidth]\{Numericalmethods_Python/Images/convergencecdo.png\}\
+    \\caption\{CDO price convergence graph as a function of simulations\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\newpage\
+\
+\\section\{Conclusion\}\
+\
+The analyses presented in this project underscores the intricate dynamics of credit portfolio modeling and CDO tranching. Through the application of Monte Carlo simulations, we have illustrated the convergence of estimated prices and losses to stable values, which reinforces the utility of these methods in financial risk assessment. The convergence graphs corroborate the robustness of the simulations, with the narrowing confidence intervals indicating increased precision of the estimations as the number of simulations escalates.\
+\
+This project has showed the multifaceted nature of financial risk management and the profound implications of advanced quantitative methods like Monte Carlo simulations in the domain. As the field progresses, the incorporation of machine learning techniques for predictive analytics and the utilization of more sophisticated computational resources are recommended for enhancing the efficacy of credit risk modeling and CDO tranching \\cite\{bishop2006\}. Pursuing these avenues of research will undoubtedly contribute to the development of more nuanced and sophisticated models, better equipped to manage the complexities of modern financial markets.\
+\
+\\newpage\
+\
+\
+\\section\{References\}\
+\
+\\begin\{thebibliography\}\{99\}\
+\
+\\bibitem\{bishop2006\} Bishop, C. M. (2006). Pattern Recognition and Machine Learning. Springer.\
+\
+\\bibitem\{bluhm2002\} Bluhm, C., Overbeck, L., \\& Wagner, C. (2002). \\textit\{Introduction to Credit Risk Modeling\}. CRC Press.\
+\
+\\bibitem\{fabozzi2008\}Fabozzi, F. J., Davis, H. A., and Choudhry, M. (2008). Introduction to Structured Finance. Wiley.\
+\
+\\bibitem\{fabozzi2007\}Fabozzi, F.J. (2007). Fixed Income Analysis. Wiley Finance.\
+\
+\\bibitem\{hull2017\} Hull, J. C. (2017). Options, futures, and other derivatives (10th ed.). Pearson.\
+\
+\\bibitem\{kluyver2016\} Kluyver, T., Ragan-Kelley, B., P\'e9rez, F., Granger, B., Bussonnier, M., Frederic, J., ... \\& Ivanov, P. (2016, May). Jupyter Notebooks \'96 a publishing format for reproducible computational workflows. In Positioning and Power in Academic Publishing: Players, Agents, and Agendas (pp. 87-90).\
+\
+\\bibitem\{mckinney2010\}McKinney, W. (2010). Data Structures for Statistical Computing in Python. In \\textit\{Proceedings of the 9th Python in Science Conference\}, pp. 56-61.\
+\
+\\bibitem\{mckinney2012\} McKinney, W. (2012). Python for Data Analysis. O'Reilly Media.\
+\
+\\bibitem\{tavella2000\} Tavella, D., \\& Randall, C. (2000). Pricing financial instruments: The finite difference method. John Wiley \\& Sons.\
+\
+\\bibitem\{wilmott1998\} Wilmott, P. (1998). Derivatives: The theory and practice of financial engineering. John Wiley \\& Sons.\
+\
+\\bibitem\{glasserman2003\} Glasserman, P. (2003). \\textit\{Monte Carlo Methods in Financial Engineering\}. Springer.\
+\
+\\bibitem\{hilpish2015\}Hilpisch, Y. (2015). \\textit\{Python for Finance: Analyze Big Financial Data\}. O'Reilly Media, Inc.\
+\
+\\bibitem\{oliphant2001\}Jones E, Oliphant T, Peterson P, et al. (2001). SciPy: Open Source Scientific Tools for Python, \\url\{http://www.scipy.org/\}.\
+\
+\\bibitem\{oliphant2006\}Oliphant, T. E. (2006). A guide to NumPy, Vol. 1. Trelgol Publishing USA.\
+\
+\
+\\end\{thebibliography\}\
+ \
+\\end\{document\}}

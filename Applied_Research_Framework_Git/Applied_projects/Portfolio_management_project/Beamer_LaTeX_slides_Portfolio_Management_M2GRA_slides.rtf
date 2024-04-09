@@ -1,0 +1,339 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass[xcolor=\{dvipsnames\}]\{beamer\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage\{graphicx\} % Needed to include images\
+\\usepackage\{amsmath\}  % For math fonts, symbols, and environments\
+\\usepackage\{hyperref\}\
+\\usepackage\{booktabs\} \
+\\usepackage\{siunitx\}\
+\
+\
+\\usetheme\{Antibes\}\
+\\usecolortheme\{default\}\
+\\setbeamertemplate\{enumerate items\}[default]\
+%\\usepackage\{times,url\}\
+\
+\\setbeamertemplate\{footline\}\{\}\
+\
+\\setbeamertemplate\{footline\}\
+\
+\\setbeamertemplate\{footline\}\{\
+  \\hfill%\
+  \\usebeamercolor[fg]\{page number in head/foot\}%\
+  \\usebeamerfont\{page number in head/foot\}%\
+  \\insertframenumber\\,/\\,\\inserttotalframenumber%\
+  \\kern1em\\vskip2pt%\
+\}\
+\
+\\title[Portfolio Managament "M2GRA": Construction of a Portfolio Management Framework in Python] %optional\
+\{Portfolio Managament "M2GRA": Construction of a Portfolio Management Framework in Python\}\
+\
+\\author[Arthur, Doe] % (optional)\
+\{Fran\'e7ois Pedeboy\\inst\{1\} \\and  Youssef Louraoui\\inst\{2\}\}\
+\
+\\institute[] % (optional)\
+\{\
+  \\inst\{1\}%\
+  francois.pedeboy@etud.univ-evry.fr\\\\\
+  Universit\'e9 Paris-Saclay\
+  \\newline\
+  \\and\
+  \\inst\{2\}%\
+  20230348@etud.univ-evry.fr\\\\\
+  Universit\'e9 Paris-Saclay\
+  \\newline\
+\}\
+\
+\\date[25 March, 2024] % (optional)\
+\{25 March, 2024\}\
+\
+\
+\\begin\{document\}\
+\
+% Title Page\
+\\begin\{frame\}\
+  \\titlepage\
+\\end\{frame\}\
+\
+\
+\\section\{Introduction and asset class universe\}\
+\\subsection\{Asset class universe\}\
+\\begin\{frame\}\{Introduction\}\
+    \\begin\{table\}\
+        \\centering\
+        \\scalebox\{0.5\}\{% Scale table to 75% of the original size\
+        \\begin\{tabular\}\{ll\}\
+            \\toprule\
+            Ticker & Description \\\\\
+            \\midrule\
+            GBP= & GBP/USD FX pair \\\\\
+            EUR= & EURO/US DOLLAR FX SPOT RATE \\\\\
+            =USD & USD index \\\\\
+            NOK= & US DOLLAR/NORWEGIAN KRONE FX SPOT RATE \\\\\
+            JPY= & US DOLLAR/JAPANESE YEN FX SPOT RATE \\\\\
+            CHF= & US DOLLAR/SWISS FRANC FX SPOT RATE \\\\\
+            AUD= & AUSTRALIAN DOLLAR/US DOLLAR FX SPOT RATE \\\\\
+            NZD= & NEW ZEALAND DOLLAR/US DOLLAR FX SPOT RATE \\\\\
+            CAD= & US DOLLAR/CANADIAN DOLLAR FX SPOT RATE \\\\\
+            SEK= & US DOLLAR/SWEDISH KRONA FX SPOT RATE \\\\\
+            GBP3MD= & GBP3MD 3 Month Deposit \\\\\
+            EUR3MD= & EUR3MD 3 Month Deposit \\\\\
+            USD3MD= & USD3MD 3 Month Deposit \\\\\
+            NOK3MD= & NOK3MD 3 Month Deposit \\\\\
+            JPY3MD= & JPY3MD 3 Month Deposit \\\\\
+            CHF3MD= & CHF3MD 3 Month Deposit \\\\\
+            AUD3MD= & AUD3MD 3 Month Deposit \\\\\
+            NZD3MD= & NZD3MD 3 Month Deposit \\\\\
+            CAD3MD= & CAD3MD 3 Month Deposit \\\\\
+            SEK3MD= & SEK3MD 3 Month Deposit \\\\\
+            GLD & SPDR Gold Shares (Gold ETF) \\\\\
+            UCO & ProShares Ultra Bloomberg Crude Oil (Oil ETF) \\\\\
+            URTH.K & iShares MSCI World ETF (Equity index ETF) \\\\\
+            \\bottomrule\
+        \\end\{tabular\}\}\
+        \\caption\{Tickers and their descriptions\}\
+    \\end\{table\}\
+\\end\{frame\}\
+\
+\\section\{Data handling\}\
+\\subsection\{Data manipulation and data cleaning\}\
+\\begin\{frame\}\{Data manipulation and data cleaning\}\
+        \\begin\{itemize\}\
+            \\item Selection of the investment universe and structure of the data.\
+            \\item Inversion of the FX rates to harmonize the dataset and consolidation of the dataset. \
+        \\end\{itemize\}\
+\\end\{frame\}\
+\
+\\section\{Risk return analysis of assets\}\
+\\subsection\{Risk-return of assets\}\
+\\begin\{frame\}\{Risk-return of assets\}\
+       \\resizebox\{\\textwidth\}\{!\}\{%\
+    \\begin\{tabular\}\{lcc\}\
+    \\toprule\
+    \\textbf\{Ticker\} & \\textbf\{Annualized Mean Return\} & \\textbf\{Annualized Volatility\} \\\\\
+    \\midrule\
+        GBP= & 2.25 & 9.31 \\\\\
+        EUR= & 2.17 & 8.01 \\\\\
+        =USD & -2.28 & 6.86 \\\\\
+        NOK= & -4.64 & 12.03 \\\\\
+        JPY= & -2.95 & 8.96 \\\\\
+        CHF= & -0.56 & 8.05 \\\\\
+        AUD= & 2.73 & 10.33 \\\\\
+        NZD= & 2.62 & 10.59 \\\\\
+        CAD= & -2.15 & 7.57 \\\\\
+        SEK= & -4.28 & 10.26 \\\\\
+        GLD & 5.01 & 14.12 \\\\\
+        UCO & -2.50 & 49.44 \\\\\
+        URTH.K & 7.67 & 16.28 \\\\\
+    \\bottomrule\
+    \\end\{tabular\}%\
+\}\
+\\end\{frame\}\
+\
+\\section\{Risk return analysis of assets\}\
+\\subsection\{Correlation structure of assets\}\
+\\begin\{frame\}\{Correlation structure of assets\}\
+    \\small \{\
+    \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.7\\linewidth]\{PF_plots/pf_plot_4.png\}       \
+            \\label\{fig:portfolio_plot_8\}\
+    \\end\{figure\}\
+\}\
+\\end\{frame\}\
+\
+\
+\\section\{Risk return analysis of assets\}\
+\\subsection\{Risk-Reward analysis\}\
+\\begin\{frame\}\{Risk-Reward analysis\}\
+    \\small \{\
+    \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.9\\linewidth]\{PF_plots/pf_plot_11.jpeg\}        \
+            \\label\{fig:portfolio_plot_9\}\
+    \\end\{figure\}\
+\}\
+\\end\{frame\}\
+\
+\\section\{Risk return analysis of assets\}\
+\\subsection\{Risk-Reward analysis\}\
+\\begin\{frame\}\{Risk-Reward analysis (II)\}\
+     \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.9\\linewidth]\{PF_plots/pf_plot_10.png\}         \
+            \\label\{fig:portfolio_plot_10\}\
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+\\section\{Risk return analysis of asset class returns\}\
+\\subsection\{Data analysis of asset class returns\}\
+\\begin\{frame\}\{Correlation of asset class returns\}\
+    \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.7\\linewidth]\{PF_plots/pf_plot_2.png\}      \
+            \\label\{fig:portfolio_plot_111\}\
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+\\section\{Risk return analysis of assets\}\
+\\subsection\{Data analysis of asset returns\}\
+\\begin\{frame\}\{Cumulative returns of asset class\}\
+    \\small \{\
+    \\begin\{figure\}\
+        \\begin\{minipage\}\{0.6\\textwidth\}\
+            \\centering\
+            \\includegraphics[width=\\linewidth]\{PF_plots/pf_plot_3.png\}\
+            \\label\{fig:first_image\}\
+        \\end\{minipage\}\\hfill\
+        \\begin\{minipage\}\{0.6\\textwidth\}\
+            \\centering\
+            \\includegraphics[width=\\linewidth]\{PF_plots/pf_plot_5.png\}\
+            \\label\{fig:second_image\}\
+        \\end\{minipage\}\
+    \\end\{figure\}\
+\}\
+\\end\{frame\}\
+\
+\\section\{Risk return analysis of assets\}\
+\\subsection\{Data analysis of asset returns\}\
+\\begin\{frame\}\{Cumulative returns of asset class (II)\}\
+    \\small \{\
+    \\begin\{figure\}\
+        \\begin\{minipage\}\{0.6\\textwidth\}\
+            \\centering\
+            \\includegraphics[width=\\linewidth]\{PF_plots/pf_plot_6.png\}\
+            \\label\{fig:first_image\}\
+        \\end\{minipage\}\\hfill\
+        \\begin\{minipage\}\{0.6\\textwidth\}\
+            \\centering\
+            \\includegraphics[width=\\linewidth]\{PF_plots/pf_plot_7.png\}\
+            \\label\{fig:second_image\}\
+        \\end\{minipage\}\
+    \\end\{figure\}\
+\}\
+\\end\{frame\}\
+\
+\\section\{Risk return analysis of assets\}\
+\\subsection\{Data analysis of asset returns\}\
+\\begin\{frame\}\{Data analysis of asset returns\}\
+\\footnotesize % Makes the text of the table smaller\
+    \\footnotesize % Makes the text of the table smaller\
+    \\begin\{table\}\
+        \\centering\
+        \\begin\{tabular\}\{l S[table-format=-1.2] S[table-format=2.2] S[table-format=-1.2] S[table-format=1.2]\}\
+            \\toprule\
+            \\textbf\{Category\} & \{\\textbf\{Mean (\\%)\}\} & \{\\textbf\{Std Dev (\\%)\}\} & \{\\textbf\{Skewness\}\} & \{\\textbf\{Kurtosis\}\} \\\\\
+            \\midrule\
+            G10 Currencies & -0.45 & 2.59 & 0.27 & 1.91 \\\\\
+            Oil & 13.88 & 59.10 & -0.09 & -1.02 \\\\\
+            Gold & 8.40 & 16.87 & 0.01 & 2.78 \\\\\
+            Global Equities & 12.44 & 19.46 & -0.31 & 3.88 \\\\\
+            \\bottomrule\
+        \\end\{tabular\}\
+    \\end\{table\}\
+\\end\{frame\}\
+\
+\
+\\section\{Analysis of strategies\}\
+\\subsection\{Implementation of the HRP portfolio\}\
+\\begin\{frame\}\{Implementation of the HRP portfolio\}\
+    \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.8\\linewidth]\{PF_plots/pf_plot_8.png\}         \
+            \\label\{fig:portfolio_plot_11\}\
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+\\section\{Analysis of strategies\}\
+\\subsection\{Implementation of the HRP portfolio\}\
+\\begin\{frame\}\{Implementation of the HRP portfolio (II)\}\
+\\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.7\\linewidth]\{PF_plots/asset_class_clustering.png\}         \
+            \\label\{fig:portfolio_plot_12\}\
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+\\section\{Analysis of strategies\}\
+\\subsection\{Risk return analysis of strategies\}\
+\\begin\{frame\}\{Risk return analysis of strategies\}\
+        \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.9\\linewidth]\{PF_plots/ew_portfolio_return.png\}         \
+            \\label\{fig:portfolio_plot_13\}\
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+\\section\{Analysis of strategies\}\
+\\subsection\{Risk return analysis of strategies\}\
+\\begin\{frame\}\{Wall-Street portfolio\}\
+        \\begin\{itemize\}\
+            \\item The Wall-Street portfolio is a benchmark portfolio strategy that we want to test and add in our overall analysis. It is based on the market outlook and recommendation from three main Wall-Street actors (JP Morgan AM, Goldman Sachs AM and BlackRock).\
+            \\item This portfolio is based on Wall-Street outlook on the economy and the overall macro environment.\
+        \\end\{itemize\}\
+\\end\{frame\}\
+\
+\\section\{Analysis of strategies\}\
+\\subsection\{Risk return analysis of strategies\}\
+\\begin\{frame\}\{Cumulative return for each strategy\}\
+        \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.7\\linewidth]\{PF_plots/cumulative_return_stategy.png\}         \
+            \\label\{fig:portfolio_plot_14\}\
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+\\section\{Analysis of strategies\}\
+\\subsection\{Risk return analysis of strategies\}\
+\\begin\{frame\}\{Drawdown for each strategy\}\
+        \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.9\\linewidth]\{PF_plots/drawdown_strategies.png\}         \
+            \\label\{fig:portfolio_plot_15\}\
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+\\section\{Analysis of strategies\}\
+\\subsection\{Risk return analysis of strategies\}\
+\\begin\{frame\}\{Correlation between strategies\}\
+        \\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=0.7\\linewidth]\{PF_plots/pf_plot_9.png\}         \
+            \\label\{fig:portfolio_plot_16\}\
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+\
+\\section\{Analysis of strategies\}\
+\\subsection\{Risk return analysis of strategies\}\
+\\begin\{frame\}\{Results and comments\}\
+\\begin\{figure\}  \
+        \\centering\
+        \\includegraphics[width=1\\linewidth]\{PF_plots/advanced_analysis.png\}         \
+            \\label\{fig:portfolio_plot_17\}\
+        \\caption\{\\fontsize\{2pt\}\{2pt\} Strategy performance analysis. Data: Refinitiv Eikon.\}   \
+    \\end\{figure\}\
+\\end\{frame\}\
+\
+% General Conclusion Section\
+\\section\{Results and comments\}\
+\\subsection\{Conclusion\}\
+\
+% Implications\
+\\begin\{frame\}\{Conclusion\}\
+\\small \{\
+\\begin\{itemize\}\
+    \\item Mixed results on the strategies implemented. \
+    \\item Wall Street (WS) exhibits the highest return but also the highest risk, which could reflect a more aggressive strategy or a high concentration in assets that have performed exceptionally well during the period.\
+    \\item In terms of Sortino ratio (modified Sharpe ratio), all strategies performed better than the benchmark EW except for HRP.  \
+\\end\{itemize\}\
+\}\
+\\end\{frame\}\
+\
+\\end\{document\}}

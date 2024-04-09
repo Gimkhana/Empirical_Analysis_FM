@@ -1,0 +1,461 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass\{article\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage[T1]\{fontenc\}\
+\\usepackage\{amsmath, amsfonts, amssymb\}\
+\\usepackage\{graphicx\}\
+\\usepackage\{subcaption\}\
+\\usepackage\{array, booktabs\}\
+\\usepackage\{hyperref\}\
+\\usepackage\{enumitem, geometry, titlesec\}\
+\\usepackage\{booktabs\}\
+\\usepackage\{tabularx\}\
+\\usepackage\{threeparttable\}\
+\\usepackage\{colortbl\} % For coloring cells\
+\\usepackage\{xcolor\} % Define colors\
+\\usepackage\{booktabs\} % For prettier tables\
+\\usepackage\{siunitx\} % Required for alignment\
+\\usepackage\{pdflscape\} % Required for landscape pages\
+\\usepackage\{booktabs\}\
+\
+\
+\\title\{Portfolio Managament "M2GRA": Construction of a Portfolio Management Framework in Python\}\
+    \
+\\author\{\
+    Youssef LOURAOUI \\\\\
+    M2 Risk and Asset Management \\\\\
+    Universit\'e9 Paris-Saclay \\\\\
+    \\texttt\{youssef.louraoui@essec.edu\}\
+    \\and\
+    Fran\'e7ois PEDEBOY\\\\\
+    M2 Risk and Asset Management \\\\\
+    Universit\'e9 Paris-Saclay \\\\\
+    \\texttt\{francois.pedeboy@etud.univ-evry.fr\}\
+    \\and\
+    Juliana Caicedo Llano \\\\ \
+    Associate Professor in Finance \\\\\
+    \\texttt\{juliana.caicedo.llano@univ-evry.fr\}\
+\}\
+\\date\{25/03/2024\}% or specify a date\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\
+\\thispagestyle\{empty\}% Removes page number on title page\
+\
+\\newpage % Starts the main content on the next page\
+\
+\\begin\{tabularx\}\{\\textwidth\}\{X\}\
+\\textbf\{1. Investment universe\} \\\\\
+\\addlinespace\
+\\textbf\{2. Strategies implemented\} \\\\\
+\\addlinespace\
+\\textbf\{3. Theoretical developments and comments\} \\\\\
+\\addlinespace\
+\\textbf\{4. Summary and analysis of results\} \\\\\
+\\addlinespace\
+\\textbf\{5. Analysis of the best strategy\} \\\\\
+\\addlinespace\
+\\textbf\{6. Improvements and discussion\} \\\\\
+\\addlinespace\
+\\textbf\{7. References\} \\\\\
+\\addlinespace\
+\\textbf\{Appendix\} \\\\\
+\\addlinespace\
+\\end\{tabularx\}\
+\\newpage\
+\
+\
+\\newpage\
+\
+\\section\{Investment universe\}\
+\
+Our investment universe is composed of different asset classes. Here's an overview into the assets used in the project:\
+\
+\\begin\{itemize\}\
+    \\item G10 Currencies: The portfolio includes major G10 currencies like GBP (British Pound), EUR (Euro), USD (US Dollar), NOK (Norwegian Krone), JPY (Japanese Yen), CHF (Swiss Franc), AUD (Australian Dollar), NZD (New Zealand Dollar), CAD (Canadian Dollar), and SEK (Swedish Krona). These currencies represent some of the world's largest and most stable economies, offering a mix of developed market exposure.\
+    \\item G10 Short Term Rates (3-month): The portfolio includes short-term government rates from the G10 countries.\
+    \\item Gold ETF (GLD): The inclusion of a Gold ETF provides a hedge against inflation and currency risk. Gold is often viewed as a 'safe haven' asset and can be a strategic asset during periods of high market uncertainty or volatility.\
+    \\item Oil ETFs (UCO): This ETF offer exposure to oil prices, which can be crucial for capturing sector-specific trends and hedging against energy-related risks. Oil prices are influenced by global economic conditions, geopolitical tensions, and supply-demand dynamics, making this ETF vital for a diversified portfolio.    \
+    \\item World Equity Index Trackers (URTH.K): URTH.K tracks a global index covering developed and emerging markets, offering diversified exposure to global equity markets.\
+\\end\{itemize\}\
+\
+We can see from table ~\\ref\{tab:tickers\} the different tickers retained in our investment universe. \
+\
+\\begin\{table\}[htbp]\
+        \\centering\
+        \\scalebox\{0.5\}\{% Scale table to 75% of the original size\
+        \\begin\{tabular\}\{ll\}\
+            \\toprule\
+            Ticker & Description \\\\\
+            \\midrule\
+            GBP= & GBP/USD FX SPOT RATE \\\\\
+            EUR= & EURO/US DOLLAR FX SPOT RATE \\\\\
+            =USD & USD index \\\\\
+            NOK= & US DOLLAR/NORWEGIAN KRONE FX SPOT RATE \\\\\
+            JPY= & US DOLLAR/JAPANESE YEN FX SPOT RATE \\\\\
+            CHF= & US DOLLAR/SWISS FRANC FX SPOT RATE \\\\\
+            AUD= & AUSTRALIAN DOLLAR/US DOLLAR FX SPOT RATE \\\\\
+            NZD= & NEW ZEALAND DOLLAR/US DOLLAR FX SPOT RATE \\\\\
+            CAD= & US DOLLAR/CANADIAN DOLLAR FX SPOT RATE \\\\\
+            SEK= & US DOLLAR/SWEDISH KRONA FX SPOT RATE \\\\\
+            GBP3MD= & GBP3MD 3 Month Deposit \\\\\
+            EUR3MD= & EUR3MD 3 Month Deposit \\\\\
+            USD3MD= & USD3MD 3 Month Deposit \\\\\
+            NOK3MD= & NOK3MD 3 Month Deposit \\\\\
+            JPY3MD= & JPY3MD 3 Month Deposit \\\\\
+            CHF3MD= & CHF3MD 3 Month Deposit \\\\\
+            AUD3MD= & AUD3MD 3 Month Deposit \\\\\
+            NZD3MD= & NZD3MD 3 Month Deposit \\\\\
+            CAD3MD= & CAD3MD 3 Month Deposit \\\\\
+            SEK3MD= & SEK3MD 3 Month Deposit \\\\\
+            GLD & SPDR Gold Shares (Gold ETF) \\\\\
+            UCO & ProShares Ultra Bloomberg Crude Oil (Oil ETF) \\\\\
+            URTH.K & iShares MSCI World ETF (Equity index ETF) \\\\\
+            \\bottomrule\
+        \\end\{tabular\}\}\
+        \\caption\{Tickers and their descriptions\}\
+        \\label\{tab:tickers\}\
+\\end\{table\}\
+\\newpage\
+\
+\\section\{Strategies implemented\}\
+The table ~\\ref\{tab:portfolio_approaches\} the different portfolio strategies implemented in this project.\\newline\
+\
+\\noindent % Prevents indentation for the following content\
+\\begin\{table\}[htbp]\
+\\caption\{Strategies and underlying principle\}\
+\\begin\{tabularx\}\{\\textwidth\}\{@\{\}X X@\{\}\} % Two equally spaced columns, tabularx will make it fit to the page width\
+\\toprule\
+\\textbf\{Portfolio Approach\} & \\textbf\{Utility\} \\\\\
+\\midrule\
+Mean-Variance (MV) & Optimizes portfolio for the highest return per unit of risk, based on historical returns and volatilities. \\\\\
+Inverse Volatility & Allocates investment based on the inverse of the assets' volatilities, giving more weight to less volatile assets. \\\\\
+Equal Risk Contribution (ERC) & Seeks to distribute risk equally among portfolio assets, aiming for each asset to contribute the same level of risk. \\\\\
+Hierarchical Risk Parity (HRP) & Uses a hierarchical clustering algorithm to structure the portfolio into a hierarchy, optimizing for diversification and risk parity. \\\\\
+Maximum Sharpe Ratio (Maximum SR) & Focuses on maximizing the Sharpe Ratio, selecting portfolio weights that offer the best expected return per unit of risk. \\\\\
+Equal Weight & Distributes capital evenly across all assets, ignoring market expectations, historical returns, or volatilities. \\\\\
+Wall-Street Portfolio (WS) & Consensus of Wall-Street expectations on macroeconomic fundamentals for the different asset classes that covers our investment universe, based purely on a discretionary basis. \\\\\
+\\bottomrule\
+\\end\{tabularx\}\
+\\label\{tab:portfolio_approaches\}\
+\\end\{table\}\
+\
+\
+\\section\{Theoretical developments on the additional strategies implemented\}\
+\
+\\section*\{Wall-Street portfolio\}\
+\
+The Wall-Street portfolio is a benchmark portfolio strategy that we seek to evaluate and incorporate into our comprehensive analysis. It derives from market projections and recommendations from three principal Wall-Street entities: JP Morgan Asset Management (JPM AM), Goldman Sachs Asset Management (GS AM), and BlackRock. This portfolio is predicated on Wall-Street's economic outlook and the overarching macroeconomic environment. We adopt the 2024 market outlook from GS AM, JPM AM, and BlackRock to construct the benchmark using their suggested asset allocation strategies\\cite\{JPM2023\} \\cite\{gsamgis2023\} \\cite\{blackrockgai2023\}.\\newline\
+\
+\\begin\{itemize\}\
+  \\item For G10 FX currencies and short-term rates, Wall Street anticipates a gradual normalization of monetary policy and the potential for an economic deceleration to yield a neutral to slightly underweight posture. The focus is on currencies with robust fundamentals and prospects for growth ~\\ref\{fig:fig1\}.\
+  \\item Regarding US long-term bonds, the projection of heightened yields and the likelihood of interest rate increments supports a marginally overweight allocation. Preference is advised for high-quality bonds with shorter maturities.\
+  \\item The oil market's trajectory is subject to various determinants, such as pricing forecasts, geopolitical uncertainties, and economic climates, suggesting a neutral to marginally underweight stance. Consideration might be given to strategies emphasizing oil-producing regions or companies with substantial fundamentals ~\\ref\{fig:fig2\}.\
+  \\item Gold's perceived stability, diversification advantages, and inflation hedging capabilities underpin a neutral to slightly overweight positioning. Strategic incorporation of gold into portfolios is advocated ~\\ref\{fig:fig3\}.\
+  \\item A pronounced allocation towards global equities is justified by the anticipation of modest growth and the eventuality of market fluctuations. Paramount is the selection of sectors, diversification across geographies, and the employment of risk mitigation techniques ~\\ref\{fig:fig4\}.\
+\\end\{itemize\}\
+\
+Based on the forecasts, a potential Wall Street benchmark portfolio can be constructed with the following asset class weights ~\\ref\{tab:wall_street_benchmark\}:\\newline\
+\
+\\begin\{table\}[h!]\
+  \\centering\
+  \\begin\{tabular\}\{@\{\}lcccc@\{\}\}\
+    \\toprule\
+    \\textbf\{Asset Class\} & \\textbf\{GS AM\} & \\textbf\{JPM AM\} & \\textbf\{BlackRock\} & \\textbf\{WS Benchmark\} \\\\\
+    \\midrule\
+    G10 Currencies & Neutral & Neutral & Neutral & 5\\% \\\\\
+    G10 Short-Term Rates & Neutral & Neutral & Neutral & 0\\% \\\\\
+    Oil & Range-bound & Neutral & Neutral & 2.5\\% \\\\\
+    Gold & Overweight & Neutral & Neutral & 52.5\\% \\\\\
+    Global Equities & Overweight & Overweight & Overweight &40\\% \\\\\
+    \\bottomrule\
+  \\end\{tabular\}\
+  \\caption\{Potential Wall Street Benchmark Portfolio Asset Allocation for 2024\}\
+  \\label\{tab:wall_street_benchmark\}\
+\\end\{table\}\
+\
+\\newpage\
+\
+\\subsection*\{Theoretical foundations of Hierarchical Risk Parity (HRP) portfolio construction\}\
+\
+HRP is a quantitative management technique that is based on the construction of an allocation by focusing on the risk group of assets to form clusters and thus understand the behaviour of each asset by combining the investment universe. According to De Prado (2016) \\cite\{dePrado2016a\}, he elaborated extensively on the topic of HRP and highlighted that Mean-Variance (MV) portfolios are optimal in-sample, but perform poorly out-of-sample (even worse than the equally weighted portfolio). Studies, such as Michaud's (1998)\\cite\{roncalli2013\}, indicate that quadratic optimizers typically give inaccurate results. One explanation for this is the difficulty in accurately forecasting returns. Small forecasting errors can cause significant differences that can be captured in the efficient frontier plot. We delve into the underlying technicalities for the HRP portfolio. To bridge that gap, De Prado \\cite\{dePrado2016a\} formulated the following approach to construct HRP portfolios:\\newline\
+\
+\
+\\begin\{itemize\}\
+    \\item Tree Clustering: Organise comparable investments into clusters using an appropriate distance metric.\
+    \\item Quasi-diagonalization: Reorganise the rows and columns of the covariance matrix so that the biggest values are on the diagonal.\
+    \\item Split allocations using recursive bisection of the reordered covariance matrix.\
+\\end\{itemize\}\
+\
+\
+\\textbf\{Tree clustering\}\\newline\
+\
+For the tree clustering and data quasi-diagonalisation, De Prado \\cite\{dePrado2016a\} makes the following point.The only input needed is the correlation matrix, of size $N x N$.\\newline\
+\
+1. Define the distance measure $d:\\left(X_i, X_j\\right) \\subset B \\rightarrow \\mathbb\{R\} \\in[0,1]$, $d_\{i, j\}=d\\left[X_i, X_j\\right]=\\sqrt\{\\frac\{1\}\{2\}\\left(1-\\rho_\{i, j\}\\right)\}$, where $B$ is the Cartesian product of items in $\\\{1, \\ldots, i, \\ldots, N\\\}$. This forms a proper metric space $D$\\newline\
+\
+2. Compute the Euclidean distance on $D, \\tilde\{d\}:\\left(D_i, D_j\\right) \\subset B \\rightarrow \\mathbb\{R\} \\in$ $[0, \\sqrt\{N\}]=\\sqrt\{\\sum_\{n=1\}^N\\left(d_\{n, i\}-d_\{n, j\}\\right)^2\}$\\newline\
+\
+Note the difference between distance metrics $d_\{i, j\}$ and $\\tilde\{d\}_\{i, j\}$. Whereas $d_\{i, j\}$ is defined on column-vectors of $X, \\tilde\{d\}_\{i, j\}$ is defined on column-vectors of $D$ (a distance of distances).\\newline\
+\
+3. Cluster together the pair of columns $\\left(i^*, j^*\\right)$ such that\
+$$\
+\\left(i^*, j^*\\right)=\\underset\{\\substack\{i, j) \\\\ i \\neq j\}\}\{\\operatorname\{argmin\}\}\\left\\\{\\tilde\{d\}_\{i, j\}\\right\\\}\
+$$\\newline\
+\
+4. Update $\\left\\\{\\tilde\{d\}_\{i, j\}\\right\\\}$ with the new cluster.\\newline\
+\
+5. Apply steps $3-4$ recursively until all $N-1$ clusters are formed.\\newline\
+\
+Similar items are clustered together, in a tree structure where two leaves are bundled together at each iteration.The dendogram's y-axis reports the distance between the two joining leaves \\cite\{dePrado2016a\}.\\newline\
+\
+\\textbf\{Quasi-diagonalisation\}\\newline\
+\
+This stage places correlated items together, and uncorrelated items far apart. This is accomplished by replacing clusters with their components recursively, until no clusters remain. Replacements preserve the order of the clustering.\\newline \
+\
+1. Because the resulting covariance is quasi-diagonal, we define the variance of a continuous subset $L_i \\in L$ as the quadratic form $\\tilde\{V\}_i \\equiv \\widetilde\{w\}_i\{ \}^\{\\prime\} V_i \\widetilde\{w\}_i$, where $L$ is the sorted list of all items and $\\quad V_i$ is the covariance matrix between the constituents of subset $L_i$ $\\widetilde\{w\}_i=\\operatorname\{diag\}\\left[V_i\\right]^\{-1\} \\frac\{1\}\{\\operatorname\{tr\}\\left[\\operatorname\{diag\}\\left[V_i\\right]^\{-1\}\\right]^\{\\prime\}\}$, where $\\operatorname\{diag\}[$.$] and$ $\\operatorname\{tr\}[$. $]$ are the diagonal and trace operators $\\quad$ \\newline\
+\
+2. This definition of $\\tilde\{V\}_i$ is motivated by the fact that the inverse-variance allocation is optimal for a diagonal covariance matrix.\\newline\
+\
+\\textbf\{Bi-section approach\}\\newline\
+\
+The HRP approach aims to create a portfolio that diversifies risk more effectively compared to traditional portfolio construction methods.\\newline\
+\
+1. Assigning Weights: Initially, assign a unit weight to all items in the portfolio. If there are $N$ assets, each asset $n$ gets a weight $w_n=1$.\\newline\
+\
+2. Recursive Bisection: The list $L_i$ of all items (assets) is divided into two sub-lists $L_i^\{(1)\}$ and $L_i^\{(2)\}$. This is done recursively, meaning that each sub-list is further divided until there are lists that cannot be split anymore (i.e., they contain only one item).\\newline\
+\
+3. Computing Variances: Calculate the variance $\\tilde\{V\}_i^\{(j)\}$ for each of the two sub-lists obtained after the bisection. The variance measures the dispersion of asset returns and is used to assess risk.\\newline\
+\
+4. Split Factor: Determine a split factor $\\alpha_i$ using the variances of the two sub-lists. This factor is used to allocate weights between the two sub-lists in a way that reflects their relative risk. It's calculated such that it lies between 0 and 1. The formula given is a method to ensure that risk is split inversely to the variances; the list with the lower variance gets a higher weight.\\newline\
+\
+5. Re-scaling Allocations for $L_i^\{(1)\}$ : Adjust the weights $w_n$ for all $n$ in sub-list $L_i^\{(1)\}$ by multiplying them by $\\alpha_i$. This increases the weights of assets in the lower-risk sub-list.\\newline\
+\
+6. Re-scaling Allocations for $L_i^\{(2)\}$ : Similarly, adjust the weights $w_n$ for all $n$ in sub-list $L_i^\{(2)\}$ by multiplying them by $\\left(1-\\alpha_i\\right)$. This decreases the weights of assets in the higher-risk sub-list.\\newline\
+\
+7. Stopping condition: The process ends when each sub-list $L_i$ contains only one item. At this point, each asset has been assigned a weight that reflects its $\\downarrow$ tribution to the overall risk of the portfolio.\\newline\
+\
+The recursive bisection process takes advantage of the "quasi-diagonalization" of the covariance matrix. Quasi-diagonalization is a process that reorders the covariance matrix to place the most correlated assets closer together, simplifying the process of dividing them into clusters.\\newline\
+\
+This HRP method is designed to construct a portfolio that not only considers the individual risk of assets but also their correlations, leading to a more balanced distribution of risk across the portfolio ~\\ref\{fig:asset_cluster\} ~\\ref\{fig:fig4\}.\\newline\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}\{1\\linewidth\}\
+    \\includegraphics[width=1\\linewidth]\{Portfolio Management M2GRA/Plots_PMM2GRA/asset_class_clustering.png\}\
+    \\caption\{Hierarchical Risk Parity (HRP) clustering plot. Source: Dta extracted from Refinitiv Eikon, Riskfolio package.\}\
+    \\label\{fig:asset_cluster\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\
+\\section\{Summary and analysis of results\}\
+\
+The table ~\\ref\{tab:performance_table\} captures the different strategies performance with different parameters. \
+\
+\\begin\{table\}[htbp]\
+\\centering\
+\\caption\{Portfolio performance metrics\}\
+\\label\{tab:performance_table\}\
+\\resizebox\{\\textwidth\}\{!\}\{% Resize table to fit within page width\
+\\begin\{tabular\}\{\
+  @\{\}\
+  l\
+  S[table-format=1.2]\
+  S[table-format=1.2]\
+  S[table-format=-1.3]\
+  S[table-format=-1.3]\
+  S[table-format=1.3]\
+  S[table-format=-1.3]\
+  S[table-format=-1.3]\
+  S[table-format=-1.2]\
+  @\{\}\
+\}\
+\\toprule\
+\\textbf\{Portfolio\} & \{\\textbf\{Annualized Return (\\%)\}\} & \{\\textbf\{Annualized Volatility (\\%)\}\} & \{\\textbf\{Skewness\}\} & \{\\textbf\{Excess Kurtosis\}\} & \{\\textbf\{Sortino Ratio\}\} & \{\\textbf\{VaR 95\\%\}\} & \{\\textbf\{CVaR 95\\%\}\} & \{\\textbf\{Max Drawdown (\\%)\}\} \\\\\
+\\midrule\
+MV      & 0.00 & 0.00 & -0.312 & 0.881  & 0.505 & -0.000 & -0.000 & -0.01 \\\\\
+Inv\\_vol & 0.02 & 0.04 & -0.100 & 1.283  & 0.652 & -0.000 & -0.000 & -0.07 \\\\\
+ERC     & 1.72 & 3.10 & -0.198 & -1.940 & 0.541 & -0.003 & -0.004 & -11.48 \\\\\
+EW      & 1.63 & 5.14 & -0.038 & -3.238 & 0.317 & -0.005 & -0.006 & -21.97 \\\\\
+SR      & 1.03 & 2.25 & -0.129 & -3.023 & 0.450 & -0.002 & -0.003 & -9.76 \\\\\
+WS      & 6.78 & 10.47 & -0.096 & 0.531  & 0.639 & -0.010 & -0.015 & -20.15 \\\\\
+HRP     & 0.45 & 2.26 & -0.127 & -1.669 & 0.194 & -0.002 & -0.003 & -5.88 \\\\\
+\\bottomrule\
+\\end\{tabular\}\
+\}\
+\\end\{table\}\
+\
+\\section\{Analysis of the best strategy\}\
+\
+The results for the various portfolio strategies reveal a range of outcomes that can inform an investor's strategy alignment with risk tolerance and return expectations. Here's an analysis of the results ~\\ref\{fig:fig5\} ~\\ref\{fig:fig7\}:\
+\
+\\begin\{itemize\}\
+    \\item The Mean-Variance (MV) portfolio has a nominal annualised return and volatility, which means it didn't really earn any extra money over the risk-free rate during the time period that was looked at. We suspect a problem in the implementation part of the strategy.\
+    \\item The Inverse Volatility portfolio only makes small gains, with an annualised return just above zero and almost no volatility. This could be a sign of a strategy that values security over growth. The higher Sortino ratio shows that this portfolio has handled downside risk better than its peers. This is something that should be looked into more, along with its individual assets and how they were allocated.\
+    \\item A more balanced method is shown by the Equal Risk Contribution (ERC) strategy, which offers average returns while keeping volatility under control. The negative skewness and excess kurtosis numbers show that the return distribution has avoided sharp tails and, by extension, extreme returns, whether they are positive or negative. We should look into how risk contributions are measured and how they relate to the actual returns because of this finding.\
+    \\item The Equal Weight (EW) strategy stands out because it has the highest volatility and the biggest maximum loss of all the strategies. However, it also has the highest annualised returns. These results show that risk has two sides: the portfolio has a bigger chance of going up, but it is also very likely to go down when the market goes down.\
+    \\item Focusing on the Maximum the Sharpe Ratio (SR) strategy, it seems to be a moderately good strategy in terms of returns, but it has less instability than the EW strategy. The strategy's goal to get the best return for the least amount of risk is supported by the negative excess kurtosis, which shows a tendency to avoid extreme results.\
+    \\item When compared to the other strategies, the Wall-Street (WS) consensus method clearly stands out, with much higher returns that come with a lot of volatility and drawdown. This kind of profile could be seen as an example of a riskier or more aggressive strategy that, while profitable, comes with big risks that could be looked at more closely to see if they can be maintained over longer periods of time. However, some biais related to selection made this portfolio inflate the results. Since there was not splitting of the dataset nor rebalancing of returns in this project, we basically took the best performing assets in the investment universe selected and were heavily exposed to gold and MSCI World which makes it tricky to assume that the discretionary approach would yield similar results out of sample.\
+    \\item Finally, the Hierarchical Risk Parity (HRP) strategy shows a sensible balance with the lowest possible drawdown, which shows how strong it is when market conditions are bad. This is in line with HRP's objective of building a portfolio that lowers systemic risk by improving understanding of asset correlation and hierarchy.\
+\\end\{itemize\}\
+\
+\
+\\subsection*\{Drawdown\}\
+\
+For the portfolio risk management, we implemented a simple drawdown framework where we assess the assets selected in terms of their maximum loss, and seek for patterns related to their market behavior. We consolidate our risk framework in the part five of the project where we introduce VaR computation as a supplementary tool to make informed decision and compare strategies based on their risk. The drawdown analysis help us to compare the performance of various portfolio optimisation techniques over time, specifically how each strategy's value has decreased from a previous peak over a certain period. Drawdown is a measure of downside risk that represents an asset's peak-to-trough fall over a certain time period ~\\ref\{fig:fig5\}.\\newline\
+\
+\\begin\{itemize\}\
+    \\item MV (Mean-Variance): This method appears to have had mild drawdowns over time, with some notable falls indicating periods of increased risk or market downturns.\
+    \\item Inverse vol (Inverse Volatility): This approach shows a drawdown pattern similar to the MV, but with some periods of lesser drawdowns, implying that it may be less risky than the MV, potentially due to its focus on lower volatility assets.\
+    \\item ERC (Equal Risk Contribution): The ERC strategy's drawdowns are fewer than those of the MV strategy, indicating that risk is possibly distributed more evenly across portfolio assets.\
+    \\item EW (Equal Weight): This strategy has seen several periods of substantial drawdowns, demonstrating that equal weighting across assets may not always protect against large market moves. It may perform similarly to a market index because all assets are handled identically, regardless of risk.\
+    \\item SR (Sharpe Ratio): The strategy aimed at maximising the Sharpe Ratio, which measures risk-adjusted return, features periods of both large and low drawdowns, reflecting fluctuations in either the projected return or portfolio volatility.\
+    \\item WS (Wall Street portfolio): This approach, which may be based on Wall Street consensus and discretionary selection, has shown mixed results, with some of the biggest drawdowns, implying that it is more aggressive or speculative.\
+    \\item HRP (Hierarchical Risk Parity): The HRP approach often exhibits more limited drawdowns over time, which may indicate more consistent risk management that considers asset correlations.\
+\\end\{itemize\}\
+\
+\
+\\subsection*\{Correlation across strategies\}\
+\
+We can elaborate more on the behaviour of the different strategies implemented and tehir respective return correlation features ~\\ref\{fig:fig6\}.\\newline\
+\
+\\begin\{itemize\}\
+    \\item Mean Variance (MV) against Inverse Volatility (Inv\\_vol): With a correlation of 0.81, these two move quite closely. When MV shifts, Inv\\_vol is likely to be performing similar movements. This indicates that they behave similarly to market movements, making them less suitable for diversification if used together.\
+    \\item ERC has moderate correlations with other strategies, particularly Inverse Volatility (0.83) and Sharpe Ratio (0.97). This means that ERC's movement is relatively predictable given how these other strategies function.\
+    \\item Equal Weight (EW) versus Equal Risk Contribution (ERC) has a high correlation (0.91) and moves almost as one. It shows that distributing weights equally or in proportion to risk levels does not significantly alter the portfolio's behaviour.\
+    \\item Sharpe Ratio (SR) strategy has a near-perfect correlation with Equal Weight (EW) at 0.97, followed by a strong correlation with ERC at 0.95. This shows that aiming for the highest return per unit of risk is directly related to these strategies.\
+    \\item Wall Street (WS) has, surprisingly, a strong correlation of 0.98 with inverse volatility, implying that Wall Street's discretionary decisions follow a strategy that favours less volatile assets. Interestingly, its correlation with Equal Weight is the lowest, at 0.67, implying some independence from a strategy that ignores market volatility.Its high concentration for gold and equity index trackers (+90\\% of the allocation) makes it a highly concentrated portfolio.\
+    \\item Hierarchical Risk Parity (HRP): This strategy stands out for having relatively modest correlations across the board, with the greatest being 0.64 with Equal Weight. Its methodology, which takes into account asset hierarchies and diversification, offers an original approach for portfolio construction.\
+\\end\{itemize\}\
+\
+\
+\
+\
+\
+\
+\\section\{Improvements and discussion\}\
+\
+The project's conclusion covers several crucial features of the analysed portfolio management strategies, which must be examined for a thorough comprehension.\\newline\
+\
+First, the results are based only on a buy-and-hold strategy. This indicates that there was no rebalancing or data splitting during the investment period. Optimal weights were calculated at the start and maintained throughout the analysis period. As a result, the reported performance reflects the hypothetical scenario in which an investor keeps the beginning allocation constant for the whole time. This methodological decision has substantial repercussions.\\newline\
+\
+It ignores the potential advantages of rebalancing, which, in fact, can account for market movements and asset correlations that alter over time. Rebalancing could potentially lower risk while increasing returns by capitalising on the reversion to mean across assets.\\newline\
+\
+The buy-and-hold strategy also implies that the initial conditions and investor expectations remain consistent across the investing horizon, which is rarely true in dynamic markets.\\newline\
+\
+Second, the study fails to account for transaction costs. In practice, these fees can have a significant impact on overall performance, particularly in strategies that involve frequent trades. By excluding transaction expenses, the project likely displays a more favourable performance situation than what would be encountered in practical deployments.\\newline\
+\
+Third, no leverage restrictions are imposed to the strategies; instead, they are all constrained by equal weight constraints that amount to one. This constraint means a simpler risk profile, with no opportunity to leverage prospective returns with borrowed cash. While this may indicate a conservative investment attitude, it also implies that the strategies' ability to generate returns is not fully examined.\\newline\
+\
+The Wall Street portfolio, in particular, stands out due to its focus on two assets that have done well within the chosen investing universe: gold and the MSCI World Index. This concentration raises concerns about the diversification and feasibility of this strategy in a realistic scenario. Despite the apparent benefit in performance indicators, a concentrated portfolio may be at higher risk due to a lack of diversification. Related to feasibility, the Wall Street portfolio's performance may not be reproducible because it is highly reliant on previous performance of these two assets, which may not continue in the future.\\newline\
+\
+Finally, the benchmark's simplicity in comparison to the Sortino ratio is highlighted. Except for Hierarchical Risk Parity (HRP), all strategies had greater Sortino ratios than Equal Weight, signifying better risk-adjusted performance. The HRP's lower Sortino ratio could be seen as a trade-off for smaller drawdown and thus stronger resilience during market downturns.\\newline\
+\
+In conclusion, while the reported results indicate that these strategies may surpass a simple benchmark, one must recognise the constraints and assumptions underlying the research. The absence of transaction costs, the lack of rebalancing, and the use of a basic benchmark may overestimate the strategies' efficacy. Furthermore, the Wall Street portfolio's lack of leverage and concentrated asset allocation underline the importance of exercising caution when interpreting the outcomes. In practice, a more comprehensive method that takes these elements into account could provide a more accurate picture of each strategy's prospective performance.\\newline\
+\
+\
+\\section\{References\}\
+%Include all the academic papers, books, and other resources cited in your report.\
+\
+\\begin\{thebibliography\}\{99\}\
+\
+\\bibitem\{dePrado2016a\}\
+de Prado, M. L. (2016). Building Diversified Portfolios that Outperform Out-of-Sample. \\textit\{Journal of Portfolio Management\}. https://doi.org/10.3905/jpm.2016.42.4.059. Available at SSRN: https://ssrn.com/abstract=2708678 or http://dx.doi.org/10.2139/ssrn.2708678.\
+\
+\\bibitem\{dePrado2016b\}\
+de Prado, M. L. (2016). Building Diversified Portfolios That Outperform Out-of-Sample (Presentation Slides), (January 10, 2016). Available at SSRN: https://ssrn.com/abstract=2713516 or http://dx.doi.org/10.2139/ssrn.2713516.\
+\
+\\bibitem\{roncalli2013\}\
+Roncalli, T. (2013). Introduction to Risk Parity and Budgeting. Chapman \\& Hall/CRC Financial Mathematics Series. Available at SSRN: https://ssrn.com/abstract=2272973 or http://dx.doi.org/10.2139/ssrn.2272973.\
+\
+% Business analysis\
+\
+\\bibitem\{JPM2023\}\
+JPMorgan Asset Management (JPM AM). Global Macro Outlook 2023-2024: https://am.jpmorgan.com/us/en/asset-management/adv/insights/market-insights/investment-outlook/\
+\
+\\bibitem\{gsamgis2023\}\
+Goldman Sachs Asset Management (GS AM).\
+\\textit\{Global Investment Strategy 2023\}.\
+\\url\{https://www.gsam.com/content/gsam/us/en/advisors/market-insights/market-strategy/outlook/2023/investment-ideas-2023-coming-up-for-air.html\}.\
+\
+\\bibitem\{blackrockgai2023\}\
+BlackRock.\
+\\textit\{Global Allocation Insights 2023\}.\
+\\url\{https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/outlook\}.\
+\
+\\end\{thebibliography\}\
+\
+\\newpage`\
+\
+\
+\\section*\{Appendix\}\
+%Include additional materials like extended data tables, code listings, or supplementary figures if necessary.\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}\{0.8\\linewidth\}\
+    \\includegraphics[width=1\\linewidth]\{Portfolio Management M2GRA/Plots_PMM2GRA/pf_plot_1.png\}\
+    \\caption\{Cumulative return of G10 currencies. Data extracted from Refinitiv Eikon.\}\
+    \\label\{fig:fig1\}\
+  \\end\{subfigure\}\
+  \\hfill\
+  \\begin\{subfigure\}\{0.8\\linewidth\}\
+    \\includegraphics[width=1\\linewidth]\{Portfolio Management M2GRA/Plots_PMM2GRA/pf_plot_2.png\}\
+    \\caption\{Cumulative return of oil (Ticker: UCO). Data extracted from Refinitiv Eikon.\}\
+    \\label\{fig:fig2\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\
+\\begin\{figure\}[ht!]\
+    \\includegraphics[width=1\\linewidth]\{Portfolio Management M2GRA/Plots_PMM2GRA/pf_plot_3.png\}\
+    \\caption\{Cumulative return of gold (Ticker: GLD). Data extracted from Refinitiv Eikon.\}\
+    \\label\{fig:fig3\}\
+\\end\{figure\}\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}\{1\\linewidth\}\
+    \\includegraphics[width=1\\linewidth]\{Portfolio Management M2GRA/Plots_PMM2GRA/pf_plot__HRP_weight.png\}\
+    \\caption\{Weights allocation of HRP portfolio.Source: Riskfolio-lib package.\}\
+    \\label\{fig:fig4\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}\{1\\linewidth\}\
+    \\includegraphics[width=1\\linewidth]\{Portfolio Management M2GRA/Plots_PMM2GRA/pf_plot_drawdown.png\}\
+    \\caption\{Drawdown of the different strategies implemented.\}\
+    \\label\{fig:fig5\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}\{1\\linewidth\}\
+    \\includegraphics[width=1\\linewidth]\{Portfolio Management M2GRA/Plots_PMM2GRA/pf_plot_correlation_strats.png\}\
+    \\caption\{Correlation structure of the different strategies implemented.\}\
+    \\label\{fig:fig6\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}\{1\\linewidth\}\
+    \\includegraphics[width=1\\linewidth]\{Portfolio Management M2GRA/Plots_PMM2GRA/cumulative_return_stategy.png\}\
+    \\caption\{Cumulative return of the different strategies implemented.\}\
+    \\label\{fig:fig7\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\\end\{document\}}

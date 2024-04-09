@@ -1,0 +1,477 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass\{article\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage[T1]\{fontenc\}\
+\\usepackage\{amsmath, amsfonts, amssymb\}\
+\\usepackage\{graphicx\}\
+\\usepackage\{subcaption\}\
+\\usepackage\{array, booktabs\}\
+\\usepackage\{hyperref\}\
+\\usepackage\{enumitem, geometry, titlesec\}\
+\\usepackage\{booktabs\}\
+\\usepackage\{tabularx\}\
+\\usepackage\{threeparttable\}\
+\\usepackage\{colortbl\} % For coloring cells\
+\\usepackage\{xcolor\} % Define colors\
+\\usepackage\{booktabs\} % For prettier tables\
+\\usepackage\{siunitx\} % Required for alignment\
+\
+\
+\\title\{Comparative analysis of CPPI and OBPI portfolio insurance strategies under different modelling techniques: Black-Scholes versus L\'e9vy jump diffusion process\}\
+    \
+\\author\{\
+    Youssef LOURAOUI \\\\\
+    M2 Risk and Asset Management \\\\\
+    Universit\'e9 Paris-Saclay \\\\\
+    \\texttt\{youssef.louraoui@essec.edu\}\
+    \\and\
+    Hassan Khalil\\\\\
+    M2 Quantitative Finance \\\\\
+    Universit\'e9 Paris-Saclay \\\\\
+    \\texttt\{hassan.khalil@etud.univ-evry.fr\}\
+    \\and\
+    Najwa Kandali\\\\\
+    M2 Quantitative Finance \\\\\
+    Universit\'e9 Paris-Saclay \\\\\
+    \\texttt\{najwa.kandali@etud.univ-evry.fr\}\
+\}\
+\\date\{18/02/2024\}% or specify a date\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\
+\\thispagestyle\{empty\}% Removes page number on title page\
+\
+\\newpage % Starts the main content on the next page\
+\
+\\begin\{tabularx\}\{\\textwidth\}\{X\}\
+\\textbf\{Abstract\} \\\\\
+\\addlinespace\
+\\textbf\{Introduction\} \\\\\
+\\addlinespace\
+\\textbf\{Background\} \\\\\
+\\addlinespace\
+1.1 Literature Review \\\\\
+1.2 Objective of the Report \\\\\
+\\addlinespace\
+\\textbf\{Methodology\} \\\\\
+\\addlinespace\
+2.1 Model Descriptions \\\\\
+2.2 Implementation in R \\\\\
+\\addlinespace\
+\\textbf\{Analysis and Results\} \\\\\
+\\addlinespace\
+3.1 CPPI under Black-Scholes vs. Jump Diffusion Model \\\\\
+3.2 Comparison of CPPI and OBPI under Black-Scholes Model \\\\\
+\\addlinespace\
+\\textbf\{Discussion and Conclusion\} \\\\\
+\\addlinespace\
+\\textbf\{References\} \\\\\
+\\addlinespace\
+\\textbf\{Appendices\} \\\\\
+\\addlinespace\
+\\end\{tabularx\}\
+\\newpage\
+\
+\\begin\{abstract\}\
+Portfolio insurance strategies are designed to protect investors from large losses in their portfolios by guaranteeing a minimum value at a given future date. This report compares two popular portfolio insurance strategies: Constant Proportion Portfolio Insurance (CPPI) and Option Based Portfolio Insurance (OBPI) under two different modelling techniques: Black-Scholes and L\'e9vy jump diffusion process. The performance of the strategies is evaluated using the S\\&P 500 index as the risky asset and the US 10-year Treasury bill as the risk-free asset. A Monte Carlo simulation is used to analyse the return distribution and sensitivity of the strategies to various model parameters. The main findings of the report are that CPPI outperforms OBPI in terms of expected return and downside risk, but OBPI has lower transaction costs and volatility. The choice of the modelling technique also affects the performance of the strategies, with L\'e9vy jump diffusion process capturing the fat tails and skewness of the return distribution better than Black-Scholes. The report provides implications and recommendations for investors who want to use portfolio insurance strategies in their asset allocation decisions.\\newline\
+\
+\\textbf\{Keywords: Portfolio Insurance, CPPI, OBPI, Black-Scholes, L\'e9vy Jump Diffusion, Monte Carlo Simulation.\}\\newline\
+\
+\\end\{abstract\}\
+\
+\
+\\newpage\
+\
+\\section\{Introduction\}\
+\\subsection*\{Background\}\
+Capital preservation strategies have been developed to respond to the requirements of investors seeking portfolio protection methods that guarantee the value of their portfolio will not decline below a certain level at a given future date. Leland (1980) demonstrated that portfolio insurance maximises the expected utility of two distinct groups of investors \\cite\{Diderich2009\}. The first ones can be denominated as safety-first investors, who are those who possess average market return expectations but have a higher degree of risk aversion that escalates more rapidly with wealth compared to the ordinary investor. The second group are investors with moderate risk aversion but above-average market return expectations who want well-diversified investment managers that anticipate generating positive alpha on average.\\newline\
+\
+These investors have a hyperbolic absolute risk aversion (HARA) utility function, indicating a preference for spending over savings and a tendency to avoid risk. There are two categories of portfolio insurance strategies \\cite\{Diderich2009\}. Static strategies involve a buy-and-hold approach, meaning that once an investment is made, it is held for a long period of time without making frequent changes.Dynamic methods, on the other hand, need regular adjustments to the portfolio based on market conditions and other factors ~\\ref\{fig:Portfolioinsurancematrix\}. \\newline\
+\
+Portfolio insurance investment methods do not necessitate any form of forecasting skill. The utility function of the investor, which can be characterised by a number of factors like the bare minimum required wealth level and time horizon, is the only factor that influences portfolio insurance investing processes \\cite\{Diderich2009\}.\\newline\
+\
+The significance of implementing a portfolio insurance investment procedure arises from the investor's having a risk preference that exhibits asymmetry around the mean, as depicted in ~\\ref\{fig:CPPIpayoff\}. Furthermore, the investor must indicate the maturity date, which is the desired date for asset recovery, the floor or protection level, which is the minimum value the portfolio should have at maturity, the performance asset, which is the chosen market in which the investor intends to be involved, and the return expectation or risk aversion, which refers to the anticipated level of commitment in the performance asset's fluctuations.\\newline\
+\
+\
+\\subsection\{Literature Review\}\
+%Summarize key findings from existing literature on CPPI and OBPI strategies. Highlight how these strategies have evolved and their significance in different market conditions.\\newline\
+\
+As mentioned in the introduction, the utility of implementing such portfolio protection strategies arises from investor's heterogeneous risk preferences.  The most basic form of a Portfolio Insurance Investment Plan (PIIP) is known as the stop-loss strategy. This approach involves an initial investment entirely in a performance asset, with a switch to a risk-free asset if the portfolio's value falls below a predetermined threshold before the maturity date \\( T \\). Mathematically, if the portfolio value at time \\( t \\) is less than the discounted floor value \\( V(t) = F(T) \\cdot e^\{-r(T-t)\} \\), then the assets are transferred into a risk-free investment. Proper execution of this strategy promises a specific payoff, as depicted in a designated figure \\cite\{Diderich2009\}.\\newline\
+\
+However, this strategy is not without its downsides. The main drawback is the potential discontinuity in the performance asset's prices, which can impede the ability to sell at the floor price \\( F(T) \\cdot e^\{-r(T-t)\} \\), thus risking the guaranteed floor value at maturity. Moreover, if the performance asset's price falls below the floor's barrier, it ceases to contribute to the portfolio's returns. Brennan and Solanki (1981) have demonstrated that such a strategy is generally in conflict with the principle of maximizing expected utility \\cite\{Diderich2009\}.\\newline\
+\
+An alternative elementary PIIP involves purchasing a zero-coupon bond for \\( F(T) \\cdot e^\{-rT\} \\), representing a risk-free investment, and allocating the remainder to the performance asset. This tactic ensures the floor value \\( F(T) \\) at maturity, barring default by the bond issuer, while allowing limited participation in the returns of the performance asset. The portfolio's value at maturity is then given by the equation:\\newline\
+\
+\\[ V(T) = F(T) + \\frac\{S(T)\}\{S(0)\} \\cdot (1 - e^\{-rT\}) \\]\
+\
+Regrettably, such a strategy is generally less than optimal concerning the maximization of expected utility \\cite\{Diderich2009\}.\\newline\
+\
+\\subsection*\{Constant Proportion Portfolio Insurance (CPPI) strategy\}\
+\
+The CPPI, credited to Perold and Sharpe (1988) for fixed-income\
+instruments and Black and Jones (1987) for equity instruments, employs a\
+straightforward strategy for dynamic asset allocation over time \\cite\{Diderich2009\}. The investor initiates the process by establishing a floor, representing the lowest acceptable value for the portfolio. Subsequently, the cushion is calculated as the surplus of the portfolio value over the floor, and the allocation to the risky asset is determined by multiplying the cushion by a predetermined multiple \\cite\{Perold1986\}. The investor's risk tolerance has an impact on both the floor and the multiple, which are independent of the model. The combined amount allocated to the risky asset is referred to as the exposure, with the remaining funds directed towards the reserve asset, typically T-bills \\cite\{Diderich2009\}.\\newline\
+\
+In the context of the portfolio at any point in time, the term 'cushion' \\( C(t) \\) is described as follows \\cite\{Perold1986\}:\
+\
+\\[ C(t) = \\max\\\{V(t) - F(T) \\cdot e^\{-r \\cdot (T-t)\}, 0\\\} \\]\
+\
+The 'cushion' signifies that portion of the portfolio which can be reduced without negatively impacting the guaranteed capital at the time of maturity. Within the CPPI strategy, the multiplier \\( m \\) dictates the investment in the performance asset as \\( m \\cdot C(t) \\), with the remainder \\( V(t) - m \\cdot C(t) \\) allocated to the risk-free asset ~\\ref\{fig:CPPIstructure\}. The decision to adjust the investment in the risk-free asset is based on the performance asset's return rate, which either escalates or diminishes the amount invested in it \\cite\{Perold1986\}. \
+\
+\
+\\subsection*\{Option Based Portfolio Insurance (OBPI) strategy\}\
+\
+The option based portfolio insurance (OBPI) investment process was introduced in 1976 by Leland and Rubinstein (1988)\\cite\{leland1988\} \\cite\{Diderich2009\}. It is based on the seminal work of Black and Scholes (1973) \\cite\{black1973\} on option pricing. The investor buys a zero coupon bond with a face value of the floor F (T) at maturity. The remaining proceeds are then used to buy at the money European call options on the performance asset.\\newline \
+\
+The portfolio's value at any given time \\( t \\) can be represented as the sum of the present value of the floor and the value derived from a number of call options. The equation is given by\\cite\{leland1988\}\\cite\{Diderich2009\}:\\newline\
+\
+\\[ V(t) = F(T) \\cdot e^\{-r(T-t)\} + n \\cdot C(t, F(T), S(t), T, \\sigma_S(t), r) \\]\\newline\
+\
+Here, \\( C(t, K, S(t), T, \\sigma_S(t), r) \\) denotes the price of a European call option on the underlying performance asset at time \\( t \\), with a maturity \\( T \\), strike price \\( K \\), current price \\( S(t) \\), implied volatility \\( \\sigma_S(t) \\), and the risk-free interest rate \\( r \\). The parameter \\( n \\) is defined as the number of call options that can be acquired with the funds that are not invested in the zero-coupon bond, formulated as:\\newline\
+\
+\\[ n = \\frac\{V(0) - F(T) \\cdot e^\{-rT\}\}\{C(0, F(T), S(0), T, \\sigma_S(0), r)\} \\]\\newline\
+\
+This representation determines the quantity of call options that can be purchased with the amount leftover after buying the zero-coupon bond \\cite\{leland1988\}.\\newline\
+\
+An analogous protection strategy may be created by retaining full ownership of the performance asset and acquiring a put option with a strike price equal to F(T) on the same asset. The put-call parity theorem establishes the equivalence between the bond plus call and equity plus put.\
+The investing processes of OBPI have two primary benefits. Static structures necessitate trading only during the establishment of the strategy and are unaffected by fluctuations in the value of the performance asset \\cite\{leland1988\}\\cite\{Diderich2009\}.\\newline\
+\
+However, the investor in an OBPI investing process faces certain drawbacks. The effectiveness of this investing strategy relies on the quantity, denoted as n, of call options that may be purchased using the remaining funds not allocated to the zero coupon bond \\cite\{leland1988\}\\cite\{Diderich2009\}. The price of an option is determined by the volatility of the underlying asset's performance and the risk-free rate. Consequently, the potential performance participation rate is contingent upon the values of these two parameters at the time of setup. Excessive fluctuations and/or low interest rates have a negative impact on the anticipated rate of participation in the performance of asset returns \\cite\{leland1988\}\\cite\{Diderich2009\}. Furthermore, since the volatility cannot be directly observed, the liquidity of the option market has a crucial significance. Greater market liquidity increases the likelihood that the volatility value used to price the option is closer to its fair value. For over-the-counter options, the investor is exposed to counterparty risk, which can become substantial as the option becomes more valuable. Acquiring options for the performance asset at the desired strike price and/or maturity might not be feasible. In this scenario, the investor has the ability to replicate the option's payoff in a dynamic manner \\cite\{leland1988\}\\cite\{Diderich2009\}. Within the framework of comprehensive markets, this can be achieved by the implementation of a self-financing and duplicating strategy. Furthermore, it is impossible for a zero coupon bond to be available for the given maturity period. Instead, it is advisable to utilise shorter-term zero bonds or coupon bonds and mitigate reinvestment risk by employing swaptions \\cite\{leland1988\}\\cite\{Diderich2009\}.\\newline\
+\
+It is crucial to acknowledge that OBPI techniques ensure the minimum value only when they reach maturity. The portfolio's value may decrease below the predetermined minimum value prior to maturity as a result of increasing interest rates, declining asset values, and/or reduced volatility of the performance asset \\cite\{leland1988\}\\cite\{Diderich2009\}.\\newline\
+\
+\
+\\subsection\{Objective of the Report\}\
+%Clearly state the objectives, such as comparing CPPI under different models (Black-Scholes and L\'e9vy process) and analyzing CPPI vs. OBPI strategies.\
+\
+A preliminary statistical analysis of the risky asset (the S\\&P 500 index, which represents the market portfolio as the performance asset) and the risk-free rate (captured by the US 10-year Treasury bill) is conducted in this report to examine the performance of the CPPI strategy. The second goal is to examine alternative portfolio insurance strategies, in this case the OBPI strategy. We analyse the performance of both portfolio insurance strategies, evaluate their sensitivity to various model parameters, and analyse their return distribution using a Monte Carlo simulation.\
+\
+\
+\\section\{Methodology\}\
+\
+The methodology section is organised into two main subsections: the first part explains the theoretical underpinnings of Levy Process jump modelling and Black-Scholes jump modelling, providing a strong foundation for the RStudio implementation, and the second part relates to the RStudio implementation and explains the main structure of the code to enhance comprehension.\
+\
+\\subsection\{Model Descriptions\}\
+\\subsubsection\{Black-Scholes Model\}\
+\
+Within the field of financial mathematics, numerous significant models have been developed to tackle the complex aspects of option pricing. One of the most influential models in finance is the Black \\& Scholes model, developed by Fischer Black, Myron Scholes, and Robert Merton. That model might be considered a significant milestone in the field, as it introduced an analytical approach for calculating the values of European-style options \\cite\{black1973\}. The fundamental equation of this model is the well-established Black-Scholes partial differential equation (PDE). The price of a European option can be determined by solving this equation under specific conditions \\cite\{black1973\}. The model is based on several underlying assumptions, including the presence of a constant and known risk-free rate, a constant level of volatility, the assumption that stock prices follow a geometric Brownian motion, the absence of any dividend payments throughout the lifespan of the option, the absence of any arbitrage opportunities, and the limitation that European-style options can only be exercised upon expiration. The uniqueness of the model lies in its ability to provide an analytical solution, enabling efficient calculations and establishing it as a fundamental tool in the field of financial engineering. Nevertheless, the subject under discussion has its share of critics. The primary focus of criticisms revolves around the assumptions made by the theory, specifically the assumption of consistent volatility. Empirical evidence suggests that volatility in real-world scenarios frequently exhibits stochastic behavior, perhaps manifesting in a "smile" or "skew" pattern \\cite\{black1973\}.\\newline\
+\
+\\subsubsection*\{Assumptions and characteristics\}\
+\
+The model's derivation results in the well-known Black-Scholes Partial Differential Equation (PDE), which, under specific conditions, can be solved to ascertain the theoretical price of a European option.\\newline \
+\
+An essential foundation of the Black-Scholes model is the assumption that the risk-free interest rate remains constant and is generally known \\cite\{black1973\}.The interest rate serves as a means to adjust the future payoffs of the options to their current values, taking into account the concept of the time value of money. Another crucial assumption of the model is that the volatility of the returns of the underlying asset remains constant across time. Volatility, which quantifies the level of risk associated with the asset, is incorporated into the model as a key factor in determining the value of the option. By assuming that volatility remains constant, the calculations are simplified and a solution that can be expressed in a mathematical formula is obtained \\cite\{black1973\}.The Black-Scholes model considers that the underlying stock prices adhere to a geometric Brownian motion, indicating that the logarithm of stock price returns follows a normal distribution and the stock prices themselves follow a log-normal distribution. The stochastic process determines the unpredictable trajectory that stock prices are believed to follow, which is characterized by constant and seamless price fluctuations.\\newline\
+\
+Another simplification involves the omission of dividends. The Black-Scholes model postulates that the underlying asset remains dividend-free during the duration of the option \\cite\{black1973\}. This assumption is essential as dividends can impact the price of the underlying asset, hence influencing the pricing of the option. The model is based on the notion of the absence of arbitrage opportunities, indicating that it is impossible to make a riskless profit. The fundamental principle of arbitrage-free markets guarantees that the option pricing model is equitable and that the values of the underlying asset and the option are in alignment with each other \\cite\{hull2017\}.\\newline\
+\
+The Black-Scholes model is exclusively tailored for European-style options, which can only be exercised on the option's expiration date. In contrast, American-style choices allow for exercising at any point up until the expiration date.\\newline\
+\
+For a call option, the payoff is expressed as follows:\\newline\
+\\begin\{equation\}\
+  (S_T-K)^+ = \\max(S_T-K; 0)\
+\\end\{equation\}\
+\
+where \\( K \\) represents the strike price of the option and \\( S_T \\) represents the price of the underlying at time \\( t \\).\\newline\
+\
+The formula to price a European call under BS is given below:\\newline\
+\
+\\begin\{equation\}\
+  C(S_0,K,r,T,\\sigma) = S_0 N(d_1) - Ke^\{-rT\} N(d_2)\
+\\end\{equation\}\
+\
+where \\( N(d_1) \\) and \\( N(d_2) \\) are cumulative distribution functions of a standard normal distribution. The \\( d_1 \\) and \\( d_2 \\) functions in the Black-Scholes model are computed as:\\newline\
+\
+\\begin\{align\}\
+    d_1 = \\frac\{1\}\{\\sigma\\sqrt\{T\}\} \\left[ \\ln\\left(\\frac\{S_0\}\{K\}\\right) + \\left(r + \\frac\{1\}\{2\} \\sigma^2\\right)T \\right] \\\\\
+    d_2 = d_1 - \\sigma\\sqrt\{T\}\
+\\end\{align\}\
+\
+The Gaussian distribution function is given by:\\newline\
+\\begin\{equation\}\
+    N(x) = \\int_\{-\\infty\}^x \\frac\{1\}\{\\sqrt\{2\\pi\}\} e^\{-\\frac\{1\}\{2\} u^2\} \\, du\
+\\end\{equation\}\
+\
+The payoff for a put option is given by:\\newline\
+\\begin\{equation\}\
+    (K - S_T)^+ = \\max(K - S_T, 0)\
+\\end\{equation\}\
+\
+where \\( K \\) is the strike price and \\( S_T \\) is the asset price at maturity.\\newline\
+\
+For a put option, the Black-Scholes model can be rewritten as:\\newline\
+\\begin\{equation\}\
+    P(S_0, K, r, T, \\sigma) = Ke^\{-rT\} N(d_2) - S_0 N(d_1)\
+\\end\{equation\}\
+\
+\
+where \\( T \\) represents time to maturity, \\( S_0 \\) represents the underlying asset price at \\( t = 0 \\),  \\( K \\) represents the strike price, \\( \\sigma \\) represents the volatility of the option, and \\( r \\) represents the risk-free rate.\\newline\
+\
+The model's beauty lies in its analytical solution, allowing for quick computations. It has become the foundational model in financial engineering. However, its assumptions, especially constant volatility, have been criticized. Market observations show that volatility can be stochastic and is often "smiled" or "skewed" \\cite\{hull2017\}.\\newline\
+\
+In summary, the Black-Scholes model relies on a simplified set of assumptions to provide a theoretical framework for option pricing. While the model has been heavily used and is widely recognized as a reference in the financial industry, its assumptions have been subject to scrutiny, leading to the development of alternative models that attempt to relax these conditions and accommodate a wider range of market phenomena.\\newline\
+\
+\\subsubsection\{Jump Diffusion Model (L\'e9vy Process)\}\
+\
+We will elaborate on the Merton model as a foundation for jump diffusion modelling. The Merton represent significant improvement in financial modeling, expanding upon the classic Black-Scholes framework by incorporating a Poisson jump-diffusion process \\cite\{kou2002\}. This integration marks a pivotal development in the understanding of asset pricing.\\newline\
+\
+Developed by Robert C. Merton, this model skillfully combines the continuous path of geometric Brownian motion, inherent in the Black-Scholes model, with the stochastic and discrete nature of jump processes \\cite\{merton1976\}. This combination allows the Merton model to reflect a more comprehensive picture of market behavior, acknowledging both the gradual, day-to-day price variations and the less frequent, yet impactful, abrupt price shifts that occur in financial markets. Its core assumptions posit that stock prices follow a blend of geometric Brownian motion and jump processes, and that jumps are log-normally distributed and occur at a Poisson rate. One of its main strengths is its capacity to account for abrupt, significant price fluctuations, or "jumps". However, it introduces a layer of complexity, and deriving analytical solutions becomes more intricate. Aligning it with market data can also present challenges \\cite\{merton1976\}.\\newline\
+\
+\\subsubsection*\{Assumptions and characteristics\}\
+\
+Jump diffusion models are a cornerstone in financial mathematics, offering a more realistic depiction of asset price dynamics compared to the standard Black-Scholes model. These models incorporate random jumps in asset prices, addressing the limitation of continuous paths assumed in classical models. A significant advancement in this area is the introduction of L\'e9vy processes, particularly in the Merton jump-diffusion model.\\newline\
+\
+L\'e9vy processes extend the classical Brownian motion by including a jump component, capturing the empirical observation of sudden and significant changes in asset prices. The general form of a L\'e9vy process $(X_t)_\{t \\geq 0\}$ can be described as:\\newline\
+\
+\\begin\{equation\}\
+X_t = \\mu t + \\sigma W_t + J_t\
+\\end\{equation\}\
+\
+where $\\mu$ is the drift coefficient, $\\sigma$ is the volatility, $W_t$ is a standard Brownian motion, and $J_t$ represents the jump component, often modeled as a compound Poisson process.\\newline\
+\
+The Merton jump-diffusion model, introduced by \\cite\{merton1976\}, is a pioneering work integrating jumps into asset pricing. In Merton's framework, the asset price $S_t$ is given by the exponential of a L\'e9vy process:\\newline\
+\
+\\begin\{equation\}\
+S_t = S_0 \\exp\\left( \\left(\\mu - \\frac\{\\sigma^2\}\{2\}\\right)t + \\sigma W_t + \\sum_\{i=1\}^\{N_t\} (Y_i - 1) \\right)\
+\\end\{equation\}\
+\
+where $S_0$ is the initial asset price, $N_t$ is a Poisson process representing the number of jumps up to time $t$, and $Y_i$ are i.i.d. random variables representing the relative jump sizes.\\newline\
+\
+L\'e9vy processes and jump diffusion models, particularly the Merton model, provide a powerful framework for capturing the complex behavior of asset prices. They address the limitations of continuous models and are essential for accurately pricing financial derivatives and assessing risk in financial markets.\\newline\
+\
+A distinctive feature of the Merton model is its assumption that jumps are log-normally distributed and occur at a rate determined by a Poisson process. This assumption is crucial, as the log-normal distribution ensures that stock prices remain positive, while the Poisson process provides a probabilistic framework for the occurrence and frequency of these jumps. This framework is particularly adept at capturing the dynamics of market reactions to significant events or unexpected news that can dramatically influence the value of underlying assets \\cite\{merton1976\}.\\newline\
+\
+The addition of a jump component introduces a layer of complexity to the model. While this enriches the model's capability to mirror real-world market phenomena, it also makes analytical solutions more intricate and challenging to derive \\cite\{merton1976\}. The calibration of the Merton model to actual market data is a sophisticated task, demanding advanced numerical methods and a deep understanding of market dynamics and investor behavior. Despite these complexities, the Merton model has proven to be a valuable tool in financial markets, particularly in volatile environments where significant price jumps are more prevalent. Its ability to model these jumps provides a powerful mechanism for pricing complex financial derivatives and managing risks associated with abrupt market movements \\cite\{merton1976\}.\\newline\
+\
+In summary, the Merton model's introduction of jump-diffusion processes to option pricing theory represents a significant leap forward from the Black-Scholes model, offering a more nuanced and comprehensive approach to understanding asset price dynamics. Its analytical complexity, while posing certain challenges, is a testament to the model's depth and its capacity to capture the multifaceted nature of financial markets. As a result, the Merton model remains a fundamental element in the toolkit of financial engineers and analysts, especially valuable in scenarios characterized by significant and rapid market changes.\\newline\
+\
+\\subsection\{Implementation in R\}\
+%Detail the approach for implementing these models and strategies in R, including the simulation setup, parameters used, and the reasoning behind these choices.\\newline\
+\
+The implementation of portfolio insurance strategies, namely CPPI (Constant Proportion Portfolio Insurance) and OBPI (Option-Based Portfolio Insurance), involves the use of financial derivatives and dynamic portfolio allocation to provide a guaranteed level of protection to the investment portfolio.\\newline\
+\
+First, the 'quantmod' package is used to get historical market data for a risky asset (the S\\&P 500 Index) and a risk-free rate (the U.S. 10-Year Treasury yield). The data is then aligned by date to make sure that the frequency is consistent, and it is processed to get daily returns. Market jumps are defined as changes in the index's returns that are greater than a certain threshold and are set to three times the standard deviation of the returns. These jumps can significantly impact the returns and risk profile of the investment strategy. A GARCH (Generalized Autoregressive Conditional Heteroskedasticity) model is fitted to the S\\&P 500 returns to estimate and forecast future volatility, an essential component in the risk management of investment strategies.\\newline\
+\
+The CPPI strategy moves money around between a risky asset and a risk-free asset by setting a "cushion" as the difference between the asset value and a set floor. The risky asset exposure is a multiple of this cushion, and the multiplier shows how aggressive the protection strategy is. The OBPI strategy is a type of portfolio insurance that uses a European call option to mimic the payoffs of a put option, offering downside protection.\\newline\
+\
+We use a Monte Carlo simulation to look at what might happen with the CPPI and OBPI strategies over time. The simulation creates a number of possible future equity paths by looking at the returns on the underlying assets and the way option prices change over time. It helps us come up with a series of random returns based on the risk-free rate, the risky asset's expected return, and its volatility. We then use these returns to simulate the equity price paths, pricing call options along the way.\\newline\
+\
+The simulation and sensitivity analysis results are then visualised using histograms and line plots to show the distribution of final equity values. The sensitivity analysis involves varying key variables such as the risk-free rate, stress scenarios, volatility, expected returns, and strike prices to better understand how changes in market conditions affect the performance of portfolio insurance strategies.\\newline\
+\
+\\section\{Analysis and Results\}\
+\\subsection\{CPPI under Black-Scholes vs. Jump Diffusion Model\}\
+%Present the results of CPPI strategy implementation under both models. Include visualizations (plots/graphs) generated from R. Discuss the behavioral differences observed in the CPPI strategy under the two models.\
+\
+The empirical analysis of the data performed over a ten-year dataframe from 2013-01-01 to 2023-01-01 tries to investigate on the performance of these two asset classes, reviewing historical trends and finding factors that influence their distinct risk and return characteristics.\\newline\
+\
+The 10-year T-bill yield, which shows the interest rate paid on T-bills, fluctuated significantly over the time under consideration. In 2013, the yield averaged 2.15\\%, a significant decrease from its peak of 3.87\\% in 2011. This drop has been attributed to the Federal Reserve's (Fed) reduction of its quantitative easing (QE) programme and a better economic outlook. From 2014 to 2016, the yield remained reasonably constant between 1.50\\% and 2.00\\% as the Federal Reserve maintained its accommodating monetary policy. The Fed began to normalise its monetary policy in 2017, which resulted in a gradual rise in the 10-year Treasury bill rate. The yield peaked at 3.22\\% in 2019. However, the COVID-19 pandemic and the Fed's expansionary monetary policy response resulted in a dramatic drop in the yield in 2020, reaching a low of 0.52\\% in August. Since 2020, the yield has risen gradually, averaging 1.93\\% in 2021 and 2.97\\% in 2023, demonstrating the Fed's continuous attempts to control inflation.\\newline\
+\
+In contrast, the performance of the S\\&P 500 index has been more erratic. In 2013, the index increased by 32.3\\%, owing to improved economic conditions and the Fed's supportive monetary policies. However, the index encountered more difficult times in 2014\'962016, with negative effects from concerns about the global economic slowdown and the Fed's prospective interest rate hikes. The S\\&P 500 index began to recover in 2017, and it has continued to rise in consecutive years, reaching an all-time high of 3,386.16 in July 2019. However, the COVID-19 pandemic in 2020 resulted in a substantial reduction, with the index falling 33.9\\% in the first quarter. Despite this loss, the S\\&P 500 index showed resilience, rising rapidly in the second half of the year and finishing 2020 with a 16.3\\% gain. The index's increasing trend continued in 2021 and 2023, with an all-time high of 4,818.62 in January 2023 ~\\ref\{fig:SPXprice\}.\\newline\
+\
+The performance of the 10-year US Treasury bill and the S\\&P 500 index from 2013 to 2023 is mixed. According to our empirical analysis of the risky asset and the risk-free asset used to construct the different portfolio insurance strategies, the US 10-year Treasury bill yield averaged across the period analysed had a level close to 2.15\\% and a volatility in terms of yield level of 0.07\\%. The S\\&P 500 index stayed on average at a level close to 2742.69 and returned on average 11.22\\% with a volatility of 17.83\\%. During the same time frame, there was a -0.023 correlation coefficient between the performance asset and the risk-free asset. This shows that having both assets in an investment portfolio could help diversify it. \\newline\
+\
+In order to properly capture the volatility clustering and general behaviour of the performance asset, we additionally construct a volatility modelling to comprehend the behaviour of the asset in terms of jumps. This is done by applying a GARCH model. The S\\&P 500 index returns shown against the fitted volatility from a GARCH model offers a detailed look at the dynamics of the market across time. As captured in the plot ~\\ref\{fig:GARCHSP500\}, we can see that there is an important volatility clustering around 2020, when the COVID pandemic hit the global financial market with its large scale and uncertain impacts. Significant changes emphasise periods of market stress or euphoria, and it depict actual return fluctuations. The red line, which shows the model's estimated conditional volatility, shows how volatility tends to cluster over time. This is a feature that makes it stand out: times of major market instability are often followed by times that are just as unstable. Additionally, this volatility clustering indicates when greater caution and plan adjustments may be required due to elevated risk. The volatility estimate reacts to spikes in real returns, demonstrating the model's reactivity to market events and providing insights on the market's reflexive behaviour in the face of new information.\\newline \
+\
+In addition to being descriptive, the GARCH model is predictive in nature, as it uses the most recent volatility estimate as a foundation for estimating short-term market risk. Forecasts of this kind play a critical role in the execution of investment and hedging strategies, such as CPPI, where portfolio insurance mechanisms depend on an understanding of volatility dynamics. The model's ability to accurately reflect market behaviour during periods of volatility is particularly noteworthy, as it is essential for determining risk indicators such as Value at Risk (VaR) and Expected Shortfall that guide risk management and regulatory compliance. Taking into account these factors, one must also take into account the possibility of model constraints and the risk of misspecification, given the volatility and return distribution assumptions used in the model.The GARCH model is therefore an effective tool for analysing financial time series data, but its use needs to be balanced with an understanding of its limitations and the overall financial climate.\\newline \
+\
+To construct the insurance portfolios, we rely on the results obtained from the preliminary statistical analysis to construct the models based on the following parameters:\\newline\
+\
+\\begin\{itemize\}\
+\\item 'S0' as the index price at start is set as the average index level over the 10 year of data covered 2742.19. \
+\\item 'T' as the investment's time horizon, which covers the period analysed, equivalent to 10 years worth of data. \
+\\item 'r' as the risk-free interest rate, which take into account the average yield over the period analysed equivalent to 2.15\\%.\
+\\item 'Sigma' as the standard deviation or volatility, of the index's returns equivalent to the average volatility over the 10 years of data analysed (17.58\\%).\
+\\item 'lambda' as the jump process's intensity in L\'e9vy process, equivalent in our empirical analysis to 3.81. \
+\\item 'k' as the logarithmic leap size on average (-0.011).\
+\\item 'delta' as the leap size's standard deviation (0.0539).\
+\\item 'multiplier' as the portfolio's aggressive response to variations in the cushion, or the gap between asset value and floor (4).\
+\\item 'floor' of the CPPI strategy's protection level is typically expressed as a percentage of the initial investment (80\\% of the initial capital).\
+\\item 'steps' which represent the simulation's total number of time steps, which typically correlates to the number of trading days in a year (252 trading days as we deal with daily data). \
+\\end\{itemize\}\
+\
+After simulating the CPPI strategy using two different modelling methods (Black-Scholes and Jump diffusion under L\'e9vy process), we can highlight the following. The simulated portfolio values over time under the Black-Scholes model and the L\'e9vy process are shown in Figure. Both models use a Constant Proportion Portfolio Insurance (CPPI) method to simulate the evolution of portfolio value ~\\ref\{fig:BSlevypayoff\}.\\newline\
+\
+The Black-Scholes model's (blue line) volatility and fluctuations display a trajectory with notable fluctuations, indicating that continuous trading and a constant volatility parameter are underlying assumptions of the model. A smooth diffusion process is produced by these assumptions, which might not always be able to capture sharp market fluctuations. There seems to be more of a jagged trajectory with sharper climbs and falls in the L\'e9vy model (red line). This behaviour is typical of L\'e9vy processes, which are intended to include jumps to account for the possibility of abrupt, notable changes in the market that may be brought on by unforeseen events or news.\\newline\
+\
+In terms of model differences, the L\'e9vy process shows times of abrupt increases or declines in portfolio value in contrast to the Black-Scholes model. These spikes may result from the model's capacity to account for both minor and major moves, which aren't always predicted by historical volatility or price trends. In contrast, these jumps are not taken into consideration by the Black-Scholes model. Its reliance on a lognormal price distribution undervalues the likelihood of significant price fluctuations, which may lead to a smoother curve but also understate risk.\\newline\
+\
+Keeping a dynamic allocation between a cash position and a hazardous asset is part of the CPPI approach. The exposure to the risky asset is determined by the "cushion," which is the difference between the asset value and a predefined floor. The CPPI strategy's multiplier increases the portfolio's reaction to profits and losses. The amplified patterns in both models demonstrate this, with gains having the potential to quickly boost portfolio value while losses have the potential to do the opposite.\\newline\
+\
+In terms of risk consideration, the L\'e9vy model's greater losses in portfolio value imply that this model might be more suited for stress-testing the portfolio against extreme market occurrences. Under typical market circumstances, the more optimistic Black-Scholes model might offer a forecast, but it might not be as reliable during market turbulence.\\newline\
+\
+The significance of model selection in risk management is highlighted by the variations in the portfolio value trajectories. Capital protection methods can be more effectively informed by a model (such as the L\'e9vy process) that accounts for the possibility of significant market movements. The accurate representation of real market behaviour by the underlying model is another factor that will determine how successful the CPPI strategy is. In the event that certain risks are not taken into account by the model, the CPPI strategy might not offer the anticipated degree of protection.\\newline\
+\
+\\subsection\{Comparison of CPPI and OBPI under Black-Scholes Model\}\
+%Outline the results of CPPI and OBPI strategies under the Black-Scholes framework. Highlight findings from the sensitivity analysis and Monte Carlo simulations. Use appropriate graphical representations to support the comparisons.\
+\
+After structuring the OBPI and CPPI strategies and estimate the different simulations to compare the different strategies, we implement a sensitivity analysis to understand how the models behave under a change of their key inputs. We look at the strike price (increase of two hundred points in terms of price level), the risk free rate change in yield (by a hundred basis point), the return of the performance asset (two hundred basis points), stress value (a hundred basis point increase).\\newline\
+\
+We assess the strike price and its variation in portfolio value as the strike price changes. The strike price is a key component in options-based strategies such as CPPI and OBPI. The plot suggests that the equity path (blue line) is volatile and reflects the underlying asset's price movements. In contrast, the CPPI (red line) and OBPI (purple line) strategies are relatively stable, indicating that they provide a cushion against the volatility of the equity. The 'floor' (green line) represents the minimum guaranteed value that the CPPI aims to protect. It is constant across time, showing that the insurance aspect of the strategy is not affected by the strike price variation. This plot suggest that the strategies are effective in providing downside protection without significantly sacrificing the upside potential, as seen by the convergence of the CPPI and OBPI values with the equity line towards the end of the period ~\\ref\{fig:Sensitivitystrike\}.\\newline\
+\
+When assesing the sensitivity of the return parameter, the plot underline how the strategies perform when the expected return (mu) of the underlying asset varies by 200 price level increase. Similar to the strike price variation plot, the equity path shows high volatility. The CPPI and OBPI strategies again show stability, indicating that the strategies' protective mechanisms are robust against changes in expected returns. When the underlying asset's returns are higher, both CPPI and OBPI strategies appear to capture some of the upside, as indicated by the increase in their values towards the end of the period ~\\ref\{fig:Sensitivitymu\}.\\newline\
+\
+\
+The stress value in a CPPI strategy is indicative of the level of risk aversion and dictates how much exposure to the risky asset is taken. Here, the plot suggests that as the stress value varies, there is little impact on the portfolio values of CPPI and OBPI strategies, which is indicative of the strategies' resilience. Again, the floor value remains constant, and the equity line shows significant volatility compared to the more stable CPPI and OBPI lines ~\\ref\{fig:Sensitivitystress\}.\\newline\
+\
+We also take a look on the impact of changing the risk-free rate on the portfolio values of the strategies. Typically, a higher risk-free rate would lead to a higher value of the risk-free asset component in the portfolio. However, the plot indicates that the variation in the risk-free rate does not significantly affect the CPPI and OBPI values, which could suggest that the asset mix is not overly sensitive to changes in the risk-free rate ~\\ref\{fig:Sensitivityrfr\}.\\newline\
+\
+Overall, these plots suggest that both CPPI and OBPI strategies are relatively stable across different market conditions and parameters. They offer downside protection while allowing participation in the upside, which is characteristic of portfolio insurance strategies. The equity curve's volatility emphasizes the need for such protective strategies in portfolio management. The constant floor value across all scenarios underlines the insurance feature of these strategies, ensuring that the portfolio value does not fall below a certain level.\\newline\
+\
+The three histograms below represent the distribution of final values from a Monte Carlo simulation for an equity simulation and two investment strategies, CPPI (Constant Proportion Portfolio Insurance) and OBPI (Option-Based Portfolio Insurance). Here is an analysis of each.\\newline\
+\
+This histogram displays the frequency distribution of the final values of a simulated equity investment over a given period. The distribution is bell-shaped and symmetric, suggesting a normal distribution of final equity prices. The central peak is around the 4000 price mark. There's a noticeable spread on both sides of the peak, which shows variability in the equity simulation payoffs ~\\ref\{fig:histogramEquity\}.\\newline\
+\
+The OBPI histogram also presents a right-skewed distribution, similar to the CPPI strategy, but the peak is closer to the 3850 price mark and the distribution is more concentrated. This indicates that the OBPI strategy outcomes are more tightly clustered around the peak, with fewer instances of both higher and lower values compared to the CPPI strategy. The strategy seems to offer a balance between protecting against downside risk and capturing some upside potential ~\\ref\{fig:histogramOBPI\}.\\newline\
+\
+The CPPI histogram shows a right-skewed distribution, indicating that most of the final values are concentrated on the left side but there is a long tail towards higher values. The peak of the distribution is just above the 3850 price mark, and the spread is narrower than the equity histogram, which suggest less variability in the CPPI strategy payoff compared to the equity simulation. The right skewness might also reflect a floor mechanism characteristic of CPPI strategies that limit downside risk but allow for participation in upside potential ~\\ref\{fig:histogramCPPI\}.\\newline\
+\
+\\section\{Discussion and conclusion\}\
+%Implications in Financial Risk Management: Discuss the practical implications of your findings, especially in the context of portfolio insurance in different market scenarios.\
+%Interpreting the Results: Discuss how the results align with or differ from existing academic literature. Highlight any novel insights or unexpected findings.\
+%Summarize the key findings of your report. Reflect on the limitations of your study and potential areas for future research. Conclude with remarks on the significance of these strategies in current financial markets.\
+\
+The empirical analysis, which covers the ten-year period from 2013 to 2023, provides an in-depth study of the dynamics of performance between the risky asset captured by the S\\&P 500 index and the risk-free asset captured by the\'a010-year Treasury bill yield. Inflation in the 10-year T-bill yield was caused by the Fed's tapering of QE and subsequent normalisation of monetary policy, two key economic events and policy changes that occurred during this time. A historic low was reached during the COVID-19 pandemic, and it peaked in 2019 at 3.22\\%. Contrarily, the S\\&P 500 shown tenacity and expansion, rising to unprecedented levels by 2023 despite the pandemic-caused decline.\\newline\
+\
+From a risk-return standpoint, the S\\&P 500 yielded an average return of 11.22\\% and had volatility of 17.83\\%, while the 10-year T-bill had an average yield of 2.15\\% and volatility of 0.07\\%. The S\\&P 500 remained at an average level of roughly 2742.69. Because of their combined portfolio allocation's intrinsic benefit of diversity, the two assets have a negative correlation coefficient of -0.023.\\newline\
+\
+A GARCH model was employed to represent the complex market behaviour of the performance asset (S\\&P 500 index), particularly the volatility clustering. The market's sharp reaction to unexpected shocks was evident in the considerable volatility that was centred around crucial occurrences such as the 2020 pandemic. The model's predicted conditional volatility (red line) depicted times of increased market volatility, highlighting the importance of careful risk management strategies like CPPI that depend on an awareness of volatility trends. Although the GARCH model has usefulness in both descriptive and predictive domains, it is crucial to acknowledge its constraints and make sure its implementation is moderated by the current state of the market.\\newline\
+\
+A reasonable parameter set produced from the empirical data was employed in the development of the CPPI and OBPI strategies, which were founded on statistical analysis. Using the Black-Scholes and L\'e9vy models to simulate these strategies, different portfolio value payoffs were found. While the L\'e9vy model accommodated market jumps and showed sharp spikes that indicated its ability to capture sudden market swings, the Black-Scholes model showed a more consistent growth pattern. These tendencies emphasise how crucial model selection is to risk management; more resilient capital protection strategies can be derived from models, such as the L\'e9vy process, that can explain large fluctuations in the market.\\newline\
+\
+The impact of adjustments in the strike price, risk-free rate, stress value, and expected return on the CPPI and OBPI strategies was examined in the sensitivity analysis. The analysis verified that both strategies successfully reduce the risk of negative returns while maintaining the potential of positive results. The strategies appeared to be less vulnerable to fluctuations in interest rates, as evidenced by the fact that changes in the risk-free rate had no significant effect on them.\\newline\
+\
+There are two types of risks that an investment manager who implements a CPPI or dynamically replicates an OBPI investment process must consider \\cite\{Diderich2009\}. These are known as external risks, which are due to potential external occurrences such as market crashes or liquidity constraints that disturb the usual investment process, and internal risks, which are due to faults in the investment process such as valuation or model errors. All risks eventually culminate in the so-called gap risk. The gap risk is the possibility that the portfolio value will fall below the floor when it reaches maturity.\\newline\
+\
+On the external risk side, the most common risks translating into gap risk are liquidity risk, which is the risk that the investment manager cannot sell the performance asset at the current market price in sufficient volume; discrete price risk, which is the risk that the investment manager is not able to sell at any given moment in time and at any given price; and extreme event risk, which is the risk that the performance asset's price drops to a value such that the portfolio falls below the floor when it reaches maturity.\\newline\
+\
+It is possible to manage external risks by changing model parameters, such as multiple values, so that there is little chance that an external risk will have a significant negative impact on the value of the portfolio \\cite\{Diderich2009\}. External risks are challenging to manage because conventional market theory does not cover them. Extreme event theories, together with Monte Carlo simulations, are typically necessary to obtain a realistic estimate of external risks. The investment manager can cover external risks by allocating some of his or her own funds to them, selling them to an insurance company, an investment bank, or bundling and selling them to the market\\cite\{Diderich2009\}.\\newline\
+\
+Overall CPPI and OBPI strategies proved stable and capable of mitigating risk under a variety of market conditions and alteration of model parameters. The consistent floor value and the strategy adaptability to both expected and unforeseen market movements demonstrate how significant this resilience is in a portfolio construction. These results highlight the practical importance of incorporating advanced portfolio insurance and risk management strategies into financial planning and investment strategies.\\newline\
+\
+\\section\{References\}\
+%Include all the academic papers, books, and other resources cited in your report.\
+\
+\\begin\{thebibliography\}\{99\}\
+\
+\\bibitem\{black1973\} Black, F., \\& Scholes, M. (1973). The Pricing of Options and Corporate Liabilities. Journal of Political Economy, 81(3), 637-654.\
+\
+\\bibitem\{Diderich2009\} Diderich, C. (2009). Positive Alpha Generation: Designing Sound Investment Processes. The Wiley Finance Series, Ch.17 (267-278). Wiley. \
+\
+\\bibitem\{hull2017\} Hull, J. C. (2017). Options, futures, and other derivatives (10th ed.). Pearson.\
+\
+\\bibitem\{kou2002\} Kou, S. G. (2002). A jump-diffusion model for option pricing. Management science, 48(8), 1086-1101.\
+\
+\\bibitem\{leland1988\} Leland, Hayne E. and Mark Rubinstein (1988) The evolution of portfolio insurance, in Portfolio Insurance: A Guide to Dynamic Hedging, Donald L. Luskin (ed.), John Wiley \\& Sons, Inc., Hoboken.\
+\
+\\bibitem\{merton1976\} Merton, R. C. (1976). Option pricing when underlying stock returns are discontinuous. Journal of financial economics, 3(1-2), 125-144.\
+\
+\\bibitem\{Perold1986\} Perold, Andre F. (1986), Constant Portfolio Insurance, Harvard Business School, Harvard.\
+\
+\\end\{thebibliography\}\
+\
+\\newpage`\
+\
+\
+\\section*\{Appendices\}\
+%Include additional materials like extended data tables, code listings, or supplementary figures if necessary.\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_theory_plot_1.png\}\
+    \\caption\{Illustration of the CPPI investment process. Source:\\cite\{Diderich2009\} \}\
+    \\label\{fig:CPPIstructure\}\
+  \\end\{subfigure\}\
+  \\hfill\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy//CPPI_strategy/CPPI_theory_plot_2.png\}\
+    \\caption\{Classification of the portfolio insurance investment processes along the two dimensions static versus dynamic processes and performance asset path dependent versus independent. Source:\\cite\{Diderich2009\}\}\
+    \\label\{fig:Portfolioinsurancematrix\}\
+  \\end\{subfigure\}\
+  \\vskip\\baselineskip % Adds vertical space between the rows of figures\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_theory_plot_3.png\}\
+    \\caption\{Expected payoff diagram at maturity from a typical investor with a HARA utility function. Source:\\cite\{Diderich2009\}\}\
+    \\label\{fig:CPPIpayoff\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_plot_1.png\}\
+    \\caption\{Performance asset (S\\&P 500 index) price over the time frame analysed. Computation by the authors.\}\
+    \\label\{fig:SPXprice\}\
+  \\end\{subfigure\}\
+  \\hfill\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/GARCH_S&P500.png\}\
+    \\caption\{GARCH model for the performance asset (S\\&P500 index) across the time frame analysed. Computation by the authors.\}\
+    \\label\{fig:GARCHSP500\}\
+  \\end\{subfigure\}\
+  \\vskip\\baselineskip % Adds vertical space between the rows of figures\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_plot_BS_levy_analysis.png\}\
+    \\caption\{Payoff of the simulated strategies using Black-Scholes and L\'e9vy process to model a CPPI strategy. Computation by the authors. \}\
+    \\label\{fig:BSlevypayoff\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_plot_5.png\}\
+    \\caption\{Sensitivity analysis of the OBPI and CPPI strategy to a hundred basis point change in the risk-free asset yield (US 10-year Treasury yield).Computation by the authors.\}\
+    \\label\{fig:Sensitivityrfr\}\
+  \\end\{subfigure\}\
+  \\hfill\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_plot_4.png\}\
+    \\caption\{Sensitivity analysis of the OBPI and CPPI strategies with respect to a change in the stress value of a hundred basis point.Computation by the authors.\}\
+    \\label\{fig:Sensitivitystress\}\
+  \\end\{subfigure\}\
+  \\vskip\\baselineskip % Adds vertical space between the rows of figures\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_plot_3.png\}\
+    \\caption\{Sensitivity analysis of the OBPI and CPPI strategies with respect to a change in the return value of two hundred basis point (2\\%).Computation by the authors.\}\
+    \\label\{fig:Sensitivitymu\}\
+  \\end\{subfigure\}\
+  \\hfill\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_plot_2.png\}\
+    \\caption\{Sensitivity analysis of the OBPI and CPPI strategies with respect to a change in the strike price of the performance asset (equivalent to a two hundred price change in the index level).Computation by the authors.\}\
+    \\label\{fig:Sensitivitystrike\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\
+\
+\
+\\begin\{figure\}[ht!]\
+  \\centering\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_histogram_2.png\}\
+    \\caption\{Histogram of the OBPI strategy values.Computation by the authors.\}\
+    \\label\{fig:histogramOBPI\}\
+  \\end\{subfigure\}\
+  \\hfill\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_histogram_1.png\}\
+    \\caption\{Histogram of the CPPI strategy values.Computation by the authors.\}\
+    \\label\{fig:histogramCPPI\}\
+  \\end\{subfigure\}\
+  \\vskip\\baselineskip % Adds vertical space between the rows of figures\
+  \\begin\{subfigure\}[b]\{0.45\\linewidth\}\
+    \\includegraphics[width=0.75\\linewidth]\{CPPI Strategy/CPPI_strategy/CPPI_histogram_3.png\}\
+    \\caption\{Histogram of the equity price values.Computation by the authors.\}\
+    \\label\{fig:histogramEquity\}\
+  \\end\{subfigure\}\
+\\end\{figure\}\
+\\end\{document\}}

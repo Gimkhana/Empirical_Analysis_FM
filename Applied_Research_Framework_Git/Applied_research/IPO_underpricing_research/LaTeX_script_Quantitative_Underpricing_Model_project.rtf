@@ -1,0 +1,539 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass\{article\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage[T1]\{fontenc\}\
+\\usepackage\{amsmath, amsfonts, amssymb\}\
+\\usepackage\{graphicx\}\
+\\usepackage\{array, booktabs\}\
+\\usepackage\{hyperref\}\
+\\usepackage\{enumitem, geometry, titlesec\}\
+\\usepackage\{booktabs\}\
+\\usepackage\{tabularx\}\
+\\usepackage\{colortbl\} % For coloring cells\
+\\usepackage\{xcolor\} % Define colors\
+\\usepackage\{booktabs\} % For prettier tables\
+\\usepackage\{siunitx\} % Required for alignment\
+\
+\
+    \\title\{IPO underpricing: Implementation of the model using a logistic regression\}\
+    \
+\\author\{\
+    Youssef LOURAOUI \\\\\
+    Bayes (formerly CASS) Business School \\\\\
+    \\texttt\{youssef.louraoui@bayes.city.ac.edu\}\
+\}\
+\\date\{03/2022\}% or specify a date\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\
+\\thispagestyle\{empty\}% Removes page number on title page\
+\
+\\newpage % Starts the main content on the next page\
+\
+\\noindent\
+\\begin\{tabularx\}\{\\textwidth\}\{X\}\
+\\toprule\
+\\textbf\{Section\}\\\\\
+\\midrule\
+\
+Abstract\
+\\addlinespace\
+\
+1. Company Presentation \\\\\
+\\addlinespace\
+\
+2. Model construction \\\\\
+\\addlinespace\
+\
+\
+3. Predictive power of the model \\\\\
+\\quad 3.1. In sample analysis \\\\\
+\\quad 3.2. Out of sample analysis \\\\\
+\\addlinespace\
+\
+4. Results of the model \\\\\
+\\addlinespace\
+\
+5. Conclusion \\\\\
+\\bottomrule\
+\\end\{tabularx\}\
+\
+\\newpage\
+\
+\\section*\{Abstract\}\
+This study aims to investigate the feasibility of valuing the Initial Public Offering (IPO)\
+market by screening the most important IPOs in the US equities market over the last\
+two decades. Investors in the initial public offering (IPO) market may benefit from\
+purchasing underpriced stocks on the first day of trading and selling them before the\
+first day's close.\
+\
+An empirical model was constructed to analyse the probability of underpriced initial\
+public offerings to aid in making rational investing decisions. On the IPO of Tradeweb\
+Markets, we present the model's conclusions. The stock had a huge first-day closing\
+price gain of 28.24 percent, indicating that the IPO was underpriced. The model\
+properly calculated the issue's underpricing, with a forecasted chance of underpricing of 100 percent. The model used in this research is based on a sample of 40 firms (out of 1827 initial public offerings) coupled with an out of sample test of 8 companies to further test for the accuracy of the model. The model targeted the United States financial industry\
+between 2000 and 2022. By screening the initial public offering market according to\
+sector, geography, and company-specific criteria, a model was developed that\
+evaluated the risk of underpricing occurring. The model predicted an underpriced\
+issue with an 97.5\\% in sample and a perfect 100\\% out of sample accuracy. Based on this report, investors can implement a profitable strategy by going long undervalued IPOs and sell them before the end of the first trading day.\
+\
+\\newpage\
+\
+\\section\{Company presentation\}\
+\
+Tradeweb Markets Inc. creates and operates electronic marketplaces for interest\
+rates, credit, stocks/ETFs, and money markets. Large global asset managers,\
+insurance companies, central banks, financial advice firms, proprietary trading\
+businesses, hedge funds, banks, and dealers are among the company's institutional,\
+wholesale, and retail clients in 62 countries. We calculated the value of the offering on\
+04/03/2019, which was priced at 27 dollars and raised \\$1.24 billion.\
+Tradeweb Markets Inc, a company in the financial business, announced its Initial\
+Public Offering on 03/07/2019. The new pricing was set at a range of 24-26 dollars.\
+The offering was priced at USD 27 on 04/03/2019 and raised USD 1.24 billion. JP\
+Morgan (Left Lead), Barclays Capital Energy Inc, Citigroup, Credit Suisse Securities\
+USA LLC, Deutsche Bank, Goldman Sachs, Merrill Lynch Pierce Fenner \\& Smith,\
+Morgan Stanley, UBS Investment Bank/US, and Wells Fargo were the offering's\
+managers (Appendix 1). In terms of shareholder breakdown, we can observe that\
+78.95 percent of the shares are in the United States, with a concentrated position on\
+the top 3\\% of shareholders, who own roughly 7\\% of the total stock value. Wells Fargo,\
+T Rowe Price and Blackrock are among the shareholders of the company.\
+The stock performance since the inception of the IPO has managed to deliver a\
+38.17\\% annualised return with a 37.67\\% annualised volatility. It even managed to\
+absorb a market shock like the covid-19 pandemic with no meaningful drawdown\
+noticed in the timeseries (Figure 1). As depicted by the figure 1, the stock offered a great upside in the first closing price\
+equivalent to 28.24\\%, which indicates that this IPO was underpriced. The model has correctly computed the underpricing of the issue, with a probability of underpricing predicted of 100\\%. In section 2, we present the steps to find the results presented in\
+this report.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.7\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_1.png\}\
+    \\caption\{Stock historical price time series. Computation by the authors. Source: Bloomberg.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\newpage\
+\
+\\section\{Model construction\}\
+\
+The model is based on the following formula, which was used to determine the likelihood of underpricing \\cite\{papapostolou2022\} (1):\
+\
+\\begin\{equation\}\
+\\begin\{aligned\}\
+\\pi &= \\alpha_0 + \\beta_1 \\text\{Update\} + \\beta_2 \\text\{ipomkt\} + \\beta_3 \\text\{stock\} + \\beta_4 \\text\{(\}\\%NI\\text\{)\} + \\beta_5 \\text\{(\}\\%\\varepsilon\\text\{PS)\} + \\beta_6 \\text\{(\}\\%\\text\{TA)\} \\\\\
+\\end\{aligned\}\
+\\end\{equation\}\
+where:\
+\\begin\{itemize\}\
+\\item $\\alpha_0$: constant of the model\
+\\item $\\beta_1 \\text\{Update\}$: sensibility to the price difference between the offered price and the first trading day closing price\
+\\item $\\beta_2 \\text\{(ipomkt)\}$: sensibility to the IPO market sentiment\
+\\item $\\beta_3 \\text\{(stock)\}$: sensibility to the stock market sentiment\
+\\item $\\beta_4 \\text\{(\}\\%NI\\text\{)\}$: sensibility to change in the net income before and after the IPO\
+\\item $\\beta_5 \\text\{(\}\\%\\varepsilon\\text\{PS)\}$: sensibility to change in the earnings per share before and after the IPO\
+\\item $\\beta_6 \\text\{(\}\\%\\text\{TA)\}$: sensibility to change in the total asset before and after the IPO\
+\\end\{itemize\}\
+\
+We implement a logistic regression to detect the underpricing anomaly \\cite\{papapostolou2022\}. Logistic regression is more accurate than an ordinary regression because it can accommodate for better predictive power of the model. Because of the nature of the logistic regression model, it will take two results: either underpricing (1) or no underpricing (0).\
+\
+The original underpricing model in the form of (2):\
+\\begin\{equation\}\
+\\pi = \\alpha_0 + \\beta_1 \\text\{Update\} + \\beta_2 \\text\{(ipomkt)\} + \\beta_3 \\text\{(stock)\} + \\beta_4 \\text\{(\}\\%NI\\text\{)\} + \\beta_5 \\text\{(\}\\%\\varepsilon\\text\{PS)\} + \\beta_6 \\text\{(\}\\%\\text\{TA)\}\
+\\end\{equation\}\
+\
+The logistic regression model is defined mathematically as (3):\
+\\begin\{equation\}\
+\\text\{logit\} (p) = \\log\\left(\\frac\{p\}\{1-p\}\\right)\
+\\end\{equation\}\
+\
+By extension, the logistic model can be computed mathematically as (4):\
+\\begin\{equation\}\
+p = \\frac\{1\}\{1 + \\exp\\left(-\\left(\\alpha_0 + \\beta_1 \\text\{Update\} + \\beta_2 \\text\{(ipomkt)\} + \\beta_3 \\text\{(stock)\} + \\beta_4 \\text\{(\}\\%NI\\text\{)\} + \\beta_5 \\text\{(\}\\%\\varepsilon\\text\{PS)\} + \\beta_6 \\text\{(\}\\%\\text\{TA)\}\\right)\\right)\}\
+\\end\{equation\}\
+\
+\\section*\{Price update (PUPDATE)\}\
+The Price Update indicates whether the final price offered to the general public was\
+greater than, less than, or equal to the initial pricing range. As illustrated in \\cite\{derrien2005\}, the price update factor is projected to have a favourable relation with\
+initial day returns. Mathematically, we can define it as (5):\
+\
+\\begin\{equation\}\
+    P_\{\\text\{update\}\} = \\frac\{(P_\{\\text\{before opening\}\} - P_\{\\text\{after opening\}\})\}\{P_\{\\text\{after opening\}\}\}\
+\\end\{equation\}\
+\
+\
+\\section*\{IPO market sentiment (IPOMKT)\}\
+\
+To find the market sentiment of the IPO market, we focused on analysing a timeseries\
+of two decades of IPOs in the US equity market. The data, downloaded from Refinitiv\
+Eikon, was then analysed by taking the three-month rolling average of the time series.\
+To determine if the market was in a hot or a cold IPO, we affected a cut-off point. A\
+dummy variable (1 for hot IPO market, 0 for a cold IPO market) is then affected for\
+each issue. We consolidate the data by years to determine the nature of the IPO\
+market at a specific point in time. We compute this metric by taking the 3-month rolling\
+average of the overall IPO market. Figure 2 depicts the behaviour of US IPO market\
+in terms of issuances during the period 2000-2022.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_2.png\}\
+    \\caption\{Historical data for the US equity market IPO during 2000-2022. Computation by the authors. Source:\
+Reuters Eikon.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\
+\\section*\{Stock market sentiment (\\%STOCK)\}\
+\
+\
+To find the stock sentiment, we focused on analysing a timeseries of two decades for\
+the NASDAQ index, a representative index that can be relied for analysing IPOs in the\
+US equity market. The data, downloaded from Refinitiv Eikon, was then analysed by\
+taking the cumulative sixty day returns of the market. To determine if the market was\
+in a hot or a cold IPO, we affected a cut-off point, which is computed as the average\
+of the NASDAQ daily logarithmic returns.\
+\
+Mathematically, we compute the 60-day cumulative logarithmic returns of the stock\
+price as follows (6):\
+\
+\\begin\{equation\}\
+    \\% \\text\{STOCK\} = \\sum_\{i=1\}^\{60\} \\log\\left(\\frac\{\\text\{return\}_\{t+1\}\}\{\\text\{return\}_t\}\\right)\
+\\end\{equation\}\
+\
+The data is then consolidated the by years to determine the nature of the IPO market\
+at a specific point in time. Figure 3 depicts US equity market sentiment captured with\
+the NASDAQ index from 2000-2022.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=1\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_3.png\}\
+    \\caption\{Stock market sentiment on the US equity market (NASDAQ index) from 2000-2022. Computation by the\
+authors. Source: Reuters Eikon.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\section*\{Net Income sensitivity (\\%NI)\}\
+\
+Net income was used to analyse the performance of the company prior to the IPO (7).\
+\
+\\begin\{equation\}\
+    \\text\{NI\} = \\frac\{\\text\{Total revenue\}\}\{\\text\{Total expenses\}\}\
+\\end\{equation\}\
+\
+The sensibility of the net income change before and after the IPO is obtained using\
+the following formula (8):\
+\
+\\begin\{equation\}\
+    \\% \\text\{NI\} = \\frac\{\\text\{NI\}_\{t+1\}\}\{\\text\{NI\}_t\}\
+\\end\{equation\}\
+\
+\\section*\{EPS sensitivity (\\%EPS)\}\
+\
+EPS was used to analyse the performance of the company prior to the IPO (9).\
+\
+\\begin\{equation\}\
+    \\text\{EPS\} = \\frac\{\\text\{Total earnings\}\}\{\\text\{Outstanding shares\}\}\
+\\end\{equation\}\
+\
+The sensibility of the earnings per share change before and after the IPO is obtained\
+using the following formula (10):\
+\
+\\begin\{equation\}\
+    \\% \\text\{EPS\} = \\frac\{\\text\{EPS\}_\{t+1\}\}\{\\text\{EPS\}_t\}\
+\\end\{equation\}\
+\
+\\section*\{Total asset sensitivity (\\%TA)\}\
+\
+Total asset was used to analyse the performance of the company prior to the IPO (11).\
+\
+\\begin\{equation\}\
+    \\text\{TA\} = \\text\{Non current assets\} + \\text\{current assets\}\
+\\end\{equation\}\
+\
+\
+The sensibility of the total asset change before and after the IPO is obtained using the\
+following formula (12):\
+\
+\\begin\{equation\}\
+    \\% \\text\{TA\} = \\frac\{\\text\{TA\}_\{t+1\}\}\{\\text\{TA\}_t\}\
+\\end\{equation\}\
+\\newpage\
+\
+\
+\\section\{Predictive power of the model\}\
+\
+\\begin\{table\}[htbp]\
+\\centering\
+\\caption\{Regression Coefficients\}\
+\\begin\{tabular\}\{ccccccc\}\
+\\toprule\
+$\\alpha$ & $\\beta_1$ & $\\beta_2$ & $\\beta_3$ & $\\beta_4$ & $\\beta_5$ & $\\beta_6$ \\\\\
+\\midrule\
+0.541 & 51.763 & -2.301 & 37.524 & -5.146 & 4.522 & 0.851 \\\\\
+\\bottomrule\
+\\end\{tabular\}\
+\\label\{tab:regression_coefficients\}\
+\\end\{table\}\
+\
+Table 1 depicts the model's beta coefficients. The coefficients indicate the amount to\
+which the dependent variable, chance of underpricing, is impacted by the\
+aforementioned parameters, which were derived using Reuters Eikon market data.\
+PUPDATE(\'df1) is clearly the most important component, showing that it has a\
+favorable effect on underpricing. Market sentiment, as measured by the underlying\
+sentiment of the US equity market as reflected by the NASDAQ, possesses significant\
+positive predictive potential (\'df3). Additionally, net income sensitivity (\'df4) and IPO\
+market sentiment (\'df2) have a detrimental influence on the underpricing model's\
+forecasting capabilities. Notably, the beneficial effect of net income sensitivity on\
+identifying underpricing anomalies (\'df5) has a lesser beneficial effect on the probability\
+of underpricing.\
+\
+\\subsection\{In sample analysis\}\
+\
+\\begin\{table\}[h!]\
+\\centering\
+\\begin\{tabular\}\{|l|c|c|c|c|\}\
+\\hline\
+\\rowcolor\{black!30\} \\textcolor\{white\}\{Prediction Table\} & \\textcolor\{white\}\{Correct\} & \\textcolor\{white\}\{Incorrect\} & \\textcolor\{white\}\{\\%Correct\} & \\textcolor\{white\}\{Type I/II Error\} \\\\\
+\\hline\
+Underpricing & 34 & 0 & 100.00\\% & 0.00\\% \\\\\
+\\hline\
+Overpricing & 5 & 1 & 83.33\\% & 16.67\\% \\\\\
+\\hline\
+\\rowcolor\{gray!25\} Total & 39 & 1 & 97.50\\% & 2.50\\% \\\\\
+\\hline\
+\\end\{tabular\}\
+\\caption\{Results of the in-sample predictive power of the model.\}\
+\\end\{table\}\
+\
+Table 2 illustrates the model's accuracy in underpricing 40 sample initial public\
+offerings (IPOs) between 2000 and 2022 on their first day of trading. The model's\
+accuracy was 97.5 percent when a 60\\% cut-off probability was utilised, as it produced\
+the smallest Type I/II errors. The objective is to minimise Type II Error, which happens\
+when the model forecasts underpricing while the firm is indeed overvalued, as this\
+results in money being lost. On the other side, Type I Error results in the loss of an\
+opportunity, since the model forecasts an overpriced IPO.\
+\
+\\subsection\{Out of sample sample analysis\}\
+\
+\\begin\{table\}[h!]\
+\\centering\
+\\rowcolors\{2\}\{gray!25\}\{white\} % Alternating colors for rows\
+\\begin\{tabular\}\{|l|c|c|c|c|\}\
+\\hline\
+\\rowcolor\{black!30\} % Color for the header row\
+\\textcolor\{white\}\{\\textbf\{Prediction Table\}\} & \\textcolor\{white\}\{\\textbf\{Correct\}\} & \\textcolor\{white\}\{\\textbf\{Incorrect\}\} & \\textcolor\{white\}\{\\textbf\{\\%Correct\}\} & \\textcolor\{white\}\{\\textbf\{Type I/II Error\}\} \\\\\
+\\hline\
+Underpricing & 7 & 0 & 100.00\\% & 0.00\\% \\\\\
+Overpricing & 1 & 0 & 100.00\\% & 0.00\\% \\\\\
+\\hline\
+\\rowcolor\{blue!25\} % Color for the total row\
+Total & 8 & 0 & 100.00\\% & 0.00\\% \\\\\
+\\hline\
+\\end\{tabular\}\
+\\caption\{Results of the out of sample predictive power of the model.\}\
+\\end\{table\}\
+\
+\
+The same approach was used for the out of sample study, which included eight IPOs.\
+It proved to be 100 percent correct. To allow for a more accurate comparison of results,\
+we selected IPOs across a longer period in the same industry (Financials) and equity\
+market (NASDAQ index). This high accuracy in forecasting undervalued initial public\
+offerings indicates that the model was sound (Table 3).\
+\
+\
+\\section\{Results of the model\}\
+\
+\\section*\{Price update (PUPDATE)\}\
+\
+\
+The model suggests that there is a positive relationship between underpricing and the\
+PUPDATE. As depicted in figure 4, the higher the PUPDATE value, the higher the\
+probability of underpricing. We observe we can appreciate how a price return from\
+-10\\% to 0\\% will increase the probability of underpricing by around 80\\%. This further\
+confirms the results of the positive coefficient \'df1 in capturing IPO underpricing.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.75\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_4.png\}\
+    \\caption\{Marginal effects on \'df1 PUPDATE. Computation by the authors. Source: Reuters Eikon.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\\newpage\
+\
+The probability of underpricing has a negative convex relationship with IPO market\
+sentiment. It's worth mentioning that the marginal effects have a minor impact on the\
+likelihood of underpricing. One explanation for this tendency is that in a strong IPO\
+market, investors are more willing to invest, therefore issuers are less motivated to put\
+money on the table because demand is already there. When dealing with a cold IPO\
+market, when demand is weaker, issuers will tend to underprice the issue to make it\
+more appealing to investors to boost IPO interest. This could indicate that as the 60-\
+day cumulative industry return rises, non-public, IPO-ready companies and their\
+underwriters tend to become overconfident. As a result, they can comfortably issue\
+shares at a higher-than-normal price, believing that there is a strong level of interest\
+and demand for shares in the industry as a result of its performance, even while\
+investors have the opposite perspective. According to the model, underwriters\
+underestimate market demand at some point, resulting in an overvalued IPO.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.75\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_5.png\}\
+    \\caption\{Marginal effects on \'df2 IPOMKT. Computation by the authors. Source: Reuters Eikon.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\section*\{IPO market sentiment (IPOMKT)\}\
+\
+The stock market sentiment has a positive concave effect on the model, as seen in\
+Figure 6. The likelihood of the IPO being underpriced increases when the 60-day\
+cumulative return on the market (STOCK percent) before the IPO rises. This is\
+consistent with recognised market sentiment theory and demonstrates that the\
+financial sector follows traditional theory \\cite\{ellul2006\}. The model suggests that positive 60-day\
+cumulative returns in the market will yield more than 99 percent likelihood of\
+underpricing, despite the fact that the increase in probability is minor.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.75\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_6.png\}\
+    \\caption\{Marginal effects on \'df3 STOCK\\%. Computation by the authors. Source: Reuters Eikon.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\section*\{Stock market sentiment (\\%STOCK)\}\
+\
+The probability of underpricing has a negative convex link with net income sensitivity.\
+It's worth mentioning that the marginal effects have a minor impact on the likelihood\
+of underpricing. In this sense, figure 7 depicts the convex relationship of underpricing\
+with the net income factor. As the net income goes to positive territory, the lower the\
+underpricing probability.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.75\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_7.png\}\
+    \\caption\{Marginal effects on \'df4 NI\\%. Computation by the authors. Source: Reuters Eikon.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\section*\{Net Income sensitivity (\\%NI)\}\
+\
+The model implies that underpricing and the earnings per share sensitivity factor have\
+a positive marginal connection. It is important to note, however, that this relationship\
+is only minor and has no bearing on the likelihood of underpricing. The marginal effect\
+of increasing the EPS disparity is only a few basis points higher underpricing\
+probability.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.75\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_8.png\}\
+    \\caption\{Marginal effects on \'df5 \\%EPS. Computation by the authors. Source: Reuters Eikon.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\section*\{Total asset sensitivity (\\%TA)\}\
+\
+The model suggests that there is a positive marginal relationship between\
+underpricing and the total asset sensitivity factor. It is worth noting, however, that this\
+relation is strictly marginal and doesn\'92t have a determinant influence on the probability\
+of underpricing.\
+\
+\\begin\{figure\}\
+    \\centering\
+    \\includegraphics[width=0.75\\linewidth]\{Latest version - MONIA research//Underpricing_project_plot/underpricing_plot_9.png\}\
+    \\caption\{Marginal effects on \'df6 \\%TA. Computation by the authors. Source: Reuters Eikon.\}\
+    \\label\{fig:enter-label\}\
+\\end\{figure\}\
+\
+\\section\{Conclusion\}\
+\
+\
+Using a larger or the entire sample instead of 40 IPOs would improve further the\
+model, which are already on the high end of the predictive ability spectrum and by\
+extension yield better estimations \\cite\{bradley2002\}.\
+\
+Since we utilised different parameters than the initial model, it may be more\
+reasonable to expand the regression and account for other significant factors, hence\
+increasing the model's predictive capacity \\cite\{lee1999\}. Concerning market and industry sentiment,\
+the 60-day cumulative return previous to the initial public offering was employed, as\
+reported, and explored in financial literature. This may provide erroneous sentiment\
+readings, as time series are more dependent on recent values than on values from\
+the distant past. A 20-day cumulative return or using exponential smoothing to give\
+more weight to recent numbers, would be more appropriate.\
+\
+\\section\{References\}\
+\
+\\begin\{thebibliography\}\{9\}\
+\
+\\bibitem\{lee1999\}\
+Lee, Philip J., Taylor, Stephen L., Walter, Terry S. (1999).\
+\\textit\{IPO Underpricing Explanations: Implications from Investor Application and Allocation Schedules\}.\
+The Journal of Financial and Quantitative Analysis, 34(4), 425-444.\
+Cambridge University Press.\
+\
+\\bibitem\{bradley2002\}\
+Bradley, Daniel J., Jordan, Bradford D. (2002).\
+\\textit\{Partial Adjustment to Public Information and IPO Underpricing\}.\
+The Journal of Financial and Quantitative Analysis, 37(4), 595-616.\
+Cambridge University Press.\
+\
+\\bibitem\{ellul2006\}\
+Ellul, Andrew \\& Pagano, Marco. (2006).\
+\\textit\{IPO Underpricing and After-Market Liquidity\}.\
+Review of Financial Studies, 19, 381-421.\
+\\url\{https://doi.org/10.1093/rfs/hhj018\}\
+\
+\\bibitem\{papapostolou2022\}\
+Papapostolou, N. (2022).\
+\\textit\{Financial Markets: IPO underpricing\}.\
+Bayes (formerly CASS) Business School.\
+\
+\\bibitem\{derrien2005\}\
+Derrien, Fran\'e7ois (2005).\
+\\textit\{IPO pricing in "hot" market conditions: Who leaves money on the table?\}.\
+Journal of Finance, 60, 487\'96521.\
+\
+\\end\{thebibliography\}\
+\\newpage\
+\
+\\section\{Appendix\}\
+\
+\
+\
+\\sisetup\{\
+  round-mode          = places, % Rounds numbers\
+  round-precision     = 2, % to 2 places\
+\}\
+\
+\\begin\{table\}[htbp]\
+\\centering\
+\\caption\{Top 5 adviser performance metrics\}\
+\\begin\{tabular\}\{\
+  l\
+  S[table-format=2.2]\
+  S[table-format=3.3]\
+  S[table-format=4.0]\
+  S[table-format=1.3]\
+  S[table-format=3.2]\
+\}\
+\\toprule\
+\{Adviser\} & \{Market Share (\\%)\} & \{Credit (USD)\} & \{Deal Count\} & \{Fees (USD)\} & \{Value (USD)\} \\\\\
+\\midrule\
+BofA Securities  & 17.07 & 235.31B & 1537 & 5.81B & 177.94 \\\\\
+Citi             & 12.82 & 176.72B & 1306 & 3.60B & 130.91 \\\\\
+Morgan Stanley   & 11.15 & 153.73B & 893  & 2.99B & 128.40 \\\\\
+Goldman Sachs    & 10.29 & 141.80B & 611  & 2.97B & 117.76 \\\\\
+JP Morgan        & 9.62  & 132.58B & 927  & 3.16B & 112.46 \\\\\
+\\bottomrule\
+\\end\{tabular\}\
+\\label\{tab:adviser_metrics\}\
+\\end\{table\}\
+\
+\
+Appendix 1. Ranking league of top underwriters. It depicts the ranking of underwriters in terms of market share in the IPO market. The first five underwriters account for 61.02\\% of the total market share.\
+\
+\
+\\end\{document\}}
