@@ -1,57 +1,45 @@
-# Applied Research Framework
-**Applied Research Framework Repository**
+### **Welcome to FinQuantX: Empirical analysis of financial markets**
 
-Welcome to the Applied Research Framework Repository – a comprehensive suite of analytical tools and scripts. This repository houses a diverse array of methods and strategies in portfolio management and econometrics, implemented in R and Python, to aid in the construction, analysis, and optimization of investment portfolios. Part of the scripts are based on lectures and projects taught in the M2 Risk and Asset Management (Paris-Saclay).
+#### **About FinQuantX**
 
-**Repository Structure**
+Welcome, and dive into **FinQuantX**, a GitHub repository full of ressources in financial analysis using different quantitative techniques. We've  compiled and implemented different models, and scripts designed to analyse from an empirical perspective the complex world of financial markets through the lens of quantitative analysis.
 
-The repository is organized into four main folders:
+#### **Our mission**
 
-**1. Asset Management**
+To bridge the gap between theoretical finance and practical application, providing a platform for learning and experimentation in finance.
 
-This folder contains a variety of advanced portfolio management techniques and strategies, each implemented in R:
+#### **What you'll find**
 
-- Global Minimum-Tangency Portfolio: Scripts for constructing portfolios that aim to achieve the lowest possible risk for a given level of expected return, utilizing the Markowitz efficient frontier concept.
-- PCA (Principal Component Analysis): PCA is used here for dimensionality reduction in financial datasets, aiding in the identification of key factors that drive asset returns.
-- Black-Litterman Model: Implementation of the Black-Litterman model which combines market equilibrium and subjective views to produce optimized asset allocations.
-- Option-Based Portfolio Insurance: Scripts that implement strategies for protecting a portfolio against downside risk using options, a crucial technique for risk-averse investors.
+- **Quantitative portfolio management**: Strategies, backtesting frameworks, and optimization algorithms for crafting portfolios that stand the test of market volatility.
+- **Numerical methods in finance**: From Monte Carlo simulations to finite difference methods, explore computational techniques that power modern financial engineering.
+- **Econometric analysis**: Tools and notebooks dedicated to uncovering economic insights from data, employing everything from regression analysis to vector autoregressions (VAR).
+- **Time series forecasting**: Cutting-edge models for predicting financial markets, LSTM networks, MLP, Random Forest with detailed and well commented scripts.
 
-**2. Econometrics**
+#### **Engage & collaborate**
 
-This folder focuses on econometric analysis, featuring:
+**FinQuantX** is more than a repository; it's initial designed for engagement and collaboration. Share your insights, propose new features, or contribute your own projects. 
 
-- Regressions: A collection of scripts for running various types of regression analyses, essential for understanding relationships between financial variables.
-- ADF (Augmented Dickey-Fuller Test): Implementation of the ADF test to check the stationarity of time series, a critical aspect in many econometric analyses in finance.
+#### **Why FinQuantX?**
 
-**3. All-Weather portfolio project (and more)**
+- **Comprehensive**: Covers a wide spectrum of applied financial topics.
+- **Cutting-Edge**: Implements the latest advancements in finance (econometric and quantitative techniques, machine learning application) and data science.
+- **Collaborative**: Open to suggestions to improve this Git repository.
 
-- An integrated project that applies various tools and scripts provided in this repository to construct an "All-Weather" portfolio.
-- This project demonstrates how to build a portfolio that aims to perform well across different economic environments, using diversification strategies and insights from the asset management and econometrics folders.
+#### **Getting started**
 
-**4. Numerical Methods in Finance**
+1. **Download the necessary Python/RStudio environment**: Make sure to have all the necessary code environment set up in order to run the scripts properly. 
+2. **Clone the repository**: Get your local copy.
+3. **Explore the notebooks**: Each notebook comes with detailed explanations and code comments.
+4. **Join the community**: Participate in discussions, share your findings, or contribute to ongoing projects.
 
-- This folder is strcutured into two main projects: Credit derivatives modelling and option pricing using numerical methods.
-- Both projects are coded in Python and use Jupyter Notebook to elaborate on the results.
+#### **Contribution**
 
-**Getting started with R**
+Got a project or an idea that can enrich our repository? We welcome contributions of all forms - be it new models, improvements to existing ones, or educational content to help demystify complex topics.
 
-To get started, clone this repository and navigate to each folder to find detailed instructions and documentation for each script and project. The code is primarily written in R, so ensure you have R and the necessary packages installed.
+---
 
-- git clone https://github.com/your-username/portfolio-management-collection.git
-- cd portfolio-management-collection
+🌟 **Star us on GitHub!** Your support helps us grow and reach more finance professionals and enthusiasts eager to transform the financial landscape through quantitative analysis.
 
-**Getting started with Python**
+💡 **Feedback?** Let us know how we can improve **FinQuantX** to better serve the community.
 
-In addition to our R scripts, you may find that Python can be a powerful tool for data analysis, particularly in areas of portfolio management and econometrics. Here are some steps to get you started with Python:
-
-**Prerequisites**
-
-Ensure you have Python installed on your system. We recommend using the Anaconda distribution, which includes Python, the Jupyter Notebook, and other commonly used packages for scientific computing and data science.
-
-**Contributing**
-
-We welcome contributions and suggestions! Reach out at 20230348@etud.univ-evry.fr for any feedback.
-
-**License**
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+---
