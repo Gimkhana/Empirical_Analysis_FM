@@ -2,14 +2,7 @@
 
 #### **About this GitHub repository**
 
-This repository full of ressources in financial analysis using different quantitative techniques. 
-
-#### **What you'll find**
-
-- **Quantitative portfolio management**: Strategies, backtesting frameworks, and optimization algorithms for crafting portfolios that stand the test of market volatility.
-- **Numerical methods in finance**: From Monte Carlo simulations to finite difference methods, explore computational techniques that power modern financial engineering.
-- **Econometric analysis**: Tools and notebooks dedicated to uncovering economic insights from data, employing everything from regression analysis to vector autoregressions (VAR).
-- **Time series forecasting**: Cutting-edge models for predicting financial markets, LSTM networks, MLP, Random Forest with detailed and well commented scripts.
+This repository full of ressources for analysing financial markets. Mainly on portfolio and quantitative modelling. Each folder has its documented and explained code with the required datasets to run the scripts correctly.
 
 #### **Getting started**
 
@@ -20,6 +13,6 @@ This repository full of ressources in financial analysis using different quantit
 
 #### **Contribution**
 
-Got a project or an idea that can enrich our repository? We welcome contributions of all forms - new models, improvements to existing ones, or educational content. 
+Got a project or an idea that can enrich the repository? Every contribution is welcome - new models, improvements to existing ones, or educational content. 
 
 ---
