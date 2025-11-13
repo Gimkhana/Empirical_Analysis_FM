@@ -46,7 +46,7 @@ You will find the main repo structured into four sub-folders:
   - All-Weather portfolio
   - Factor investing during COVID-19
   - CPPI vs OBPI strategy research
-  - MONIA working paper with the Central Bank of Morocco)
+  - MONIA transition (presentation slides and dataset)
   - IPO underpricing project
  
 - Quantitative Methods (part of the Quantitative Techniques in Finance @ Paris-Saclay instructor A. Bousabaa; co-authored with Y. Bancé): Project that elaborates on 
@@ -183,10 +183,9 @@ cd Empirical_Analysis_FM
 ### Usage
 
 Each project folder contains:
-- **README.md** - Detailed project description and methodology
-- **R Markdown / Jupyter Notebooks** - Reproducible analysis with comments
-- **Data/** - Sample datasets or instructions to obtain data
-- **Output/** - Generated figures, tables, and results
+- **Code notebooks** for replicable analysis with comments
+- **Data/** with sample datasets or instructions to obtain data
+- **Output/** generated figures, tables, and results
 
 ---
 
@@ -209,9 +208,8 @@ You are free to use, modify, and distribute this code for academic, personal, or
 ## Acknowledgments
 
 - **ESSEC Business School**, **Bayes (formerly CASS) Business School** and **Université Paris-Saclay** faculty for research guidance
-- **Bank Al-Maghrib** for MONIA data access and collaboration
-- **Professor Arnaud Feral** (ESSEC) and **Abderrahim Rafiki** (Bank Al-Maghrib) for co-authorship
-
+- **Bank Al-Maghrib** for MONIA data access and collaboration (publicly disclosed in bank website)
+  
 ---
 
 *Last updated: November 2025*
