@@ -1,4 +1,4 @@
-### **Empirical Analysis of Financial Markets: Factor Investing, Portfolio Optimization, and Quantitative Methods**
+### **Empirical Analysis of Financial Markets: Factor Investing, Portfolio Management, and Quantitative Methods**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![R](https://img.shields.io/badge/R-276DC3?logo=r&logoColor=white)](https://www.r-project.org/)
@@ -6,10 +6,10 @@
 
 #### **About this GitHub repository**
 
-This repository documents quantitative research and applied projects in portfolio optimization, factor investing, and risk management. It combines academic rigor (5 published papers, 2k+ downloads) with institutional application (central bank collaboration, multi-asset strategies).
-- For practitioners: Reproducible frameworks for portfolio construction, volatility modeling, and alternative risk strategies.
-- For researchers: Well-documented methodologies with citations, data sources, and validation approaches.
-- For candidates: Demonstration of technical depth, institutional experience, and research credibility.
+This repository documents quantitative research and applied projects in portfolio management, factor investing, investment strategies. It combines academic rigor (5 published papers, 2k+ downloads) with institutional and academic insights.
+- For practitioners: Reproducible frameworks for portfolio construction and investment stragies.
+- For researchers: Well documented methodologies with clear citations and data sources.
+- This repository is also well suited for anyone looking to delve into data science and quantitative techniques applied to finance.
 
 --- 
 
