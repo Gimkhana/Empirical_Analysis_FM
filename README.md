@@ -4,9 +4,20 @@
 [![R](https://img.shields.io/badge/R-276DC3?logo=r&logoColor=white)](https://www.r-project.org/)
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 
+#### **About this GitHub repository**
+
+Structure of this Github:
+
+You will find the main repo structured into four sub-folders:
+
+- Applied Projects (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Applied_projects) : Covers different smaller projects on equity valuation (part of the Valuation and Corporate Finance module @ Paris-Saclay instructor F. Pansard), volatility modeling (part of the Volatility modelling module @ Paris-Saclay instructor S. Pulido), econometrics scripts (part of the Econometrics module @ Paris-Saclay instructor J. Caicedo), crude oil modelling (Petroineos Trading independent project), machine learning forecasting (part of the Machine Learning module @ Paris-Saclay instructor A. Bousabaa), portfolio management project (independent projects) 
+- Applied Research https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Applied_research) : Covers all the content shared for each paper (All-Weather portfolio, Factor investing during COVID-19, CPPI vs OBPI strategy research, IPO underpricing project and MONIA working paper with the Central Bank of Morocco)  
+- Quantitative Methods (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Quantitative_methods_finance): Project that elaborates on option pricing and CDS calibration via Monte Carlo simulation (part of the Quantitative Techniques in Finance @ Paris-Saclay instructor A. Bousabaa; co-authored with Y. Bancé)
+- Quantitative Portfolio Management (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Quantitative_portfolio_management) : Project covering portfolio management techniques (part of the Asset Management module @ Paris-Saclay instructor P. Clauss)
+
 #### **About me**
 
-Driven postgraduate with hands-on experience in risk management, market analysis, and capital markets research through roles at Amundi AM, PetroIneos Trading, and the Central Bank of Morocco. Skilled in Bloomberg, Refinitiv, and advanced analytics, I leverage data-driven insights to support strategic decisions making. I thrive on complex challenges and steep learning curves. I hope you can find value in the research I share.
+Applied finance professional specializing in quantitative portfolio optimization and factor investing analysis. 20+ months across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). Developed 5+ research papers on multi-asset portfolio construction, crisis-period factor behavior, and yield curve modeling cumulating 2k+ combined downloads across SSRN and ResearchGate. I hope you can find value in the research I share.
 
 In a nutshell: 
 
@@ -24,16 +35,6 @@ Email: youssef.louraoui@essec.edu
 
 **Research Focus**: Factor investing, Portfolio Management, Investment, Finance
 
-#### **About this GitHub repository**
-
-Structure of this Github:
-
-You will find the main repo structured into four sub-folders:
-
-- Applied Projects (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Applied_projects) : Covers different smaller projects on equity valuation (part of the Valuation and Corporate Finance module @ Paris-Saclay instructor F. Pansard), volatility modeling (part of the Volatility modelling module @ Paris-Saclay instructor S. Pulido), econometrics scripts (part of the Econometrics module @ Paris-Saclay instructor J. Caicedo), crude oil modelling (Petroineos Trading independent project), machine learning forecasting (part of the Machine Learning module @ Paris-Saclay instructor A. Bousabaa), portfolio management project (independent projects) 
-- Applied Research https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Applied_research) : Covers all the content shared for each paper (All-Weather portfolio, Factor investing during COVID-19, CPPI vs OBPI strategy research, IPO underpricing project and MONIA working paper with the Central Bank of Morocco)  
-- Quantitative Methods (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Quantitative_methods_finance): Project that elaborates on option pricing and CDS calibration via Monte Carlo simulation (part of the Quantitative Techniques in Finance @ Paris-Saclay instructor A. Bousabaa; co-authored with Y. Bancé)
-- Quantitative Portfolio Management (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Quantitative_portfolio_management) : Project covering portfolio management techniques (part of the Asset Management module @ Paris-Saclay instructor P. Clauss)
 
 ## 📂 Featured Projects
 
