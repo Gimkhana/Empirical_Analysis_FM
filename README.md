@@ -38,7 +38,7 @@ You will find the main repo structured into four sub-folders:
 ## 📂 Featured Projects
 
 ### 1. All Weather Portfolio Optimization
-**Location**: [`Applied_Research_Framework_Git/Applied_research/All_weather_portfolio_research`)
+**Location**: [`Applied_Research_Framework_Git/Applied_research/All_weather_portfolio_research`]
 
 Comparative analysis of portfolio construction strategies: Global Minimum Variance, Principal Component Analysis, Tangency Portfolio, and Black-Litterman optimization applied to multi-asset ETF portfolio.
 
@@ -56,7 +56,7 @@ Comparative analysis of portfolio construction strategies: Global Minimum Varian
 ---
 
 ### 2. COVID-19 Factor Investing Analysis
-**Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`)
+**Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`]
 
 GARCH volatility modeling examining how US equity factors (Value, Momentum, Quality, Min Volatility, Size) reacted during pandemic-induced market stress.
 Paper goes into a financial litterature of factor investing (Markowitz (1952), Sharpe (1964) earlier works and discuss more recent contributions (Fama-French in the 90's and other recent authors).
@@ -82,7 +82,7 @@ Paper goes into a financial litterature of factor investing (Markowitz (1952), S
 ---
 
 ### 3. CPPI vs. OBPI Portfolio Insurance Strategies
-**Location**: [`Applied_Research_Framework_Git/Portfolio_Insurance/`](Applied_Research_Framework_Git/Portfolio_Insurance/)
+**Location**: [`Applied_Research_Framework_Git/Applied_research/CPPI_strategy_research`]
 
 Monte Carlo simulation comparing Constant Proportion Portfolio Insurance (CPPI) and Option-Based Portfolio Insurance (OBPI) under Black-Scholes and Lévy jump-diffusion models.
 
@@ -102,7 +102,7 @@ Monte Carlo simulation comparing Constant Proportion Portfolio Insurance (CPPI) 
 ---
 
 ### 4. MONIA Forward Rate Curve Construction
-**Location**: [`Applied_Research_Framework_Git/Yield_Curve_Modeling/`](Applied_Research_Framework_Git/Yield_Curve_Modeling/)
+**Location**: [`Applied_Research_Framework_Git/Applied_research/Money_market_research_BAM`]
 
 Development of forward rate model for Moroccan interbank market (MONIA) to support Bank Al-Maghrib's LIBOR transition framework.
 
@@ -125,16 +125,15 @@ Development of forward rate model for Moroccan interbank market (MONIA) to suppo
 
 ## Technical Skills
 
-**Programming**: R, Python, MATLAB, LaTeX  
-**Finance**: Bloomberg Terminal, Refinitiv Eikon, FactSet  
-**Methods**: GARCH modeling, Monte Carlo simulation, PCA, Black-Litterman optimization, Nelson-Siegel-Svensson yield curves, neural networks  
-**Visualization**: ggplot2, matplotlib, seaborn, Plotly
+**Programming**: RStudio, Python, LaTeX  
+**Finance**: Bloomberg Terminal, Refinitiv Eikon, FactSet
+**Finance**: Market Research, Academic Research, Market Analysis
 
 ---
 
 ## Publications & Research
 
-- **5 research papers** published on SSRN and Rsearch Gate with **2k+ combined downloads**
+- **5 research papers** published on SSRN and Research Gate with **2k+ combined downloads**
 - Co-authored with **Bank Al-Maghrib (Central Bank of Morocco)** officials and presented at **ESSEC dissertation defense** (2021)
 
 📄 [View all publications on SSRN](https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=4240493)
@@ -148,26 +147,12 @@ Development of forward rate model for Moroccan interbank market (MONIA) to suppo
 - **R** (≥4.0): Download from [CRAN](https://cran.r-project.org/)
 - **Python** (≥3.8): Download from [Python.org](https://www.python.org/)
 - **RStudio** (recommended): Download from [RStudio](https://posit.co/products/open-source/rstudio/)
-
+  
 ### Installation
-
----
 
 Clone the repository
 git clone https://github.com/Gimkhana/Empirical_Analysis_FM.git
 cd Empirical_Analysis_FM
-
----
-
-For R projects: Install required packages
-Rscript -e "install.packages(c('tidyverse', 'PerformanceAnalytics', 'PortfolioAnalytics', 'rugarch', 'quantmod'))"
-
----
-
-For Python projects: Install dependencies
-pip install -r requirements.txt
-
-text
 
 ---
 
@@ -178,11 +163,6 @@ Each project folder contains:
 - **R Markdown / Jupyter Notebooks** - Reproducible analysis with comments
 - **Data/** - Sample datasets or instructions to obtain data
 - **Output/** - Generated figures, tables, and results
-
-## Repository Structure
-
-
-text
 
 ---
 
