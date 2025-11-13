@@ -1,0 +1,23 @@
+### COVID-19 Factor Investing Analysis
+**Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`]
+
+GARCH volatility modeling examining how US equity factors (Value, Momentum, Quality, Min Volatility, Size) reacted during pandemic-induced market stress.
+Paper goes into a financial litterature of factor investing (Markowitz (1952), Sharpe (1964) earlier works and discuss more recent contributions (Fama-French in the 90's and other recent authors).
+
+**Methodology** 
+- Based on EDHEC Risk Institute paper (Hasaj, M. & Sherer, B., 2021; "Covid-19 and Smart-Beta: A Case Study on theRole of Sectors”. EDHEC-Risk Institute Working Paper., pp. 1-35.)
+- We compare the performance of the funds to the VIX level during the Covid-19 period on 374 trading days.
+- MSCI factors funds as a benchmark
+- Based on Pagano (2020) COVID-19 timeframe decomposition 
+  
+**Insights**:
+- Volatility clustering observed, especially during early stages of the pandemic.
+- Minimum Volatility and Momentum factors showed signiﬁcant resilience to market changes.
+- Minimum Volatility exhibited lower than expected volatility.
+- Momentum and Value factors experienced heightened volatility, indicating sensitivity tomarket stress.
+
+**Technologies**: R, RStudio, rugarch 
+**Methods**: GARCH(1,1), time-varying correlations, multiple linear regression  
+**Data**: MSCI factor indices (2019-2021, Refinitiv Eikon)
+
+📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4677442) | 100+ downloads
