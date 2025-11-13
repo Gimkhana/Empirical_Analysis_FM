@@ -6,23 +6,23 @@
 
 #### **About this GitHub repository**
 
-This repository documents quantitative research and applied projects in portfolio optimization, factor investing, and risk management. It combines academic rigor (5 published papers, 2k+ downloads) with institutional application (central bank collaboration, multi-asset strategies).
+This repository compiles different applied projects in factor investing, portfolio management, and investment strategies. It combines academic rigor (5 published papers, 2k+ downloads) with institutional and academic insights.
 - For practitioners: Reproducible frameworks for portfolio construction, volatility modeling, and alternative risk strategies.
-- For researchers: Well-documented methodologies with citations, data sources, and validation approaches.
-- For candidates: Demonstration of technical depth, institutional experience, and research credibility.
+- For researchers: Well-documented methodologies with citations and access to the original data sourcess used.
+- This repository is also well suited for anyone looking to delve into data science and quantiative techniques applied to finance. 
 
 --- 
 
 #### **About me**
 
-Applied finance professional specializing in quantitative portfolio optimization and factor investing analysis. 20+ months across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). Developed 5+ research papers on multi-asset portfolio construction, crisis-period factor behavior, and yield curve modeling cumulating 2k+ combined downloads across SSRN and ResearchGate. I hope you can find value in the research I share.
+Driven finance postgraduate with 20+ months across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). Developed 5+ research papers on multi-asset portfolio construction, crisis-period factor investing behavior cumulating 2k+ combined downloads across SSRN and ResearchGate. I hope you can find value in the research I share.
 
 In a nutshell: 
 
-- 🎓 Master's degree in Risk & Asset management (M2 GRA) @ Paris-Saclay
-- 🎓 Master's degree in Energy Trade and Finance & Bayes (formerly CASS) Business School, London
-- 🎓 Graduate in Business studies (finance concentration) @ ESSEC Business School
-- 💼 +20 months experience across capital markets @ Central Bank of Morocco (BAM), commodity trading and market analysis @ PetroIneos Trading London, risk management @ Amundi AM and client solutions analytics @ FactSet London
+- Master's degree in Risk & Asset management (M2 GRA) @ Paris-Saclay
+- Master's degree in Energy Trade and Finance & Bayes (formerly CASS) Business School, London
+- Graduate in Business studies (finance concentration) @ ESSEC Business School
+- +20 months experience across capital markets @ Central Bank of Morocco (BAM), commodity trading and market analysis @ PetroIneos Trading London, risk management @ Amundi AM and client solutions analytics @ FactSet London
 
 **Contact**
 Email: youssef.louraoui@essec.edu
