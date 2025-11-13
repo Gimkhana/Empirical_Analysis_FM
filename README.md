@@ -194,7 +194,7 @@ Each project folder contains:
 
 Contributions are welcome! Whether you want to:
 - **Improve existing models** (add robustness checks, alternative specifications)
-- **Add new projects** (derivatives pricing, credit risk, algorithmic trading)
+- **Add new projects**
 - **Fix bugs or enhance documentation**
 
 ---
@@ -202,7 +202,6 @@ Contributions are welcome! Whether you want to:
 ## License
 
 This project is licensed under the **MIT License** - see the [LICENSE] file for details.
-
 You are free to use, modify, and distribute this code for academic, personal, or commercial purposes with attribution.
 
 ---
