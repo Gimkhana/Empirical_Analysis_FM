@@ -1,0 +1,15 @@
+### 1. All Weather Portfolio Optimization
+**Location**: [`Applied_Research_Framework_Git/Applied_research/All_weather_portfolio_research`]
+
+Comparative analysis of portfolio construction strategies: Global Minimum Variance, Principal Component Analysis, Tangency Portfolio, and Black-Litterman optimization applied to multi-asset ETF portfolio.
+
+**Insights**:
+- Black-Litterman incorporating market views from BlackRock, Goldman Sachs, JPMorgan achieved highest Sharpe ratio (0.82)
+- GMV allocation: 88.91% bonds, demonstrating risk-minimization trade-offs
+- COVID-19 period analysis revealed correlation breakdown across asset classes
+
+**Technologies**: R, tydiverse, quantmod, corrplot, DataExplorer, ggplot2  
+**Methods**: Markowitz optimization, PCA, Black-Litterman,
+**Data**: VTI, EMGF, IEF, DBC, GLD (2019-2023, Refinitiv Eikon)
+
+📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4649247) | 1K+ downloads
