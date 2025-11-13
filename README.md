@@ -6,16 +6,16 @@
 
 #### **About this GitHub repository**
 
-This repository compiles different applied projects in factor investing, portfolio management, and investment strategies. It combines academic rigor (5 published papers, 2k+ downloads) with institutional and academic insights.
+This repository documents quantitative research and applied projects in portfolio optimization, factor investing, and risk management. It combines academic rigor (5 published papers, 2k+ downloads) with institutional application (central bank collaboration, multi-asset strategies).
 - For practitioners: Reproducible frameworks for portfolio construction, volatility modeling, and alternative risk strategies.
-- For researchers: Well-documented methodologies with citations and access to the original data sourcess used.
-- This repository is also well suited for anyone looking to delve into data science and quantiative techniques applied to finance. 
+- For researchers: Well-documented methodologies with citations, data sources, and validation approaches.
+- For candidates: Demonstration of technical depth, institutional experience, and research credibility.
 
 --- 
 
 #### **About me**
 
-Driven finance postgraduate with 20+ months across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). Developed 5+ research papers on multi-asset portfolio construction, crisis-period factor investing behavior cumulating 2k+ combined downloads across SSRN and ResearchGate. I hope you can find value in the research I share.
+Applied finance professional specializing in quantitative portfolio optimization and factor investing analysis. 20+ months across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). Developed 5+ research papers on multi-asset portfolio construction, crisis-period factor behavior, and yield curve modeling cumulating 2k+ combined downloads across SSRN and ResearchGate. I hope you can find value in the research I share.
 
 In a nutshell: 
 
@@ -26,9 +26,7 @@ In a nutshell:
 
 **Contact**
 Email: youssef.louraoui@essec.edu
-[LinkedIn](https://www.linkedin.com/in/yousseflouraoui) 
-[SSRN]([https://ssrn.com/author=YOURSSRNID](https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=4240493))
-[ResearchGate]([https://www.researchgate.net/profile/YOURPROFILE](https://www.researchgate.net/profile/Youssef-Louraoui-2))
+[LinkedIn](https://www.linkedin.com/in/youssef-louraoui/) | [SSRN](https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=4240493) | [ResearchGate](https://www.researchgate.net/profile/Youssef-Louraoui-2)
 
 ---
 
@@ -61,7 +59,7 @@ Comparative analysis of portfolio construction strategies: Global Minimum Varian
 **Methods**: Markowitz optimization, PCA, Black-Litterman,
 **Data**: VTI, EMGF, IEF, DBC, GLD (2019-2023, Refinitiv Eikon)
 
-📄 [Published Paper (SSRN)]([https://ssrn.com/abstract=4649247](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4649247)) | 1K+ downloads
+📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4649247) | 1K+ downloads
 
 ---
 
@@ -87,7 +85,7 @@ Paper goes into a financial litterature of factor investing (Markowitz (1952), S
 **Methods**: GARCH(1,1), time-varying correlations, multiple linear regression  
 **Data**: MSCI factor indices (2019-2021, Refinitiv Eikon)
 
-📄 [Published Paper (SSRN)]([https://ssrn.com/abstract=4677442](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4677442)) | 100+ downloads
+📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4677442) | 100+ downloads
 
 ---
 
@@ -129,7 +127,7 @@ Development of forward rate model for Moroccan interbank market (MONIA) to suppo
 **Methods**: Compounding in arrears, forward rate calculations, sensitivity analysis  
 **Data**: MONIA repo rates (2020-2021, Bank Al-Maghrib)
 
-📄 [Working Paper presentation]([LINK](https://www.researchgate.net/publication/376477514_Construction_of_a_forward_rate_model_for_the_Moroccan_interbank_market)) (Co-authored with A. Feral, PhD & A. Rafiki, Bank Al-Maghrib)
+📄 [Working Paper presentation](https://www.researchgate.net/publication/376477514_Construction_of_a_forward_rate_model_for_the_Moroccan_interbank_market) (Co-authored with A. Feral, PhD & A. Rafiki, Bank Al-Maghrib)
 
 ---
 
@@ -195,8 +193,8 @@ You are free to use, modify, and distribute this code for academic, personal, or
 
 ## Acknowledgments
 
+- **ESSEC Business School**, **Bayes (formerly CASS) Business School** and **Université Paris-Saclay** faculty for research guidance
 - **Bank Al-Maghrib** for MONIA data access and collaboration
-- **ESSEC Business School**, **Bayes (formerly CASS) Business School and **Université Paris-Saclay** faculty for research guidance
 - **Professor Arnaud Feral** (ESSEC) and **Abderrahim Rafiki** (Bank Al-Maghrib) for co-authorship
 
 ---
