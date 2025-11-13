@@ -6,14 +6,12 @@
 
 #### **About this GitHub repository**
 
-Structure of this Github:
+This repository documents quantitative research and applied projects in portfolio optimization, factor investing, and risk management. It combines academic rigor (5 published papers, 2k+ downloads) with institutional application (central bank collaboration, multi-asset strategies).
+- For practitioners: Reproducible frameworks for portfolio construction, volatility modeling, and alternative risk strategies.
+- For researchers: Well-documented methodologies with citations, data sources, and validation approaches.
+- For candidates: Demonstration of technical depth, institutional experience, and research credibility.
 
-You will find the main repo structured into four sub-folders:
-
-- Applied Projects (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Applied_projects) : Covers different smaller projects on equity valuation (part of the Valuation and Corporate Finance module @ Paris-Saclay instructor F. Pansard), volatility modeling (part of the Volatility modelling module @ Paris-Saclay instructor S. Pulido), econometrics scripts (part of the Econometrics module @ Paris-Saclay instructor J. Caicedo), crude oil modelling (Petroineos Trading independent project), machine learning forecasting (part of the Machine Learning module @ Paris-Saclay instructor A. Bousabaa), portfolio management project (independent projects) 
-- Applied Research https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Applied_research) : Covers all the content shared for each paper (All-Weather portfolio, Factor investing during COVID-19, CPPI vs OBPI strategy research, IPO underpricing project and MONIA working paper with the Central Bank of Morocco)  
-- Quantitative Methods (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Quantitative_methods_finance): Project that elaborates on option pricing and CDS calibration via Monte Carlo simulation (part of the Quantitative Techniques in Finance @ Paris-Saclay instructor A. Bousabaa; co-authored with Y. Bancé)
-- Quantitative Portfolio Management (https://github.com/Gimkhana/Empirical_Analysis_FM/tree/main/Applied_Research_Framework_Git/Quantitative_portfolio_management) : Project covering portfolio management techniques (part of the Asset Management module @ Paris-Saclay instructor P. Clauss)
+--- 
 
 #### **About me**
 
@@ -32,9 +30,20 @@ Email: youssef.louraoui@essec.edu
 [SSRN]([https://ssrn.com/author=YOURSSRNID](https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=4240493))
 [ResearchGate]([https://www.researchgate.net/profile/YOURPROFILE](https://www.researchgate.net/profile/Youssef-Louraoui-2))
 
+---
+
+**Structure of this Github**
+
+You will find the main repo structured into four sub-folders:
+
+- Applied Projects : Covers different smaller projects on equity valuation (part of the Valuation and Corporate Finance module @ Paris-Saclay instructor F. Pansard), volatility modeling (part of the Volatility modelling module @ Paris-Saclay instructor S. Pulido), econometrics scripts (part of the Econometrics module @ Paris-Saclay instructor J. Caicedo), crude oil modelling (Petroineos Trading independent project), machine learning forecasting (part of the Machine Learning module @ Paris-Saclay instructor A. Bousabaa), portfolio management project (independent projects) 
+- Applied Research: Covers all the content shared for each paper (All-Weather portfolio, Factor investing during COVID-19, CPPI vs OBPI strategy research, IPO underpricing project and MONIA working paper with the Central Bank of Morocco)  
+- Quantitative Methods: Project that elaborates on option pricing and CDS calibration via Monte Carlo simulation (part of the Quantitative Techniques in Finance @ Paris-Saclay instructor A. Bousabaa; co-authored with Y. Bancé)
+- Quantitative Portfolio Management: Project covering portfolio management techniques (part of the Asset Management module @ Paris-Saclay instructor P. Clauss)
 
 **Research Focus**: Factor investing, Portfolio Management, Investment, Finance
 
+--- 
 
 ## 📂 Featured Projects
 
