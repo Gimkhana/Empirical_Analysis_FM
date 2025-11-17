@@ -6,23 +6,24 @@
 
 #### **About this GitHub repository**
 
-This repository documents quantitative research and applied projects in portfolio management, factor investing, investment strategies. It combines academic rigor (5 published papers, 2k+ downloads) with institutional and academic insights.
-- For practitioners: Reproducible frameworks for portfolio construction and investment stragies.
-- For researchers: Well documented methodologies with clear citations and data sources.
+This repository documents quantitative research and applied projects in portfolio management, factor investing, and investment strategies. It combines academic rigor (5 published papers, 2,000+ downloads) with institutional and academic insights.
+
+- For practitioners: Reproducible frameworks for portfolio construction and investment strategies.
+- For researchers: Well-documented methodologies with clear citations and data sources.
 - This repository is also well suited for anyone looking to delve into data science and quantitative techniques applied to finance.
 
 --- 
 
 #### **About me**
 
-Driven finance postgraduate with 20+ months across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). Developed 5+ research papers on multi-asset portfolio construction, crisis-period factor behavior, and investment strategies cumulating 2k+ downloads across SSRN and ResearchGate. I hope you can find value in the research I share.
+Driven finance postgraduate with 20+ months of experience across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). Developed 5+ research papers on multi-asset portfolio construction, crisis-period factor behavior, and investment strategies, accumulating 2,000+ downloads across SSRN and ResearchGate. I hope you can find value in the research I share.
 
-In a nutshell: 
+In a nutshell:
 
-- Master's degree in Risk & Asset management (M2 GRA) @ Paris-Saclay
-- Master's degree in Energy Trade and Finance & Bayes (formerly CASS) Business School, London
-- Graduate in Business studies (finance concentration) @ ESSEC Business School
-- +20 months experience across capital markets @ Central Bank of Morocco (BAM), commodity trading and market analysis @ PetroIneos Trading London, risk management @ Amundi AM and client solutions analytics @ FactSet London
+- Master's degree in Risk & Asset Management (M2 GRA) @ Paris-Saclay
+- Master's degree in Energy Trade and Finance @ Bayes (formerly CASS) Business School, London
+- Graduate in Business Studies (Finance concentration) @ ESSEC Business School
+- 20+ months of experience across capital markets @ Central Bank of Morocco (BAM), commodity trading and market analysis @ PetroIneos Trading London, risk management @ Amundi AM, and client solutions analytics @ FactSet London
 
 **Contact**
 Email: youssef.louraoui@essec.edu
@@ -32,30 +33,30 @@ Email: youssef.louraoui@essec.edu
 
 **Structure of this Github**
 
-You will find the main repo structured into four sub-folders:
+You will find the main repository structured into four sub-folders:
 
-- Applied Projects : Covers different smaller projects on
-  - Equity valuation (part of the Valuation and Corporate Finance module @ Paris-Saclay instructor F. Pansard)
-  - Volatility modeling (part of the Volatility modelling module @ Paris-Saclay instructor S. Pulido)
-  - Econometrics scripts (part of the Econometrics module @ Paris-Saclay instructor J. Caicedo)
-  - Crude oil modelling (Petroineos Trading independent project)
-  - Machine learning forecasting (part of the Machine Learning module @ Paris-Saclay instructor A. Bousabaa)
-  - Portfolio management project (independent projects)
-    
+- Applied Projects: Covers different smaller projects on
+  - Equity valuation (part of the Valuation and Corporate Finance module @ Paris-Saclay, instructor F. Pansard)
+  - Volatility modeling (part of the Volatility Modelling module @ Paris-Saclay, instructor S. Pulido)
+  - Econometrics scripts (part of the Econometrics module @ Paris-Saclay, instructor J. Caicedo)
+  - Crude oil modelling (PetroIneos Trading independent project)
+  - Machine learning forecasting (part of the Machine Learning module @ Paris-Saclay, instructor A. Bousabaa)
+  - Portfolio management projects (independent projects)
+
 - Applied Research: Covers all the content shared for each paper
   - All-Weather portfolio
   - Factor investing during COVID-19
-  - CPPI vs OBPI strategy research
+  - CPPI vs. OBPI strategy research
   - MONIA transition (presentation slides and dataset)
   - IPO underpricing project
- 
-- Quantitative Methods (part of the Quantitative Techniques in Finance @ Paris-Saclay instructor A. Bousabaa; co-authored with Y. Bancé): Project that elaborates on 
-  - Option pricing and
-  - CDS calibration via Monte Carlo simulation
-    
-- Quantitative Portfolio Management: Project covering portfolio management techniques (part of the Asset Management module @ Paris-Saclay instructor P. Clauss)
 
-**Research Focus**: Factor investing, Portfolio Management, Investment, Finance
+- Quantitative Methods (part of the Quantitative Techniques in Finance @ Paris-Saclay, instructor A. Bousabaa; co-authored with Y. Bancé): Project that elaborates on
+  - Option pricing
+  - CDS calibration via Monte Carlo simulation
+
+- Quantitative Portfolio Management: Project covering portfolio management techniques (part of the Asset Management module @ Paris-Saclay, instructor P. Clauss)
+
+**Research Focus**: Factor investing, Portfolio Management, Investment Strategies
 
 --- 
 
@@ -64,7 +65,7 @@ You will find the main repo structured into four sub-folders:
 ### 1. All Weather Portfolio Optimization
 **Location**: [`Applied_Research_Framework_Git/Applied_research/All_weather_portfolio_research`]
 
-Comparative analysis of portfolio construction strategies: Global Minimum Variance, Principal Component Analysis, Tangency Portfolio, and Black-Litterman optimization applied to multi-asset ETF portfolio.
+Comparative analysis of portfolio construction strategies: Global Minimum Variance, Principal Component Analysis, Tangency Portfolio, and Black-Litterman optimization applied to multi-asset ETF portfolios.
 
 **Insights**:
 - Black-Litterman incorporating market views from BlackRock, Goldman Sachs, JPMorgan achieved highest Sharpe ratio (0.82)
@@ -82,8 +83,8 @@ Comparative analysis of portfolio construction strategies: Global Minimum Varian
 ### 2. COVID-19 Factor Investing Analysis
 **Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`]
 
-GARCH volatility modeling examining how US equity factors (Value, Momentum, Quality, Min Volatility, Size) reacted during pandemic-induced market stress.
-Paper goes into a financial litterature of factor investing (Markowitz (1952), Sharpe (1964) earlier works and discuss more recent contributions (Fama-French in the 90's and other recent authors).
+This paper examines how US equity factors (Value, Momentum, Quality, Min Volatility, Size) reacted during pandemic-induced market stress.
+Paper goes into a financial litterature of factor investing (Markowitz (1952), Sharpe (1964) earlier works and discuss more recent contributions (Fama-French in the 90's and other recent authors) and apply a GARCH volatility modeling on MSCI US Equity factors (based on EDHEC Risk paper).  
 
 **Methodology** 
 - Based on EDHEC Risk Institute paper (Hasaj, M. & Sherer, B., 2021; "Covid-19 and Smart-Beta: A Case Study on theRole of Sectors”. EDHEC-Risk Institute Working Paper., pp. 1-35.)
@@ -94,7 +95,7 @@ Paper goes into a financial litterature of factor investing (Markowitz (1952), S
 **Insights**:
 - Volatility clustering observed, especially during early stages of the pandemic.
 - Minimum Volatility and Momentum factors showed signiﬁcant resilience to market changes.
-- Minimum Volatility exhibited lower than expected volatility.
+- Minimum Volatility factor exhibited lower than expected volatility.
 - Momentum and Value factors experienced heightened volatility, indicating sensitivity tomarket stress.
 
 **Technologies**: R, RStudio, rugarch 
@@ -207,6 +208,7 @@ You are free to use, modify, and distribute this code for academic, personal, or
 
 ## Acknowledgments
 
+- Special mention to **P.Clauss** for introducing me to Github and leveraging it as a portfolio document for showcasing work and also for his unwaring support during the Portfolio Management module @ Paris-Saclay
 - **ESSEC Business School**, **Bayes (formerly CASS) Business School** and **Université Paris-Saclay** faculty for research guidance
 - **Bank Al-Maghrib** for MONIA data access and collaboration (publicly disclosed in bank website)
   
