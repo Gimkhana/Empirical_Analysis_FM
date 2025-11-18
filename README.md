@@ -16,7 +16,7 @@ This repository documents quantitative research and applied projects in portfoli
 
 #### **About me**
 
-Driven finance postgraduate with 20+ months of experience across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). Developed 5+ research papers on multi-asset portfolio construction, crisis-period factor behavior, and investment strategies, accumulating 2,000+ downloads across SSRN and ResearchGate. I hope you can find value in the research I share.
+Driven finance postgraduate with 20+ months of experience across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). I hope you can find value in the research I share.
 
 In a nutshell:
 
