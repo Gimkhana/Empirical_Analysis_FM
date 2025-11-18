@@ -62,10 +62,40 @@ You will find the main repository structured into four sub-folders:
 
 ## 📂 Featured Projects
 
-### 1. All Weather Portfolio Optimization
+**### 1. Asymmetric Factor Volatility During COVID-19: Evidence for EGARCH over GARCH
+**Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`]
+
+This paper documents a critical market inefficiency in factor-level volatility forecasting during systemic crises. 
+Traditional symmetric GARCH(1,1) models, despite effectively capturing autocorrelation dynamics, systematically misspecify factor-level risk through two mechanisms: 
+- (1) violation of normality assumptions creating extreme fat tails, and 
+- (2) asymmetric shock responses
+
+**Methodology** 
+- Based on EDHEC Risk Institute paper (Hasaj, M. & Sherer, B., 2021; "Covid-19 and Smart-Beta: A Case Study on theRole of Sectors”. EDHEC-Risk Institute Working Paper., pp. 1-35.)
+- We compare the performance of the funds to the VIX level during the Covid-19 period on 374 trading days.
+- MSCI factors funds as a benchmark
+- Based on Pagano (2020) COVID-19 timeframe decomposition 
+  
+**Insights**:
+Analysing five US equity factors (Size, Value, Quality, Momentum, Minimum Volatility) and the S&P 500 Index from November 2019 to December 2021, we found: 
+
+- (1) all factors exhibit significant asymmetric volatility drifts (γ = 0.388-0.554, p < 0.05), with defensive factors showing stronger asymmetry than Value
+- (2) GARCH systematically underpredicts tail volatility by 40-260 basis points during crisis peaks
+- (3) EGARCH reduces this misspecification by 20% when forecasting the Momentum factor and show overconfidence in prediction when assessing market aggregate (S&P 500) with statistically significant out-of-sample improvements (p < 0.001)
+- The finding that defensive factors do not escape asymmetric responses challenges conventional portfolio diversification wisdom
+- The findings presented in this paper suggest practitioners consider alternative models to capture volatility such as EGARCH compared to standard Gaussian GARCH model
+
+**Technologies**: R, RStudio, rugarch 
+**Methods**: Econometrics (GARCH modelling) 
+**Data**: MSCI factor indices (2019-2021, Refinitiv Eikon)
+
+📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4677442) | 100+ downloads
+
+--- 
+### 2. All Weather Portfolio Optimization
 **Location**: [`Applied_Research_Framework_Git/Applied_research/All_weather_portfolio_research`]
 
-Comparative analysis of portfolio construction strategies: Global Minimum Variance, Principal Component Analysis, Tangency Portfolio, and Black-Litterman optimization applied to multi-asset ETF portfolios.
+Comparative analysis of portfolio construction strategies: Global Minimum Variance, Principal Component Analysis, Tangency Portfolio, and Black-Litterman optimization applied to multi-asset ETF portfolios (part of the Asset Management module @ Paris-Saclay, instructor P. Clauss)
 
 **Insights**:
 - Black-Litterman incorporating market views from BlackRock, Goldman Sachs, JPMorgan achieved highest Sharpe ratio (0.82)
@@ -75,41 +105,12 @@ Comparative analysis of portfolio construction strategies: Global Minimum Varian
 **Technologies**: R, tydiverse, quantmod, corrplot, DataExplorer, ggplot2  
 **Methods**: Markowitz optimization, PCA, Black-Litterman,
 **Data**: VTI, EMGF, IEF, DBC, GLD (2019-2023, Refinitiv Eikon)
-
-📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4649247) | 1K+ downloads
-
----
-
-### 2. COVID-19 Factor Investing Analysis
-**Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`]
-
-This paper examines how US equity factors (Value, Momentum, Quality, Min Volatility, Size) reacted during pandemic-induced market stress.
-Paper goes into a financial litterature of factor investing (Markowitz (1952), Sharpe (1964) earlier works and discuss more recent contributions (Fama-French in the 90's and other recent authors) and apply a GARCH volatility modeling on MSCI US Equity factors (based on EDHEC Risk paper).  
-
-**Methodology** 
-- Based on EDHEC Risk Institute paper (Hasaj, M. & Sherer, B., 2021; "Covid-19 and Smart-Beta: A Case Study on theRole of Sectors”. EDHEC-Risk Institute Working Paper., pp. 1-35.)
-- We compare the performance of the funds to the VIX level during the Covid-19 period on 374 trading days.
-- MSCI factors funds as a benchmark
-- Based on Pagano (2020) COVID-19 timeframe decomposition 
-  
-**Insights**:
-- Volatility clustering observed, especially during early stages of the pandemic.
-- Minimum Volatility and Momentum factors showed signiﬁcant resilience to market changes.
-- Minimum Volatility factor exhibited lower than expected volatility.
-- Momentum and Value factors experienced heightened volatility, indicating sensitivity tomarket stress.
-
-**Technologies**: R, RStudio, rugarch 
-**Methods**: GARCH(1,1), time-varying correlations, multiple linear regression  
-**Data**: MSCI factor indices (2019-2021, Refinitiv Eikon)
-
-📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4677442) | 100+ downloads
-
 ---
 
 ### 3. CPPI vs. OBPI Portfolio Insurance Strategies
 **Location**: [`Applied_Research_Framework_Git/Applied_research/CPPI_strategy_research`]
 
-Monte Carlo simulation comparing Constant Proportion Portfolio Insurance (CPPI) and Option-Based Portfolio Insurance (OBPI) under Black-Scholes and Lévy jump-diffusion models.
+Monte Carlo simulation comparing Constant Proportion Portfolio Insurance (CPPI) and Option-Based Portfolio Insurance (OBPI) under Black-Scholes and Lévy jump-diffusion models (part of the Financial Insurance module @ Paris-Saclay, instructor C. Benezet)
 
 **Insights**:
 - The US 10-year Treasury bill yield averaged across the period analysed had a level close to 2.15% and a volatility in terms of yield level of 0.07%.
@@ -126,10 +127,10 @@ Monte Carlo simulation comparing Constant Proportion Portfolio Insurance (CPPI) 
 
 ---
 
-### 4. MONIA Forward Rate Curve Construction
+### 4. Slides for MONIA Forward Rate Curve Construction
 **Location**: [`Applied_Research_Framework_Git/Applied_research/Money_market_research_BAM`]
 
-Development of forward rate model for Moroccan interbank market (MONIA) to support Bank Al-Maghrib's LIBOR transition framework.
+Development of forward rate model for Moroccan interbank market (MONIA) to support Bank Al-Maghrib's LIBOR transition framework (slides presented for undergraduate research project).
 
 **Insights**:
 - Construction of the forward yield curve using alternative reference rates has not seen the light of day at no central bank until now (as of July 2021).
@@ -144,7 +145,7 @@ Development of forward rate model for Moroccan interbank market (MONIA) to suppo
 **Methods**: Compounding in arrears, forward rate calculations, sensitivity analysis  
 **Data**: MONIA repo rates (2020-2021, Bank Al-Maghrib)
 
-📄 [Working Paper presentation](https://www.researchgate.net/publication/376477514_Construction_of_a_forward_rate_model_for_the_Moroccan_interbank_market) (Co-authored with A. Feral, PhD & A. Rafiki, Bank Al-Maghrib)
+📄 [Slides](https://www.researchgate.net/publication/376477514_Construction_of_a_forward_rate_model_for_the_Moroccan_interbank_market) (Co-authored with A. Feral, PhD & A. Rafiki, Bank Al-Maghrib)
 
 ---
 
@@ -157,9 +158,6 @@ Development of forward rate model for Moroccan interbank market (MONIA) to suppo
 ---
 
 ## Publications & Research
-
-- **5 research papers** published on SSRN and Research Gate with **2k+ combined downloads**
-- Co-authored with **Bank Al-Maghrib (Central Bank of Morocco)** officials and presented at **ESSEC dissertation defense** (2021)
 
 📄 [View all publications on SSRN](https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=4240493)
 📄 [View all publications on Research Gate](https://www.researchgate.net/profile/Youssef-Louraoui-2)
@@ -208,9 +206,9 @@ You are free to use, modify, and distribute this code for academic, personal, or
 
 ## Acknowledgments
 
-- Special mention to **P.Clauss** for introducing me to Github and leveraging it as a portfolio document for showcasing work and also for his unwaring support during the Portfolio Management module @ Paris-Saclay
+- Special mention to **P.Clauss** for introducing me to Github and leveraging it as a portfolio document for showcasing work and also for his unwaring support during the Asset Management module @ Paris-Saclay
 - **ESSEC Business School**, **Bayes (formerly CASS) Business School** and **Université Paris-Saclay** faculty for research guidance
-- **Bank Al-Maghrib** for MONIA data access and collaboration (publicly disclosed in bank website)
+- **Bank Al-Maghrib** for MONIA data access and collaboration
   
 ---
 
