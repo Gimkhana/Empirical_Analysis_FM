@@ -62,7 +62,7 @@ You will find the main repository structured into four sub-folders:
 
 ## 📂 Featured Projects
 
-**### 1. Asymmetric Factor Volatility During COVID-19: Evidence for EGARCH over GARCH
+**1. Asymmetric Factor Volatility During COVID-19: Evidence for EGARCH over GARCH**
 **Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`]
 
 This paper documents a critical market inefficiency in factor-level volatility forecasting during systemic crises. 
