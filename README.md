@@ -6,7 +6,7 @@
 
 #### **About this GitHub repository**
 
-This repository documents quantitative research and applied projects in portfolio management, factor investing, and investment strategies. It combines academic rigor (5 published papers, 2,000+ downloads) with institutional and academic insights.
+This repository documents quantitative research and applied projects in portfolio management, factor investing, and investment strategies. It combines academic rigor with institutional and academic insights.
 
 - For practitioners: Reproducible frameworks for portfolio construction and investment strategies.
 - For researchers: Well-documented methodologies with clear citations and data sources.
