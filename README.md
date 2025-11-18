@@ -92,6 +92,7 @@ Analysing five US equity factors (Size, Value, Quality, Momentum, Minimum Volati
 📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4677442) | 100+ downloads
 
 --- 
+
 ### 2. All Weather Portfolio Optimization
 **Location**: [`Applied_Research_Framework_Git/Applied_research/All_weather_portfolio_research`]
 
@@ -105,6 +106,7 @@ Comparative analysis of portfolio construction strategies: Global Minimum Varian
 **Technologies**: R, tydiverse, quantmod, corrplot, DataExplorer, ggplot2  
 **Methods**: Markowitz optimization, PCA, Black-Litterman,
 **Data**: VTI, EMGF, IEF, DBC, GLD (2019-2023, Refinitiv Eikon)
+
 ---
 
 ### 3. CPPI vs. OBPI Portfolio Insurance Strategies
