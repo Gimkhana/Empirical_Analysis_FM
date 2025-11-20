@@ -1,7 +1,5 @@
 ###############################################################################
-# COMPLETE ENHANCED STRUCTURED ANALYSIS CODE
-# Copy and paste this entire section into RStudio
-# Run it after your data preparation and individual factor returns are ready
+# SECTION 0: INITIAL PACKAGES
 ###############################################################################
 
 library(rugarch)
