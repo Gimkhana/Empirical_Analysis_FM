@@ -36,12 +36,9 @@ Email: youssef.louraoui@essec.edu
 You will find the main repository structured into four sub-folders:
 
 - Applied Projects: Covers different smaller projects on
-  - Equity valuation (part of the Valuation and Corporate Finance module @ Paris-Saclay, instructor F. Pansard)
-  - Volatility modeling (part of the Volatility Modelling module @ Paris-Saclay, instructor S. Pulido)
-  - Econometrics scripts (part of the Econometrics module @ Paris-Saclay, instructor J. Caicedo)
   - Crude oil modelling (PetroIneos Trading independent project)
   - Machine learning forecasting (part of the Machine Learning module @ Paris-Saclay, instructor A. Bousabaa)
-  - Portfolio management projects (independent projects)
+  - Portfolio management projects (Portfolio Management module @ Paris-Saclay, instructor J. Caicedo)
 
 - Applied Research: Covers all the content shared for each paper
   - All-Weather portfolio
