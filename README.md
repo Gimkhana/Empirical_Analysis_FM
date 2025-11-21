@@ -182,8 +182,8 @@ cd Empirical_Analysis_FM
 
 Each project folder contains:
 - **Code notebooks** for replicable analysis with comments
-- **Data/** with sample datasets or instructions to obtain data
-- **Output/** generated figures, tables, and results
+- **Data** with sample datasets or instructions to obtain data
+- **Output** generated figures, tables, and results
 
 ---
 
