@@ -39,13 +39,14 @@ You will find the main repository structured into four sub-folders:
   - Crude oil modelling (PetroIneos Trading independent project)
   - Machine learning forecasting (part of the Machine Learning module @ Paris-Saclay, instructor A. Bousabaa)
   - Portfolio management projects (Portfolio Management module @ Paris-Saclay, instructor J. Caicedo)
+  - IPO underpricing project
 
 - Applied Research: Covers all the content shared for each paper
   - All-Weather portfolio
   - Factor investing during COVID-19
   - CPPI vs. OBPI strategy research
   - MONIA transition (presentation slides and dataset)
-  - IPO underpricing project
+  
 
 - Quantitative Methods (part of the Quantitative Techniques in Finance @ Paris-Saclay, instructor A. Bousabaa; co-authored with Y. Bancé): Project that elaborates on
   - Option pricing
