@@ -6,11 +6,7 @@
 
 #### **About this GitHub repository**
 
-This repository documents quantitative research and applied projects in portfolio management, factor investing, and investment strategies. It combines academic rigor with institutional and academic insights.
-
-- For practitioners: Reproducible frameworks for portfolio construction and investment strategies.
-- For researchers: Well-documented methodologies with clear citations and data sources.
-- This repository is also well suited for anyone looking to delve into data science and quantitative techniques applied to finance.
+This repository documents quantitative research and applied projects in portfolio management, factor investing, and investment strategies. It combines academic rigor with institutional and academic insights. All projects comes with well documented methodologies with clear citations and data sources. This repository is also well suited for anyone looking to delve into data science and quantitative techniques applied to finance.
 
 --- 
 
@@ -18,15 +14,13 @@ This repository documents quantitative research and applied projects in portfoli
 
 Driven finance postgraduate with 20+ months of experience across institutional asset management (Amundi), commodity trading (PetroIneos), central banking (Bank Al-Maghrib), and client solutions analytics (FactSet). I hope you can find value in the research I share.
 
-In a nutshell:
-
 - Master's degree in Risk & Asset Management (M2 GRA) @ Paris-Saclay
 - Master's degree in Energy Trade and Finance @ Bayes (formerly CASS) Business School, London
 - Graduate in Business Studies (Finance concentration) @ ESSEC Business School
 - 20+ months of experience across capital markets @ Central Bank of Morocco (BAM), commodity trading and market analysis @ PetroIneos Trading London, risk management @ Amundi AM, and client solutions analytics @ FactSet London
 
 **Contact**
-Email: youssef.louraoui@essec.edu
+youssef.louraoui@essec.edu
 [LinkedIn](https://www.linkedin.com/in/youssef-louraoui/) | [SSRN](https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=4240493) | [ResearchGate](https://www.researchgate.net/profile/Youssef-Louraoui-2)
 
 ---
@@ -35,7 +29,7 @@ Email: youssef.louraoui@essec.edu
 
 You will find the main repository structured into four sub-folders:
 
-- Applied Projects: Covers different smaller projects on
+- Applied Projects: Covers different smaller projects 
   - Crude oil modelling (PetroIneos Trading independent project)
   - Machine learning forecasting (part of the Machine Learning module @ Paris-Saclay, instructor A. Bousabaa)
   - Portfolio management projects (Portfolio Management module @ Paris-Saclay, instructor J. Caicedo)
@@ -47,8 +41,7 @@ You will find the main repository structured into four sub-folders:
   - CPPI vs. OBPI strategy research
   - MONIA transition (presentation slides)
   
-
-- Quantitative Methods (part of the Quantitative Techniques in Finance @ Paris-Saclay, instructor A. Bousabaa; co-authored with Y. Bancé): Project that elaborates on
+- Quantitative Methods (part of the Quantitative Techniques in Finance @ Paris-Saclay, instructor A. Bousabaa; co-authored with Y. Bancé): 
   - Option pricing
   - CDS calibration via Monte Carlo simulation
 
@@ -58,7 +51,7 @@ You will find the main repository structured into four sub-folders:
 
 --- 
 
-## 📂 Featured Projects
+## Featured Projects
 
 **1. Asymmetric Factor Volatility During COVID-19: Evidence for EGARCH over GARCH**
 **Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`]
@@ -69,13 +62,12 @@ Traditional symmetric GARCH(1,1) models, despite effectively capturing autocorre
 - (2) asymmetric shock responses
 
 **Methodology** 
-- Based on EDHEC Risk Institute paper (Hasaj, M. & Sherer, B., 2021; "Covid-19 and Smart-Beta: A Case Study on theRole of Sectors”. EDHEC-Risk Institute Working Paper., pp. 1-35.)
-- We compare the performance of the funds to the VIX level during the Covid-19 period on 374 trading days.
-- MSCI factors funds as a benchmark
-- Based on Pagano (2020) COVID-19 timeframe decomposition 
+- Initial reflexion of the project based on EDHEC Risk Institute paper (Hasaj, M. & Sherer, B., 2021; "Covid-19 and Smart-Beta: A Case Study on theRole of Sectors”. EDHEC-Risk Institute Working Paper., pp. 1-35.)
+- We analyse the behavior of factors volatility during the Covid-19 period across 374 trading days.
+- Tested on MSCI US equity factors (Size, Value, Quality, Momentum, Minimum Volatility) and using S&P 500 as the market aggregate
+- Used Pagano timeline taxonomy (2020) COVID-19 timeframe decomposition 
   
 **Insights**:
-Analysing five US equity factors (Size, Value, Quality, Momentum, Minimum Volatility) and the S&P 500 Index from November 2019 to December 2021, we found: 
 
 - (1) all factors exhibit significant asymmetric volatility drifts (γ = 0.388-0.554, p < 0.05), with defensive factors showing stronger asymmetry than Value
 - (2) GARCH systematically underpredicts tail volatility by 40-260 basis points during crisis peaks
@@ -127,7 +119,7 @@ Monte Carlo simulation comparing Constant Proportion Portfolio Insurance (CPPI) 
 
 ---
 
-### 4. Slides for MONIA Forward Rate Curve Construction
+### 4. Alternative Reference Rate Implementation in Emerging Markets: Morocco's MONIA Forward Curve
 **Location**: [`Applied_Research_Framework_Git/Applied_research/Money_market_research_BAM`]
 
 Development of forward rate model for Moroccan interbank market (MONIA) to support Bank Al-Maghrib's LIBOR transition framework (slides presented for undergraduate research project).
@@ -149,7 +141,7 @@ Development of forward rate model for Moroccan interbank market (MONIA) to suppo
 
 ---
 
-### 5. ML forecasting: An application to Urals loading 
+### 5. Machine Learning (ML) Forecasting: An Application to Urals Loading Prediction 
 **Location**: [`Applied_Research_Framework_Git/Applied_projects/Crude_oil_market_analysis`]
 
 The project aim to answer the following question: can we build a generalizable ML model that works across normal AND crisis periods, using only economically independent variables?
@@ -173,16 +165,15 @@ The project aim to answer the following question: can we build a generalizable M
 ### Extension work -> ML forecasting with synthetic data: An application to Urals loading 
 **Location**: [`Applied_Research_Framework_Git/Applied_projects/Crude_oil_market_analysis/Enhanced_oil_market_analysis`]
 
-High ﬁdelity synthetic commodity data that preserves critical market characteristics and offers an alternative solution for data generation without breaching proprietary strategies. Case study using multivariate distribution (based on mean features and covariance to derive the synthetic dataset → projection for usage with copula modeling )
+High ﬁdelity synthetic commodity data that preserves critical market characteristics and offers an alternative solution for data generation without breaching proprietary strategies. Case study using multivariate distribution (based on mean features and covariance to derive the synthetic dataset → projection for usage with copula modeling). 
 
 **Insights**:
 - 96% statistical similarity between original and synthetic data → crisis simulation, ML model
 development, and Basel III compliance without exposing proprietary strategies.
 - Multiple layer of statistical testing confirm a good fit of the generated data to the original dataset
 
-
 **Technologies**: Jupyter Notebook (Python script) 
-**Methods**: Multivariate distribution, Data generation
+**Methods**: Machine Learning (ML), Multivariate distribution, Data generation
 **Data**: Urals loading, Brent futures (LCOc1), MOEX index (Russian equity index), Brent crack spread (2017-2021, Refinitiv Eikon)
 
 ---
@@ -246,8 +237,6 @@ You are free to use, modify, and distribute this code for academic, personal, or
 
 - Special mention to **P.Clauss** for introducing me to Github and leveraging it as a portfolio document for showcasing work and also for his unwaring support during the Asset Management module @ Paris-Saclay
 - **ESSEC Business School**, **Bayes (formerly CASS) Business School** and **Université Paris-Saclay** faculty for research guidance
-- **Bank Al-Maghrib** for MONIA data access and collaboration
-  
----
 
+---
 *Last updated: November 2025*
