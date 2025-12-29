@@ -523,60 +523,60 @@
 \end{frame}
 
 % ==================== SECTION 6: CANAL+ CASE STUDY ====================
-% \section{Real world case study: Canal+ Season 1}
+\section{Real world case study: Canal+ Season 1}
 
-% \begin{frame}{Canal+ show mechanics (modification to game)}
-%   \textbf{How the TV show differs from standard Loup Garou:}
+\begin{frame}{Canal+ show mechanics (modification to game)}
+  \textbf{How the TV show differs from standard Loup Garou:}
 
-%   \vspace{0.3cm}
-%   \begin{columns}[T]
-%     \column{0.5\textwidth}
-%     \textbf{Standard rules:}
-%     \begin{itemize}
-%       \item Simple day vote
-%       \item Night kills
-%       \item Seer optional
-%     \end{itemize}
+  \vspace{0.3cm}
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+    \textbf{Standard rules:}
+    \begin{itemize}
+      \item Simple day vote
+      \item Night kills
+      \item Seer optional
+    \end{itemize}
     
-%     \column{0.5\textwidth}
-%     \textbf{Canal+ additions:}
-%     \begin{itemize}
-%       \item \textbf{Quest mechanic}: Success unlocks roles
-%       \item \textbf{Salvation assembly}: Quest sabotage = protection vote
-%       \item \textbf{Public captain}: Breaks ties visibly
-%       \item \textbf{Limited Seer}: Only 2 checks per season
-%     \end{itemize}
-%   \end{columns}
+    \column{0.5\textwidth}
+    \textbf{Canal+ additions:}
+    \begin{itemize}
+      \item \textbf{Quest mechanic}: Success unlocks roles
+      \item \textbf{Salvation assembly}: Quest sabotage = protection vote
+      \item \textbf{Public captain}: Breaks ties visibly
+      \item \textbf{Limited Seer}: Only 2 checks per season
+    \end{itemize}
+  \end{columns}
 
-%   \vspace{0.5cm}
-%   \begin{alertblock}{Impact on theory}
-%     Quest sabotage creates a ``salvage valve'' for wolves approaching elimination. Theory predicts ~40\% wolf win; show mechanism increases this substantially.
-%   \end{alertblock}
-% \end{frame}
+  \vspace{0.5cm}
+  \begin{alertblock}{Impact on theory}
+    Quest sabotage creates a ``salvage valve'' for wolves approaching elimination. Theory predicts ~40\% wolf win; show mechanism increases this substantially.
+  \end{alertblock}
+\end{frame}
 
-% \begin{frame}{Season 1 winner analysis: Werewolves}
+\begin{frame}{Season 1 winner analysis: Werewolves}
  
-%   \textbf{Psychological mastery:} Charlie (mentalist) leveraged cold reading techniques to appear truthful while lying, Olivier (spy) was sacrificed mid game delivering a masterclass acting, and Stéphane (acting teacher) played very smoothly so he didn't raise suspicions till the very end. \\
+  \textbf{Psychological mastery:} Charlie (mentalist) leveraged cold reading techniques to appear truthful while lying, Olivier (spy) was sacrificed mid game delivering a masterclass acting, and Stéphane (acting teacher) played very smoothly so he didn't raise suspicions till the very end. \\
     
-%   \textbf{Sabotage timing:} in episode 6, werewolves deliberately lost a quest
-%     \begin{itemize}
-%       \item Triggered "salvation assembly" (protection vote) given to a werewolf
-%       \item Reversed expected elimination
-%       \item Bought 1-2 extra days for wolf coordination
-%     \end{itemize}
+  \textbf{Sabotage timing:} in episode 6, werewolves deliberately lost a quest
+    \begin{itemize}
+      \item Triggered "salvation assembly" (protection vote) given to a werewolf
+      \item Reversed expected elimination
+      \item Bought 1-2 extra days for wolf coordination
+    \end{itemize}
     
-%   \textbf{Seer limitation:} Alexane had only 2 checks
-%     \begin{itemize}
-%       \item Checked Charlie (wolf) but couldn't weaponize information
-%       \item Exhausted checks before final vote
-%     \end{itemize}
+  \textbf{Seer limitation:} Alexane had only 2 checks
+    \begin{itemize}
+      \item Checked Charlie (wolf) but couldn't weaponize information
+      \item Exhausted checks before final vote
+    \end{itemize}
     
-%   \textbf{Coalition failure:} Villagers (10 total) never formed unified voting bloc \\
+  \textbf{Coalition failure:} Villagers (10 total) never formed unified voting bloc \\
 
-%   \begin{alertblock}{Lesson}
-%     \textbf{Game design matters:} Quest sabotage mechanic fundamentally altered theoretical probabilities, favoring wolves.
-%   \end{alertblock}
-% \end{frame}
+  \begin{alertblock}{Lesson}
+    \textbf{Game design matters:} Quest sabotage mechanic fundamentally altered theoretical probabilities, favoring wolves.
+  \end{alertblock}
+\end{frame}
 
 % ==================== CONCLUSION ====================
 \section{Conclusion}
@@ -623,61 +623,61 @@
 % \end{frame}
 
 % ==================== Appendix SECTION 9: MONTE CARLO DEEP DIVE ====================
-% \section{Appendix: Implementing Monte Carlo analysis}
+\section{Appendix: Implementing Monte Carlo analysis}
 
-% \begin{frame}{(Appendix) Step 1: Define player strategies}
-%   \textbf{Villager strategy (Stochastic):}
+\begin{frame}{(Appendix) Step 1: Define player strategies}
+  \textbf{Villager strategy (Stochastic):}
   
-%   $$P(\text{vote for } j \mid \text{villager}) = \begin{cases}
-%     0.8 & \text{if } j \text{ is known wolf} \\
-%     0.15 & \text{if } j \text{ is suspicious (high variance)} \\
-%     0.05 & \text{uniform random}
-%   \end{cases}$$
+  $$P(\text{vote for } j \mid \text{villager}) = \begin{cases}
+    0.8 & \text{if } j \text{ is known wolf} \\
+    0.15 & \text{if } j \text{ is suspicious (high variance)} \\
+    0.05 & \text{uniform random}
+  \end{cases}$$
 
-%   \vspace{0.3cm}
-%   \textbf{Werewolf strategy (Deterministic):}
+  \vspace{0.3cm}
+  \textbf{Werewolf strategy (Deterministic):}
   
-%   $$P(\text{vote for } j \mid \text{wolf}) = \begin{cases}
-%     1.0 & \text{if coordinated to vote for } j \\
-%     0.0 & \text{otherwise}
-%   \end{cases}$$
+  $$P(\text{vote for } j \mid \text{wolf}) = \begin{cases}
+    1.0 & \text{if coordinated to vote for } j \\
+    0.0 & \text{otherwise}
+  \end{cases}$$
 
-%   \vspace{0.3cm}
-%   \textbf{Seer strategy:}
-%   \begin{itemize}
-%     \item Check Round 1: Random villager (5/13 prob) or random player (1/3 prob wolf)
-%     \item Reveal Round 4: If wolf found
-%   \end{itemize}
+  \vspace{0.3cm}
+  \textbf{Seer strategy:}
+  \begin{itemize}
+    \item Check Round 1: Random villager (5/13 prob) or random player (1/3 prob wolf)
+    \item Reveal Round 4: If wolf found
+  \end{itemize}
 
-%   \begin{exampleblock}{Parameterization}
-%     These probabilities are \textbf{inputs} to your simulation. Vary them to test sensitivity.
-%   \end{exampleblock}
-% \end{frame}
+  \begin{exampleblock}{Parameterization}
+    These probabilities are \textbf{inputs} to your simulation. Vary them to test sensitivity.
+  \end{exampleblock}
+\end{frame}
 
-% \begin{frame}{(Appendix) Step 2: Vote resolution}
-%   \textbf{Plurality vote:}
+\begin{frame}{(Appendix) Step 2: Vote resolution}
+  \textbf{Plurality vote:}
   
-%   $$\text{Eliminated} = \arg\max_j \sum_{i \in \text{players}} \mathbb{1}[\text{player } i \text{ votes for } j]$$
+  $$\text{Eliminated} = \arg\max_j \sum_{i \in \text{players}} \mathbb{1}[\text{player } i \text{ votes for } j]$$
 
-%   \vspace{0.3cm}
-%   \textbf{Tie handling:}
+  \vspace{0.3cm}
+  \textbf{Tie handling:}
   
-%   If multiple players tied for most votes:
-%   \begin{itemize}
-%     \item \textbf{Random tiebreak}: Uniform random choice (standard rule)
-%     \item \textbf{Captain breaks}: Captain's vote counts double (Canal+ rule)
-%   \end{itemize}
+  If multiple players tied for most votes:
+  \begin{itemize}
+    \item \textbf{Random tiebreak}: Uniform random choice (standard rule)
+    \item \textbf{Captain breaks}: Captain's vote counts double (Canal+ rule)
+  \end{itemize}
 
-%   \vspace{0.3cm}
-%   \textbf{Elimination process:}
-%   \begin{itemize}
-%     \item Remove player from game
-%     \item Check win conditions:
-%     \begin{itemize}
-%       \item Werewolves $\geq$ Villagers? → Wolves win
-%       \item No werewolves left? → Villagers win
-%     \end{itemize}
-%   \end{itemize}
+  \vspace{0.3cm}
+  \textbf{Elimination process:}
+  \begin{itemize}
+    \item Remove player from game
+    \item Check win conditions:
+    \begin{itemize}
+      \item Werewolves $\geq$ Villagers? → Wolves win
+      \item No werewolves left? → Villagers win
+    \end{itemize}
+  \end{itemize}
 
   % \begin{alertblock}{Implementation}
   %   Use a \textbf{game state object} tracking:
@@ -687,31 +687,31 @@
   %     \item Day count
   %   \end{itemize}
   % \end{alertblock}
-% \end{frame}
+\end{frame}
 
-% \begin{frame}{(Appendix) Step 3: Night phase with special roles}
-%   \textbf{Werewolf kill logic:}
+\begin{frame}{(Appendix) Step 3: Night phase with special roles}
+  \textbf{Werewolf kill logic:}
   
-%   $$\text{Target} = \begin{cases}
-%     \text{Seer} & \text{if Seer identity known} \\
-%     \text{High-status villager} & \text{if Seer unknown} \\
-%     \text{Random villager} & \text{fallback}
-%   \end{cases}$$
+  $$\text{Target} = \begin{cases}
+    \text{Seer} & \text{if Seer identity known} \\
+    \text{High-status villager} & \text{if Seer unknown} \\
+    \text{Random villager} & \text{fallback}
+  \end{cases}$$
 
-%   \vspace{0.3cm}
-%   \textbf{Witch revival:}
-%   \begin{itemize}
-%     \item Witch (if alive) decides: Revive killed player or let them die? 
-%     \item Optimal: Revive if killed player is Seer or high-value 
-%     \item Simplification: \textbf{Always revive Seer if killed}
-%   \end{itemize}
+  \vspace{0.3cm}
+  \textbf{Witch revival:}
+  \begin{itemize}
+    \item Witch (if alive) decides: Revive killed player or let them die? 
+    \item Optimal: Revive if killed player is Seer or high-value 
+    \item Simplification: \textbf{Always revive Seer if killed}
+  \end{itemize}
 
-%   \vspace{0.3cm}
-%   \textbf{Seer check (if alive):}
-%   \begin{itemize}
-%     \item Seer selects random living player 
-%     \item Check result stored (but not revealed until day phase) 
-%   \end{itemize}
+  \vspace{0.3cm}
+  \textbf{Seer check (if alive):}
+  \begin{itemize}
+    \item Seer selects random living player 
+    \item Check result stored (but not revealed until day phase) 
+  \end{itemize}
 
   % \begin{alertblock}{State Update}
   %   After night phase:
@@ -721,61 +721,61 @@
   %     \item Store Seer check result
   %   \end{itemize}
   % \end{alertblock}
-% \end{frame}
+\end{frame}
 
-% \begin{frame}{(Appendix) Step 4: Statistical analysis}
-%   \textbf{Aggregate results (after 10,000 sims):}
+\begin{frame}{(Appendix) Step 4: Statistical analysis}
+  \textbf{Aggregate results (after 10,000 sims):}
   
-%   $$\hat{p}_{\text{wolf}} = \frac{\# \text{wolf wins}}{10,000}$$
+  $$\hat{p}_{\text{wolf}} = \frac{\# \text{wolf wins}}{10,000}$$
   
-%   \vspace{0.3cm}
-%   \textbf{95\% Confidence interval:}
+  \vspace{0.3cm}
+  \textbf{95\% Confidence interval:}
   
-%   $$\text{CI}_{95\%} = \hat{p}_{\text{wolf}} \pm 1.96 \sqrt{\frac{\hat{p}_{\text{wolf}}(1-\hat{p}_{\text{wolf}})}{10,000}}$$
+  $$\text{CI}_{95\%} = \hat{p}_{\text{wolf}} \pm 1.96 \sqrt{\frac{\hat{p}_{\text{wolf}}(1-\hat{p}_{\text{wolf}})}{10,000}}$$
 
-%   \vspace{0.3cm}
-%   \textbf{Comparison: Seer vs. no Seer}
+  \vspace{0.3cm}
+  \textbf{Comparison: Seer vs. no Seer}
   
-%   $$\Delta = \hat{p}_{\text{villagers}}(\text{with Seer}) - \hat{p}_{\text{villagers}}(\text{without Seer})$$
+  $$\Delta = \hat{p}_{\text{villagers}}(\text{with Seer}) - \hat{p}_{\text{villagers}}(\text{without Seer})$$
 
-%   \vspace{0.3cm}
-%   \textbf{Expected output:}
-%   \begin{center}
-%     \begin{tabular}{lcc}
-%       \hline
-%       \textbf{Scenario} & \textbf{Wolf win rate} & \textbf{95\% CI} \\
-%       \hline
-%       No Seer & 43\% & [$40\%$, $46\%$] \\
-%       With Seer & 27\% & [$24\%$, $30\%$] \\
-%       \hline
-%     \end{tabular}
-%   \end{center}
+  \vspace{0.3cm}
+  \textbf{Expected output:}
+  \begin{center}
+    \begin{tabular}{lcc}
+      \hline
+      \textbf{Scenario} & \textbf{Wolf win rate} & \textbf{95\% CI} \\
+      \hline
+      No Seer & 43\% & [$40\%$, $46\%$] \\
+      With Seer & 27\% & [$24\%$, $30\%$] \\
+      \hline
+    \end{tabular}
+  \end{center}
 
-% \end{frame}
+\end{frame}
 
-% \begin{frame}{(Appendix) Advanced sensitivity analysis}
-%   \textbf{Villain cooperation level:} 50\%, 75\%, 100\% coordination \\
-%   \textbf{Seer accuracy:} 100\% correct, or 10\% false positive rate \\
-%   \textbf{Witch revival strategy:} Always save Seer vs. Always save high-status \\
-%   \textbf{Villager voting model:} Random vs. Bayesian informed vs. Coalition-based \\
+\begin{frame}{(Appendix) Advanced sensitivity analysis}
+  \textbf{Villain cooperation level:} 50\%, 75\%, 100\% coordination \\
+  \textbf{Seer accuracy:} 100\% correct, or 10\% false positive rate \\
+  \textbf{Witch revival strategy:} Always save Seer vs. Always save high-status \\
+  \textbf{Villager voting model:} Random vs. Bayesian informed vs. Coalition-based \\
 
-%   \textbf{Sensitivity matrix}
-%   \begin{center}
-%     \begin{tabular}{cccc}
-%       & \textbf{50\% Wolf Coop} & \textbf{75\%} & \textbf{100\%} \\
-%       \textbf{No Seer} & 35\% & 39\% & 43\% \\
-%       \textbf{With Seer} & 22\% & 24\% & 27\% \\
-%     \end{tabular}
-%   \end{center}
+  \textbf{Sensitivity matrix}
+  \begin{center}
+    \begin{tabular}{cccc}
+      & \textbf{50\% Wolf Coop} & \textbf{75\%} & \textbf{100\%} \\
+      \textbf{No Seer} & 35\% & 39\% & 43\% \\
+      \textbf{With Seer} & 22\% & 24\% & 27\% \\
+    \end{tabular}
+  \end{center}
   
-%   \begin{alertblock}{Insight}
-%     Seer improves villager win rate by \textbf{16 percentage points}, with 95\% confidence the improvement is between 10-22 points.
-%   \end{alertblock}
+  \begin{alertblock}{Insight}
+    Seer improves villager win rate by \textbf{16 percentage points}, with 95\% confidence the improvement is between 10-22 points.
+  \end{alertblock}
 
-%   \begin{alertblock}{Insight}
-%     Wolf coordination strength matters significantly. A 25\% drop in coordination = 4-8\% swing in win rate.
-%   \end{alertblock}
-% \end{frame}
+  \begin{alertblock}{Insight}
+    Wolf coordination strength matters significantly. A 25\% drop in coordination = 4-8\% swing in win rate.
+  \end{alertblock}
+\end{frame}
 
 
 
