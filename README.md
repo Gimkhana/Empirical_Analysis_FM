@@ -31,6 +31,7 @@ You will find the main repository structured into four sub-folders:
 
 - Applied Projects: Covers different smaller projects 
   - Crude oil modelling (PetroIneos Trading independent project)
+  - Game theory analysis
   - Machine learning forecasting (part of the Machine Learning module @ Paris-Saclay, instructor A. Bousabaa)
   - Portfolio management projects (Portfolio Management module @ Paris-Saclay, instructor J. Caicedo)
   - IPO underpricing project (part of the Financial Markets module @ Bayes (formerly CASS) Business School, instructor N. Papapostolou)
