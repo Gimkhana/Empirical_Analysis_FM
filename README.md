@@ -34,7 +34,7 @@ You will find the main repository structured into the following structure:
   - IPO underpricing project (part of the Financial Markets module @ Bayes (formerly CASS) Business School, instructor N. Papapostolou)
   - All-Weather portfolio
 
-**Research Focus**: Factor investing, Portfolio Management, Investment Strategies
+**Research Focus**: Portfolio Management, Investment Strategies
 
 --- 
 ## Technical Skills
