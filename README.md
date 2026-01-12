@@ -6,7 +6,7 @@
 
 #### **About this GitHub repository**
 
-This repository documents quantitative research and applied projects in portfolio management, factor investing, and investment strategies. It combines academic rigor with institutional and academic insights. All projects comes with well documented methodologies with clear citations and data sources. This repository is also well suited for anyone looking to delve into data science and quantitative techniques applied to finance.
+This repository documents quantitative research and applied projects in portfolio management, factor investing, and investment strategies. All projects comes with well documented methodologies with clear citations and data sources. This repository is also well suited for anyone looking to delve into data science and quantitative techniques applied to finance.
 
 --- 
 
@@ -27,158 +27,16 @@ youssef.louraoui@essec.edu
 
 **Structure of this Github**
 
-You will find the main repository structured into four sub-folders:
+You will find the main repository structured into the following structure:
 
 - Applied Projects: Covers different smaller projects 
-  - Crude oil modelling (PetroIneos Trading independent project)
   - Game theory analysis
-  - Machine learning forecasting (part of the Machine Learning module @ Paris-Saclay, instructor A. Bousabaa)
-  - Portfolio management projects (Portfolio Management module @ Paris-Saclay, instructor J. Caicedo)
   - IPO underpricing project (part of the Financial Markets module @ Bayes (formerly CASS) Business School, instructor N. Papapostolou)
-
-- Applied Research: Covers all the content shared for each paper
   - All-Weather portfolio
-  - Factor investing during COVID-19
-  - CPPI vs. OBPI strategy research
-  - MONIA transition (presentation slides)
-  
-- Quantitative Methods (part of the Quantitative Techniques in Finance @ Paris-Saclay, instructor A. Bousabaa; co-authored with Y. Bancé): 
-  - Option pricing
-  - CDS calibration via Monte Carlo simulation
-
-- Quantitative Portfolio Management: Project covering portfolio management techniques (part of the Asset Management module @ Paris-Saclay, instructor P. Clauss)
 
 **Research Focus**: Factor investing, Portfolio Management, Investment Strategies
 
 --- 
-
-## Featured Projects
-
-**1. Asymmetric Factor Volatility During COVID-19: Evidence for EGARCH over GARCH**
-**Location**: [`Applied_Research_Framework_Git/Applied_research/Factor_investing_research`]
-
-This paper documents a critical market inefficiency in factor-level volatility forecasting during systemic crises. 
-Traditional symmetric GARCH(1,1) models, despite effectively capturing autocorrelation dynamics, systematically misspecify factor-level risk through two mechanisms: 
-- (1) violation of normality assumptions creating extreme fat tails, and 
-- (2) asymmetric shock responses
-
-**Methodology** 
-- Initial reflexion of the project based on EDHEC Risk Institute paper (Hasaj, M. & Sherer, B., 2021; "Covid-19 and Smart-Beta: A Case Study on theRole of Sectors”. EDHEC-Risk Institute Working Paper., pp. 1-35.)
-- We analyse the behavior of factors volatility during the Covid-19 period across 374 trading days.
-- Tested on MSCI US equity factors (Size, Value, Quality, Momentum, Minimum Volatility) and using S&P 500 as the market aggregate
-- Used Pagano timeline taxonomy (2020) COVID-19 timeframe decomposition 
-  
-**Insights**:
-
-- (1) all factors exhibit significant asymmetric volatility drifts (γ = 0.388-0.554, p < 0.05), with defensive factors showing stronger asymmetry than Value
-- (2) GARCH systematically underpredicts tail volatility by 40-260 basis points during crisis peaks
-- (3) EGARCH reduces this misspecification by 20% when forecasting the Momentum factor and show overconfidence in prediction when assessing market aggregate (S&P 500) with statistically significant out-of-sample improvements (p < 0.001)
-- The finding that defensive factors do not escape asymmetric responses challenges conventional portfolio diversification wisdom
-- The findings presented in this paper suggest practitioners consider alternative models to capture volatility such as EGARCH compared to standard Gaussian GARCH model
-
-**Technologies**: R, RStudio, rugarch 
-**Methods**: Econometrics (GARCH modelling) 
-**Data**: MSCI factor indices (2019-2021, Refinitiv Eikon)
-
-📄 [Published Paper (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4677442) | 100+ downloads
-
---- 
-
-### 2. All Weather Portfolio Optimization
-**Location**: [`Applied_Research_Framework_Git/Applied_research/All_weather_portfolio_research`]
-
-Comparative analysis of portfolio construction strategies: Global Minimum Variance, Principal Component Analysis, Tangency Portfolio, and Black-Litterman optimization applied to multi-asset ETF portfolios (part of the Asset Management module @ Paris-Saclay, instructor P. Clauss)
-
-**Insights**:
-- Black-Litterman incorporating market views from BlackRock, Goldman Sachs, JPMorgan achieved highest Sharpe ratio (0.82)
-- GMV allocation: 88.91% bonds, demonstrating risk-minimization trade-offs
-- COVID-19 period analysis revealed correlation breakdown across asset classes
-
-**Technologies**: R, tydiverse, quantmod, corrplot, DataExplorer, ggplot2  
-**Methods**: Markowitz optimization, PCA, Black-Litterman,
-**Data**: VTI, EMGF, IEF, DBC, GLD (2019-2023, Refinitiv Eikon)
-
----
-
-### 3. CPPI vs. OBPI Portfolio Insurance Strategies
-**Location**: [`Applied_Research_Framework_Git/Applied_research/CPPI_strategy_research`]
-
-Monte Carlo simulation comparing Constant Proportion Portfolio Insurance (CPPI) and Option-Based Portfolio Insurance (OBPI) under Black-Scholes and Lévy jump-diffusion models (part of the Financial Insurance module @ Paris-Saclay, instructor C. Benezet)
-
-**Insights**:
-- The US 10-year Treasury bill yield averaged across the period analysed had a level close to 2.15% and a volatility in terms of yield level of 0.07%.
-- The S&P 500 index stayed on average at a level close to 2742.69 and returned on average 11.22% with a volatility of 17.83%.
-- During the same time frame, there was a -0.023 correlation coeﬃcientbetween the performance asset and the risk-free asset. This shows that having both assets in an investment portfolio could help diversify it.
-- Lévy process shows times of abrupt increases or declines in portfolio value in contrast to the Black-Scholes model. These spikes may result from the model’s capacity to account for both minor and major moves, which aren’t always predicted by historical volatility or price trends.
-- In contrast, these jumps are not taken into consideration by the Black-Scholes model. Its reliance on a lognormal price distribution undervalues the likelihood of signiﬁcant price ﬂuctuations, which may lead to a smoother curve but also understate risk.
-
-**Technologies**: R, Monte Carlo simulation  
-**Methods**: CPPI, OBPI, Black-Scholes, Lévy processes, GARCH volatility forecasting  
-**Data**: S&P 500, US 10Y Treasury (2013-2023) extracted from Refinitiv Eikon
-
-📄 [Published Paper](https://www.researchgate.net/publication/379753726_Comparative_analysis_of_CPPI_and_OBPI_portfolio_insurance_strategies_under_different_modelling_techniques_Black-Scholes_versus_Levy_jump_diffusion_process)
-
----
-
-### 4. Alternative Reference Rate Implementation in Emerging Markets: Morocco's MONIA Forward Curve
-**Location**: [`Applied_Research_Framework_Git/Applied_research/Money_market_research_BAM`]
-
-Development of forward rate model for Moroccan interbank market (MONIA) to support Bank Al-Maghrib's LIBOR transition framework (slides presented for undergraduate research project).
-
-**Insights**:
-- Construction of the forward yield curve using alternative reference rates has not seen the light of day at no central bank until now (as of July 2021).
-- Paradigm shift in methodology: from a declarative-based rate to an eﬀective-based rate.
-- Moroccan market limited in terms of maturity.
-- Limiting assumption: the rate is diﬃcult to model for maturities of more than one year.
-- The 12-month rate explodes despite its risk-free nature.
-- Impact of Covid-19 on results.
-- Research work at a germinal stage.
-
-**Technologies**: Microsoft Excel 
-**Methods**: Compounding in arrears, forward rate calculations, sensitivity analysis  
-**Data**: MONIA repo rates (2020-2021, Bank Al-Maghrib)
-
-📄 [Slides](https://www.researchgate.net/publication/376477514_Construction_of_a_forward_rate_model_for_the_Moroccan_interbank_market) (Co-authored with A. Feral, PhD & A. Rafiki, Bank Al-Maghrib)
-
----
-
-### 5. Machine Learning (ML) Forecasting: An Application to Urals Loading Prediction 
-**Location**: [`Applied_Research_Framework_Git/Applied_projects/Crude_oil_market_analysis`]
-
-The project aim to answer the following question: can we build a generalizable ML model that works across normal AND crisis periods, using only economically independent variables?
-
-**Insights**:
-- Wide gap between the models tested (0.521 → 1.371 mbbl/d deviations in MAE) MLP outperforms LSTM by 25%. 
-- By removing multicollinear features, MLP now beats LSTM by 58%
-- MLP (3 layers) outperforms LSTM despite simpler architecture, because it trains on independent, interpretable features.
-
-**Dataset**: 
-- 234 weekly observations (2017-2021)
-- Target: Urals crude loading volumes (mb/d)
-- Training: 164 observations (70%)
-- Testing: 70 observations (30%)
-- Normalization: Z-score (+/− 3 σ threshold)
-- Source: We tested two dfferrent set of features in the ML model using Reﬁnitiv Eikon, Petrologistics datasets
-
-**Technologies**: Jupyter Notebook (Python script) 
-**Methods**: ML techniques
-
-### Extension work -> ML forecasting with synthetic data: An application to Urals loading 
-**Location**: [`Applied_Research_Framework_Git/Applied_projects/Crude_oil_market_analysis/Enhanced_oil_market_analysis`]
-
-High ﬁdelity synthetic commodity data that preserves critical market characteristics and offers an alternative solution for data generation without breaching proprietary strategies. Case study using multivariate distribution (based on mean features and covariance to derive the synthetic dataset → projection for usage with copula modeling). 
-
-**Insights**:
-- 96% statistical similarity between original and synthetic data → crisis simulation, ML model
-development, and Basel III compliance without exposing proprietary strategies.
-- Multiple layer of statistical testing confirm a good fit of the generated data to the original dataset
-
-**Technologies**: Jupyter Notebook (Python script) 
-**Methods**: Machine Learning (ML), Multivariate distribution, Data generation
-**Data**: Urals loading, Brent futures (LCOc1), MOEX index (Russian equity index), Brent crack spread (2017-2021, Refinitiv Eikon)
-
----
-
 ## Technical Skills
 
 **Programming**: RStudio, Python, LaTeX  
@@ -231,13 +89,6 @@ Contributions are welcome! Whether you want to:
 
 This project is licensed under the **MIT License** - see the [LICENSE] file for details.
 You are free to use, modify, and distribute this code for academic, personal, or commercial purposes with attribution.
-
----
-
-## Acknowledgments
-
-- Special mention to **P.Clauss** for introducing me to Github and leveraging it as a portfolio document for showcasing work and also for his unwaring support during the Asset Management module @ Paris-Saclay
-- **ESSEC Business School**, **Bayes (formerly CASS) Business School** and **Université Paris-Saclay** faculty for research guidance
 
 ---
 *Last updated: November 2025*
