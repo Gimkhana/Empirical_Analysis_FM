@@ -1,4 +1,4 @@
-## **Empirical Research: Application to financial markets**
+## **Empirical Research: Application to Financial Markets**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![R](https://img.shields.io/badge/R-276DC3?logo=r&logoColor=white)](https://www.r-project.org/)
