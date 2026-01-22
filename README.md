@@ -14,9 +14,10 @@ This repository covers applied projects in portfolio management, and game theory
 
 You will find the main repository structured into the following structure:
 
-- Applied Projects: Covers different smaller projects 
-  - Game theory analysis
   - All-Weather portfolio
+  - Game theory analysis
+  - Market dashboard
+  - Fund replication framework (from Roncalli's paper "An Alternative Approach to Alternative Beta", 2007)
 
 **Research focus**: Portfolio Management, Investment Strategies, Game Theory
 
