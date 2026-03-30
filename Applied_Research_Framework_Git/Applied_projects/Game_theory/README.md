@@ -4,6 +4,8 @@ Decoding hidden information, coordination, and deception in Loup Garou & Blackja
 
 Two projects, one theme: Decision under uncertainty.
 
+---
+
 ### 1. Loup Garou: Optimal strategy in incomplete information games
 Werewolf game modeled as a Bayesian game with asymmetric information. Werewolves know each other; villagers don't. We derived the winning probability formula and proved that optimally-playing werewolves win 41-43% of games despite 3:10 numerical disadvantage.
 
@@ -19,6 +21,8 @@ Method: Monte Carlo simulation tested three voter models (random, information-re
 Application: Canal+ show analysis (Season 1) showed werewolves exploited quest sabotage mechanics and psychology, converting theoretical 43% into actual victory.
 
 Skill: Python, NumPy, Monte Carlo | Output: Win rate probabilities, sensitivity tables, strategic recommendations
+
+---
 
 ### 2. Blackjack Through Game Theory
 Blackjack reformulated as a sequential game with imperfect information. Player moves first with only dealer's upcard visible; dealer follows fixed rule (hit <17, stand ≥17). Unlike poker, dealer strategy is not optimized and creating exploitable structure.
@@ -39,6 +43,8 @@ Variance insight: Short-term outcomes are random despite negative expected value
 
 Skill: Computational game theory, EV analysis | Output: Basic strategy charts, house edge calculations, card counting metrics
 
-Key takeaway: 
+---
+
+**Key takeaway:** 
 
 Games appear intuitive. Math proves otherwise. In Loup Garou, the outnumbered faction wins often because information asymmetry + coordination beats majority voting. In Blackjack, the player with -0.43% edge can still play optimally because expected value doesn't depend on winning the hand (it depends on maximizing long-run aggregate outcomes). Both projects show that rigorous game-theoretic analysis flips conventional wisdom.
