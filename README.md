@@ -13,7 +13,7 @@
   - Market Dashboard
   - Fund Replication Framework (from Roncalli's paper "An Alternative Approach to Alternative Beta", 2007)
 
-**Research focus**: Portfolio Management, Game Theory, Data Science
+**Topics**: Portfolio Management, Game Theory, Data Visualisation
 
 📄 [View all publications on SSRN](https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=4240493)
 📄 [View all publications on Research Gate](https://www.researchgate.net/profile/Youssef-Louraoui-2)
